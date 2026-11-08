@@ -13,9 +13,18 @@ import { countTokens } from '../../evaluation/token-accounting.js';
 import type { Diagnosis, TokenUsage } from '../types.js';
 
 export interface SingleShotItem { id: string; system: string; prompt: string; context: string }
-export interface SingleShotResult { id: string; raw: unknown; usage: TokenUsage | null; usage_source: 'api-reported' | 'proxy-tokenizer' | 'unavailable'; cost_usd: number | null; latency_ms: number; error?: string }
+export interface SingleShotResult {
+  id: string; raw: unknown; usage: TokenUsage | null; usage_source: 'api-reported' | 'proxy-tokenizer' | 'unavailable'; cost_usd: number | null; latency_ms: number; error?: string;
+  /** Set when the item is NOT scored: an infrastructure failure / init-fingerprint mismatch, or 'pending' (not run: halted). */
+  excluded?: string;
+  /** Extra per-run metadata recorded with the scored run (status, cost reconciliation, timing, init fingerprint). */
+  extra?: Record<string, unknown>;
+}
 
-export interface SingleShotBackend { name: string; model: string; billable: boolean; run(items: SingleShotItem[], workDir: string): Promise<SingleShotResult[]> }
+/** `halted`: why the backend stopped early (pending items come back with `excluded: 'pending'`). */
+export type SingleShotResults = SingleShotResult[] & { halted?: string | null; meta?: Record<string, unknown> };
+
+export interface SingleShotBackend { name: string; model: string; billable: boolean; run(items: SingleShotItem[], workDir: string): Promise<SingleShotResults> }
 
 /** Parse "// <file>:<a>-<b> <symbol> [...]" headers (BM25/embeddings/graph renderers) or "file:line:" (rg). */
 export function contextTopCandidates(context: string, k = 3): Diagnosis | null {

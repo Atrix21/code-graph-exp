@@ -1,0 +1,33 @@
+{
+  "run_id": "validate-single-mock-personal",
+  "protocol": "single_shot",
+  "split": "dev",
+  "budget": 2000,
+  "methods": [
+    "none",
+    "hybrid",
+    "oracle"
+  ],
+  "repeats": 1,
+  "backend": "claude-code-mock",
+  "model": "claude-sonnet-5-5",
+  "billable": true,
+  "prompt_version": "p1",
+  "n_items": 3,
+  "n_scored": 3,
+  "n_excluded": 0,
+  "n_pending": 0,
+  "status": "completed",
+  "halted": null,
+  "backend_meta": {
+    "effort": "high",
+    "billing": "subscription",
+    "account": "personal",
+    "run_usd": null,
+    "seed": 20261108,
+    "profile": "restricted-oauth",
+    "expected_version": "2.1.319"
+  },
+  "wall_ms_this_invocation": 177,
+  "updated": "2026-11-08T15:39:08.018Z"
+}

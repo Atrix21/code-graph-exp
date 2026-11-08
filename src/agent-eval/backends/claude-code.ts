@@ -23,7 +23,7 @@ import { isOwnMockUrl } from '../mock-anthropic/server.js';
 import { AGENT_SYSTEM_PROMPT, SINGLE_SHOT_SYSTEM_PROMPT } from '../prompt.js';
 import { parseDiagnosis } from '../scoring.js';
 import { DIAGNOSIS_SCHEMA, type AgentRun, type Diagnosis, type Protocol, type TokenUsage } from '../types.js';
-import type { SingleShotBackend, SingleShotItem, SingleShotResult } from './single-shot.js';
+import type { SingleShotBackend, SingleShotItem, SingleShotResult, SingleShotResults } from './single-shot.js';
 
 export const DUMMY_API_KEY = 'sk-ant-dummy-not-a-real-key';
 export const EXP_DIR_REL = 'experiments/02-agent-diagnosis';
@@ -198,8 +198,8 @@ export function buildClaudeCommand(o: ClaudeCommandOpts): ClaudeCommand {
 /* approval gate                                                                                     */
 /* ------------------------------------------------------------------------------------------------ */
 
-export interface ApprovalRequest { protocol: Protocol; conditions: string[]; model: string; split: string; max_total_usd: number; billing?: Billing }
-interface ApprovalEntry { protocol: Protocol | '*'; conditions: string[] | '*'; model: string; split: string; max_total_usd: number; billing?: Billing }
+export interface ApprovalRequest { protocol: Protocol; conditions: string[]; model: string; split: string; max_total_usd: number; billing?: Billing; /** Claude Code account name (`claude-account`) the runs use. */ account?: string }
+interface ApprovalEntry { protocol: Protocol | '*'; conditions: string[] | '*'; model: string; split: string; max_total_usd: number; billing?: Billing; account?: string }
 export interface ApprovalFile { approved_by?: string; approved_at?: string; approvals?: ApprovalEntry[] }
 
 export const normCondition = (c: string): string => c.replace(/^(agentic|single):/, '').replace(/@\d+k?$/, '');
@@ -230,6 +230,7 @@ export function checkApproval(req: ApprovalRequest, approvalPath = APPROVAL_PATH
       if (miss.length) w.push(`conditions not approved: ${miss.join(',')}`);
     }
     if ((e.billing ?? 'subscription') !== (req.billing ?? 'subscription')) w.push(`billing ${req.billing ?? 'subscription'} not approved (entry: ${e.billing ?? 'subscription'})`);
+    if (e.account && e.account !== req.account) w.push(`account ${req.account ?? '(none)'} not approved (entry: ${e.account})`);
     if (!(typeof e.max_total_usd === 'number' && e.max_total_usd > 0)) w.push('max_total_usd missing');
     else if (req.max_total_usd > e.max_total_usd) w.push(`requested cap $${req.max_total_usd} > approved $${e.max_total_usd}`);
     if (!w.length) return { ok: true, cap: Math.min(req.max_total_usd, e.max_total_usd) };
@@ -525,7 +526,7 @@ export function fingerprintOf(init: any): InitFingerprint {
   };
 }
 
-export interface InitExpectation { mcp: McpServerSpec | null; model: string; version?: string; mock: boolean; billing?: Billing }
+export interface InitExpectation { mcp: McpServerSpec | null; model: string; version?: string; mock: boolean; billing?: Billing; /** Default agentic. Single-shot offers only StructuredOutput. */ protocol?: Protocol }
 export interface InitMismatch { categories: string[]; details: string[] }
 
 /** Compare a `system/init` event with the condition's expected set. Empty `categories` = OK. */
@@ -537,7 +538,7 @@ export function checkInit(init: any, exp: InitExpectation): InitMismatch {
   const mcpPrefix = exp.mcp ? `mcp__${exp.mcp.name}__` : null;
   const expectedMcp = exp.mcp ? (EXPECTED_MCP_TOOLS[exp.mcp.name] ?? []).map((t) => `${mcpPrefix}${t}`) : [];
   const denied = new Set((exp.mcp?.denyTools ?? []).map((t) => `mcp__${exp.mcp!.name}__${t}`));
-  const expected = new Set<string>([...AGENT_TOOLS, 'StructuredOutput', ...expectedMcp]);
+  const expected = new Set<string>(exp.protocol === 'single_shot' ? ['StructuredOutput'] : [...AGENT_TOOLS, 'StructuredOutput', ...expectedMcp]);
   const have = new Set(fp.tools);
   for (const t of have) {
     if (denied.has(t)) flag('denied_mcp_tool', `denied tool offered: ${t}`);
@@ -715,47 +716,152 @@ export async function runClaude(spec: ClaudeCommand, prompt: string, meta: RunMe
 /* single-shot backend                                                                               */
 /* ------------------------------------------------------------------------------------------------ */
 
-export interface SingleShotOptions { /** Explicit mock server URL (`MockServer.url`); mock mode is never read from ANTHROPIC_BASE_URL. */ mockUrl?: string; runUsd?: number; profile?: ProfileName; maxTotalUsd?: number; split?: string; concurrency?: number; timeoutMs?: number; guard?: BillableGuard }
+export interface SingleShotOptions {
+  /** Explicit mock server URL (`MockServer.url`); mock mode is never read from ANTHROPIC_BASE_URL. */ mockUrl?: string;
+  runUsd?: number; profile?: ProfileName; maxTotalUsd?: number; split?: string; concurrency?: number; timeoutMs?: number; guard?: BillableGuard;
+  effort?: string; billing?: Billing;
+  /** Claude Code account name (approval) and its child base environment (`resolveAccount(...).env`). */
+  account?: string; baseEnv?: NodeJS.ProcessEnv;
+  /** Expected Claude Code version (init fingerprint); a change halts the run. */
+  version?: string;
+  /** Run order seed (seeded shuffle of the items; null keeps the given order). */
+  seed?: number | null;
+  log?: (s: string) => void;
+}
+
+export const SINGLE_SHOT_SEED = 20261108;
+
+function seededShuffle<T>(xs: T[], seed: number): T[] {
+  let a = seed >>> 0;
+  const rand = () => { a = (a + 0x6d2b79f5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  const out = [...xs];
+  for (let i = out.length - 1; i > 0; i--) { const j = Math.floor(rand() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; }
+  return out;
+}
+
+const readJsonlFile = (p: string): any[] => (fs.existsSync(p) ? fs.readFileSync(p, 'utf8').split('\n').filter(Boolean).flatMap((l) => { try { return [JSON.parse(l)]; } catch { return []; } }) : []);
 
 /**
  * Single-shot over Claude Code: no tools (`--tools ""`), json-schema structured output, one call per item.
  * `billable` is always true (the approval gate decides at run time; mock mode only with an explicit mockUrl).
+ *
+ * Same run discipline as the agentic harness: every finished call is appended to `<workDir>/ss-raw.jsonl` at once,
+ * so re-running the same run id resumes; infrastructure failures and init-fingerprint mismatches are excluded (never
+ * scored; infra errors get one retry); an auth/usage-limit error, 3 consecutive infra errors, 2 consecutive identical
+ * init mismatches or a version change halt the run (remaining items come back as `excluded: 'pending'`).
  */
 export function claudeSingleShot(model: string, opts: SingleShotOptions = {}): SingleShotBackend {
   const mockUrl = opts.mockUrl;
   const profile = opts.profile ?? (process.env.AGENT_EVAL_PROFILE as ProfileName | undefined) ?? 'restricted-oauth';
+  const log = opts.log ?? ((m: string) => console.error(m));
   return {
     name: mockUrl ? 'claude-code-mock' : 'claude-code', model, billable: true,
-    async run(items: SingleShotItem[], workDir: string): Promise<SingleShotResult[]> {
+    async run(items: SingleShotItem[], workDir: string): Promise<SingleShotResults> {
       let guard = opts.guard;
       if (!guard) {
         const taskIds = new Set(items.map((i) => i.id.split('|')[0]));
         const splits = selectTasksSplits(taskIds);
         const conditions = [...new Set(items.map((i) => i.id.split('|')[1] ?? ''))];
-        guard = new BillableGuard({ protocol: 'single_shot', conditions, model, split: opts.split ?? (splits.size === 1 ? [...splits][0] : 'mixed'), max_total_usd: opts.maxTotalUsd ?? readApprovedCap() }, { runUsd: opts.runUsd });
+        guard = new BillableGuard({ protocol: 'single_shot', conditions, model, split: opts.split ?? (splits.size === 1 ? [...splits][0] : 'mixed'), max_total_usd: opts.maxTotalUsd ?? readApprovedCap(), billing: opts.billing ?? 'subscription', account: opts.account }, { runUsd: opts.runUsd });
       }
+      if (!mockUrl) guard.assertAllowed({}, false); // fail fast, before anything runs
       fs.mkdirSync(workDir, { recursive: true });
+      const rawFile = path.join(workDir, 'ss-raw.jsonl');
+      const prior = readJsonlFile(rawFile);
+      const done = new Map<string, SingleShotResult>();
+      const attempts = new Map<string, number>();
+      const final = new Map<string, string>();
+      for (const r of prior) {
+        if (!r.excluded) done.set(r.id, r);
+        else if (r.excluded === 'aborted') continue;
+        else { attempts.set(r.id, (attempts.get(r.id) ?? 0) + 1); if (r.retryable === false || (attempts.get(r.id) ?? 0) >= 2) final.set(r.id, r.excluded); }
+      }
+      const order = opts.seed === null ? items : seededShuffle(items, opts.seed ?? SINGLE_SHOT_SEED);
+      const todo = order.filter((it) => !done.has(it.id) && !final.has(it.id));
+      log(`single-shot: ${items.length} items, ${done.size} done, ${final.size} finally excluded, ${todo.length} to run`);
       const scratch = fs.mkdtempSync(path.join(os.tmpdir(), 'ss-'));
-      const results: SingleShotResult[] = new Array(items.length);
+      let halted: string | null = null;
+      const halt = (why: string) => { if (!halted) { halted = why; log(`HALT: ${why}`); } };
+      let infraStreak = 0, initStreak = { reason: '', n: 0 };
+      const inflight = new Set<string>();
+      const g = guard;
+      const unhook = onHarnessAbort((why) => {
+        for (const id of inflight) {
+          try { fs.appendFileSync(rawFile, JSON.stringify({ id, excluded: 'aborted', status: why, ts: new Date().toISOString() }) + '\n'); } catch { /* best effort */ }
+          if (!mockUrl) g.chargeAborted(id, why);
+        }
+      });
+      const runOne = async (it: SingleShotItem, attempt: number): Promise<'ok' | 'retry' | 'stop'> => {
+        const spec = buildClaudeCommand({ protocol: 'single_shot', profile, model, cwd: scratch, systemPrompt: it.system, mockUrl, mcpConfigPath: path.join(workDir, 'empty-mcp.json'), effort: opts.effort, billing: opts.billing, baseEnv: opts.baseEnv, maxBudgetUsd: opts.runUsd, claudeBin: process.env.AGENT_EVAL_CLAUDE_BIN });
+        const tag = crypto.createHash('sha1').update(it.id).digest('hex').slice(0, 12);
+        inflight.add(it.id);
+        try {
+          const r = await runClaude(spec, it.prompt, { run_id: it.id, task_id: it.id.split('|')[0], condition: it.id.split('|')[1] ?? '', repeat: Number(it.id.split('|')[2] ?? 0), model, workspace_hash: '' }, {
+            guard: g, timeoutMs: opts.timeoutMs ?? 300_000, transcriptPath: path.join(workDir, 'transcripts', `${tag}${attempt > 1 ? `_try${attempt}` : ''}.jsonl`),
+            onInit: (init) => { const m = checkInit(init, { protocol: 'single_shot', mcp: null, model, version: opts.version, mock: !!mockUrl, billing: opts.billing }); return m.categories.length ? m.categories.join(',') + ' :: ' + m.details.join(' | ') : null; },
+            shouldAbort: () => halted,
+          });
+          const oc = r.outcome;
+          const extra = { status: oc.status, attempt, effort: opts.effort ?? null, cost_reported_usd: r.cost.reported, cost_list_usd: r.cost.list, cost_ledger_usd: r.cost.ledger, wall_ms: r.timing.wall_ms, init_ms: r.timing.init_ms, api_duration_ms: r.detail.duration_api_ms, stop_detail: r.run.stop_reason, init: r.init, claude_version: r.init?.claude_code_version ?? null };
+          if (oc.status === 'infra_error' || oc.status === 'init_mismatch' || oc.status === 'aborted') {
+            const excluded = oc.status === 'infra_error' ? `infra_error:${oc.infra_kind}` : oc.status === 'init_mismatch' ? `init_mismatch:${(oc.reason ?? '').split(' :: ')[0]}` : 'aborted';
+            const retryable = oc.status === 'infra_error';
+            fs.appendFileSync(rawFile, JSON.stringify({ id: it.id, excluded, retryable, detail: [oc.reason, oc.text].filter(Boolean).join(' | ').slice(0, 600), ...extra, ts: new Date().toISOString() }) + '\n');
+            log(`${it.id} EXCLUDED ${excluded} (attempt ${attempt})`);
+            if (oc.status === 'aborted') return 'stop';
+            if (oc.status === 'init_mismatch') {
+              infraStreak = 0;
+              const reason = (oc.reason ?? '').split(' :: ')[0];
+              initStreak = initStreak.reason === reason ? { reason, n: initStreak.n + 1 } : { reason, n: 1 };
+              if (reason.split(',').includes('version')) halt(`Claude Code version changed during the experiment (${oc.reason})`);
+              else if (initStreak.n >= 2) halt(`2 consecutive init-fingerprint exclusions: ${oc.reason}`);
+              return 'stop';
+            }
+            initStreak = { reason: '', n: 0 };
+            infraStreak++;
+            if (oc.infra_kind === 'auth' || oc.infra_kind === 'limit') halt(`${oc.infra_kind} / usage-limit error: ${(oc.text ?? oc.reason ?? '').slice(0, 200)}`);
+            else if (infraStreak >= 3) halt('3 consecutive infrastructure errors');
+            return 'retry';
+          }
+          infraStreak = 0; initStreak = { reason: '', n: 0 };
+          const res: SingleShotResult = { id: it.id, raw: r.run.diagnosis, usage: r.run.usage, usage_source: r.run.usage_source, cost_usd: r.run.cost_usd, latency_ms: r.run.latency_ms, error: r.run.diagnosis ? undefined : r.run.parse_error ?? r.run.stop_reason, extra };
+          fs.appendFileSync(rawFile, JSON.stringify({ ...res, ts: new Date().toISOString() }) + '\n');
+          done.set(it.id, res);
+          log(`${it.id} ${oc.status} ledger=$${r.cost.ledger.toFixed(4)} wall=${(r.timing.wall_ms / 1000).toFixed(1)}s`);
+          return 'ok';
+        } finally { inflight.delete(it.id); }
+      };
       let next = 0;
       const worker = async () => {
         for (;;) {
-          const idx = next++;
-          if (idx >= items.length) return;
-          const it = items[idx];
-          const spec = buildClaudeCommand({ protocol: 'single_shot', profile, model, cwd: scratch, systemPrompt: it.system, mockUrl, mcpConfigPath: path.join(workDir, 'empty-mcp.json') });
-          try {
-            const r = await runClaude(spec, it.prompt, { run_id: it.id, task_id: it.id.split('|')[0], condition: it.id.split('|')[1] ?? '', repeat: 0, model, workspace_hash: '' },
-              { guard, timeoutMs: opts.timeoutMs ?? 300_000, transcriptPath: path.join(workDir, 'transcripts', `${crypto.createHash('sha1').update(it.id).digest('hex').slice(0, 12)}.jsonl`) });
-            results[idx] = { id: it.id, raw: r.run.diagnosis, usage: r.run.usage, usage_source: r.run.usage_source, cost_usd: r.run.cost_usd, latency_ms: r.run.latency_ms, error: r.run.diagnosis ? undefined : r.run.parse_error ?? r.run.stop_reason };
-          } catch (e) {
-            if (e instanceof BillableRefused) throw e;
-            results[idx] = { id: it.id, raw: null, usage: null, usage_source: 'unavailable', cost_usd: null, latency_ms: 0, error: String((e as Error).message) };
+          if (halted) return;
+          const it = todo[next++];
+          if (!it) return;
+          for (let attempt = (attempts.get(it.id) ?? 0) + 1; attempt <= 2 && !halted; attempt++) {
+            let v: 'ok' | 'retry' | 'stop';
+            try { v = await runOne(it, attempt); } catch (e) {
+              if (e instanceof BillableRefused) { halt(e.message); return; }
+              fs.appendFileSync(rawFile, JSON.stringify({ id: it.id, excluded: 'infra_error:harness', retryable: true, detail: String((e as Error).stack ?? e).slice(0, 600), attempt, ts: new Date().toISOString() }) + '\n');
+              infraStreak++;
+              if (infraStreak >= 3) halt('3 consecutive infrastructure errors');
+              v = 'retry';
+            }
+            if (v !== 'retry') break;
           }
         }
       };
-      try { await Promise.all(Array.from({ length: opts.concurrency ?? 1 }, worker)); } finally { fs.rmSync(scratch, { recursive: true, force: true }); }
-      return results;
+      try { await Promise.all(Array.from({ length: Math.max(1, opts.concurrency ?? 1) }, worker)); } finally { unhook(); fs.rmSync(scratch, { recursive: true, force: true }); }
+      // final exclusion = non-retryable, or two failed attempts; anything else not done is still pending (resume runs it)
+      const n = new Map<string, number>(), finalNow = new Map<string, string>();
+      for (const r of readJsonlFile(rawFile)) {
+        if (!r.excluded || r.excluded === 'aborted') continue;
+        n.set(r.id, (n.get(r.id) ?? 0) + 1);
+        if (r.retryable === false || (n.get(r.id) ?? 0) >= 2) finalNow.set(r.id, r.excluded);
+      }
+      const out = items.map((it) => done.get(it.id) ?? { id: it.id, raw: null, usage: null, usage_source: 'unavailable' as const, cost_usd: null, latency_ms: 0, excluded: finalNow.get(it.id) ?? 'pending' }) as SingleShotResults;
+      out.halted = halted;
+      out.meta = { effort: opts.effort ?? null, billing: opts.billing ?? 'subscription', account: opts.account ?? null, run_usd: opts.runUsd ?? null, seed: opts.seed === null ? null : opts.seed ?? SINGLE_SHOT_SEED, profile, expected_version: opts.version ?? null };
+      return out;
     },
   };
 }

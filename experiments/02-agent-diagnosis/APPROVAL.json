@@ -1,0 +1,9 @@
+{
+  "approved_by": "project owner (chat, 2026-11-08 ~21:00 IST): \"run the experiments on the 'cc personal' claude code profile, and do it one experiment at once, not parallely\"",
+  "approved_at": "2026-11-08T21:00:00+05:30",
+  "_scope": "Stage 1 smoke pilot only (2 dev tasks). Later stages are added after stage 1 passes the first-run checklist. Caps are cumulative over spend-ledger.jsonl (all protocols). Subscription billing: the dollar figures are Claude Code's list-price estimates, used as a runaway guard; the real limit is the account's plan usage.",
+  "approvals": [
+    { "_stage": "1 smoke pilot", "protocol": "agentic", "conditions": ["baseline", "embeddings", "hybrid", "graphify", "crg"], "model": "claude-sonnet-5-5", "split": "dev", "billing": "subscription", "account": "personal", "max_total_usd": 10 },
+    { "_stage": "1 smoke pilot", "protocol": "single_shot", "conditions": "*", "model": "claude-sonnet-5-5", "split": "dev", "billing": "subscription", "account": "personal", "max_total_usd": 10 }
+  ]
+}

@@ -15,6 +15,7 @@
  * Real (billable) runs are refused unless experiments/02-agent-diagnosis/APPROVAL.json covers the plan and
  * AGENT_EVAL_BILLABLE=1 is set (see backends/claude-code.ts). `--mock-api` runs everything against the local mock server.
  */
+import { accountRecord, assertSubscriptionAccount, resolveAccount, type AccountInfo } from './account.js';
 import { spawn, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -186,6 +187,8 @@ export interface AgenticOptions {
   perRunUsd?: number;
   /** Real runs only: 'subscription' (default) or 'api-key'; must match the approval entry. */
   billing?: 'subscription' | 'api-key';
+  /** Claude Code account (`claude-account` name) whose login the runs use; required for billable subscription runs. */
+  account?: string;
   timeoutS?: number;
   effort?: string;
   keepWorkspaces?: boolean;
@@ -242,14 +245,15 @@ export async function runAgentic(cfg: BenchmarkConfig, o: AgenticOptions): Promi
   const taskById = new Map(tasks.map((t) => [t.task_id, t]));
   const dir = path.join(o.resultsRoot ?? abs(path.join(EXP_DIR, 'results')), o.runId);
 
-  const guard = new BillableGuard({ protocol: 'agentic', conditions: o.conditions, model, split: o.split, max_total_usd: o.maxTotalUsd ?? approvedCapOr(0.01), billing: o.billing ?? 'subscription' }, { runUsd: o.perRunUsd });
+  const acct = bindAccount({ account: o.account, billing: o.billing, mock });
+  const guard = new BillableGuard({ protocol: 'agentic', conditions: o.conditions, model, split: o.split, max_total_usd: o.maxTotalUsd ?? approvedCapOr(0.01), billing: o.billing ?? 'subscription', account: o.account }, { runUsd: o.perRunUsd });
   if (!mock) guard.assertAllowed({}, false); // fail fast, before anything is built
 
   const version = claudeVersion();
   // ---- plan (shuffle once, persist, reuse) and config pinning ----
   fs.mkdirSync(path.join(dir, 'transcripts'), { recursive: true });
   fs.mkdirSync(path.join(dir, 'retrieval-logs'), { recursive: true });
-  const config = { split: o.split, conditions: o.conditions, repeats: o.repeats, tasks: tasks.map((t) => t.task_id).sort(), model, profile: o.profile, effort, max_turns: maxTurns, budget_per_call: budget, seed: SHUFFLE_SEED, claude_version: version, mock_api: o.mockApi ?? null };
+  const config = { split: o.split, conditions: o.conditions, repeats: o.repeats, tasks: tasks.map((t) => t.task_id).sort(), model, profile: o.profile, effort, max_turns: maxTurns, budget_per_call: budget, seed: SHUFFLE_SEED, claude_version: version, mock_api: o.mockApi ?? null, account: acct ? accountRecord(acct) : null };
   const planFile = path.join(dir, 'plan.json');
   let plan: PlanItem[];
   if (fs.existsSync(planFile)) {
@@ -367,7 +371,7 @@ export async function runAgentic(cfg: BenchmarkConfig, o: AgenticOptions): Promi
         mockSrv = await startMockServer({ logFile: path.join(dir, 'transcripts', `${safe}.mock-requests.jsonl`), policy });
       }
       const spec = buildClaudeCommand({
-        protocol: 'agentic', profile: o.profile, model, cwd: ws.dir, mcp, mcpConfigPath: path.join(mcpDir, `${safe}.json`), mockUrl: mockSrv?.url, maxTurns, maxBudgetUsd: o.perRunUsd, effort, billing: o.billing,
+        protocol: 'agentic', profile: o.profile, model, cwd: ws.dir, mcp, mcpConfigPath: path.join(mcpDir, `${safe}.json`), mockUrl: mockSrv?.url, maxTurns, maxBudgetUsd: o.perRunUsd, effort, billing: o.billing, baseEnv: acct?.env,
         claudeBin: process.env.AGENT_EVAL_CLAUDE_BIN, injectExtraTool: o.mockApi === 'inject-extra-tool' ? 'Bash' : undefined,
       });
       let mismatch: string[] = [];
@@ -450,6 +454,21 @@ export async function runAgentic(cfg: BenchmarkConfig, o: AgenticOptions): Promi
   return { runs, excluded, dir, halted };
 }
 
+/**
+ * Resolves `--account` (non-billable). Billable subscription runs must name one; API-key billing must not.
+ * In mock mode the account only selects the configuration whose isolation is being tested.
+ */
+export function bindAccount(o: { account?: string; billing?: 'subscription' | 'api-key'; mock: boolean }): AccountInfo | null {
+  if (!o.account) {
+    if (!o.mock && (o.billing ?? 'subscription') === 'subscription') throw new BillableRefused('--account <name> is required for billable subscription runs (the Claude Code login to bill)');
+    return null;
+  }
+  if ((o.billing ?? 'subscription') === 'api-key') throw new BillableRefused('--account binds a subscription login; it cannot be combined with --billing api-key');
+  const a = resolveAccount(o.account);
+  if (!o.mock) assertSubscriptionAccount(a);
+  return a;
+}
+
 const attemptsOf = (ex: any[], id: string) => ex.filter((e) => e.run_id === id && e.retryable !== false && e.excluded_kind !== 'aborted').length;
 
 function approvedCapOr(d: number): number {
@@ -474,7 +493,7 @@ export async function agenticCommand(cfg: BenchmarkConfig): Promise<void> {
     runId, split, conditions: (arg('conditions') ?? 'baseline').split(','), repeats: Number(arg('repeats', '1')), model: arg('model', DEFAULT_MODEL)!,
     profile: arg('profile', 'restricted-oauth') as ProfileName, mockApi, taskIds: (arg('task-ids') ?? arg('tasks'))?.split(','), parallel: Number(arg('parallel', '1')),
     budget: Number(arg('budget', '4000')), maxTurns: arg('max-turns') ? Number(arg('max-turns')) : undefined, maxTotalUsd: arg('max-usd') ? Number(arg('max-usd')) : undefined,
-    perRunUsd: arg('run-usd') ? Number(arg('run-usd')) : undefined, billing: (arg('billing') ?? 'subscription') as 'subscription' | 'api-key', timeoutS: arg('timeout-s') ? Number(arg('timeout-s')) : undefined, effort: arg('effort'), keepWorkspaces: flag('keep-workspaces'), installSignals: true,
+    perRunUsd: arg('run-usd') ? Number(arg('run-usd')) : undefined, billing: (arg('billing') ?? 'subscription') as 'subscription' | 'api-key', account: arg('account'), timeoutS: arg('timeout-s') ? Number(arg('timeout-s')) : undefined, effort: arg('effort'), keepWorkspaces: flag('keep-workspaces'), installSignals: true,
   });
   if (runs.length) console.log(report(runs, 'agentic:baseline'));
   console.error(`wrote ${path.join(dir, 'runs.jsonl')} (${runs.length} scored runs)${halted ? `; HALTED: ${halted}` : ''}`);
