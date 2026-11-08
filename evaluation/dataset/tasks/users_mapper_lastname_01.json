@@ -10,19 +10,20 @@
     "src/auth/auth.controller.ts::AuthController.register",
     "src/auth/auth.service.ts::AuthService.register",
     "src/users/users.service.ts::UsersService.create",
-    "src/users/infrastructure/persistence/relational/repositories/user.repository.ts::UsersRelationalRepository.create"
+    "src/users/infrastructure/persistence/relational/repositories/user.repository.ts::UsersRelationalRepository.create",
+    "src/users/infrastructure/persistence/relational/repositories/user.repository.ts::UsersRelationalRepository.update"
   ],
   "relevant_files": [
-    "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts",
     "src/auth/auth.controller.ts",
     "src/auth/auth.service.ts",
-    "src/users/users.service.ts",
-    "src/users/infrastructure/persistence/relational/repositories/user.repository.ts"
+    "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts",
+    "src/users/infrastructure/persistence/relational/repositories/user.repository.ts",
+    "src/users/users.service.ts"
   ],
   "expected_relationships": [
     [
       "src/auth/auth.controller.ts::AuthController.register",
-      "ROUTES_TO",
+      "CALLS",
       "src/auth/auth.service.ts::AuthService.register"
     ],
     [
@@ -59,13 +60,15 @@
   ],
   "distractor_symbols": [
     "src/users/infrastructure/persistence/document/mappers/user.mapper.ts::UserMapper.toPersistence",
-    "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts::UserMapper.toDomain",
-    "src/users/infrastructure/persistence/relational/repositories/user.repository.ts::UsersRelationalRepository.update"
+    "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts::UserMapper.toDomain"
   ],
   "difficulty": "hard",
-  "lexical_overlap": "low",
+  "lexical_overlap": "medium",
   "bug_category": "wrong-field",
   "call_distance": 3,
   "fix": "Assign persistenceEntity.lastName = domainEntity.lastName.",
-  "notes": "Service and DTO pass the right lastName; the relational mapper copies the wrong property when persisting. Applies to create and update since both call toPersistence. Document mapper twin is intact."
+  "notes": "Service and DTO pass the right lastName; the relational mapper copies the wrong property when persisting. Applies to create and update since both call toPersistence. Document mapper twin is intact.",
+  "adjudication": [
+    "added UsersRelationalRepository.update (second caller of toPersistence described in the report); overlap low->medium"
+  ]
 }

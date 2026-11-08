@@ -85,7 +85,7 @@ export function tokenTable(aggs: Aggregate[]): string {
 export function pairedTable(rowsByMethod: Map<string, TaskMetrics[]>, ref: string, metric: keyof TaskMetrics): string {
   const r = rowsByMethod.get(ref);
   if (!r) return '';
-  const head = `| ${ref} vs | mean Δ ${String(metric)} | 95% CI | P(Δ≤0) |`;
+  const head = `| method | Δ = ${ref} − method (${String(metric)}) | 95% CI | P(Δ≤0) |`;
   const sep = '|---|---:|---:|---:|';
   const out: string[] = [head, sep];
   for (const [m, rows] of rowsByMethod) {

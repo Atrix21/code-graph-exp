@@ -7,17 +7,17 @@
   ],
   "relevant_symbols": [
     "src/roles/roles.guard.ts::RolesGuard.canActivate",
-    "src/users/users.controller.ts::UsersController.findAll",
-    "src/auth/strategies/jwt.strategy.ts::JwtStrategy.validate"
+    "src/auth/strategies/jwt.strategy.ts::JwtStrategy.validate",
+    "src/users/users.controller.ts::UsersController"
   ],
   "relevant_files": [
+    "src/auth/strategies/jwt.strategy.ts",
     "src/roles/roles.guard.ts",
-    "src/users/users.controller.ts",
-    "src/auth/strategies/jwt.strategy.ts"
+    "src/users/users.controller.ts"
   ],
   "expected_relationships": [
     [
-      "src/users/users.controller.ts::UsersController.findAll",
+      "src/users/users.controller.ts::UsersController",
       "CHECKS",
       "src/roles/roles.guard.ts::RolesGuard.canActivate"
     ],
@@ -44,9 +44,12 @@
     "src/users/users.controller.ts::UsersController.findOne"
   ],
   "difficulty": "medium",
-  "lexical_overlap": "low",
+  "lexical_overlap": "medium",
   "bug_category": "wrong-field",
   "call_distance": 1,
   "fix": "Compare against request.user?.role?.id.",
-  "notes": "RoleEnum.admin = 1 and the seeded admin has user id 1, hiding the bug for the first account only."
+  "notes": "RoleEnum.admin = 1 and the seeded admin has user id 1, hiding the bug for the first account only.",
+  "adjudication": [
+    "guard/roles decorators are class-level -> anchor is UsersController, not findAll; overlap low->medium"
+  ]
 }

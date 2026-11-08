@@ -53,5 +53,8 @@
   "bug_category": "off-by-one",
   "call_distance": 1,
   "fix": "Use skip: (page - 1) * limit.",
-  "notes": "Off-by-one in page-to-offset conversion in the relational repository; the document twin and the controller defaults are fine."
+  "notes": "Off-by-one in page-to-offset conversion in the relational repository; the document twin and the controller defaults are fine.",
+  "adjudication": [
+    "accepted as-is"
+  ]
 }

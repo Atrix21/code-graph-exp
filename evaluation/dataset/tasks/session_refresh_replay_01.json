@@ -9,20 +9,18 @@
     "src/session/infrastructure/persistence/relational/repositories/session.repository.ts::SessionRelationalRepository.updateByHash",
     "src/auth/auth.controller.ts::AuthController.refresh",
     "src/auth/auth.service.ts::AuthService.refreshToken",
-    "src/session/session.service.ts::SessionService.updateByHash",
-    "src/auth/strategies/jwt-refresh.strategy.ts::JwtRefreshStrategy.validate"
+    "src/session/session.service.ts::SessionService.updateByHash"
   ],
   "relevant_files": [
-    "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
     "src/auth/auth.controller.ts",
     "src/auth/auth.service.ts",
-    "src/session/session.service.ts",
-    "src/auth/strategies/jwt-refresh.strategy.ts"
+    "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+    "src/session/session.service.ts"
   ],
   "expected_relationships": [
     [
       "src/auth/auth.controller.ts::AuthController.refresh",
-      "ROUTES_TO",
+      "CALLS",
       "src/auth/auth.service.ts::AuthService.refreshToken"
     ],
     [
@@ -57,9 +55,12 @@
     "src/session/infrastructure/persistence/relational/repositories/session.repository.ts::SessionRelationalRepository.update"
   ],
   "difficulty": "hard",
-  "lexical_overlap": "medium",
+  "lexical_overlap": "low",
   "bug_category": "missing-check",
   "call_distance": 2,
   "fix": "Include hash: conditions.hash in the update's where clause.",
-  "notes": "AuthService.refreshToken correctly generates a new hash and treats a null session as 401, but the repository no longer filters by the previous hash so rotation does not invalidate old refresh tokens."
+  "notes": "AuthService.refreshToken correctly generates a new hash and treats a null session as 401, but the repository no longer filters by the previous hash so rotation does not invalidate old refresh tokens.",
+  "adjudication": [
+    "removed JwtRefreshStrategy.validate (not involved in hash check); overlap medium->low"
+  ]
 }

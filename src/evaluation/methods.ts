@@ -26,10 +26,12 @@ export const REGISTRY: Record<string, Factory> = {
   code_review_graph_emb: async () => new CodeReviewGraphRetriever({ name: 'code_review_graph_emb', embeddings: true }),
   custom_graph: async () => {
     const { GraphRetriever } = await import('../retrieval/graph-retrieval.js');
-    return new GraphRetriever();
+    const { customGraphConfig } = await import('./configs.js');
+    return new GraphRetriever(customGraphConfig());
   },
   hybrid: async () => {
     const { HybridRetriever } = await import('../retrieval/hybrid-retrieval.js');
-    return new HybridRetriever();
+    const { hybridConfig } = await import('./configs.js');
+    return new HybridRetriever(hybridConfig());
   },
 };

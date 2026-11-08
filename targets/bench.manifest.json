@@ -1,29 +1,153 @@
 {
   "upstream": "https://github.com/brocoders/nestjs-boilerplate.git",
   "upstream_commit": "9620f159eefe38f47747d02ab162852367c5472c",
-  "bench_commit": "0d40b0facdba47c69e7cbe54f6787c08606ca8a5",
-  "patches": {
-    "auth_jwt_secret_01.patch": "55c94e6d488b214880ac193b87234a4da7f2f15807846441a266851d83357969",
-    "auth_refresh_expiry_01.patch": "14dcc94c6fb50609df40b68b9b2cc2bdaed956d12df93566a0e2f8a92ca68fa6",
-    "auth_reset_link_reuse_01.patch": "6b7f878583c5dce8f7c5e4fef03791755991c74fbde7e4efd0a02e3c4c4d38d3",
-    "auth_reset_sessions_01.patch": "4c697a3e9c3d5cfb38e296bf3ba1d8143eac277071c3294917e1f465bd8f8b8a",
-    "auth_social_link_01.patch": "d7dd164fa6d8996706da02ca46a6b7c3d57270cffd340f1da4c6261e30064734",
-    "auth_uniform_login_01.patch": "b4779547dad880a88b8adedc9e693c089e4cd0f4d401cfd4462d44edec93d9b8",
-    "auth_update_email_dup_01.patch": "e978d1bf0a82e26adff66c0b28e05dddad784104a131a65c507aaedce85ef9ec",
-    "files_local_path_01.patch": "7b89aca43d85e8456e3d38f0fd16909e8f3763ffdc4fc1dd139e4f925ee26ca1",
-    "files_photo_url_01.patch": "7ca56f6c7c5e748e8b6421ca07ba4c4458f0834ba73818852c91f78a06f8a4a3",
-    "files_presigned_size_01.patch": "6c8fa83ac05f87ba868c0688831dd9a8facda36d2209ffdbffee34e13270c0c5",
-    "mail_new_email_link_01.patch": "272eb675ed500faa3d0b3ae5396484e2cdfd186898d84455430e0e5583d4138d",
-    "roles_admin_guard_01.patch": "0de4363a010860d5a21eaae8fd11087ac18a93965c11ddaff351e34d32e54f99",
-    "session_password_change_01.patch": "bba2050421661ba7f85c7b194b0febb3927652463efa775b599f537f3aeba917",
-    "session_refresh_replay_01.patch": "3cd9c5528dd5e3999da9f0b355f65f34d5775672d94d5ce400860051229544f6",
-    "users_create_provider_01.patch": "24cc13302400dd8f5350572ba33c07dc019fddbb7cf3443524ec530c4c81b7dc",
-    "users_list_page_01.patch": "8bba2c25dbd2f77f22d3fa8c5a362ed04ce614e3e5620738fed5281cb3e2bec0",
-    "users_mapper_lastname_01.patch": "066dad8e499da7b5bcd6de51d3e5aa2f2bef0c9bd2e327c38c0981856c653226",
-    "users_photo_cleared_01.patch": "3d33b97d596e005023f43edb214117c8b1c80a57a4676300ba1ce39aed915319",
-    "users_update_noop_01.patch": "bbe6b310e332d249d32c54868c1b00dd115134bcee831dca30a9fcc07afb30dc",
-    "utils_has_next_page_01.patch": "39dabb558ef6b00f9c8c8b155d12d40d209c128a92cc5a9577a2764ab9916786"
+  "mode": "single-bug snapshots (one branch per task, materialised at the same path)",
+  "base": {
+    "branch": "base",
+    "commit": "aec082a504bd42b67bb0f7cf663ae65dc1bbad13",
+    "corpus_files": 170,
+    "corpus_sha256": "cff15b7e139455ef6bb373ba4e945888e6e0b32c5064ca5283e7ccef674122a7"
   },
-  "corpus_files": 170,
-  "corpus_sha256": "0352add032609569487ee0f3a1912a2f6f5c1033a44a5dfd6c4d1ac8f09e2f50"
+  "tasks": {
+    "auth_jwt_secret_01": {
+      "branch": "task/auth_jwt_secret_01",
+      "commit": "014eda65189784f9228811534ba092944d2d0474",
+      "patch_sha256": "55c94e6d488b214880ac193b87234a4da7f2f15807846441a266851d83357969",
+      "corpus_sha256": "194b2518cdcbf0c4da5d4b8e11a6ccde0163b8ac1937532bbfee8d3ab1dee6fe",
+      "tsc_exit": 0
+    },
+    "auth_refresh_expiry_01": {
+      "branch": "task/auth_refresh_expiry_01",
+      "commit": "cf8f329eb739983c6a84830401c4182af603986d",
+      "patch_sha256": "14dcc94c6fb50609df40b68b9b2cc2bdaed956d12df93566a0e2f8a92ca68fa6",
+      "corpus_sha256": "ba8a21d012a1dda2fb0cdc42cf317f804d3f9f8967aa48609b55f7d0e205edfa",
+      "tsc_exit": 0
+    },
+    "auth_reset_link_reuse_01": {
+      "branch": "task/auth_reset_link_reuse_01",
+      "commit": "f10d2f06f06484f5bff71a78738b277225c4abba",
+      "patch_sha256": "6b7f878583c5dce8f7c5e4fef03791755991c74fbde7e4efd0a02e3c4c4d38d3",
+      "corpus_sha256": "5c43593a60c24b7c872b1227b7fcdbc6ddc6e04d86467f66f35a7f91569268a5",
+      "tsc_exit": 0
+    },
+    "auth_reset_sessions_01": {
+      "branch": "task/auth_reset_sessions_01",
+      "commit": "648e0602e3ff29c20a1fe643202f7756eee33f5d",
+      "patch_sha256": "4c697a3e9c3d5cfb38e296bf3ba1d8143eac277071c3294917e1f465bd8f8b8a",
+      "corpus_sha256": "b103f6531487292e85ea7eefc0724aa98a13709c8cbcb10d1d120672c1ad3663",
+      "tsc_exit": 0
+    },
+    "auth_social_link_01": {
+      "branch": "task/auth_social_link_01",
+      "commit": "ed590d0f2af2304a03e380d0004e8ebd3180af37",
+      "patch_sha256": "d7dd164fa6d8996706da02ca46a6b7c3d57270cffd340f1da4c6261e30064734",
+      "corpus_sha256": "9661dacae064a4d5624e4b1bb4a1f652645271eaef66bed18f3eab7394e2b179",
+      "tsc_exit": 0
+    },
+    "auth_uniform_login_01": {
+      "branch": "task/auth_uniform_login_01",
+      "commit": "04874c11f8f703bca702520ce75de2f9d6c04407",
+      "patch_sha256": "b4779547dad880a88b8adedc9e693c089e4cd0f4d401cfd4462d44edec93d9b8",
+      "corpus_sha256": "73d04dcf1268f760687a81f9c62fad2a0646baf12327b5cf8f3000f78ac40766",
+      "tsc_exit": 0
+    },
+    "auth_update_email_dup_01": {
+      "branch": "task/auth_update_email_dup_01",
+      "commit": "da327dbf380a6f017080be896c278d93a05c9bc2",
+      "patch_sha256": "e978d1bf0a82e26adff66c0b28e05dddad784104a131a65c507aaedce85ef9ec",
+      "corpus_sha256": "d2ce05a8a8d0eda573f535e6ef9713e207992380d31ece889d7885b101550720",
+      "tsc_exit": 0
+    },
+    "files_local_path_01": {
+      "branch": "task/files_local_path_01",
+      "commit": "ec662fe94f6fde4182e27fb5ce6679d0c53340a8",
+      "patch_sha256": "7b89aca43d85e8456e3d38f0fd16909e8f3763ffdc4fc1dd139e4f925ee26ca1",
+      "corpus_sha256": "505f70cbc92e73955f89d34534e9c12dd3f919ab6d730de4c970958f55131997",
+      "tsc_exit": 0
+    },
+    "files_photo_url_01": {
+      "branch": "task/files_photo_url_01",
+      "commit": "29e87c19230903dba4399f38ea216ef218d56a43",
+      "patch_sha256": "7ca56f6c7c5e748e8b6421ca07ba4c4458f0834ba73818852c91f78a06f8a4a3",
+      "corpus_sha256": "3d70c9a73c27cdf177afc9d7eec5c17b57ac4fea66ded943813ce7e00d3053b7",
+      "tsc_exit": 0
+    },
+    "files_presigned_size_01": {
+      "branch": "task/files_presigned_size_01",
+      "commit": "d84a461bba37c1f2e2c299046f7d98a53eab1922",
+      "patch_sha256": "6c8fa83ac05f87ba868c0688831dd9a8facda36d2209ffdbffee34e13270c0c5",
+      "corpus_sha256": "48305d0257cc617d0097f5b120b7abf46ec4ff8e0f468d021ca3da04edccf20c",
+      "tsc_exit": 0
+    },
+    "mail_new_email_link_01": {
+      "branch": "task/mail_new_email_link_01",
+      "commit": "08c7e3174565c46d6c70eacfffb1187059c23283",
+      "patch_sha256": "272eb675ed500faa3d0b3ae5396484e2cdfd186898d84455430e0e5583d4138d",
+      "corpus_sha256": "0d16e348a24d815af52b79d72681ec867426a128f06c5aef271ca2be4da73242",
+      "tsc_exit": 0
+    },
+    "roles_admin_guard_01": {
+      "branch": "task/roles_admin_guard_01",
+      "commit": "9ea96dddc57ca355f73cadf56edae2da94af5a67",
+      "patch_sha256": "0de4363a010860d5a21eaae8fd11087ac18a93965c11ddaff351e34d32e54f99",
+      "corpus_sha256": "826417729061e3472eecb94343294f930bb814830a21452f19c619f4f212287d",
+      "tsc_exit": 0
+    },
+    "session_password_change_01": {
+      "branch": "task/session_password_change_01",
+      "commit": "dc00748f681d4c2c83ccf0c187141c8675a334a5",
+      "patch_sha256": "bba2050421661ba7f85c7b194b0febb3927652463efa775b599f537f3aeba917",
+      "corpus_sha256": "666f49705443f10b74e5e11b27c9899d129a617fb8b163dbfd950b869b74a262",
+      "tsc_exit": 0
+    },
+    "session_refresh_replay_01": {
+      "branch": "task/session_refresh_replay_01",
+      "commit": "b7eb96ae30148991d2d1b846d66a2f91e1ff7593",
+      "patch_sha256": "3cd9c5528dd5e3999da9f0b355f65f34d5775672d94d5ce400860051229544f6",
+      "corpus_sha256": "dfa776ee4a6d022b4bd8393fdd05a25a36819cb943a83cc329256e5d33ce4049",
+      "tsc_exit": 0
+    },
+    "users_create_provider_01": {
+      "branch": "task/users_create_provider_01",
+      "commit": "4abcb105f353edc68778f93459f8d1152058f04c",
+      "patch_sha256": "24cc13302400dd8f5350572ba33c07dc019fddbb7cf3443524ec530c4c81b7dc",
+      "corpus_sha256": "fbc1134742cf5f891dc4c60053ff3fca06f40b28d49f4001a15dcba5a659b083",
+      "tsc_exit": 0
+    },
+    "users_list_page_01": {
+      "branch": "task/users_list_page_01",
+      "commit": "e8f6ad7a904ad3e91e838be20c383569b0a89ea1",
+      "patch_sha256": "8bba2c25dbd2f77f22d3fa8c5a362ed04ce614e3e5620738fed5281cb3e2bec0",
+      "corpus_sha256": "8bc688ab1d58e2be855a4bceba1ca00e6d22a6c8337ee572d6dce167d0f35158",
+      "tsc_exit": 0
+    },
+    "users_mapper_lastname_01": {
+      "branch": "task/users_mapper_lastname_01",
+      "commit": "d12197c5313cb538099de68f819d59c6fdac6297",
+      "patch_sha256": "066dad8e499da7b5bcd6de51d3e5aa2f2bef0c9bd2e327c38c0981856c653226",
+      "corpus_sha256": "2cbb6cb4b86538ca9b216e5ce5988b1be21a62bc0547e9900f20e90c66bd9642",
+      "tsc_exit": 0
+    },
+    "users_photo_cleared_01": {
+      "branch": "task/users_photo_cleared_01",
+      "commit": "40a5a6d420fd6c9511a38fddb504c6d096548f5b",
+      "patch_sha256": "3d33b97d596e005023f43edb214117c8b1c80a57a4676300ba1ce39aed915319",
+      "corpus_sha256": "73ecface996420b422b55a4bc2fb5e56971c28ba0539c1540c153e7ae80b404c",
+      "tsc_exit": 0
+    },
+    "users_update_noop_01": {
+      "branch": "task/users_update_noop_01",
+      "commit": "57cda0d42310ccff6481c4cceda75f98a21e44dd",
+      "patch_sha256": "bbe6b310e332d249d32c54868c1b00dd115134bcee831dca30a9fcc07afb30dc",
+      "corpus_sha256": "a746abeaa37f2ad072ee7884410f97d6d70c668a73c880e19b935503419bf5a2",
+      "tsc_exit": 0
+    },
+    "utils_has_next_page_01": {
+      "branch": "task/utils_has_next_page_01",
+      "commit": "4b5193d8904abdaf5b16ebbdad085c3ffe271e47",
+      "patch_sha256": "39dabb558ef6b00f9c8c8b155d12d40d209c128a92cc5a9577a2764ab9916786",
+      "corpus_sha256": "c1e2ccc63f25eea1d1d1d8dbd9bf9dc52c2d994db17d6203579a9b7b080759dd",
+      "tsc_exit": 0
+    }
+  }
 }

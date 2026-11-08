@@ -17,7 +17,7 @@ export function generateReport(dir: string): string {
   const aggs = [...byMethod.values()].map((rows) => aggregate(rows));
   const idx = Object.entries(m.index as Record<string, any>).map(([k, v]) =>
     `| ${k} | ${Math.round(v.index_ms).toLocaleString('en-US')} | ${v.index_llm_tokens ?? 'unavailable'} | ${v.embedding_tokens ?? '—'} | ${v.details?.nodes ?? v.details?.chunks ?? '—'} | ${v.details?.edges ?? '—'} |`);
-  const ref = byMethod.has('hybrid') ? 'hybrid' : byMethod.has('custom_graph') ? 'custom_graph' : [...byMethod.keys()][0];
+  const ref = ['hybrid_all', 'hybrid', 'custom_graph'].find((k) => byMethod.has(k)) ?? [...byMethod.keys()][0];
   return [
     `# Run ${m.meta.run_id}`,
     '',

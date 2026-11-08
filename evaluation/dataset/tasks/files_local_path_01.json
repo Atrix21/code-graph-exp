@@ -11,8 +11,8 @@
     "src/files/infrastructure/uploader/local/files.controller.ts::FilesLocalController.download"
   ],
   "relevant_files": [
-    "src/files/infrastructure/uploader/local/files.service.ts",
-    "src/files/infrastructure/uploader/local/files.controller.ts"
+    "src/files/infrastructure/uploader/local/files.controller.ts",
+    "src/files/infrastructure/uploader/local/files.service.ts"
   ],
   "expected_relationships": [
     [
@@ -42,5 +42,8 @@
   "bug_category": "wrong-field",
   "call_distance": 0,
   "fix": "Build the path from file.path instead of file.filename.",
-  "notes": "Wrong Multer field. S3 variants use different fields (key) and are separate services."
+  "notes": "Wrong Multer field. S3 variants use different fields (key) and are separate services.",
+  "adjudication": [
+    "accepted as-is"
+  ]
 }

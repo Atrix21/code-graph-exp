@@ -8,30 +8,18 @@
   "relevant_symbols": [
     "src/auth/auth.service.ts::AuthService.resetPassword",
     "src/auth/auth.controller.ts::AuthController.resetPassword",
-    "src/session/session.service.ts::SessionService.deleteByUserId",
-    "src/session/infrastructure/persistence/relational/repositories/session.repository.ts::SessionRelationalRepository.deleteByUserId"
+    "src/session/session.service.ts::SessionService.deleteByUserId"
   ],
   "relevant_files": [
-    "src/auth/auth.service.ts",
     "src/auth/auth.controller.ts",
-    "src/session/session.service.ts",
-    "src/session/infrastructure/persistence/relational/repositories/session.repository.ts"
+    "src/auth/auth.service.ts",
+    "src/session/session.service.ts"
   ],
   "expected_relationships": [
     [
       "src/auth/auth.controller.ts::AuthController.resetPassword",
-      "ROUTES_TO",
+      "CALLS",
       "src/auth/auth.service.ts::AuthService.resetPassword"
-    ],
-    [
-      "src/auth/auth.service.ts::AuthService.resetPassword",
-      "CALLS",
-      "src/session/session.service.ts::SessionService.deleteByUserId"
-    ],
-    [
-      "src/session/session.service.ts::SessionService.deleteByUserId",
-      "CALLS",
-      "src/session/infrastructure/persistence/relational/repositories/session.repository.ts::SessionRelationalRepository.deleteByUserId"
     ],
     [
       "src/auth/auth.service.ts::AuthService.resetPassword",
@@ -57,9 +45,19 @@
     "src/session/infrastructure/persistence/document/repositories/session.repository.ts::SessionDocumentRepository.deleteByUserId"
   ],
   "difficulty": "medium",
-  "lexical_overlap": "low",
+  "lexical_overlap": "medium",
   "bug_category": "missing-call",
   "call_distance": 0,
   "fix": "Call sessionService.deleteByUserId({ userId: user.id }) before updating the user in resetPassword.",
-  "notes": "The invalidating call was removed from resetPassword. AuthService.update has a similar exclude-current-session invalidation for authenticated password change; that one is intact in this task."
+  "notes": "The invalidating call was removed from resetPassword. AuthService.update has a similar exclude-current-session invalidation for authenticated password change; that one is intact in this task.",
+  "missing_in_buggy_code": [
+    [
+      "src/auth/auth.service.ts::AuthService.resetPassword",
+      "CALLS",
+      "src/session/session.service.ts::SessionService.deleteByUserId"
+    ]
+  ],
+  "adjudication": [
+    "removed SessionRelationalRepository.deleteByUserId (padding); the resetPassword->deleteByUserId call is the removed call, recorded under missing_in_buggy_code; overlap low->medium"
+  ]
 }

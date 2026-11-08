@@ -12,14 +12,14 @@
     "src/auth/auth.service.ts::AuthService.validateLogin"
   ],
   "relevant_files": [
-    "src/users/users.service.ts",
     "src/auth/auth.controller.ts",
-    "src/auth/auth.service.ts"
+    "src/auth/auth.service.ts",
+    "src/users/users.service.ts"
   ],
   "expected_relationships": [
     [
       "src/auth/auth.controller.ts::AuthController.register",
-      "ROUTES_TO",
+      "CALLS",
       "src/auth/auth.service.ts::AuthService.register"
     ],
     [
@@ -54,5 +54,8 @@
   "bug_category": "wrong-enum-constant",
   "call_distance": 1,
   "fix": "Default provider to AuthProvidersEnum.email.",
-  "notes": "The wrong enum member is the default; social flows pass provider explicitly so they are unaffected. The symptom surfaces in validateLogin."
+  "notes": "The wrong enum member is the default; social flows pass provider explicitly so they are unaffected. The symptom surfaces in validateLogin.",
+  "adjudication": [
+    "accepted (description valid under single-bug snapshots)"
+  ]
 }

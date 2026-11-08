@@ -45,9 +45,12 @@ export interface TaskMetrics {
   llm_tokens: number | null;
 }
 
-const renderCache = new Map<string, { text: string; tokens: number }>();
+// Cache per SymbolIndex instance: each task snapshot has its own sources.
+const renderCaches = new WeakMap<SymbolIndex, Map<string, { text: string; tokens: number }>>();
 
 export function renderSymbolUniform(index: SymbolIndex, key: string, anchorLine?: number): { text: string; tokens: number } {
+  let renderCache = renderCaches.get(index);
+  if (!renderCache) renderCaches.set(index, (renderCache = new Map()));
   const ck = `${key}@${anchorLine ?? ''}`;
   const c = renderCache.get(ck);
   if (c) return c;

@@ -11,13 +11,13 @@
     "src/auth/auth.service.ts::AuthService.validateLogin"
   ],
   "relevant_files": [
-    "src/auth/auth.service.ts",
-    "src/auth/auth.controller.ts"
+    "src/auth/auth.controller.ts",
+    "src/auth/auth.service.ts"
   ],
   "expected_relationships": [
     [
       "src/auth/auth.controller.ts::AuthController.login",
-      "ROUTES_TO",
+      "CALLS",
       "src/auth/auth.service.ts::AuthService.validateLogin"
     ],
     [
@@ -46,5 +46,8 @@
   "bug_category": "wrong-condition",
   "call_distance": 1,
   "fix": "Use the uniform payload when uniformErrors is true (drop the negation) and the specific errors otherwise.",
-  "notes": "validateLogin delegates all failure responses to invalidLoginException; the negated flag inverts which payload is returned. forgotPassword reads the same flag but is correct."
+  "notes": "validateLogin delegates all failure responses to invalidLoginException; the negated flag inverts which payload is returned. forgotPassword reads the same flag but is correct.",
+  "adjudication": [
+    "accepted as-is"
+  ]
 }

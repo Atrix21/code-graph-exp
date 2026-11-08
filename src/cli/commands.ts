@@ -4,11 +4,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { abs, type BenchmarkConfig } from '../config.js';
-import { loadCorpus, setupTarget } from '../evaluation/corpus.js';
+import { loadCorpus, checkoutSnapshot, setupTarget } from '../evaluation/corpus.js';
 import { loadTasks, validateTasks } from '../evaluation/ground-truth.js';
 import { SymbolIndex } from '../evaluation/symbol-index.js';
 import { REGISTRY, PRIMARY_METHODS } from '../evaluation/methods.js';
-import { evaluateOutputs, runMethod, toQueries, writeRun, type MethodRun } from '../evaluation/runner.js';
+import { runPerTask, writeRun } from '../evaluation/runner.js';
 import { generateReport } from '../evaluation/report.js';
 import type { GroundTruthTask, RetrievalBudget } from '../types.js';
 
@@ -29,9 +29,9 @@ export function selectTasks(cfg: BenchmarkConfig, split: string): GroundTruthTas
 export async function run(cmd: string, cfg: BenchmarkConfig, _repo: string) {
   switch (cmd) {
     case 'setup-target': {
-      const m = setupTarget(cfg, { noPatches: flag('no-patches') });
-      console.log(JSON.stringify(m, null, 2));
-      if (m.tsc_exit !== 0) { console.error('WARNING: benchmark snapshot does not type-check'); process.exit(1); }
+      const m = setupTarget(cfg, { noTypecheck: flag('no-typecheck') });
+      console.log(JSON.stringify({ base: m.base, tasks: Object.keys(m.tasks).length, typecheck_failures: m.typecheck_failures }, null, 2));
+      if (m.typecheck_failures) { console.error('WARNING: some snapshots do not type-check'); process.exit(1); }
       return;
     }
     case 'index': {
@@ -56,24 +56,13 @@ export async function run(cmd: string, cfg: BenchmarkConfig, _repo: string) {
       const runId = arg('run', `bench-${split}`)!;
       const methods = (arg('methods') ?? PRIMARY_METHODS.join(',')).split(',');
       const budget: RetrievalBudget = { maxResults: Number(arg('max-results', String(cfg.budget.maxResults))), maxContextTokens: Number(arg('budget', String(cfg.budget.maxContextTokens))) };
-      const corpus = loadCorpus(cfg);
       const tasks = selectTasks(cfg, split);
-      const index = new SymbolIndex(corpus.repoRoot, corpus.files);
-      const issues = validateTasks(tasks, index).filter((i) => i.level === 'error');
-      if (issues.length) throw new Error(`ground truth invalid on benchmark snapshot:\n${issues.map((i) => `${i.task_id}: ${i.msg}`).join('\n')}`);
-      const queries = toQueries(tasks);
-      const runs: MethodRun[] = [];
-      for (const name of methods) {
-        const f = REGISTRY[name];
-        if (!f) throw new Error(`unknown method ${name}`);
-        const m = await f();
-        const { index: st, outputs } = await runMethod(m, corpus, queries, budget);
-        const metrics = evaluateOutputs(index, tasks, outputs);
-        runs.push({ method: name, index: st, outputs, metrics });
-      }
+      for (const n of methods) if (!REGISTRY[n]) throw new Error(`unknown method ${n}`);
+      const runs = await runPerTask(cfg, tasks, methods.map((n) => ({ name: n, make: REGISTRY[n] })), budget);
+      const manifest = JSON.parse(fs.readFileSync(abs('targets/bench.manifest.json'), 'utf8'));
       const dir = path.join(abs(cfg.results_dir), runId);
       writeRun(dir, runs, {
-        run_id: runId, split, methods, budget, commit: corpus.commit, n_tasks: tasks.length, n_files: corpus.files.length,
+        run_id: runId, split, methods, budget, commit: `per-task snapshots (base ${manifest.base.commit})`, snapshot_commits: Object.fromEntries(tasks.map((t) => [t.task_id, manifest.tasks[t.task_id]?.commit])), n_tasks: tasks.length, n_files: manifest.base.corpus_files,
         dataset_version: cfg.dataset.version, created: new Date().toISOString(),
       });
       console.error(`wrote ${dir}`);

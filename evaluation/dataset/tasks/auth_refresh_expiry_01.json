@@ -8,20 +8,16 @@
   "relevant_symbols": [
     "src/auth/auth.service.ts::AuthService.getTokensData",
     "src/auth/auth.controller.ts::AuthController.refresh",
-    "src/auth/auth.service.ts::AuthService.refreshToken",
-    "src/auth/strategies/jwt-refresh.strategy.ts::JwtRefreshStrategy.validate",
-    "src/auth/config/auth.config.ts::EnvironmentVariablesValidator.AUTH_REFRESH_TOKEN_EXPIRES_IN"
+    "src/auth/auth.service.ts::AuthService.refreshToken"
   ],
   "relevant_files": [
-    "src/auth/auth.service.ts",
     "src/auth/auth.controller.ts",
-    "src/auth/strategies/jwt-refresh.strategy.ts",
-    "src/auth/config/auth.config.ts"
+    "src/auth/auth.service.ts"
   ],
   "expected_relationships": [
     [
       "src/auth/auth.controller.ts::AuthController.refresh",
-      "ROUTES_TO",
+      "CALLS",
       "src/auth/auth.service.ts::AuthService.refreshToken"
     ],
     [
@@ -33,11 +29,6 @@
       "src/auth/auth.service.ts::AuthService.validateLogin",
       "CALLS",
       "src/auth/auth.service.ts::AuthService.getTokensData"
-    ],
-    [
-      "src/auth/auth.service.ts::AuthService.getTokensData",
-      "READS",
-      "src/auth/config/auth.config.ts::EnvironmentVariablesValidator.AUTH_REFRESH_TOKEN_EXPIRES_IN"
     ]
   ],
   "data_flow": [
@@ -61,5 +52,8 @@
   "bug_category": "wrong-config",
   "call_distance": 1,
   "fix": "Use the 'auth.refreshExpires' config key for the refresh token expiresIn.",
-  "notes": "Shared helper getTokensData is used by login, social login and refresh. The config key for the second signAsync call was swapped to the access-token key. The access-token expiry computed at the top is correct."
+  "notes": "Shared helper getTokensData is used by login, social login and refresh. The config key for the second signAsync call was swapped to the access-token key. The access-token expiry computed at the top is correct.",
+  "adjudication": [
+    "removed JwtRefreshStrategy.validate and the config validator property (not on the cause path; READS edge absent in buggy code)"
+  ]
 }

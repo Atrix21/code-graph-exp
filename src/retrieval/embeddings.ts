@@ -93,7 +93,7 @@ export class EmbeddingRetriever implements RetrievalMethod {
 
   async prepare(corpus: Corpus): Promise<IndexStats> {
     const t0 = performance.now();
-    this.embedder = new Embedder(path.join(corpus.cacheDir, 'embeddings'));
+    this.embedder = new Embedder(path.join(path.dirname(corpus.cacheDir), 'embeddings')); // content-hash cache shared across snapshots
     const symIndex = new SymbolIndex(corpus.repoRoot, corpus.files);
     this.chunks = buildChunks(symIndex);
     const { vectors, tokens, computed } = this.embedder.embed(this.chunks.map((c) => ({ id: c.id + '#' + c.start_line, text: c.text, kind: 'doc' as const })));

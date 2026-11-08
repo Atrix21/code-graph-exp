@@ -9,17 +9,18 @@
     "src/auth/auth.service.ts::AuthService.update",
     "src/auth/auth.controller.ts::AuthController.update",
     "src/users/users.service.ts::UsersService.findByEmail",
-    "src/auth/auth.service.ts::AuthService.confirmNewEmail"
+    "src/mail/mail.service.ts::MailService.confirmNewEmail"
   ],
   "relevant_files": [
-    "src/auth/auth.service.ts",
     "src/auth/auth.controller.ts",
+    "src/auth/auth.service.ts",
+    "src/mail/mail.service.ts",
     "src/users/users.service.ts"
   ],
   "expected_relationships": [
     [
       "src/auth/auth.controller.ts::AuthController.update",
-      "ROUTES_TO",
+      "CALLS",
       "src/auth/auth.service.ts::AuthService.update"
     ],
     [
@@ -54,5 +55,8 @@
   "bug_category": "wrong-comparison",
   "call_distance": 0,
   "fix": "Throw emailExists when userByEmail.id !== currentUser.id.",
-  "notes": "Equality instead of inequality. Because the email differs from the current one (outer guard), the condition can never be true so the duplicate check never fires. UsersService.update has a similar emailAlreadyExists check but it is not reached for this flow."
+  "notes": "Equality instead of inequality. Because the email differs from the current one (outer guard), the condition can never be true so the duplicate check never fires. UsersService.update has a similar emailAlreadyExists check but it is not reached for this flow.",
+  "adjudication": [
+    "replaced AuthService.confirmNewEmail (link consumer, not on path) with MailService.confirmNewEmail (sends the mail in the report)"
+  ]
 }

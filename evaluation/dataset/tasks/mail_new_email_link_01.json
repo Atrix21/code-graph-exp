@@ -11,14 +11,14 @@
     "src/auth/auth.service.ts::AuthService.update"
   ],
   "relevant_files": [
-    "src/mail/mail.service.ts",
     "src/auth/auth.controller.ts",
-    "src/auth/auth.service.ts"
+    "src/auth/auth.service.ts",
+    "src/mail/mail.service.ts"
   ],
   "expected_relationships": [
     [
       "src/auth/auth.controller.ts::AuthController.update",
-      "ROUTES_TO",
+      "CALLS",
       "src/auth/auth.service.ts::AuthService.update"
     ],
     [
@@ -48,5 +48,8 @@
   "bug_category": "wrong-constant",
   "call_distance": 1,
   "fix": "Use the '/confirm-new-email' path.",
-  "notes": "String constant copied from userSignUp. The template name and i18n keys are still the new-email ones, so the mail otherwise looks right."
+  "notes": "String constant copied from userSignUp. The template name and i18n keys are still the new-email ones, so the mail otherwise looks right.",
+  "adjudication": [
+    "accepted (description valid under single-bug snapshots)"
+  ]
 }

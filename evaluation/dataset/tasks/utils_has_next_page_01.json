@@ -7,13 +7,11 @@
   ],
   "relevant_symbols": [
     "src/utils/infinity-pagination.ts::infinityPagination",
-    "src/users/users.controller.ts::UsersController.findAll",
-    "src/users/users.service.ts::UsersService.findManyWithPagination"
+    "src/users/users.controller.ts::UsersController.findAll"
   ],
   "relevant_files": [
-    "src/utils/infinity-pagination.ts",
     "src/users/users.controller.ts",
-    "src/users/users.service.ts"
+    "src/utils/infinity-pagination.ts"
   ],
   "expected_relationships": [
     [
@@ -38,9 +36,12 @@
     "src/utils/dto/infinity-pagination-response.dto.ts::InfinityPaginationResponse"
   ],
   "difficulty": "easy",
-  "lexical_overlap": "low",
+  "lexical_overlap": "high",
   "bug_category": "wrong-comparison",
   "call_distance": 1,
   "fix": "Compute hasNextPage as data.length === options.limit.",
-  "notes": "Single util used by the users list endpoint. The service and repository return correct rows; only the flag is wrong."
+  "notes": "Single util used by the users list endpoint. The service and repository return correct rows; only the flag is wrong.",
+  "adjudication": [
+    "removed UsersService.findManyWithPagination (unrelated to the flag); overlap low->high"
+  ]
 }

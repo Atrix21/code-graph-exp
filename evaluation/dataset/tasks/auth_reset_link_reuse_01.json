@@ -12,13 +12,13 @@
     "src/auth/auth.service.ts::AuthService.forgotPassword"
   ],
   "relevant_files": [
-    "src/auth/auth.service.ts",
-    "src/auth/auth.controller.ts"
+    "src/auth/auth.controller.ts",
+    "src/auth/auth.service.ts"
   ],
   "expected_relationships": [
     [
       "src/auth/auth.controller.ts::AuthController.resetPassword",
-      "ROUTES_TO",
+      "CALLS",
       "src/auth/auth.service.ts::AuthService.resetPassword"
     ],
     [
@@ -47,10 +47,13 @@
     "src/session/session.service.ts::SessionService.deleteByUserId",
     "src/auth/auth.service.ts::AuthService.confirmEmail"
   ],
-  "difficulty": "hard",
-  "lexical_overlap": "low",
+  "difficulty": "medium",
+  "lexical_overlap": "high",
   "bug_category": "wrong-field",
   "call_distance": 1,
   "fix": "Append user.password to the forgot secret so each link stops verifying once the password changes.",
-  "notes": "No code compares or stores used links; single-use relies on the secret embedding the password hash. Swapping the field to email makes the secret stable across password changes. The bug is in the private helper, not in resetPassword."
+  "notes": "No code compares or stores used links; single-use relies on the secret embedding the password hash. Swapping the field to email makes the secret stable across password changes. The bug is in the private helper, not in resetPassword.",
+  "adjudication": [
+    "overlap low->high, difficulty hard->medium: the unchanged upstream comment in getForgotSecret matches the report wording (kept: it is genuine upstream code)"
+  ]
 }

@@ -8,35 +8,14 @@
   "relevant_symbols": [
     "src/files/domain/file.ts::FileType.path",
     "src/auth/auth.controller.ts::AuthController.me",
-    "src/auth/auth.service.ts::AuthService.me",
-    "src/users/users.service.ts::UsersService.findById",
-    "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts::UserMapper.toDomain",
     "src/files/infrastructure/persistence/relational/mappers/file.mapper.ts::FileMapper.toDomain"
   ],
   "relevant_files": [
-    "src/files/domain/file.ts",
     "src/auth/auth.controller.ts",
-    "src/auth/auth.service.ts",
-    "src/users/users.service.ts",
-    "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts",
+    "src/files/domain/file.ts",
     "src/files/infrastructure/persistence/relational/mappers/file.mapper.ts"
   ],
   "expected_relationships": [
-    [
-      "src/auth/auth.controller.ts::AuthController.me",
-      "ROUTES_TO",
-      "src/auth/auth.service.ts::AuthService.me"
-    ],
-    [
-      "src/auth/auth.service.ts::AuthService.me",
-      "CALLS",
-      "src/users/users.service.ts::UsersService.findById"
-    ],
-    [
-      "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts::UserMapper.toDomain",
-      "CALLS",
-      "src/files/infrastructure/persistence/relational/mappers/file.mapper.ts::FileMapper.toDomain"
-    ],
     [
       "src/files/infrastructure/persistence/relational/mappers/file.mapper.ts::FileMapper.toDomain",
       "INSTANTIATES",
@@ -64,5 +43,8 @@
   "bug_category": "wrong-config",
   "call_distance": 2,
   "fix": "Prefix the local path with appConfig().backendDomain.",
-  "notes": "The bug sits in a class-transformer decorator callback attached to FileType.path (anonymous callback => enclosing property symbol). No service calls it directly: it runs when responses are serialized."
+  "notes": "The bug sits in a class-transformer decorator callback attached to FileType.path (anonymous callback => enclosing property symbol). No service calls it directly: it runs when responses are serialized.",
+  "adjudication": [
+    "removed generic pass-through symbols"
+  ]
 }

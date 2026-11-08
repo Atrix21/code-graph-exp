@@ -22,7 +22,7 @@
   "dataset": {
     "tasks_dir": "evaluation/dataset/tasks",
     "bugs_dir": "evaluation/dataset/bugs",
-    "version": "unfrozen",
+    "version": "v1.0",
     "split_seed": 20261108
   },
   "budget": {
