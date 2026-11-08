@@ -1,0 +1,39 @@
+{
+  "run_id": "stage1-single-dev-8000",
+  "protocol": "single_shot",
+  "split": "dev",
+  "budget": 8000,
+  "methods": [
+    "none",
+    "ripgrep",
+    "bm25",
+    "embeddings",
+    "graphify",
+    "code_review_graph",
+    "custom_graph",
+    "hybrid",
+    "oracle"
+  ],
+  "repeats": 1,
+  "backend": "claude-code",
+  "model": "claude-sonnet-5-5",
+  "billable": true,
+  "prompt_version": "p1",
+  "n_items": 18,
+  "n_scored": 18,
+  "n_excluded": 0,
+  "n_pending": 0,
+  "status": "completed",
+  "halted": null,
+  "backend_meta": {
+    "effort": "high",
+    "billing": "subscription",
+    "account": "personal",
+    "run_usd": 0.25,
+    "seed": 20261108,
+    "profile": "restricted-oauth",
+    "expected_version": "2.1.319"
+  },
+  "wall_ms_this_invocation": 157343,
+  "updated": "2026-11-08T15:48:08.466Z"
+}

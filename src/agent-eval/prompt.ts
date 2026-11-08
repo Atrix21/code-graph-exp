@@ -13,6 +13,19 @@ export const AGENT_SYSTEM_PROMPT = [
   'Investigate until you are confident, then give your diagnosis. Be efficient: do not read files you do not need.',
 ].join(' ');
 
+/**
+ * p2 ("directed"): p1 plus ONE sentence, identical in every condition, that points the agent at an MCP retrieval tool
+ * when one is attached (a no-op for the baseline, which has none). Added after the stage-1 smoke pilot, where the agent
+ * never called any attached retrieval tool under p1 (decision-log E2-D17).
+ */
+export const DIRECTED_TOOL_SENTENCE = 'Besides Read, Grep and Glob you may have a code-search or code-graph tool provided through MCP (its name starts with mcp__); if you do, use it first to find candidate locations, then verify them by reading the code.';
+export type AgentPromptVersion = 'p1' | 'p2';
+export const AGENT_PROMPT_VERSIONS: AgentPromptVersion[] = ['p1', 'p2'];
+export function agentSystemPrompt(v: AgentPromptVersion = 'p1'): string {
+  if (v === 'p1') return AGENT_SYSTEM_PROMPT;
+  if (v === 'p2') return `${AGENT_SYSTEM_PROMPT} ${DIRECTED_TOOL_SENTENCE}`;
+  throw new Error(`unknown agent prompt version '${v}'`);
+}
 export const SINGLE_SHOT_SYSTEM_PROMPT = 'You are a senior software engineer diagnosing a bug from a bug report and the material provided. Answer with JSON only.';
 
 export function agentTaskPrompt(bugReport: string): string {

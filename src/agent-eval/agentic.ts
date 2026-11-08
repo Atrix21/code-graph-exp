@@ -30,7 +30,7 @@ import { report } from './analysis.js';
 import { competitorServerSpec } from './mcp/competitor-servers.js';
 import { SERVER_METHODS } from './mcp/retrieval-server.js';
 import { startMockServer, FIXED_DIAGNOSIS, type MockPolicy, type MockStep } from './mock-anthropic/server.js';
-import { agentTaskPrompt, PROMPT_VERSION } from './prompt.js';
+import { agentSystemPrompt, agentTaskPrompt, AGENT_PROMPT_VERSIONS, type AgentPromptVersion } from './prompt.js';
 import { bugLocations, scoreDiagnosis, snapshotIndex } from './scoring.js';
 import type { ScoredRun } from './runner.js';
 import { buildWorkspace, checkWorkspaceIsolation, workspaceHash, type Workspace } from './workspace.js';
@@ -189,6 +189,8 @@ export interface AgenticOptions {
   billing?: 'subscription' | 'api-key';
   /** Claude Code account (`claude-account` name) whose login the runs use; required for billable subscription runs. */
   account?: string;
+  /** Agent prompt version (prompt.ts): p1 (default, natural tool choice) or p2 (directed to an attached MCP tool). */
+  promptVersion?: AgentPromptVersion;
   timeoutS?: number;
   effort?: string;
   keepWorkspaces?: boolean;
@@ -231,6 +233,8 @@ export async function runAgentic(cfg: BenchmarkConfig, o: AgenticOptions): Promi
   const maxTurns = o.maxTurns ?? DEFAULT_MAX_TURNS;
   const budget = o.budget ?? 4000;
   const parallel = Math.max(1, o.parallel ?? 1);
+  const promptVersion = o.promptVersion ?? 'p1';
+  if (!AGENT_PROMPT_VERSIONS.includes(promptVersion)) throw new Error(`unknown --prompt '${promptVersion}'`);
   const mock = o.mockApi != null;
   for (const c of o.conditions) if (!ALL_CONDITIONS.includes(c)) throw new Error(`unknown condition '${c}'`);
   if (!PROFILE_NAMES.includes(o.profile)) throw new Error(`unknown profile '${o.profile}'`);
@@ -253,13 +257,14 @@ export async function runAgentic(cfg: BenchmarkConfig, o: AgenticOptions): Promi
   // ---- plan (shuffle once, persist, reuse) and config pinning ----
   fs.mkdirSync(path.join(dir, 'transcripts'), { recursive: true });
   fs.mkdirSync(path.join(dir, 'retrieval-logs'), { recursive: true });
-  const config = { split: o.split, conditions: o.conditions, repeats: o.repeats, tasks: tasks.map((t) => t.task_id).sort(), model, profile: o.profile, effort, max_turns: maxTurns, budget_per_call: budget, seed: SHUFFLE_SEED, claude_version: version, mock_api: o.mockApi ?? null, account: acct ? accountRecord(acct) : null };
+  const config = { split: o.split, conditions: o.conditions, repeats: o.repeats, tasks: tasks.map((t) => t.task_id).sort(), model, profile: o.profile, effort, max_turns: maxTurns, budget_per_call: budget, seed: SHUFFLE_SEED, claude_version: version, mock_api: o.mockApi ?? null, account: acct ? accountRecord(acct) : null, prompt_version: promptVersion };
   const planFile = path.join(dir, 'plan.json');
   let plan: PlanItem[];
   if (fs.existsSync(planFile)) {
     const prev = JSON.parse(fs.readFileSync(planFile, 'utf8'));
     for (const k of Object.keys(config) as (keyof typeof config)[]) {
-      if (JSON.stringify(prev.config?.[k]) !== JSON.stringify(config[k])) throw new Error(`resuming '${o.runId}' with a different ${k}: ${JSON.stringify(prev.config?.[k])} != ${JSON.stringify(config[k])} (use a new --run id)`);
+      const was = prev.config && k in prev.config ? prev.config[k] : k === 'prompt_version' ? 'p1' : undefined; // runs before p2 existed were p1
+      if (JSON.stringify(was) !== JSON.stringify(config[k])) throw new Error(`resuming '${o.runId}' with a different ${k}: ${JSON.stringify(prev.config?.[k])} != ${JSON.stringify(config[k])} (use a new --run id)`);
     }
     plan = prev.items;
     log(`resuming ${o.runId}: plan of ${plan.length} items from plan.json`);
@@ -302,7 +307,7 @@ export async function runAgentic(cfg: BenchmarkConfig, o: AgenticOptions): Promi
 
   const writeMeta = (status: string, extra: Record<string, unknown> = {}) => fs.writeFileSync(path.join(dir, 'meta.json'), JSON.stringify({
     run_id: o.runId, status, protocol: 'agentic', ...config, backend: mock ? 'claude-code-mock' : 'claude-code', billable: !mock, max_parallel: parallel, max_embedding_servers: MAX_EMBEDDING_SERVERS,
-    prompt_version: PROMPT_VERSION, isolation_env: ISOLATION_ENV, condition_labels: Object.fromEntries(o.conditions.map((c) => [c, CONDITION_LABELS[c] ?? c])),
+    isolation_env: ISOLATION_ENV, condition_labels: Object.fromEntries(o.conditions.map((c) => [c, CONDITION_LABELS[c] ?? c])),
     tool_policy: Object.fromEntries(o.conditions.map((c) => [c, conditionToolPolicy(c)])), run_usd: o.perRunUsd ?? null, max_total_usd: mock ? null : guard.req.max_total_usd, shuffle_seed: SHUFFLE_SEED, plan_file: 'plan.json', updated: new Date().toISOString(), ...extra,
   }, null, 2) + '\n');
   writeMeta('running');
@@ -371,7 +376,7 @@ export async function runAgentic(cfg: BenchmarkConfig, o: AgenticOptions): Promi
         mockSrv = await startMockServer({ logFile: path.join(dir, 'transcripts', `${safe}.mock-requests.jsonl`), policy });
       }
       const spec = buildClaudeCommand({
-        protocol: 'agentic', profile: o.profile, model, cwd: ws.dir, mcp, mcpConfigPath: path.join(mcpDir, `${safe}.json`), mockUrl: mockSrv?.url, maxTurns, maxBudgetUsd: o.perRunUsd, effort, billing: o.billing, baseEnv: acct?.env,
+        protocol: 'agentic', profile: o.profile, model, cwd: ws.dir, mcp, systemPrompt: agentSystemPrompt(promptVersion), mcpConfigPath: path.join(mcpDir, `${safe}.json`), mockUrl: mockSrv?.url, maxTurns, maxBudgetUsd: o.perRunUsd, effort, billing: o.billing, baseEnv: acct?.env,
         claudeBin: process.env.AGENT_EVAL_CLAUDE_BIN, injectExtraTool: o.mockApi === 'inject-extra-tool' ? 'Bash' : undefined,
       });
       let mismatch: string[] = [];
@@ -383,7 +388,7 @@ export async function runAgentic(cfg: BenchmarkConfig, o: AgenticOptions): Promi
       const modified = workspaceHash(ws.dir, ws.files) !== ws.hash;
       const oc = r.outcome;
       const rec: Omit<AgenticRun, 'score'> = {
-        ...r.run, prompt_version: PROMPT_VERSION, profile: o.profile, workspace_modified: modified, permission_denials: r.detail.permission_denials.length, api_duration_ms: r.detail.duration_api_ms,
+        ...r.run, prompt_version: promptVersion, profile: o.profile, workspace_modified: modified, permission_denials: r.detail.permission_denials.length, api_duration_ms: r.detail.duration_api_ms,
         usage_result_event: r.detail.usage_result, mcp_status: r.detail.mcp_servers, attempt, position: item.position, status: oc.status, condition_label: CONDITION_LABELS[cond] ?? cond, effort, claude_version: version,
         cost_reported_usd: r.cost.reported, cost_list_usd: r.cost.list, cost_ledger_usd: r.cost.ledger, wall_ms: r.timing.wall_ms, duration_ms: r.detail.duration_ms, init_ms: r.timing.init_ms,
         mcp_startup_ms: mcp ? r.timing.init_ms : null, index_build_ms: mcp?.build_ms ?? (['custom_graph', 'hybrid'].includes(cond) ? warmMs.get(item.task_id) ?? null : null), init: r.init,
@@ -493,7 +498,7 @@ export async function agenticCommand(cfg: BenchmarkConfig): Promise<void> {
     runId, split, conditions: (arg('conditions') ?? 'baseline').split(','), repeats: Number(arg('repeats', '1')), model: arg('model', DEFAULT_MODEL)!,
     profile: arg('profile', 'restricted-oauth') as ProfileName, mockApi, taskIds: (arg('task-ids') ?? arg('tasks'))?.split(','), parallel: Number(arg('parallel', '1')),
     budget: Number(arg('budget', '4000')), maxTurns: arg('max-turns') ? Number(arg('max-turns')) : undefined, maxTotalUsd: arg('max-usd') ? Number(arg('max-usd')) : undefined,
-    perRunUsd: arg('run-usd') ? Number(arg('run-usd')) : undefined, billing: (arg('billing') ?? 'subscription') as 'subscription' | 'api-key', account: arg('account'), timeoutS: arg('timeout-s') ? Number(arg('timeout-s')) : undefined, effort: arg('effort'), keepWorkspaces: flag('keep-workspaces'), installSignals: true,
+    perRunUsd: arg('run-usd') ? Number(arg('run-usd')) : undefined, billing: (arg('billing') ?? 'subscription') as 'subscription' | 'api-key', account: arg('account'), promptVersion: arg('prompt', 'p1') as AgentPromptVersion, timeoutS: arg('timeout-s') ? Number(arg('timeout-s')) : undefined, effort: arg('effort'), keepWorkspaces: flag('keep-workspaces'), installSignals: true,
   });
   if (runs.length) console.log(report(runs, 'agentic:baseline'));
   console.error(`wrote ${path.join(dir, 'runs.jsonl')} (${runs.length} scored runs)${halted ? `; HALTED: ${halted}` : ''}`);

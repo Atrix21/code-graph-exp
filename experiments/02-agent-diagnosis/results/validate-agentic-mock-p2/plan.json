@@ -1,0 +1,46 @@
+{
+ "seed": 20261108,
+ "created": "2026-11-08T15:50:35.710Z",
+ "config": {
+  "split": "dev",
+  "conditions": [
+   "baseline",
+   "hybrid"
+  ],
+  "repeats": 1,
+  "tasks": [
+   "auth_social_link_01"
+  ],
+  "model": "claude-sonnet-5-5",
+  "profile": "restricted-oauth",
+  "effort": "high",
+  "max_turns": 40,
+  "budget_per_call": 4000,
+  "seed": 20261108,
+  "claude_version": "2.1.319",
+  "mock_api": "echo-structured",
+  "account": {
+   "name": "personal",
+   "primary": true,
+   "subscription_type": "pro",
+   "email_sha": "0cfa2dbaab"
+  },
+  "prompt_version": "p2"
+ },
+ "items": [
+  {
+   "run_id": "auth_social_link_01|agentic:hybrid|0",
+   "task_id": "auth_social_link_01",
+   "condition": "hybrid",
+   "repeat": 0,
+   "position": 0
+  },
+  {
+   "run_id": "auth_social_link_01|agentic:baseline|0",
+   "task_id": "auth_social_link_01",
+   "condition": "baseline",
+   "repeat": 0,
+   "position": 1
+  }
+ ]
+}

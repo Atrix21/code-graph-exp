@@ -1,0 +1,113 @@
+{
+  "run_id": "validate-agentic-mock-p2",
+  "status": "completed",
+  "protocol": "agentic",
+  "split": "dev",
+  "conditions": [
+    "baseline",
+    "hybrid"
+  ],
+  "repeats": 1,
+  "tasks": [
+    "auth_social_link_01"
+  ],
+  "model": "claude-sonnet-5-5",
+  "profile": "restricted-oauth",
+  "effort": "high",
+  "max_turns": 40,
+  "budget_per_call": 4000,
+  "seed": 20261108,
+  "claude_version": "2.1.319",
+  "mock_api": "echo-structured",
+  "account": {
+    "name": "personal",
+    "primary": true,
+    "subscription_type": "pro",
+    "email_sha": "0cfa2dbaab"
+  },
+  "prompt_version": "p2",
+  "backend": "claude-code-mock",
+  "billable": false,
+  "max_parallel": 1,
+  "max_embedding_servers": 2,
+  "isolation_env": {
+    "CLAUDE_CODE_DISABLE_CLAUDE_MDS": "1",
+    "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
+    "CLAUDE_CODE_SKIP_PROMPT_HISTORY": "1",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "DISABLE_AUTOUPDATER": "1",
+    "NO_COLOR": "1",
+    "ENABLE_CLAUDEAI_MCP_SERVERS": "false",
+    "MCP_TIMEOUT": "180000",
+    "MCP_TOOL_TIMEOUT": "120000"
+  },
+  "condition_labels": {
+    "baseline": "baseline",
+    "hybrid": "hybrid"
+  },
+  "tool_policy": {
+    "baseline": {
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "allowed": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "denied": [
+        "Bash",
+        "Edit",
+        "Write",
+        "NotebookEdit",
+        "WebFetch",
+        "WebSearch",
+        "Task",
+        "Agent",
+        "Skill",
+        "TodoWrite"
+      ]
+    },
+    "hybrid": {
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "allowed": [
+        "Read",
+        "Grep",
+        "Glob",
+        "mcp__retrieval__*"
+      ],
+      "denied": [
+        "Bash",
+        "Edit",
+        "Write",
+        "NotebookEdit",
+        "WebFetch",
+        "WebSearch",
+        "Task",
+        "Agent",
+        "Skill",
+        "TodoWrite"
+      ]
+    }
+  },
+  "run_usd": null,
+  "max_total_usd": null,
+  "shuffle_seed": 20261108,
+  "plan_file": "plan.json",
+  "updated": "2026-11-08T15:50:41.534Z",
+  "halted": null,
+  "n_pending": 0,
+  "n_items": 2,
+  "n_scored": 2,
+  "n_excluded_records": 0,
+  "total_cost_ledger_usd": 0.0036263,
+  "total_cost_reported_usd": 0.0032079000000000005,
+  "wall_ms_this_invocation": 2415,
+  "finished": "2026-11-08T15:50:41.533Z"
+}

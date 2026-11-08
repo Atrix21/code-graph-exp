@@ -123,3 +123,21 @@ describe('claude-code single-shot run discipline (mock mode, fake binary)', () =
     await expect(withBin(f.bin, () => b.run(items(1), path.join(tmp, 'ss-refuse')))).rejects.toThrow(/AGENT_EVAL_BILLABLE|approval/);
   });
 });
+
+describe('prompt variants and list-price recomputation', () => {
+  it('p2 is p1 plus exactly the directed sentence; p1 is unchanged', async () => {
+    const { agentSystemPrompt, AGENT_SYSTEM_PROMPT, DIRECTED_TOOL_SENTENCE } = await import('../../src/agent-eval/prompt.js');
+    expect(agentSystemPrompt('p1')).toBe(AGENT_SYSTEM_PROMPT);
+    expect(agentSystemPrompt('p2')).toBe(`${AGENT_SYSTEM_PROMPT} ${DIRECTED_TOOL_SENTENCE}`);
+    expect(() => agentSystemPrompt('p3' as any)).toThrow(/unknown/);
+  });
+
+  it('1-hour cache writes are priced at 2x input (reconciles a real stage-1 run within the cache-read price difference)', async () => {
+    const { usageCost } = await import('../../src/agent-eval/backends/claude-code.js');
+    const u = { input: 6, output: 630, cache_read: 8948, cache_write: 5694 };
+    expect(usageCost(u, 'claude-sonnet-5-5', 5694)).toBeCloseTo((6 * 2 + 630 * 10 + 8948 * 0.2 + 5694 * 4) / 1e6, 10);
+    expect(usageCost(u, 'claude-sonnet-5-5')).toBeCloseTo((6 * 2 + 630 * 10 + 8948 * 0.2 + 5694 * 2.5) / 1e6, 10);
+    // Claude Code reported $0.0299828 for this run: the same tokens with cache reads at $0.10/M.
+    expect(usageCost(u, 'claude-sonnet-5-5', 5694) - 8948 * 0.1 / 1e6).toBeCloseTo(0.0299828, 7);
+  });
+});

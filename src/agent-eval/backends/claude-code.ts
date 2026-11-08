@@ -352,9 +352,15 @@ export function priceFor(model: string) {
   if (/sonnet/i.test(model)) return LIST_PRICES.sonnet;
   return LIST_PRICES.opus; // opus, and unknown models: the dearest (conservative for a cap)
 }
-export const usageCost = (u: TokenUsage, model: string): number => {
+/**
+ * List-price cost. `cacheWrite1h` (part of `cache_write`) is priced at 2x input (1-hour TTL, which Claude Code uses);
+ * the rest of `cache_write` at the 5-minute rate (1.25x). Claude Code's own `total_cost_usd` (the pre-registered cost
+ * metric) prices Sonnet 5.5 cache reads at $0.10/M; this recomputation uses the published $0.20/M, so it can be higher.
+ */
+export const usageCost = (u: TokenUsage, model: string, cacheWrite1h = 0): number => {
   const p = priceFor(model);
-  return (u.input * p.in + u.output * p.out + u.cache_read * p.cacheRead + u.cache_write * p.cacheWrite) / 1e6;
+  const w1h = Math.min(Math.max(0, cacheWrite1h), u.cache_write);
+  return (u.input * p.in + u.output * p.out + u.cache_read * p.cacheRead + (u.cache_write - w1h) * p.cacheWrite + w1h * 2 * p.in) / 1e6;
 };
 
 /* ------------------------------------------------------------------------------------------------ */
@@ -700,8 +706,8 @@ export async function runClaude(spec: ClaudeCommand, prompt: string, meta: RunMe
     let list: number | null = null;
     if (res?.modelUsage && Object.keys(res.modelUsage).length) {
       list = 0;
-      for (const [m, v] of Object.entries<any>(res.modelUsage)) list += usageCost({ input: num(v.inputTokens ?? v.input_tokens), output: num(v.outputTokens ?? v.output_tokens), cache_read: num(v.cacheReadInputTokens ?? v.cache_read_input_tokens), cache_write: num(v.cacheCreationInputTokens ?? v.cache_creation_input_tokens) }, m);
-    } else if (res?.usage) list = usageCost(resultUsage(res.usage)!, spec.model);
+      for (const [m, v] of Object.entries<any>(res.modelUsage)) list += usageCost({ input: num(v.inputTokens ?? v.input_tokens), output: num(v.outputTokens ?? v.output_tokens), cache_read: num(v.cacheReadInputTokens ?? v.cache_read_input_tokens), cache_write: num(v.cacheCreationInputTokens ?? v.cache_creation_input_tokens) }, m, num(v.cacheCreationEphemeral1hInputTokens));
+    } else if (res?.usage) list = usageCost(resultUsage(res.usage)!, spec.model, num(res.usage.cache_creation?.ephemeral_1h_input_tokens));
     else if (parsed.messageUsage.size) { list = 0; for (const v of parsed.messageUsage.values()) list += usageCost(v.usage, v.model || spec.model); }
     const reported = out.run.cost_usd;
     let ledger = Math.max(reported ?? 0, list ?? 0);
