@@ -1,5 +1,15 @@
 # PROGRESS
 
+## Experiment 2 (branch `agent-eval`): downstream agent diagnosis. Status: harness ready, awaiting approval
+- Question: does graph-enhanced retrieval make a coding agent diagnose bugs more accurately or cheaply?
+- Everything is in `experiments/02-agent-diagnosis/`: `protocol.md` (pre-registration), `decision-log.md`, `AUDIT.md` (independent audit + fixes), `APPROVAL-REQUEST.md` (stages, costs, decisions needed).
+- Built and validated at zero cost: isolated workspaces, MCP retrieval servers (ours + native Graphify/CRG), Claude Code headless backend with an approval gate, a mock Messages API proving isolation from recorded requests, automatic scorer, confirmatory analysis. Tests: 222 passing.
+- **No billable run has been made.** A billable stage starts only after the owner approves it; the lead then writes `APPROVAL.json`.
+- Commands: `npm run agent-eval -- agentic --split dev --task-ids a,b --conditions baseline,embeddings,hybrid,graphify,crg --mock-api scripted --run <id>` (zero cost); `npx tsx src/agent-eval/verify-isolation.ts`; `npm run agent-eval -- report --run <id>`.
+- Pending: the independent auditor's re-verification of the fixes (interrupted by the account's weekly usage limit; resume after it resets).
+
+---
+
 Living status file. Another session should be able to continue from here plus `research/decision-log.md`.
 
 ## Status: M1–M5 complete (final report: `research/findings.md`)
