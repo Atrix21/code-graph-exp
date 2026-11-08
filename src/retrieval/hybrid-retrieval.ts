@@ -12,7 +12,7 @@
 import type { Corpus, IndexStats, RetrievalBudget, RetrievalMethod, RetrievalOutput, RetrievalQuery } from '../types.js';
 import { BM25Retriever } from './bm25.js';
 import { EmbeddingRetriever } from './embeddings.js';
-import { DEFAULT_GRAPH_CONFIG, GraphEngine, type GraphConfig } from './graph-engine.js';
+import { DEFAULT_GRAPH_CONFIG, GraphEngine, basePrior, type GraphConfig } from './graph-engine.js';
 import { DEFAULT_SNIPPETS, loadOrBuildGraph, renderRanked, type RankedSymbol, type SnippetConfig } from './graph-retrieval.js';
 import { extractIdentifierLikeTerms, tokenize } from './text.js';
 
@@ -130,6 +130,13 @@ export class HybridRetriever implements RetrievalMethod {
       }
     }
     const chunkByKey = new Map(chunks.map((ch) => [ch.id, ch]));
+    for (const [k, v] of final) {
+      const node = eng?.byKey.get(k) ?? null;
+      const kind = node?.type ?? chunkByKey.get(k)?.kind ?? 'module';
+      const file = k.split('::')[0];
+      // Without a graph only the kind/test-path prior applies (the control-flow bonus needs the graph).
+      final.set(k, v * (eng ? eng.prior(kind, file, node?.id ?? null) : basePrior(c.graph, kind, file)));
+    }
     const ranked: RankedSymbol[] = [...final.entries()]
       .sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1))
       .slice(0, budget.maxResults)

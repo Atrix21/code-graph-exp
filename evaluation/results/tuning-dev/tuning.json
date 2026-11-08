@@ -1,0 +1,566 @@
+{
+  "split": "dev",
+  "n_tasks": 6,
+  "objective": "mean Recall@10 + mean RC MRR",
+  "rows": [
+    {
+      "name": "h_g0.3_f0_s0.5_d2",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 0.3,
+        "wFact": 0,
+        "wSem": 0.5,
+        "depth": 2
+      },
+      "distance": 3,
+      "r10": 0.6666666666666666,
+      "mrr": 0.4166666666666667,
+      "rc5": 0.6666666666666666,
+      "objective": 1.0833333333333333
+    },
+    {
+      "name": "h_g0.3_f0_s0.5_d3",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 0.3,
+        "wFact": 0,
+        "wSem": 0.5,
+        "depth": 3
+      },
+      "distance": 4,
+      "r10": 0.6666666666666666,
+      "mrr": 0.46710526315789475,
+      "rc5": 0.6666666666666666,
+      "objective": 1.1337719298245614
+    },
+    {
+      "name": "h_g0.3_f0_s1_d2",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 0.3,
+        "wFact": 0,
+        "wSem": 1,
+        "depth": 2
+      },
+      "distance": 2,
+      "r10": 0.6666666666666666,
+      "mrr": 0.43737373737373736,
+      "rc5": 0.6666666666666666,
+      "objective": 1.104040404040404
+    },
+    {
+      "name": "h_g0.3_f0_s1_d3",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 0.3,
+        "wFact": 0,
+        "wSem": 1,
+        "depth": 3
+      },
+      "distance": 3,
+      "r10": 0.6666666666666666,
+      "mrr": 0.4234848484848485,
+      "rc5": 0.6666666666666666,
+      "objective": 1.090151515151515
+    },
+    {
+      "name": "h_g0.3_f0.5_s0.5_d2",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 0.3,
+        "wFact": 0.5,
+        "wSem": 0.5,
+        "depth": 2
+      },
+      "distance": 2,
+      "r10": 0.6666666666666666,
+      "mrr": 0.5638888888888888,
+      "rc5": 0.6666666666666666,
+      "objective": 1.2305555555555554
+    },
+    {
+      "name": "h_g0.3_f0.5_s0.5_d3",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 0.3,
+        "wFact": 0.5,
+        "wSem": 0.5,
+        "depth": 3
+      },
+      "distance": 3,
+      "r10": 0.6666666666666666,
+      "mrr": 0.5638888888888888,
+      "rc5": 0.6666666666666666,
+      "objective": 1.2305555555555554
+    },
+    {
+      "name": "h_g0.3_f0.5_s1_d2",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 0.3,
+        "wFact": 0.5,
+        "wSem": 1,
+        "depth": 2
+      },
+      "distance": 1,
+      "r10": 0.6666666666666666,
+      "mrr": 0.5674603174603174,
+      "rc5": 0.6666666666666666,
+      "objective": 1.2341269841269842
+    },
+    {
+      "name": "h_g0.3_f0.5_s1_d3",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 0.3,
+        "wFact": 0.5,
+        "wSem": 1,
+        "depth": 3
+      },
+      "distance": 2,
+      "r10": 0.6666666666666666,
+      "mrr": 0.5674603174603174,
+      "rc5": 0.6666666666666666,
+      "objective": 1.2341269841269842
+    },
+    {
+      "name": "h_g0.6_f0_s0.5_d2",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 0.6,
+        "wFact": 0,
+        "wSem": 0.5,
+        "depth": 2
+      },
+      "distance": 2,
+      "r10": 0.7083333333333334,
+      "mrr": 0.439327485380117,
+      "rc5": 0.6666666666666666,
+      "objective": 1.1476608187134505
+    },
+    {
+      "name": "h_g0.6_f0_s0.5_d3",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 0.6,
+        "wFact": 0,
+        "wSem": 0.5,
+        "depth": 3
+      },
+      "distance": 3,
+      "r10": 0.7083333333333334,
+      "mrr": 0.5682539682539681,
+      "rc5": 0.6666666666666666,
+      "objective": 1.2765873015873015
+    },
+    {
+      "name": "h_g0.6_f0_s1_d2",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 0.6,
+        "wFact": 0,
+        "wSem": 1,
+        "depth": 2
+      },
+      "distance": 1,
+      "r10": 0.7083333333333334,
+      "mrr": 0.4861111111111111,
+      "rc5": 0.6666666666666666,
+      "objective": 1.1944444444444444
+    },
+    {
+      "name": "h_g0.6_f0_s1_d3",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 0.6,
+        "wFact": 0,
+        "wSem": 1,
+        "depth": 3
+      },
+      "distance": 2,
+      "r10": 0.7083333333333334,
+      "mrr": 0.4861111111111111,
+      "rc5": 0.6666666666666666,
+      "objective": 1.1944444444444444
+    },
+    {
+      "name": "h_g0.6_f0.5_s0.5_d2",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 0.6,
+        "wFact": 0.5,
+        "wSem": 0.5,
+        "depth": 2
+      },
+      "distance": 1,
+      "r10": 0.7083333333333334,
+      "mrr": 0.45370370370370366,
+      "rc5": 0.6666666666666666,
+      "objective": 1.162037037037037
+    },
+    {
+      "name": "h_g0.6_f0.5_s0.5_d3",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 0.6,
+        "wFact": 0.5,
+        "wSem": 0.5,
+        "depth": 3
+      },
+      "distance": 2,
+      "r10": 0.7083333333333334,
+      "mrr": 0.45632387706855787,
+      "rc5": 0.6666666666666666,
+      "objective": 1.1646572104018913
+    },
+    {
+      "name": "h_g0.6_f0.5_s1_d2",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 0.6,
+        "wFact": 0.5,
+        "wSem": 1,
+        "depth": 2
+      },
+      "distance": 0,
+      "r10": 0.6666666666666666,
+      "mrr": 0.5694444444444444,
+      "rc5": 0.6666666666666666,
+      "objective": 1.2361111111111112
+    },
+    {
+      "name": "h_g0.6_f0.5_s1_d3",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 0.6,
+        "wFact": 0.5,
+        "wSem": 1,
+        "depth": 3
+      },
+      "distance": 1,
+      "r10": 0.6666666666666666,
+      "mrr": 0.5674603174603174,
+      "rc5": 0.6666666666666666,
+      "objective": 1.2341269841269842
+    },
+    {
+      "name": "h_g1_f0_s0.5_d2",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 1,
+        "wFact": 0,
+        "wSem": 0.5,
+        "depth": 2
+      },
+      "distance": 3,
+      "r10": 0.75,
+      "mrr": 0.4437134502923976,
+      "rc5": 0.6666666666666666,
+      "objective": 1.1937134502923976
+    },
+    {
+      "name": "h_g1_f0_s0.5_d3",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 1,
+        "wFact": 0,
+        "wSem": 0.5,
+        "depth": 3
+      },
+      "distance": 4,
+      "r10": 0.75,
+      "mrr": 0.571067821067821,
+      "rc5": 0.6666666666666666,
+      "objective": 1.321067821067821
+    },
+    {
+      "name": "h_g1_f0_s1_d2",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 1,
+        "wFact": 0,
+        "wSem": 1,
+        "depth": 2
+      },
+      "distance": 2,
+      "r10": 0.75,
+      "mrr": 0.5151515151515151,
+      "rc5": 0.6666666666666666,
+      "objective": 1.2651515151515151
+    },
+    {
+      "name": "h_g1_f0_s1_d3",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 1,
+        "wFact": 0,
+        "wSem": 1,
+        "depth": 3
+      },
+      "distance": 3,
+      "r10": 0.7083333333333334,
+      "mrr": 0.5200534759358288,
+      "rc5": 0.6666666666666666,
+      "objective": 1.2283868092691623
+    },
+    {
+      "name": "h_g1_f0.5_s0.5_d2",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 1,
+        "wFact": 0.5,
+        "wSem": 0.5,
+        "depth": 2
+      },
+      "distance": 2,
+      "r10": 0.75,
+      "mrr": 0.39766081871345027,
+      "rc5": 0.6666666666666666,
+      "objective": 1.1476608187134503
+    },
+    {
+      "name": "h_g1_f0.5_s0.5_d3",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 1,
+        "wFact": 0.5,
+        "wSem": 0.5,
+        "depth": 3
+      },
+      "distance": 3,
+      "r10": 0.7916666666666666,
+      "mrr": 0.45842470760233917,
+      "rc5": 0.6666666666666666,
+      "objective": 1.2500913742690059
+    },
+    {
+      "name": "h_g1_f0.5_s1_d2",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 1,
+        "wFact": 0.5,
+        "wSem": 1,
+        "depth": 2
+      },
+      "distance": 1,
+      "r10": 0.7916666666666666,
+      "mrr": 0.4888888888888889,
+      "rc5": 0.6666666666666666,
+      "objective": 1.2805555555555554
+    },
+    {
+      "name": "h_g1_f0.5_s1_d3",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 1,
+        "wFact": 0.5,
+        "wSem": 1,
+        "depth": 3
+      },
+      "distance": 2,
+      "r10": 0.7083333333333334,
+      "mrr": 0.4766081871345029,
+      "rc5": 0.6666666666666666,
+      "objective": 1.1849415204678362
+    },
+    {
+      "name": "c_p0.4_d2_cf0",
+      "kind": "custom_graph",
+      "params": {
+        "propagationWeight": 0.4,
+        "depth": 2,
+        "cfBonus": 0
+      },
+      "distance": 2,
+      "r10": 0.75,
+      "mrr": 0.2905831363278171,
+      "rc5": 0.5,
+      "objective": 1.040583136327817
+    },
+    {
+      "name": "c_p0.4_d2_cf0.3",
+      "kind": "custom_graph",
+      "params": {
+        "propagationWeight": 0.4,
+        "depth": 2,
+        "cfBonus": 0.3
+      },
+      "distance": 1,
+      "r10": 0.7083333333333334,
+      "mrr": 0.4024216524216524,
+      "rc5": 0.5,
+      "objective": 1.1107549857549857
+    },
+    {
+      "name": "c_p0.4_d3_cf0",
+      "kind": "custom_graph",
+      "params": {
+        "propagationWeight": 0.4,
+        "depth": 3,
+        "cfBonus": 0
+      },
+      "distance": 3,
+      "r10": 0.7916666666666666,
+      "mrr": 0.32381644518272423,
+      "rc5": 0.5,
+      "objective": 1.1154831118493909
+    },
+    {
+      "name": "c_p0.4_d3_cf0.3",
+      "kind": "custom_graph",
+      "params": {
+        "propagationWeight": 0.4,
+        "depth": 3,
+        "cfBonus": 0.3
+      },
+      "distance": 2,
+      "r10": 0.7916666666666666,
+      "mrr": 0.4358552631578947,
+      "rc5": 0.5,
+      "objective": 1.2275219298245612
+    },
+    {
+      "name": "c_p0.7_d2_cf0",
+      "kind": "custom_graph",
+      "params": {
+        "propagationWeight": 0.7,
+        "depth": 2,
+        "cfBonus": 0
+      },
+      "distance": 1,
+      "r10": 0.6666666666666666,
+      "mrr": 0.4342592592592593,
+      "rc5": 0.5,
+      "objective": 1.1009259259259259
+    },
+    {
+      "name": "c_p0.7_d2_cf0.3",
+      "kind": "custom_graph",
+      "params": {
+        "propagationWeight": 0.7,
+        "depth": 2,
+        "cfBonus": 0.3
+      },
+      "distance": 0,
+      "r10": 0.6666666666666666,
+      "mrr": 0.43607058596947373,
+      "rc5": 0.5,
+      "objective": 1.1027372526361403
+    },
+    {
+      "name": "c_p0.7_d3_cf0",
+      "kind": "custom_graph",
+      "params": {
+        "propagationWeight": 0.7,
+        "depth": 3,
+        "cfBonus": 0
+      },
+      "distance": 2,
+      "r10": 0.8333333333333334,
+      "mrr": 0.44235209235209233,
+      "rc5": 0.5,
+      "objective": 1.2756854256854258
+    },
+    {
+      "name": "c_p0.7_d3_cf0.3",
+      "kind": "custom_graph",
+      "params": {
+        "propagationWeight": 0.7,
+        "depth": 3,
+        "cfBonus": 0.3
+      },
+      "distance": 1,
+      "r10": 0.75,
+      "mrr": 0.4442959001782531,
+      "rc5": 0.5,
+      "objective": 1.1942959001782532
+    },
+    {
+      "name": "c_p1_d2_cf0",
+      "kind": "custom_graph",
+      "params": {
+        "propagationWeight": 1,
+        "depth": 2,
+        "cfBonus": 0
+      },
+      "distance": 2,
+      "r10": 0.7083333333333334,
+      "mrr": 0.4514689933944592,
+      "rc5": 0.5,
+      "objective": 1.1598023267277926
+    },
+    {
+      "name": "c_p1_d2_cf0.3",
+      "kind": "custom_graph",
+      "params": {
+        "propagationWeight": 1,
+        "depth": 2,
+        "cfBonus": 0.3
+      },
+      "distance": 1,
+      "r10": 0.7083333333333334,
+      "mrr": 0.44609788359788355,
+      "rc5": 0.5,
+      "objective": 1.154431216931217
+    },
+    {
+      "name": "c_p1_d3_cf0",
+      "kind": "custom_graph",
+      "params": {
+        "propagationWeight": 1,
+        "depth": 3,
+        "cfBonus": 0
+      },
+      "distance": 3,
+      "r10": 0.7083333333333334,
+      "mrr": 0.44728835978835974,
+      "rc5": 0.5,
+      "objective": 1.1556216931216932
+    },
+    {
+      "name": "c_p1_d3_cf0.3",
+      "kind": "custom_graph",
+      "params": {
+        "propagationWeight": 1,
+        "depth": 3,
+        "cfBonus": 0.3
+      },
+      "distance": 2,
+      "r10": 0.75,
+      "mrr": 0.4532140313390314,
+      "rc5": 0.5,
+      "objective": 1.2032140313390314
+    }
+  ],
+  "chosen": {
+    "hybrid": {
+      "name": "h_g1_f0_s0.5_d3",
+      "kind": "hybrid",
+      "params": {
+        "wGraph": 1,
+        "wFact": 0,
+        "wSem": 0.5,
+        "depth": 3
+      },
+      "distance": 4,
+      "r10": 0.75,
+      "mrr": 0.571067821067821,
+      "rc5": 0.6666666666666666,
+      "objective": 1.321067821067821
+    },
+    "custom_graph": {
+      "name": "c_p0.7_d3_cf0",
+      "kind": "custom_graph",
+      "params": {
+        "propagationWeight": 0.7,
+        "depth": 3,
+        "cfBonus": 0
+      },
+      "distance": 2,
+      "r10": 0.8333333333333334,
+      "mrr": 0.44235209235209233,
+      "rc5": 0.5,
+      "objective": 1.2756854256854258
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "frozen_at": "2026-11-08T08:06:56.356518Z",
+  "note": "Method code + tuned configs frozen after dev-only tuning, before any held-out (test) evaluation.",
+  "sha256": {
+    "evaluation/configs/hybrid.json": "8197e925597a132fea2d518d417be19449d30f1b10851d5fa141ce1088f1fdfe",
+    "evaluation/configs/custom_graph.json": "ef2285ac4df3d0d84b7831e6d70b293de7821ed0368fea565961525e8098e4b3",
+    "src/retrieval/graph-engine.ts": "11a4fbe774eaec3ae05350d2c69921cfa6f62c5dc012bb312be53034ea889ae0",
+    "src/retrieval/graph-retrieval.ts": "8553d54368faac0f8b1534d6347b7c4039da523d2c2441d888d1568a098056c2",
+    "src/retrieval/hybrid-retrieval.ts": "35910117990891c96736abb8aaba272f10acc4ac33521a5dc3bbaba809891c18",
+    "src/retrieval/bm25.ts": "4507569609be6ff360d14a321fcd69d4228a8f317b02dbae6ce80c4dc0e31b6d",
+    "src/retrieval/embeddings.ts": "e9427c4694a1c6fb3c0e0fa4e33db151ad001e59d1df778f0b74800a35fd3031",
+    "src/retrieval/ripgrep.ts": "444cc5f60fb00869e098ad061a17d2528ba898297af2e1482f94e94918077d53",
+    "src/retrieval/chunker.ts": "7cc1f9994ccba84709c316fb1a0b7674808cb2100d8c78dd9ffb041c4ed83942",
+    "src/retrieval/text.ts": "359a4a20fbc83775101de45e0a6df21fafa2a5f323f3e8c483b1df7de8ee84bc",
+    "benchmark.config.json": "1294499b219568e525e7f96178c54b17d673bce8f5cc9d3e8eeeb7944e9d7cf0"
+  }
+}

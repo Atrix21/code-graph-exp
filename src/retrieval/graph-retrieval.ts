@@ -124,7 +124,7 @@ export class GraphRetriever implements RetrievalMethod {
     const prop = this.engine.propagate(new Map(seedList));
     const scores = new Map<string, number>();
     for (const d of this.engine.outputDecls()) {
-      const s = (fact.get(d.id) ?? 0) + this.cfg.propagationWeight * (prop.get(d.id)?.score ?? 0);
+      const s = this.engine.prior(d.type, d.file!, d.id) * ((fact.get(d.id) ?? 0) + this.cfg.propagationWeight * (prop.get(d.id)?.score ?? 0));
       if (s > 0) scores.set(d.id, s);
     }
     const ranked: RankedSymbol[] = [...scores.entries()]

@@ -28,7 +28,8 @@ export interface GraphConfig {
   seeds: number;
   maxVisited: number;
   decay: number;
-  hubPenalty: number; // exponent on log2(degree) for intermediate nodes
+  hubPenalty: number; // exponent gamma: intermediate node u divides by max(1, deg(u)/hubThreshold)^gamma
+  hubThreshold: number;
   useConfidence: boolean;
   aggregation: 'max' | 'sum';
   disabledFamilies: EdgeFamily[];
@@ -36,6 +37,21 @@ export interface GraphConfig {
   edgeWeights: Partial<Record<EdgeType, EdgeWeight>>;
   factWeights: Record<FactKind, number>; // token repetition factor in fact documents (0 = off)
   outputTypes: NodeType[];
+  /** Ranking priors (multiplicative). Not graph capabilities except cfBonus; ablated separately. */
+  priors: { enabled: boolean; types: Record<string, number>; testPath: number };
+  /** Control-flow richness bonus: score × (1 + cfBonus·min(1, #conditions/4)). Uses CHECKS/condition nodes. */
+  cfBonus: number;
+}
+
+export const TEST_PATH_RE = /(^|\/)test\/|\.(e2e-)?spec\.ts$|\.test\.ts$/;
+
+/** Graph-independent part of the prior (declaration kind + test path); usable without a graph. */
+export function basePrior(cfg: GraphConfig, kind: string, file: string): number {
+  const pr = cfg.priors;
+  if (!pr.enabled) return 1;
+  let p = pr.types[kind] ?? 0.5;
+  if (TEST_PATH_RE.test(file)) p *= pr.testPath;
+  return p;
 }
 
 export const DEFAULT_EDGE_WEIGHTS: Record<EdgeType, EdgeWeight> = {
@@ -82,7 +98,8 @@ export const DEFAULT_GRAPH_CONFIG: GraphConfig = {
   seeds: 8,
   maxVisited: 3000,
   decay: 0.85,
-  hubPenalty: 1,
+  hubPenalty: 0.5,
+  hubThreshold: 10,
   useConfidence: true,
   aggregation: 'sum',
   disabledFamilies: [],
@@ -90,6 +107,8 @@ export const DEFAULT_GRAPH_CONFIG: GraphConfig = {
   edgeWeights: {},
   factWeights: { name: 3, path: 1, route: 2, control_flow: 1, data_flow: 1, execution: 1, application: 1, structural: 0 },
   outputTypes: ['function', 'method', 'class', 'variable', 'property', 'interface', 'type'],
+  priors: { enabled: true, types: { method: 1, function: 1, class: 0.6, variable: 0.5, property: 0.5, interface: 0.4, type: 0.4, module: 0.4 }, testPath: 0.3 },
+  cfBonus: 0.3,
 };
 
 interface PEdge { to: string; type: EdgeType; w: number; conf: number; dir: 'fwd' | 'back'; ev: string | null; line: number | null; verification: string }
@@ -239,7 +258,7 @@ export class GraphEngine {
   /** Bounded best-path propagation from seeds. Returns per-node aggregated graph relevance. */
   propagate(seeds: Map<string, number>): Map<string, Propagated> {
     const result = new Map<string, Propagated>();
-    const hub = (id: string) => Math.pow(Math.max(1, Math.log2(1 + (this.degree.get(id) ?? 1))), this.cfg.hubPenalty);
+    const hub = (id: string) => Math.pow(Math.max(1, (this.degree.get(id) ?? 1) / this.cfg.hubThreshold), this.cfg.hubPenalty);
     for (const [seed, s0] of seeds) {
       const best = new Map<string, { score: number; path: PathStep[] }>();
       best.set(seed, { score: s0, path: [] });
@@ -277,6 +296,29 @@ export class GraphEngine {
       r.score = this.cfg.aggregation === 'max' ? r.contributions[0].score : r.contributions.slice(0, 3).reduce((a, c) => a + c.score, 0);
     }
     return result;
+  }
+
+  private condCount: Map<string, number> | null = null;
+
+  /** Number of condition nodes owned by a declaration (control-flow richness). */
+  conditions(id: string): number {
+    if (!this.condCount) {
+      this.condCount = new Map();
+      for (const n of this.nodes.values()) if (n.type === 'condition') {
+        const o = this.owner.get(n.id) ?? n.id;
+        this.condCount.set(o, (this.condCount.get(o) ?? 0) + 1);
+      }
+    }
+    return this.condCount.get(id) ?? 0;
+  }
+
+  /** Multiplicative ranking prior for an output candidate (node may be null for chunk-only keys). */
+  prior(kind: string, file: string, nodeId: string | null): number {
+    let p = basePrior(this.cfg, kind, file);
+    if (this.cfg.cfBonus > 0 && nodeId && !this.cfg.disableControlFlow && !this.cfg.disabledFamilies.includes('execution')) {
+      p *= 1 + this.cfg.cfBonus * Math.min(1, this.conditions(nodeId) / 4);
+    }
+    return p;
   }
 
   keyOf(n: GraphNode): string | null {

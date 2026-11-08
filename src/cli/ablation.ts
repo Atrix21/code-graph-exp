@@ -49,6 +49,9 @@ export function variants(): Variant[] {
     h('no_graph_at_all', 'extra', { wGraph: 0, wFact: 0 }),
     h('no_graph_facts', 'extra', { wFact: 0 }),
     h('uniform_edge_weights', 'extra', { graph: { edgeWeights: uniformWeights } }),
+    h('no_priors', 'extra', { graph: { priors: { enabled: false } } }),
+    h('no_cf_bonus', 'extra', { graph: { cfBonus: 0 } }),
+    h('no_hub_damping', 'extra', { graph: { hubPenalty: 0 } }),
     // traversal depth
     h('depth_1', 'depth', { graph: { depth: 1 } }),
     h('depth_2', 'depth', { graph: { depth: 2 } }),
