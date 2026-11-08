@@ -43,7 +43,7 @@ npm test                         # 85 tests (graph extractor + harness)
 - 14 held-out tasks from one repository. CIs are wide.
 - No LLM in the loop: Graphify and CRG are used without the agent they were designed for.
 - Proxy tokenizer (o200k_base).
-- The downstream "LLM identifies the root cause from each method's context" experiment was not run (see findings §H).
+- The downstream "LLM identifies the root cause from each method's context" experiment was not run (see findings §G, step 1).
 
 ## Next steps (if continuing)
 1. Downstream agent experiment: same model, each method's context, measure root-cause identification and real Claude token usage.
