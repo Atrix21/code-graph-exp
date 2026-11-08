@@ -577,7 +577,14 @@ export type InfraKind = 'auth' | 'limit' | 'api_error' | 'crash' | 'no_result' |
 export interface Outcome { status: OutcomeStatus; infra_kind?: InfraKind; reason?: string; text?: string }
 
 const AUTH_RE = /authenticat|unauthori[sz]ed|invalid (x-)?api[ -]?key|invalid bearer|not logged in|\/login|oauth token|credit balance|permission_error|\b40[13]\b/i;
-const LIMIT_RE = /usage limit|rate[ _-]?limit|limit reached|quota|resets? at|too many requests|\b429\b|out of (extra )?usage/i;
+/** Plan/usage/rate limits. Claude Code's subscription message is e.g. "You've hit your 5-hour limit · resets 12:30am". */
+export const LIMIT_RE = /usage limit|rate[ _-]?limit|limit reached|quota|resets? at|too many requests|\b429\b|out of (extra )?usage|hit your [\w -]{0,30}limit|\d+-hour limit|weekly limit|limit · resets|resets \d{1,2}(:\d{2})?\s*[ap]m/i;
+/**
+ * An exclusion caused by a plan/usage limit (an interruption, not a failure of the run): never counted as an attempt
+ * on resume, like an abort. Also recognises records written before the limit pattern covered the subscription message.
+ */
+export const isUsageLimitExclusion = (e: { excluded?: string; excluded_detail?: string; detail?: string }): boolean =>
+  e.excluded === 'infra_error:limit' || (String(e.excluded ?? '').startsWith('infra_error') && LIMIT_RE.test(String(e.excluded_detail ?? e.detail ?? '')));
 
 /** Agent outcomes (submitted / max_turns / budget / no_structured_output) are scored; everything else is infrastructure and never scored. */
 export function classifyOutcome(p: ParsedStream, c: { exitCode: number | null; timedOut: boolean; spawnError?: boolean; initMismatch?: string; aborted?: string; hasDiagnosis: boolean; stderr?: string }): Outcome {
@@ -779,7 +786,7 @@ export function claudeSingleShot(model: string, opts: SingleShotOptions = {}): S
       const final = new Map<string, string>();
       for (const r of prior) {
         if (!r.excluded) done.set(r.id, r);
-        else if (r.excluded === 'aborted') continue;
+        else if (r.excluded === 'aborted' || isUsageLimitExclusion(r)) continue;
         else { attempts.set(r.id, (attempts.get(r.id) ?? 0) + 1); if (r.retryable === false || (attempts.get(r.id) ?? 0) >= 2) final.set(r.id, r.excluded); }
       }
       const order = opts.seed === null ? items : seededShuffle(items, opts.seed ?? SINGLE_SHOT_SEED);
@@ -860,7 +867,7 @@ export function claudeSingleShot(model: string, opts: SingleShotOptions = {}): S
       // final exclusion = non-retryable, or two failed attempts; anything else not done is still pending (resume runs it)
       const n = new Map<string, number>(), finalNow = new Map<string, string>();
       for (const r of readJsonlFile(rawFile)) {
-        if (!r.excluded || r.excluded === 'aborted') continue;
+        if (!r.excluded || r.excluded === 'aborted' || isUsageLimitExclusion(r)) continue;
         n.set(r.id, (n.get(r.id) ?? 0) + 1);
         if (r.retryable === false || (n.get(r.id) ?? 0) >= 2) finalNow.set(r.id, r.excluded);
       }

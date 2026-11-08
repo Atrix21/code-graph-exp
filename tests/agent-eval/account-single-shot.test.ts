@@ -141,3 +141,32 @@ describe('prompt variants and list-price recomputation', () => {
     expect(usageCost(u, 'claude-sonnet-5-5', 5694) - 8948 * 0.1 / 1e6).toBeCloseTo(0.0299828, 7);
   });
 });
+
+describe('subscription usage limits', () => {
+  it("Claude Code's 5-hour / weekly limit messages are limits (halt at once), and never count as attempts", async () => {
+    const { classifyOutcome, isUsageLimitExclusion, parseStreamJson } = await import('../../src/agent-eval/backends/claude-code.js');
+    for (const msg of ["You've hit your 5-hour limit · resets 12:30am (Asia/Kolkata)", "You've hit your weekly limit · resets Nov 15, 8:30pm"]) {
+      const p = parseStreamJson(JSON.stringify({ type: 'result', subtype: 'success', is_error: true, result: msg }) + '\n');
+      expect(classifyOutcome(p, { exitCode: 1, timedOut: false, hasDiagnosis: false }).infra_kind).toBe('limit');
+    }
+    // records written before the fix (classified api_error) are still recognised from their detail
+    expect(isUsageLimitExclusion({ excluded: 'infra_error:api_error', excluded_detail: "error result: You've hit your 5-hour limit · resets 12:30am" })).toBe(true);
+    expect(isUsageLimitExclusion({ excluded: 'infra_error:api_error', excluded_detail: 'error result: Overloaded' })).toBe(false);
+    expect(isUsageLimitExclusion({ excluded: 'init_mismatch:extra_tool', excluded_detail: 'limit · resets 1pm' })).toBe(false);
+  });
+
+  it('single-shot: a limit-interrupted item is retried on resume even after two limit hits', async () => {
+    const srv = await startMockServer({ policy: { kind: 'echo-structured' } });
+    try {
+      const f = fakeClaude();
+      const dir = path.join(tmp, 'ss-limit2');
+      const b = claudeSingleShot('claude-sonnet-5-5', { mockUrl: srv.url, version: '9.9.9', log: () => undefined });
+      f.set(INIT, { ...LIMIT, result: "You've hit your 5-hour limit · resets 12:30am (Asia/Kolkata)" });
+      expect((await withBin(f.bin, () => b.run(items(2), dir))).halted).toMatch(/limit/);
+      expect((await withBin(f.bin, () => b.run(items(2), dir))).halted).toMatch(/limit/); // second interruption of the same item
+      f.set(INIT, OK);
+      const r = await withBin(f.bin, () => b.run(items(2), dir));
+      expect(r.filter((x) => !x.excluded).length).toBe(2);
+    } finally { await srv.close(); }
+  });
+});

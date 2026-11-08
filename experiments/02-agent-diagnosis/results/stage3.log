@@ -1,0 +1,106 @@
+=== 2026-11-08T21:46:53+05:30 agentic --split test --conditions baseline,embeddings,hybrid,graphify,crg --repeats 3 --prompt p2 --account personal --run-usd 1 --max-usd 75 --parallel 1 --run stage3-agentic-test-p2
+210 planned, 0 scored, 0 finally excluded, 210 to run
+warming custom-graph cache for utils_has_next_page_01
+warming custom-graph cache for files_presigned_size_01
+warming custom-graph cache for users_list_page_01
+warming custom-graph cache for auth_reset_sessions_01
+warming custom-graph cache for files_local_path_01
+warming custom-graph cache for auth_jwt_secret_01
+warming custom-graph cache for users_mapper_lastname_01
+warming custom-graph cache for users_photo_cleared_01
+warming custom-graph cache for files_photo_url_01
+warming custom-graph cache for roles_admin_guard_01
+warming custom-graph cache for mail_new_email_link_01
+warming custom-graph cache for session_password_change_01
+warming custom-graph cache for users_create_provider_01
+warming custom-graph cache for auth_uniform_login_01
+[#0] utils_has_next_page_01|agentic:crg|0 submitted turns=5 ledger=$0.0242 rc_line=1
+[#1] files_presigned_size_01|agentic:graphify|1 submitted turns=4 ledger=$0.0202 rc_line=1
+[#2] users_list_page_01|agentic:embeddings|2 submitted turns=4 ledger=$0.0163 rc_line=1
+[#3] auth_reset_sessions_01|agentic:crg|0 submitted turns=7 ledger=$0.0475 rc_line=1
+[#4] files_local_path_01|agentic:crg|0 submitted turns=6 ledger=$0.0345 rc_line=1
+[#5] auth_jwt_secret_01|agentic:embeddings|1 submitted turns=5 ledger=$0.0200 rc_line=1
+[#6] users_mapper_lastname_01|agentic:graphify|2 submitted turns=3 ledger=$0.0165 rc_line=1
+[#7] auth_reset_sessions_01|agentic:embeddings|2 submitted turns=7 ledger=$0.0297 rc_line=1
+[#8] utils_has_next_page_01|agentic:graphify|2 submitted turns=4 ledger=$0.0142 rc_line=1
+[#9] users_photo_cleared_01|agentic:embeddings|0 submitted turns=4 ledger=$0.0296 rc_line=1
+[#10] files_photo_url_01|agentic:baseline|1 submitted turns=5 ledger=$0.0201 rc_line=1
+[#11] auth_jwt_secret_01|agentic:baseline|0 submitted turns=5 ledger=$0.0232 rc_line=1
+[#12] roles_admin_guard_01|agentic:baseline|1 submitted turns=5 ledger=$0.0234 rc_line=1
+[#13] mail_new_email_link_01|agentic:baseline|1 submitted turns=6 ledger=$0.0371 rc_line=1
+[#14] files_local_path_01|agentic:embeddings|1 submitted turns=3 ledger=$0.0289 rc_line=1
+[#15] mail_new_email_link_01|agentic:baseline|2 submitted turns=5 ledger=$0.0301 rc_line=1
+[#16] utils_has_next_page_01|agentic:embeddings|1 submitted turns=5 ledger=$0.0162 rc_line=1
+[#17] session_password_change_01|agentic:hybrid|2 submitted turns=7 ledger=$0.0378 rc_line=1
+[#18] mail_new_email_link_01|agentic:crg|2 submitted turns=5 ledger=$0.0387 rc_line=1
+[#19] users_photo_cleared_01|agentic:crg|2 submitted turns=8 ledger=$0.0662 rc_line=1
+[#20] mail_new_email_link_01|agentic:hybrid|1 submitted turns=5 ledger=$0.0497 rc_line=1
+[#21] files_presigned_size_01|agentic:hybrid|0 submitted turns=4 ledger=$0.0173 rc_line=1
+[#22] users_list_page_01|agentic:baseline|0 submitted turns=4 ledger=$0.0161 rc_line=1
+[#23] users_photo_cleared_01|agentic:crg|1 submitted turns=6 ledger=$0.0407 rc_line=1
+[#24] files_presigned_size_01|agentic:embeddings|1 submitted turns=5 ledger=$0.0230 rc_line=1
+[#25] files_photo_url_01|agentic:hybrid|2 submitted turns=5 ledger=$0.0201 rc_line=1
+[#26] users_create_provider_01|agentic:graphify|1 submitted turns=5 ledger=$0.0237 rc_line=1
+[#27] auth_reset_sessions_01|agentic:graphify|0 submitted turns=8 ledger=$0.0490 rc_line=1
+[#28] files_photo_url_01|agentic:embeddings|2 submitted turns=5 ledger=$0.0180 rc_line=1
+[#29] utils_has_next_page_01|agentic:baseline|0 submitted turns=4 ledger=$0.0135 rc_line=1
+[#30] files_local_path_01|agentic:hybrid|2 submitted turns=4 ledger=$0.0284 rc_line=1
+[#31] utils_has_next_page_01|agentic:graphify|0 submitted turns=4 ledger=$0.0125 rc_line=1
+[#32] users_mapper_lastname_01|agentic:baseline|1 submitted turns=3 ledger=$0.0139 rc_line=1
+[#33] users_photo_cleared_01|agentic:crg|0 submitted turns=7 ledger=$0.0431 rc_line=1
+[#34] users_list_page_01|agentic:crg|0 submitted turns=4 ledger=$0.0228 rc_line=1
+[#35] files_local_path_01|agentic:embeddings|2 submitted turns=3 ledger=$0.0266 rc_line=1
+[#36] auth_uniform_login_01|agentic:crg|2 submitted turns=7 ledger=$0.0375 rc_line=1
+[#37] users_create_provider_01|agentic:hybrid|1 submitted turns=5 ledger=$0.0202 rc_line=1
+[#38] files_local_path_01|agentic:baseline|2 submitted turns=7 ledger=$0.0279 rc_line=1
+[#39] auth_jwt_secret_01|agentic:graphify|1 submitted turns=5 ledger=$0.0230 rc_line=1
+[#40] mail_new_email_link_01|agentic:hybrid|0 submitted turns=4 ledger=$0.0484 rc_line=1
+[#41] auth_jwt_secret_01|agentic:crg|1 submitted turns=5 ledger=$0.0298 rc_line=1
+[#42] session_password_change_01|agentic:crg|2 submitted turns=7 ledger=$0.0522 rc_line=1
+[#43] auth_uniform_login_01|agentic:embeddings|2 submitted turns=6 ledger=$0.0250 rc_line=1
+[#44] users_create_provider_01|agentic:baseline|2 submitted turns=6 ledger=$0.0251 rc_line=1
+[#45] auth_uniform_login_01|agentic:crg|1 submitted turns=5 ledger=$0.0258 rc_line=1
+[#46] auth_jwt_secret_01|agentic:graphify|0 submitted turns=5 ledger=$0.0199 rc_line=1
+[#47] users_mapper_lastname_01|agentic:embeddings|1 submitted turns=3 ledger=$0.0142 rc_line=1
+[#48] users_create_provider_01|agentic:crg|0 submitted turns=7 ledger=$0.0452 rc_line=1
+[#49] utils_has_next_page_01|agentic:crg|2 submitted turns=5 ledger=$0.0212 rc_line=1
+[#50] files_local_path_01|agentic:embeddings|0 submitted turns=3 ledger=$0.0265 rc_line=1
+[#51] files_presigned_size_01|agentic:baseline|2 submitted turns=4 ledger=$0.0180 rc_line=1
+[#52] mail_new_email_link_01|agentic:embeddings|0 submitted turns=5 ledger=$0.0296 rc_line=1
+[#53] users_mapper_lastname_01|agentic:hybrid|2 submitted turns=4 ledger=$0.0173 rc_line=1
+[#54] users_create_provider_01|agentic:baseline|0 submitted turns=7 ledger=$0.0278 rc_line=1
+[#55] files_photo_url_01|agentic:graphify|2 submitted turns=4 ledger=$0.0178 rc_line=1
+[#56] files_local_path_01|agentic:graphify|1 submitted turns=7 ledger=$0.0319 rc_line=1
+[#57] auth_jwt_secret_01|agentic:embeddings|0 submitted turns=5 ledger=$0.0223 rc_line=1
+[#58] session_password_change_01|agentic:embeddings|0 submitted turns=9 ledger=$0.0346 rc_line=1
+[#59] session_password_change_01|agentic:crg|1 submitted turns=6 ledger=$0.0431 rc_line=1
+[#60] files_photo_url_01|agentic:crg|2 submitted turns=4 ledger=$0.0239 rc_line=1
+[#61] users_mapper_lastname_01|agentic:embeddings|2 submitted turns=3 ledger=$0.0126 rc_line=1
+[#62] auth_uniform_login_01|agentic:baseline|0 submitted turns=5 ledger=$0.0244 rc_line=1
+[#63] users_photo_cleared_01|agentic:baseline|1 submitted turns=7 ledger=$0.0352 rc_line=1
+[#64] mail_new_email_link_01|agentic:crg|0 submitted turns=5 ledger=$0.0326 rc_line=1
+[#65] roles_admin_guard_01|agentic:graphify|0 submitted turns=5 ledger=$0.0181 rc_line=1
+[#66] roles_admin_guard_01|agentic:crg|1 submitted turns=5 ledger=$0.0262 rc_line=1
+[#67] utils_has_next_page_01|agentic:baseline|1 submitted turns=5 ledger=$0.0142 rc_line=1
+[#68] session_password_change_01|agentic:baseline|2 EXCLUDED infra_error:api_error (attempt 1)
+[#68] session_password_change_01|agentic:baseline|2 EXCLUDED infra_error:api_error (attempt 2)
+HALT: 3 consecutive infrastructure errors
+[#69] files_photo_url_01|agentic:baseline|2 EXCLUDED infra_error:api_error (attempt 1)
+| Condition | tasks | RC+line@1 [95% CI] | RC@1 | RC@3 | Line@1 | File@1 | Valid | Tokens/run | Cost/run (USD) | Latency p50 (ms) | Turns | Retrieval calls | RC+line@1 per $ |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| agentic:baseline | 12 | 1.00 [1.00–1.00] | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 19,045 | 0.0215 | 10,486 | 5.13 | 0.00 | 46.55 |
+| agentic:crg | 12 | 1.00 [1.00–1.00] | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 60,809 | 0.0292 | 10,618 | 5.63 | 0.00 | 34.27 |
+| agentic:embeddings | 12 | 1.00 [1.00–1.00] | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 19,212 | 0.0221 | 10,368 | 5.08 | 0.17 | 45.18 |
+| agentic:graphify | 9 | 1.00 [1.00–1.00] | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 24,243 | 0.0215 | 10,290 | 5.00 | 0.00 | 46.51 |
+| agentic:hybrid | 7 | 1.00 [1.00–1.00] | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 21,716 | 0.0255 | 10,823 | 4.79 | 0.29 | 39.24 |
+
+Paired differences vs `agentic:baseline` (per-task means over repeats; Δ = condition − reference):
+
+| Condition | Δ RC+line@1 [95% CI] | Δ tokens/run | Δ cost/run | W/L/T |
+|---|---:|---:|---:|---:|
+| agentic:crg | 0.00 [0.00, 0.00] | 35,529 | 0.0043 | 0/0/10 |
+| agentic:embeddings | 0.00 [0.00, 0.00] | -946 | -0.0006 | 0/0/10 |
+| agentic:graphify | 0.00 [0.00, 0.00] | 2,455 | -0.0007 | 0/0/8 |
+| agentic:hybrid | 0.00 [0.00, 0.00] | 1,270 | 0.0020 | 0/0/6 |
+wrote /home/adityareddy/dev/experiments/code-graphs/experiments/02-agent-diagnosis/results/stage3-agentic-test-p2/runs.jsonl (68 scored runs); HALTED: 3 consecutive infrastructure errors
+STOPPED (exit 3) at: agentic --split test --conditions baseline,embeddings,hybrid,graphify,crg --repeats 3 --prompt p2 --account personal --run-usd 1 --max-usd 75 --parallel 1 --run stage3-agentic-test-p2

@@ -24,7 +24,7 @@ import { abs, type BenchmarkConfig } from '../config.js';
 import { loadTasks } from '../evaluation/ground-truth.js';
 import type { SymbolIndex } from '../evaluation/symbol-index.js';
 import type { GroundTruthTask } from '../types.js';
-import { assertBillablePlan, buildClaudeCommand, BillableGuard, BillableRefused, checkInit, installSignalHandlers, ISOLATION_ENV, onHarnessAbort, PROFILE_NAMES, runClaude, toolPolicy, type ClaudeRunDetail, type InitFingerprint, type McpServerSpec, type OutcomeStatus, type ProfileName } from './backends/claude-code.js';
+import { assertBillablePlan, buildClaudeCommand, BillableGuard, BillableRefused, checkInit, installSignalHandlers, isUsageLimitExclusion, ISOLATION_ENV, onHarnessAbort, PROFILE_NAMES, runClaude, toolPolicy, type ClaudeRunDetail, type InitFingerprint, type McpServerSpec, type OutcomeStatus, type ProfileName } from './backends/claude-code.js';
 import { EXP_DIR } from './contexts.js';
 import { report } from './analysis.js';
 import { competitorServerSpec } from './mcp/competitor-servers.js';
@@ -295,7 +295,7 @@ export async function runAgentic(cfg: BenchmarkConfig, o: AgenticOptions): Promi
   const attemptsUsed = new Map<string, number>(), finalExcluded = new Set<string>();
   for (const e of priorExcl) {
     if (e.retryable === false) finalExcluded.add(e.run_id);
-    else if (e.excluded_kind !== 'aborted') attemptsUsed.set(e.run_id, (attemptsUsed.get(e.run_id) ?? 0) + 1);
+    else if (e.excluded_kind !== 'aborted' && !isUsageLimitExclusion(e)) attemptsUsed.set(e.run_id, (attemptsUsed.get(e.run_id) ?? 0) + 1); // limit hits are interruptions, not attempts
   }
   for (const [id, n] of attemptsUsed) if (n >= 2) finalExcluded.add(id);
   for (const r of readJsonl(rawFile)) { // finished but not yet scored (scoring failed / crash between the two writes)
@@ -474,7 +474,7 @@ export function bindAccount(o: { account?: string; billing?: 'subscription' | 'a
   return a;
 }
 
-const attemptsOf = (ex: any[], id: string) => ex.filter((e) => e.run_id === id && e.retryable !== false && e.excluded_kind !== 'aborted').length;
+const attemptsOf = (ex: any[], id: string) => ex.filter((e) => e.run_id === id && e.retryable !== false && e.excluded_kind !== 'aborted' && !isUsageLimitExclusion(e)).length;
 
 function approvedCapOr(d: number): number {
   try {
