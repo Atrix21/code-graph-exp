@@ -1,12 +1,13 @@
 # PROGRESS
 
-## Experiment 2 (branch `agent-eval`): downstream agent diagnosis. Status: harness ready, awaiting approval
+## Experiment 2 (branch `agent-eval`): downstream agent diagnosis. Status: main run (stage 3) in progress
 - Question: does graph-enhanced retrieval make a coding agent diagnose bugs more accurately or cheaply?
-- Everything is in `experiments/02-agent-diagnosis/`: `protocol.md` (pre-registration), `decision-log.md`, `AUDIT.md` (independent audit + fixes), `APPROVAL-REQUEST.md` (stages, costs, decisions needed).
-- Built and validated at zero cost: isolated workspaces, MCP retrieval servers (ours + native Graphify/CRG), Claude Code headless backend with an approval gate, a mock Messages API proving isolation from recorded requests, automatic scorer, confirmatory analysis. Tests: 222 passing.
-- **No billable run has been made.** A billable stage starts only after the owner approves it; the lead then writes `APPROVAL.json`.
-- Commands: `npm run agent-eval -- agentic --split dev --task-ids a,b --conditions baseline,embeddings,hybrid,graphify,crg --mock-api scripted --run <id>` (zero cost); `npx tsx src/agent-eval/verify-isolation.ts`; `npm run agent-eval -- report --run <id>`.
-- Pending: the independent auditor's re-verification of the fixes (interrupted by the account's weekly usage limit; resume after it resets).
+- Everything is in `experiments/02-agent-diagnosis/`: `protocol.md` (frozen 2026-11-08, Amendment A), `FROZEN.json`, `decision-log.md` (E2-D01..D19), `AUDIT.md`, `APPROVAL.json` (owner-approved stages), `results/`.
+- Approval (2026-11-08): run on the owner's "personal" Claude Code login (Pro subscription), strictly one run at a time. Model claude-sonnet-5-5, effort high.
+- Stages 1–2 (dev pilot, done): 60 agentic + 108 single-shot runs, all valid, 0 exclusions, $6.02 list-price. Agentic accuracy at ceiling (1.00 everywhere). Under p1 the agent never calls retrieval tools; under p2 (directed) it uses our `search_code` (≈ 40% fewer turns, 20–30% fewer tokens) but still never Graphify/CRG. Report: `results/dev-pilot-report.md`.
+- Stage 3 (test split, 1,176 runs: agentic p2 → single-shot 2k → 8k → agentic p1): `experiments/02-agent-diagnosis/run-stage3.sh` (resumable; stops on a usage-limit halt; re-run the script to resume). Log: `results/stage3.log`.
+- Final report: `npx tsx src/agent-eval/final-report.ts --split test` → `results/final-report.md`.
+- Not done: the independent auditor's re-verification of the audit fixes (deferred to save plan usage; the fixes are covered by tests and the dev pilot ran clean).
 
 ---
 
