@@ -18,6 +18,11 @@ import { oracleContext } from './prompt.js';
 export const EXP_DIR = 'experiments/02-agent-diagnosis';
 export const SINGLE_SHOT_METHODS = ['ripgrep', 'bm25', 'embeddings', 'graphify', 'code_review_graph', 'custom_graph', 'hybrid'];
 
+/** Audit F-18: CRG's native output carries the neutral clone path '/tmp/cgbench/w/' (a 'benchmark' hint). Map it to a neutral prefix. */
+export function neutralisePaths(text: string): string {
+  return text.replace(/\/tmp\/cgbench\/w\//g, '/workspace/app/').replace(/\/tmp\/cgbench\/w\b/g, '/workspace/app');
+}
+
 export interface ContextRow { task_id: string; method: string; budget: number; context: string; tokens: number; source: string }
 
 const EXP1_RUNS: Record<number, string> = { 8000: 'final-test', 2000: 'final-test-budget2000' };
@@ -46,6 +51,7 @@ export async function buildContexts(cfg: BenchmarkConfig, split: 'dev' | 'test',
     const oracle = truncateToTokens(oracleContext(t.relevant_symbols.map((k) => ({ key: k, text: renderSymbolUniform(index, k).text }))), budget).text;
     rows.push({ task_id: t.task_id, method: 'oracle', budget, context: oracle, tokens: countTokens(oracle), source: 'ground-truth' });
   }
+  for (const r of rows) { r.context = neutralisePaths(r.context); r.tokens = countTokens(r.context); }
   const out = abs(path.join(EXP_DIR, 'contexts', `${split}-${budget}.jsonl`));
   fs.mkdirSync(path.dirname(out), { recursive: true });
   fs.writeFileSync(out, rows.map((r) => JSON.stringify(r)).join('\n') + '\n');

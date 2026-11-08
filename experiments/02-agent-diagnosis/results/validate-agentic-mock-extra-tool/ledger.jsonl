@@ -1,0 +1,2 @@
+{"ts":"2026-11-08T13:53:52.545Z","run_id":"auth_refresh_expiry_01|agentic:baseline|0","attempt":1,"status":"init_mismatch","cost_reported_usd":null,"cost_list_usd":null,"cost_ledger_usd":0,"usage":null,"wall_ms":240,"position":0}
+{"ts":"2026-11-08T13:53:52.875Z","run_id":"auth_refresh_expiry_01|agentic:baseline|3","attempt":1,"status":"init_mismatch","cost_reported_usd":null,"cost_list_usd":null,"cost_ledger_usd":0,"usage":null,"wall_ms":245,"position":1}

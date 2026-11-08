@@ -1,0 +1,20 @@
+{
+  "run_id": "validate-single-qwen-dev-2k",
+  "protocol": "single_shot",
+  "split": "dev",
+  "budget": 2000,
+  "methods": [
+    "none",
+    "embeddings",
+    "hybrid",
+    "oracle"
+  ],
+  "repeats": 1,
+  "backend": "local-qwen",
+  "model": "Qwen/Qwen3-1.7B",
+  "billable": false,
+  "prompt_version": "p1",
+  "n_items": 24,
+  "wall_ms": 172783,
+  "created": "2026-11-08T12:39:25.600Z"
+}

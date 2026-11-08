@@ -1,0 +1,99 @@
+{
+ "seed": 20261108,
+ "created": "2026-11-08T13:53:06.451Z",
+ "config": {
+  "split": "dev",
+  "conditions": [
+   "baseline",
+   "embeddings",
+   "hybrid",
+   "graphify",
+   "crg"
+  ],
+  "repeats": 1,
+  "tasks": [
+   "auth_refresh_expiry_01",
+   "session_refresh_replay_01"
+  ],
+  "model": "claude-sonnet-5-5",
+  "profile": "restricted-oauth",
+  "effort": "high",
+  "max_turns": 40,
+  "budget_per_call": 4000,
+  "seed": 20261108,
+  "claude_version": "2.1.319",
+  "mock_api": "scripted"
+ },
+ "items": [
+  {
+   "run_id": "auth_refresh_expiry_01|agentic:embeddings|0",
+   "task_id": "auth_refresh_expiry_01",
+   "condition": "embeddings",
+   "repeat": 0,
+   "position": 0
+  },
+  {
+   "run_id": "auth_refresh_expiry_01|agentic:baseline|0",
+   "task_id": "auth_refresh_expiry_01",
+   "condition": "baseline",
+   "repeat": 0,
+   "position": 1
+  },
+  {
+   "run_id": "auth_refresh_expiry_01|agentic:crg|0",
+   "task_id": "auth_refresh_expiry_01",
+   "condition": "crg",
+   "repeat": 0,
+   "position": 2
+  },
+  {
+   "run_id": "session_refresh_replay_01|agentic:baseline|0",
+   "task_id": "session_refresh_replay_01",
+   "condition": "baseline",
+   "repeat": 0,
+   "position": 3
+  },
+  {
+   "run_id": "session_refresh_replay_01|agentic:crg|0",
+   "task_id": "session_refresh_replay_01",
+   "condition": "crg",
+   "repeat": 0,
+   "position": 4
+  },
+  {
+   "run_id": "session_refresh_replay_01|agentic:hybrid|0",
+   "task_id": "session_refresh_replay_01",
+   "condition": "hybrid",
+   "repeat": 0,
+   "position": 5
+  },
+  {
+   "run_id": "auth_refresh_expiry_01|agentic:hybrid|0",
+   "task_id": "auth_refresh_expiry_01",
+   "condition": "hybrid",
+   "repeat": 0,
+   "position": 6
+  },
+  {
+   "run_id": "session_refresh_replay_01|agentic:embeddings|0",
+   "task_id": "session_refresh_replay_01",
+   "condition": "embeddings",
+   "repeat": 0,
+   "position": 7
+  },
+  {
+   "run_id": "session_refresh_replay_01|agentic:graphify|0",
+   "task_id": "session_refresh_replay_01",
+   "condition": "graphify",
+   "repeat": 0,
+   "position": 8
+  },
+  {
+   "run_id": "auth_refresh_expiry_01|agentic:graphify|0",
+   "task_id": "auth_refresh_expiry_01",
+   "condition": "graphify",
+   "repeat": 0,
+   "position": 9
+  }
+ ]
+}

@@ -9,3 +9,4 @@ targets/*/
 __pycache__/
 targets/node_modules
 evaluation/results/smoke*/
+experiments/02-agent-diagnosis/results/isolation-report-raw/control__*

@@ -1,0 +1,24 @@
+== exclusion demos
+== control (no isolation)
+== bare / baseline
+== bare / bm25
+== bare / graphify
+== bare / crg
+== bare / max-turns
+== bare / single-shot
+== restricted-oauth / baseline
+== restricted-oauth / bm25
+== restricted-oauth / graphify
+== restricted-oauth / crg
+== restricted-oauth / graphify (no deny list, to measure the full tools/list)
+== restricted-oauth / crg (no deny list, to measure the full tools/list)
+== restricted-oauth / max-turns
+== restricted-oauth / single-shot
+== safe-mode / baseline
+== safe-mode / bm25
+== safe-mode / graphify
+== safe-mode / crg
+== safe-mode / max-turns
+== safe-mode / single-shot
+wrote /home/adityareddy/dev/experiments/code-graphs/experiments/02-agent-diagnosis/results/isolation-report.json and .md
+exit=0

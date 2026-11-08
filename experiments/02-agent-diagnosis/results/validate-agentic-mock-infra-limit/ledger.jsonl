@@ -1,0 +1,1 @@
+{"ts":"2026-11-08T13:53:51.309Z","run_id":"auth_refresh_expiry_01|agentic:baseline|2","attempt":1,"status":"infra_error","infra_kind":"limit","cost_reported_usd":0,"cost_list_usd":0,"cost_ledger_usd":0,"usage":{"input":0,"output":0,"cache_read":0,"cache_write":0},"wall_ms":291,"position":0}

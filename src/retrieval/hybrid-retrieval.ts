@@ -60,6 +60,11 @@ export class HybridRetriever implements RetrievalMethod {
     };
   }
 
+  /** Opt-in async query embedding (see EmbeddingRetriever.prewarmQuery); no-op unless a QueryEmbedder is configured. */
+  async prewarmQuery(query: string): Promise<void> {
+    if (this.cfg.wSem > 0) await this.emb.prewarmQuery(query);
+  }
+
   async retrieveBatch(qs: RetrievalQuery[], budget: RetrievalBudget): Promise<RetrievalOutput[]> {
     if (this.cfg.wSem > 0) this.emb.warmQueries(qs);
     const out: RetrievalOutput[] = [];

@@ -2,7 +2,7 @@
 /**
  * Experiment 2 CLI.
  *   contexts  --split dev|test --budget N                     build single-shot contexts (non-billable)
- *   single    --split --budget --methods a,b --repeats R --backend mock|local-qwen|claude-code [--tasks id,..] --run ID
+ *   single    --split --budget --methods a,b --repeats R --backend mock|local-qwen|claude-code [--task-ids id,..] --run ID
  *   agentic   (see agentic.ts)
  *   report    --run ID [--reference COND]
  */
@@ -12,7 +12,7 @@ import { abs, loadConfig } from '../config.js';
 import { buildContexts, EXP_DIR, SINGLE_SHOT_METHODS } from './contexts.js';
 import { runSingleShot } from './runner.js';
 import { localQwen, mockContextTop3, type SingleShotBackend } from './backends/single-shot.js';
-import { loadRuns, report } from './analysis.js';
+import { confirmatoryReport, loadRuns, report } from './analysis.js';
 
 const arg = (n: string, d?: string) => { const i = process.argv.indexOf(`--${n}`); return i >= 0 ? process.argv[i + 1] : d; };
 
@@ -35,7 +35,7 @@ async function main() {
     else throw new Error(`unknown backend ${name}`);
     const methods = (arg('methods') ?? ['none', ...SINGLE_SHOT_METHODS, 'oracle'].join(',')).split(',');
     const runId = arg('run', `single-${name}-${arg('split', 'dev')}-${arg('budget', '8000')}`)!;
-    const runs = await runSingleShot(cfg, { runId, split: arg('split', 'dev') as 'dev' | 'test', budget: Number(arg('budget', '8000')), methods, repeats: Number(arg('repeats', '1')), backend, taskIds: arg('tasks')?.split(',') });
+    const runs = await runSingleShot(cfg, { runId, split: arg('split', 'dev') as 'dev' | 'test', budget: Number(arg('budget', '8000')), methods, repeats: Number(arg('repeats', '1')), backend, taskIds: arg('task-ids')?.split(',') });
     const md = report(runs, arg('reference', `single:none@${arg('budget', '8000')}`));
     fs.writeFileSync(abs(path.join(EXP_DIR, 'results', runId, 'report.md')), md + '\n');
     console.log(md);
@@ -44,7 +44,8 @@ async function main() {
   if (cmd === 'agentic') return (await import('./agentic.js')).agenticCommand(cfg);
   if (cmd === 'report') {
     const dir = abs(path.join(EXP_DIR, 'results', arg('run')!));
-    const md = report(loadRuns(dir), arg('reference'));
+    const runs = loadRuns(dir);
+    const md = report(runs, arg('reference')) + '\n\n## Confirmatory analysis (pre-registered)\n\n' + confirmatoryReport(runs);
     fs.writeFileSync(path.join(dir, 'report.md'), md + '\n');
     console.log(md);
     return;

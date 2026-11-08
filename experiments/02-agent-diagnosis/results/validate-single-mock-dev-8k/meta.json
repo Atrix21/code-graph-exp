@@ -1,0 +1,25 @@
+{
+  "run_id": "validate-single-mock-dev-8k",
+  "protocol": "single_shot",
+  "split": "dev",
+  "budget": 8000,
+  "methods": [
+    "none",
+    "ripgrep",
+    "bm25",
+    "embeddings",
+    "graphify",
+    "code_review_graph",
+    "custom_graph",
+    "hybrid",
+    "oracle"
+  ],
+  "repeats": 1,
+  "backend": "mock-context-top3",
+  "model": "none",
+  "billable": false,
+  "prompt_version": "p1",
+  "n_items": 54,
+  "wall_ms": 1281,
+  "created": "2026-11-08T12:26:23.960Z"
+}

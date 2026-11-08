@@ -71,7 +71,7 @@ export const DIAGNOSIS_SCHEMA = {
     candidates: {
       type: 'array', minItems: 1, maxItems: 3,
       items: {
-        type: 'object', additionalProperties: false, required: ['file', 'symbol', 'explanation'],
+        type: 'object', additionalProperties: false, required: ['file', 'symbol', 'start_line', 'end_line', 'explanation'],
         properties: {
           file: { type: 'string', description: 'Repository-relative path of the file containing the defect' },
           symbol: { type: 'string', description: 'Function/method containing the defect, e.g. ClassName.methodName or functionName' },

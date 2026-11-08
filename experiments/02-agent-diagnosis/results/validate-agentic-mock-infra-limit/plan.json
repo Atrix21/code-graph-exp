@@ -1,0 +1,45 @@
+{
+ "seed": 20261108,
+ "created": "2026-11-08T13:53:50.946Z",
+ "config": {
+  "split": "dev",
+  "conditions": [
+   "baseline"
+  ],
+  "repeats": 3,
+  "tasks": [
+   "auth_refresh_expiry_01"
+  ],
+  "model": "claude-sonnet-5-5",
+  "profile": "restricted-oauth",
+  "effort": "high",
+  "max_turns": 40,
+  "budget_per_call": 4000,
+  "seed": 20261108,
+  "claude_version": "2.1.319",
+  "mock_api": "infra-limit"
+ },
+ "items": [
+  {
+   "run_id": "auth_refresh_expiry_01|agentic:baseline|2",
+   "task_id": "auth_refresh_expiry_01",
+   "condition": "baseline",
+   "repeat": 2,
+   "position": 0
+  },
+  {
+   "run_id": "auth_refresh_expiry_01|agentic:baseline|1",
+   "task_id": "auth_refresh_expiry_01",
+   "condition": "baseline",
+   "repeat": 1,
+   "position": 1
+  },
+  {
+   "run_id": "auth_refresh_expiry_01|agentic:baseline|0",
+   "task_id": "auth_refresh_expiry_01",
+   "condition": "baseline",
+   "repeat": 0,
+   "position": 2
+  }
+ ]
+}

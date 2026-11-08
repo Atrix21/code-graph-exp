@@ -56,15 +56,15 @@ export function estimatePlan(opts: { model: string; testTasks: number; devTasks:
 }
 
 if (process.argv[1]?.endsWith('cost.ts')) {
-  const insp = abs(`${EXP_DIR}/results/mcp-inspection.json`);
-  const schema = fs.existsSync(insp) ? JSON.parse(fs.readFileSync(insp, 'utf8')) : null;
-  const tok = (name: string, d: number) => schema?.servers?.find?.((s: any) => s.name === name)?.tools_list_tokens ?? d;
+  // Tool-schema tokens actually offered per turn, measured from recorded request bodies with the read-only deny
+  // list applied (results/isolation-report.md): our search_code ≈ 68, Graphify 7 tools ≈ 945, CRG 23 tools ≈ 6,245.
+  void fs; void abs; void EXP_DIR;
   const conds = [
     { id: 'baseline', toolSchemaTokens: 0 },
-    { id: 'embeddings', toolSchemaTokens: tok('embeddings', 150) },
-    { id: 'hybrid', toolSchemaTokens: tok('hybrid', 150) },
-    { id: 'graphify', toolSchemaTokens: tok('graphify', 2_500) },
-    { id: 'crg', toolSchemaTokens: tok('crg', 9_000) },
+    { id: 'embeddings', toolSchemaTokens: 68 },
+    { id: 'hybrid', toolSchemaTokens: 68 },
+    { id: 'graphify', toolSchemaTokens: 945 },
+    { id: 'crg', toolSchemaTokens: 6245 },
   ];
   for (const model of ['haiku', 'sonnet', 'opus']) {
     const rows = estimatePlan({ model, testTasks: 14, devTasks: 6, agenticConditions: conds, repeats: 3, singleShotSplits: [{ split: 'dev', budget: 2000 }, { split: 'dev', budget: 8000 }, { split: 'test', budget: 2000 }, { split: 'test', budget: 8000 }], singleShotMethods: ['none', 'ripgrep', 'bm25', 'embeddings', 'graphify', 'code_review_graph', 'custom_graph', 'hybrid', 'oracle'] });

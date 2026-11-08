@@ -1,0 +1,928 @@
+{
+  "generated_at": "2026-11-08T12:39:39.185Z",
+  "tokenizer": "o200k_base (js-tiktoken 1.0.21) — proxy for Claude tokens",
+  "sample_query": "Users get 401 Unauthorized on every request after logging in; the JWT token verification seems to reject valid tokens",
+  "our_server_budget": {
+    "maxResults": 20,
+    "maxContextTokens": 4000
+  },
+  "servers": [
+    {
+      "server": "search_code:hybrid",
+      "workspace": "auth_jwt_secret_01",
+      "launch": {
+        "command": "/home/adityareddy/dev/experiments/code-graphs/node_modules/.bin/tsx",
+        "args": [
+          "/home/adityareddy/dev/experiments/code-graphs/src/agent-eval/mcp/retrieval-server.ts",
+          "--method",
+          "hybrid",
+          "--workspace",
+          "/tmp/work/d2743cc096/app",
+          "--budget",
+          "4000",
+          "--max-results",
+          "20",
+          "--log",
+          "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/inspect-logs/auth_jwt_secret_01-hybrid.jsonl"
+        ]
+      },
+      "build_ms": null,
+      "startup_ms": 7048,
+      "initialize_ms": 802,
+      "server_info": {
+        "name": "code-search",
+        "version": "1.0.0"
+      },
+      "tool_count": 1,
+      "tool_names": [
+        "search_code"
+      ],
+      "tools_list_tokens": 62,
+      "tools_list_payload_tokens": 62,
+      "tool_tokens": {
+        "search_code": 60
+      },
+      "sample": {
+        "tool": "search_code",
+        "args": {
+          "query": "Users get 401 Unauthorized on every request after logging in; the JWT token verification seems to reject valid tokens"
+        },
+        "cold_latency_ms": 503,
+        "warm_latency_ms": 33,
+        "result_tokens": 3739,
+        "result_chars": 15376,
+        "is_error": false,
+        "preview": "// src/auth/auth.service.ts:523-560 AuthService.refreshToken [bm25 0.88; sem 0.77; CALLS← AuthController.refresh (static_verified)]\n  async refreshToken(\n    data: Pick<JwtRefreshPayloadType, 'sessionId' | 'hash'>,\n  ): Promise<Omit<LoginResponseDto, 'user'>> {\n    const hash = crypto\n      .createHash('sha256')\n      .update(randomStringGenerator())\n      .digest('hex');\n\n    const session = awai"
+      },
+      "path_leak_hits": [],
+      "stderr_tail": "[listening] method=hybrid budget=4000 max_results=20\n[ready] method=hybrid files=170 workspace_hash=606d806697e9 prepare_ms=6260 index_ms=398\n"
+    },
+    {
+      "server": "search_code:custom_graph",
+      "workspace": "auth_jwt_secret_01",
+      "launch": {
+        "command": "/home/adityareddy/dev/experiments/code-graphs/node_modules/.bin/tsx",
+        "args": [
+          "/home/adityareddy/dev/experiments/code-graphs/src/agent-eval/mcp/retrieval-server.ts",
+          "--method",
+          "custom_graph",
+          "--workspace",
+          "/tmp/work/d2743cc096/app",
+          "--budget",
+          "4000",
+          "--max-results",
+          "20",
+          "--log",
+          "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/inspect-logs/auth_jwt_secret_01-custom_graph.jsonl"
+        ]
+      },
+      "build_ms": null,
+      "startup_ms": 959,
+      "initialize_ms": 848,
+      "server_info": {
+        "name": "code-search",
+        "version": "1.0.0"
+      },
+      "tool_count": 1,
+      "tool_names": [
+        "search_code"
+      ],
+      "tools_list_tokens": 62,
+      "tools_list_payload_tokens": 62,
+      "tool_tokens": {
+        "search_code": 60
+      },
+      "sample": {
+        "tool": "search_code",
+        "args": {
+          "query": "Users get 401 Unauthorized on every request after logging in; the JWT token verification seems to reject valid tokens"
+        },
+        "cold_latency_ms": 504,
+        "warm_latency_ms": 23,
+        "result_tokens": 3573,
+        "result_chars": 14856,
+        "is_error": false,
+        "preview": "// src/auth/auth.service.ts:523-560 AuthService.refreshToken [match 0.83; CALLS← AuthController.refresh (static_verified)]\n  async refreshToken(\n    data: Pick<JwtRefreshPayloadType, 'sessionId' | 'hash'>,\n  ): Promise<Omit<LoginResponseDto, 'user'>> {\n    const hash = crypto\n      .createHash('sha256')\n      .update(randomStringGenerator())\n      .digest('hex');\n\n    const session = await this.se"
+      },
+      "path_leak_hits": [],
+      "stderr_tail": "[listening] method=custom_graph budget=4000 max_results=20\n[ready] method=custom_graph files=170 workspace_hash=606d806697e9 prepare_ms=121 index_ms=2864\n"
+    },
+    {
+      "server": "search_code:embeddings",
+      "workspace": "auth_jwt_secret_01",
+      "launch": {
+        "command": "/home/adityareddy/dev/experiments/code-graphs/node_modules/.bin/tsx",
+        "args": [
+          "/home/adityareddy/dev/experiments/code-graphs/src/agent-eval/mcp/retrieval-server.ts",
+          "--method",
+          "embeddings",
+          "--workspace",
+          "/tmp/work/d2743cc096/app",
+          "--budget",
+          "4000",
+          "--max-results",
+          "20",
+          "--log",
+          "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/inspect-logs/auth_jwt_secret_01-embeddings.jsonl"
+        ]
+      },
+      "build_ms": null,
+      "startup_ms": 5840,
+      "initialize_ms": 738,
+      "server_info": {
+        "name": "code-search",
+        "version": "1.0.0"
+      },
+      "tool_count": 1,
+      "tool_names": [
+        "search_code"
+      ],
+      "tools_list_tokens": 62,
+      "tools_list_payload_tokens": 62,
+      "tool_tokens": {
+        "search_code": 60
+      },
+      "sample": {
+        "tool": "search_code",
+        "args": {
+          "query": "Users get 401 Unauthorized on every request after logging in; the JWT token verification seems to reject valid tokens"
+        },
+        "cold_latency_ms": 525,
+        "warm_latency_ms": 10,
+        "result_tokens": 1978,
+        "result_chars": 8506,
+        "is_error": false,
+        "preview": "// src/auth/strategies/jwt.strategy.ts:23-29 JwtStrategy.validate\n  public validate(payload: JwtPayloadType): OrNeverType<JwtPayloadType> {\n    if (!payload.id) {\n      throw new UnauthorizedException();\n    }\n\n    return payload;\n  }\n\n// src/auth/strategies/jwt.strategy.ts:9-30 JwtStrategy\n@Injectable()\nexport class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {\n\n  // Why we don't check "
+      },
+      "path_leak_hits": [],
+      "stderr_tail": "[listening] method=embeddings budget=4000 max_results=20\n[ready] method=embeddings files=170 workspace_hash=606d806697e9 prepare_ms=5111 index_ms=185\n"
+    },
+    {
+      "server": "search_code:bm25",
+      "workspace": "auth_jwt_secret_01",
+      "launch": {
+        "command": "/home/adityareddy/dev/experiments/code-graphs/node_modules/.bin/tsx",
+        "args": [
+          "/home/adityareddy/dev/experiments/code-graphs/src/agent-eval/mcp/retrieval-server.ts",
+          "--method",
+          "bm25",
+          "--workspace",
+          "/tmp/work/d2743cc096/app",
+          "--budget",
+          "4000",
+          "--max-results",
+          "20",
+          "--log",
+          "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/inspect-logs/auth_jwt_secret_01-bm25.jsonl"
+        ]
+      },
+      "build_ms": null,
+      "startup_ms": 1010,
+      "initialize_ms": 824,
+      "server_info": {
+        "name": "code-search",
+        "version": "1.0.0"
+      },
+      "tool_count": 1,
+      "tool_names": [
+        "search_code"
+      ],
+      "tools_list_tokens": 62,
+      "tools_list_payload_tokens": 62,
+      "tool_tokens": {
+        "search_code": 60
+      },
+      "sample": {
+        "tool": "search_code",
+        "args": {
+          "query": "Users get 401 Unauthorized on every request after logging in; the JWT token verification seems to reject valid tokens"
+        },
+        "cold_latency_ms": 429,
+        "warm_latency_ms": 13,
+        "result_tokens": 3937,
+        "result_chars": 17474,
+        "is_error": false,
+        "preview": "// src/auth-facebook/auth-facebook.service.ts:93-156 AuthFacebookService.verifyAccessToken\n  private async verifyAccessToken(accessToken: string): Promise<void> {\n    try {\n      const appId = this.configService.get('facebook.appId', { infer: true });\n      const appSecret = this.configService.get('facebook.appSecret', {\n        infer: true,\n      });\n\n      // Application credentials must be conf"
+      },
+      "path_leak_hits": [],
+      "stderr_tail": "[listening] method=bm25 budget=4000 max_results=20\n[ready] method=bm25 files=170 workspace_hash=606d806697e9 prepare_ms=196 index_ms=172\n"
+    },
+    {
+      "server": "graphify-native",
+      "workspace": "auth_jwt_secret_01",
+      "launch": {
+        "command": "/usr/bin/env",
+        "args": [
+          "-u",
+          "CRG_OPENAI_API_KEY",
+          "-u",
+          "CRG_OPENAI_BASE_URL",
+          "-u",
+          "CRG_OPENAI_MODEL",
+          "-u",
+          "CRG_VOYAGE_MODEL",
+          "-u",
+          "VOYAGE_API_KEY",
+          "-u",
+          "GOOGLE_API_KEY",
+          "-u",
+          "MINIMAX_API_KEY",
+          "-u",
+          "OPENAI_API_KEY",
+          "-u",
+          "OPENAI_BASE_URL",
+          "-u",
+          "ANTHROPIC_API_KEY",
+          "-u",
+          "GEMINI_API_KEY",
+          "-u",
+          "GRAPHIFY_API_KEY",
+          "-u",
+          "MOONSHOT_API_KEY",
+          "-u",
+          "DEEPSEEK_API_KEY",
+          "/home/adityareddy/dev/experiments/code-graphs/vendor/.venvs/graphify/bin/graphify-mcp",
+          "--graph",
+          "/tmp/work/d2743cc096/idx/graphify-out/graph.json"
+        ],
+        "env": {
+          "HOME": "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/606d806697e9/graphify-d2743cc096/home",
+          "XDG_CONFIG_HOME": "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/606d806697e9/graphify-d2743cc096/home/.config",
+          "XDG_CACHE_HOME": "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/606d806697e9/graphify-d2743cc096/home/.cache",
+          "XDG_DATA_HOME": "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/606d806697e9/graphify-d2743cc096/home/.local/share",
+          "GRAPHIFY_NO_AUTO_REFRESH": "1",
+          "GRAPHIFY_BACKEND": "none",
+          "GRAPHIFY_QUERY_LOG_DISABLE": "1",
+          "PYTHONIOENCODING": "utf-8"
+        }
+      },
+      "build_ms": 1532.8,
+      "startup_ms": 647,
+      "initialize_ms": 647,
+      "server_info": {
+        "name": "graphify",
+        "version": "0.9.104"
+      },
+      "tool_count": 10,
+      "tool_names": [
+        "query_graph",
+        "get_node",
+        "get_neighbors",
+        "get_community",
+        "god_nodes",
+        "graph_stats",
+        "shortest_path",
+        "list_prs",
+        "get_pr_impact",
+        "triage_prs"
+      ],
+      "tools_list_tokens": 1350,
+      "tools_list_payload_tokens": 1350,
+      "tool_tokens": {
+        "query_graph": 201,
+        "get_node": 101,
+        "get_neighbors": 126,
+        "get_community": 110,
+        "god_nodes": 118,
+        "graph_stats": 69,
+        "shortest_path": 176,
+        "list_prs": 146,
+        "get_pr_impact": 143,
+        "triage_prs": 158
+      },
+      "sample": {
+        "tool": "query_graph",
+        "args": {
+          "question": "Users get 401 Unauthorized on every request after logging in; the JWT token verification seems to reject valid tokens"
+        },
+        "cold_latency_ms": 64,
+        "warm_latency_ms": 34,
+        "result_tokens": 1589,
+        "result_chars": 6551,
+        "is_error": false,
+        "preview": "Graph: /tmp/work/d2743cc096/idx/graphify-out/graph.json (1176 nodes) | Traversal: BFS depth=3 | Start: ['Tokens', 'tokens.ts', 'Request', 'JwtPayloadType', 'users.service.ts', 'validate-config.ts', 'AfterLoad'] | 669 nodes found\n\n[!] TRUNCATED: showing 57 of 669 nodes (~2000-token budget). The answer may be among the 612 cut nodes — raise the token budget to 18210 to get all 669 (CLI: --budget 182"
+      },
+      "path_leak_hits": [],
+      "stderr_tail": ""
+    },
+    {
+      "server": "crg-native",
+      "workspace": "auth_jwt_secret_01",
+      "launch": {
+        "command": "/usr/bin/env",
+        "args": [
+          "-u",
+          "CRG_OPENAI_API_KEY",
+          "-u",
+          "CRG_OPENAI_BASE_URL",
+          "-u",
+          "CRG_OPENAI_MODEL",
+          "-u",
+          "CRG_VOYAGE_MODEL",
+          "-u",
+          "VOYAGE_API_KEY",
+          "-u",
+          "GOOGLE_API_KEY",
+          "-u",
+          "MINIMAX_API_KEY",
+          "-u",
+          "OPENAI_API_KEY",
+          "-u",
+          "OPENAI_BASE_URL",
+          "-u",
+          "ANTHROPIC_API_KEY",
+          "-u",
+          "GEMINI_API_KEY",
+          "-u",
+          "GRAPHIFY_API_KEY",
+          "-u",
+          "MOONSHOT_API_KEY",
+          "-u",
+          "DEEPSEEK_API_KEY",
+          "/home/adityareddy/dev/experiments/code-graphs/vendor/.venvs/code-review-graph/bin/code-review-graph",
+          "serve",
+          "--repo",
+          "/tmp/work/d2743cc096/app"
+        ],
+        "env": {
+          "HOME": "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/606d806697e9/crg-d2743cc096/home",
+          "XDG_CONFIG_HOME": "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/606d806697e9/crg-d2743cc096/home/.config",
+          "XDG_CACHE_HOME": "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/606d806697e9/crg-d2743cc096/home/.cache",
+          "XDG_DATA_HOME": "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/606d806697e9/crg-d2743cc096/home/.local/share",
+          "CRG_DATA_DIR": "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/606d806697e9/crg-d2743cc096",
+          "CRG_HOME": "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/606d806697e9/crg-d2743cc096/crg_home",
+          "HF_HUB_OFFLINE": "1",
+          "TOKENIZERS_PARALLELISM": "false"
+        }
+      },
+      "build_ms": 649.5,
+      "startup_ms": 907,
+      "initialize_ms": 907,
+      "server_info": {
+        "name": "code-review-graph",
+        "version": "2.3.9"
+      },
+      "tool_count": 30,
+      "tool_names": [
+        "build_or_update_graph_tool",
+        "run_postprocess_tool",
+        "get_minimal_context_tool",
+        "get_impact_radius_tool",
+        "query_graph_tool",
+        "get_review_context_tool",
+        "semantic_search_nodes_tool",
+        "embed_graph_tool",
+        "list_graph_stats_tool",
+        "get_docs_section_tool",
+        "find_large_functions_tool",
+        "list_flows_tool",
+        "get_flow_tool",
+        "get_affected_flows_tool",
+        "list_communities_tool",
+        "get_community_tool",
+        "get_architecture_overview_tool",
+        "detect_changes_tool",
+        "refactor_tool",
+        "apply_refactor_tool",
+        "generate_wiki_tool",
+        "get_wiki_page_tool",
+        "get_hub_nodes_tool",
+        "get_bridge_nodes_tool",
+        "get_knowledge_gaps_tool",
+        "get_surprising_connections_tool",
+        "get_suggested_questions_tool",
+        "traverse_graph_tool",
+        "list_repos_tool",
+        "cross_repo_search_tool"
+      ],
+      "tools_list_tokens": 8242,
+      "tools_list_payload_tokens": 8902,
+      "tool_tokens": {
+        "build_or_update_graph_tool": 498,
+        "run_postprocess_tool": 293,
+        "get_minimal_context_tool": 252,
+        "get_impact_radius_tool": 406,
+        "query_graph_tool": 475,
+        "get_review_context_tool": 348,
+        "semantic_search_nodes_tool": 400,
+        "embed_graph_tool": 511,
+        "list_graph_stats_tool": 98,
+        "get_docs_section_tool": 212,
+        "find_large_functions_tool": 216,
+        "list_flows_tool": 250,
+        "get_flow_tool": 277,
+        "get_affected_flows_tool": 300,
+        "list_communities_tool": 274,
+        "get_community_tool": 254,
+        "get_architecture_overview_tool": 232,
+        "detect_changes_tool": 425,
+        "refactor_tool": 424,
+        "apply_refactor_tool": 288,
+        "generate_wiki_tool": 189,
+        "get_wiki_page_tool": 156,
+        "get_hub_nodes_tool": 176,
+        "get_bridge_nodes_tool": 179,
+        "get_knowledge_gaps_tool": 181,
+        "get_surprising_connections_tool": 194,
+        "get_suggested_questions_tool": 102,
+        "traverse_graph_tool": 228,
+        "list_repos_tool": 85,
+        "cross_repo_search_tool": 317
+      },
+      "sample": {
+        "tool": "semantic_search_nodes_tool",
+        "args": {
+          "query": "Users get 401 Unauthorized on every request after logging in; the JWT token verification seems to reject valid tokens"
+        },
+        "cold_latency_ms": 5931,
+        "warm_latency_ms": 10,
+        "result_tokens": 2506,
+        "result_chars": 9677,
+        "is_error": false,
+        "preview": "{\"status\":\"ok\",\"query\":\"Users get 401 Unauthorized on every request after logging in; the JWT token verification seems to reject valid tokens\",\"search_mode\":\"fts\",\"summary\":\"Found 20 node(s) matching 'Users get 401 Unauthorized on every request after logging in; the JWT token verification seems to reject valid tokens'\",\"results\":[{\"name\":\"Tokens\",\"qualified_name\":\"/tmp/work/d2743cc096/app/src/soci"
+      },
+      "path_leak_hits": [],
+      "stderr_tail": "[11/08/26 18:08:55] INFO     Starting MCP server                transport.py:241\n                             'code-review-graph' with transport                 \n                             'stdio'                                            \n"
+    },
+    {
+      "server": "search_code:hybrid",
+      "workspace": "base",
+      "launch": {
+        "command": "/home/adityareddy/dev/experiments/code-graphs/node_modules/.bin/tsx",
+        "args": [
+          "/home/adityareddy/dev/experiments/code-graphs/src/agent-eval/mcp/retrieval-server.ts",
+          "--method",
+          "hybrid",
+          "--workspace",
+          "/tmp/work/e284cdad90/app",
+          "--budget",
+          "4000",
+          "--max-results",
+          "20",
+          "--log",
+          "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/inspect-logs/base-hybrid.jsonl"
+        ]
+      },
+      "build_ms": null,
+      "startup_ms": 6876,
+      "initialize_ms": 879,
+      "server_info": {
+        "name": "code-search",
+        "version": "1.0.0"
+      },
+      "tool_count": 1,
+      "tool_names": [
+        "search_code"
+      ],
+      "tools_list_tokens": 62,
+      "tools_list_payload_tokens": 62,
+      "tool_tokens": {
+        "search_code": 60
+      },
+      "sample": {
+        "tool": "search_code",
+        "args": {
+          "query": "Users get 401 Unauthorized on every request after logging in; the JWT token verification seems to reject valid tokens"
+        },
+        "cold_latency_ms": 561,
+        "warm_latency_ms": 37,
+        "result_tokens": 3742,
+        "result_chars": 15385,
+        "is_error": false,
+        "preview": "// src/auth/auth.service.ts:523-560 AuthService.refreshToken [bm25 0.88; sem 0.77; CALLS← AuthController.refresh (static_verified)]\n  async refreshToken(\n    data: Pick<JwtRefreshPayloadType, 'sessionId' | 'hash'>,\n  ): Promise<Omit<LoginResponseDto, 'user'>> {\n    const hash = crypto\n      .createHash('sha256')\n      .update(randomStringGenerator())\n      .digest('hex');\n\n    const session = awai"
+      },
+      "path_leak_hits": [],
+      "stderr_tail": "[listening] method=hybrid budget=4000 max_results=20\n[ready] method=hybrid files=170 workspace_hash=99bcd8b0605e prepare_ms=6006 index_ms=364\n"
+    },
+    {
+      "server": "search_code:custom_graph",
+      "workspace": "base",
+      "launch": {
+        "command": "/home/adityareddy/dev/experiments/code-graphs/node_modules/.bin/tsx",
+        "args": [
+          "/home/adityareddy/dev/experiments/code-graphs/src/agent-eval/mcp/retrieval-server.ts",
+          "--method",
+          "custom_graph",
+          "--workspace",
+          "/tmp/work/e284cdad90/app",
+          "--budget",
+          "4000",
+          "--max-results",
+          "20",
+          "--log",
+          "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/inspect-logs/base-custom_graph.jsonl"
+        ]
+      },
+      "build_ms": null,
+      "startup_ms": 963,
+      "initialize_ms": 849,
+      "server_info": {
+        "name": "code-search",
+        "version": "1.0.0"
+      },
+      "tool_count": 1,
+      "tool_names": [
+        "search_code"
+      ],
+      "tools_list_tokens": 62,
+      "tools_list_payload_tokens": 62,
+      "tool_tokens": {
+        "search_code": 60
+      },
+      "sample": {
+        "tool": "search_code",
+        "args": {
+          "query": "Users get 401 Unauthorized on every request after logging in; the JWT token verification seems to reject valid tokens"
+        },
+        "cold_latency_ms": 562,
+        "warm_latency_ms": 23,
+        "result_tokens": 3573,
+        "result_chars": 14856,
+        "is_error": false,
+        "preview": "// src/auth/auth.service.ts:523-560 AuthService.refreshToken [match 0.83; CALLS← AuthController.refresh (static_verified)]\n  async refreshToken(\n    data: Pick<JwtRefreshPayloadType, 'sessionId' | 'hash'>,\n  ): Promise<Omit<LoginResponseDto, 'user'>> {\n    const hash = crypto\n      .createHash('sha256')\n      .update(randomStringGenerator())\n      .digest('hex');\n\n    const session = await this.se"
+      },
+      "path_leak_hits": [],
+      "stderr_tail": "[listening] method=custom_graph budget=4000 max_results=20\n[ready] method=custom_graph files=170 workspace_hash=99bcd8b0605e prepare_ms=125 index_ms=2949\n"
+    },
+    {
+      "server": "search_code:embeddings",
+      "workspace": "base",
+      "launch": {
+        "command": "/home/adityareddy/dev/experiments/code-graphs/node_modules/.bin/tsx",
+        "args": [
+          "/home/adityareddy/dev/experiments/code-graphs/src/agent-eval/mcp/retrieval-server.ts",
+          "--method",
+          "embeddings",
+          "--workspace",
+          "/tmp/work/e284cdad90/app",
+          "--budget",
+          "4000",
+          "--max-results",
+          "20",
+          "--log",
+          "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/inspect-logs/base-embeddings.jsonl"
+        ]
+      },
+      "build_ms": null,
+      "startup_ms": 6806,
+      "initialize_ms": 801,
+      "server_info": {
+        "name": "code-search",
+        "version": "1.0.0"
+      },
+      "tool_count": 1,
+      "tool_names": [
+        "search_code"
+      ],
+      "tools_list_tokens": 62,
+      "tools_list_payload_tokens": 62,
+      "tool_tokens": {
+        "search_code": 60
+      },
+      "sample": {
+        "tool": "search_code",
+        "args": {
+          "query": "Users get 401 Unauthorized on every request after logging in; the JWT token verification seems to reject valid tokens"
+        },
+        "cold_latency_ms": 506,
+        "warm_latency_ms": 16,
+        "result_tokens": 1974,
+        "result_chars": 8484,
+        "is_error": false,
+        "preview": "// src/auth/strategies/jwt.strategy.ts:21-27 JwtStrategy.validate\n  public validate(payload: JwtPayloadType): OrNeverType<JwtPayloadType> {\n    if (!payload.id) {\n      throw new UnauthorizedException();\n    }\n\n    return payload;\n  }\n\n// src/auth/strategies/jwt.strategy.ts:9-28 JwtStrategy\n@Injectable()\nexport class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {\n\n  // Why we don't check "
+      },
+      "path_leak_hits": [],
+      "stderr_tail": "[listening] method=embeddings budget=4000 max_results=20\n[ready] method=embeddings files=170 workspace_hash=99bcd8b0605e prepare_ms=6018 index_ms=190\n"
+    },
+    {
+      "server": "search_code:bm25",
+      "workspace": "base",
+      "launch": {
+        "command": "/home/adityareddy/dev/experiments/code-graphs/node_modules/.bin/tsx",
+        "args": [
+          "/home/adityareddy/dev/experiments/code-graphs/src/agent-eval/mcp/retrieval-server.ts",
+          "--method",
+          "bm25",
+          "--workspace",
+          "/tmp/work/e284cdad90/app",
+          "--budget",
+          "4000",
+          "--max-results",
+          "20",
+          "--log",
+          "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/inspect-logs/base-bm25.jsonl"
+        ]
+      },
+      "build_ms": null,
+      "startup_ms": 1073,
+      "initialize_ms": 883,
+      "server_info": {
+        "name": "code-search",
+        "version": "1.0.0"
+      },
+      "tool_count": 1,
+      "tool_names": [
+        "search_code"
+      ],
+      "tools_list_tokens": 62,
+      "tools_list_payload_tokens": 62,
+      "tool_tokens": {
+        "search_code": 60
+      },
+      "sample": {
+        "tool": "search_code",
+        "args": {
+          "query": "Users get 401 Unauthorized on every request after logging in; the JWT token verification seems to reject valid tokens"
+        },
+        "cold_latency_ms": 492,
+        "warm_latency_ms": 15,
+        "result_tokens": 3933,
+        "result_chars": 17452,
+        "is_error": false,
+        "preview": "// src/auth-facebook/auth-facebook.service.ts:93-156 AuthFacebookService.verifyAccessToken\n  private async verifyAccessToken(accessToken: string): Promise<void> {\n    try {\n      const appId = this.configService.get('facebook.appId', { infer: true });\n      const appSecret = this.configService.get('facebook.appSecret', {\n        infer: true,\n      });\n\n      // Application credentials must be conf"
+      },
+      "path_leak_hits": [],
+      "stderr_tail": "[listening] method=bm25 budget=4000 max_results=20\n[ready] method=bm25 files=170 workspace_hash=99bcd8b0605e prepare_ms=200 index_ms=176\n"
+    },
+    {
+      "server": "graphify-native",
+      "workspace": "base",
+      "launch": {
+        "command": "/usr/bin/env",
+        "args": [
+          "-u",
+          "CRG_OPENAI_API_KEY",
+          "-u",
+          "CRG_OPENAI_BASE_URL",
+          "-u",
+          "CRG_OPENAI_MODEL",
+          "-u",
+          "CRG_VOYAGE_MODEL",
+          "-u",
+          "VOYAGE_API_KEY",
+          "-u",
+          "GOOGLE_API_KEY",
+          "-u",
+          "MINIMAX_API_KEY",
+          "-u",
+          "OPENAI_API_KEY",
+          "-u",
+          "OPENAI_BASE_URL",
+          "-u",
+          "ANTHROPIC_API_KEY",
+          "-u",
+          "GEMINI_API_KEY",
+          "-u",
+          "GRAPHIFY_API_KEY",
+          "-u",
+          "MOONSHOT_API_KEY",
+          "-u",
+          "DEEPSEEK_API_KEY",
+          "/home/adityareddy/dev/experiments/code-graphs/vendor/.venvs/graphify/bin/graphify-mcp",
+          "--graph",
+          "/tmp/work/e284cdad90/idx/graphify-out/graph.json"
+        ],
+        "env": {
+          "HOME": "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/99bcd8b0605e/graphify-e284cdad90/home",
+          "XDG_CONFIG_HOME": "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/99bcd8b0605e/graphify-e284cdad90/home/.config",
+          "XDG_CACHE_HOME": "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/99bcd8b0605e/graphify-e284cdad90/home/.cache",
+          "XDG_DATA_HOME": "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/99bcd8b0605e/graphify-e284cdad90/home/.local/share",
+          "GRAPHIFY_NO_AUTO_REFRESH": "1",
+          "GRAPHIFY_BACKEND": "none",
+          "GRAPHIFY_QUERY_LOG_DISABLE": "1",
+          "PYTHONIOENCODING": "utf-8"
+        }
+      },
+      "build_ms": 1798.3,
+      "startup_ms": 679,
+      "initialize_ms": 679,
+      "server_info": {
+        "name": "graphify",
+        "version": "0.9.104"
+      },
+      "tool_count": 10,
+      "tool_names": [
+        "query_graph",
+        "get_node",
+        "get_neighbors",
+        "get_community",
+        "god_nodes",
+        "graph_stats",
+        "shortest_path",
+        "list_prs",
+        "get_pr_impact",
+        "triage_prs"
+      ],
+      "tools_list_tokens": 1350,
+      "tools_list_payload_tokens": 1350,
+      "tool_tokens": {
+        "query_graph": 201,
+        "get_node": 101,
+        "get_neighbors": 126,
+        "get_community": 110,
+        "god_nodes": 118,
+        "graph_stats": 69,
+        "shortest_path": 176,
+        "list_prs": 146,
+        "get_pr_impact": 143,
+        "triage_prs": 158
+      },
+      "sample": {
+        "tool": "query_graph",
+        "args": {
+          "question": "Users get 401 Unauthorized on every request after logging in; the JWT token verification seems to reject valid tokens"
+        },
+        "cold_latency_ms": 73,
+        "warm_latency_ms": 35,
+        "result_tokens": 1589,
+        "result_chars": 6551,
+        "is_error": false,
+        "preview": "Graph: /tmp/work/e284cdad90/idx/graphify-out/graph.json (1176 nodes) | Traversal: BFS depth=3 | Start: ['Tokens', 'tokens.ts', 'Request', 'JwtPayloadType', 'users.service.ts', 'validate-config.ts', 'AfterLoad'] | 669 nodes found\n\n[!] TRUNCATED: showing 57 of 669 nodes (~2000-token budget). The answer may be among the 612 cut nodes — raise the token budget to 18210 to get all 669 (CLI: --budget 182"
+      },
+      "path_leak_hits": [],
+      "stderr_tail": ""
+    },
+    {
+      "server": "crg-native",
+      "workspace": "base",
+      "launch": {
+        "command": "/usr/bin/env",
+        "args": [
+          "-u",
+          "CRG_OPENAI_API_KEY",
+          "-u",
+          "CRG_OPENAI_BASE_URL",
+          "-u",
+          "CRG_OPENAI_MODEL",
+          "-u",
+          "CRG_VOYAGE_MODEL",
+          "-u",
+          "VOYAGE_API_KEY",
+          "-u",
+          "GOOGLE_API_KEY",
+          "-u",
+          "MINIMAX_API_KEY",
+          "-u",
+          "OPENAI_API_KEY",
+          "-u",
+          "OPENAI_BASE_URL",
+          "-u",
+          "ANTHROPIC_API_KEY",
+          "-u",
+          "GEMINI_API_KEY",
+          "-u",
+          "GRAPHIFY_API_KEY",
+          "-u",
+          "MOONSHOT_API_KEY",
+          "-u",
+          "DEEPSEEK_API_KEY",
+          "/home/adityareddy/dev/experiments/code-graphs/vendor/.venvs/code-review-graph/bin/code-review-graph",
+          "serve",
+          "--repo",
+          "/tmp/work/e284cdad90/app"
+        ],
+        "env": {
+          "HOME": "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/99bcd8b0605e/crg-e284cdad90/home",
+          "XDG_CONFIG_HOME": "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/99bcd8b0605e/crg-e284cdad90/home/.config",
+          "XDG_CACHE_HOME": "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/99bcd8b0605e/crg-e284cdad90/home/.cache",
+          "XDG_DATA_HOME": "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/99bcd8b0605e/crg-e284cdad90/home/.local/share",
+          "CRG_DATA_DIR": "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/99bcd8b0605e/crg-e284cdad90",
+          "CRG_HOME": "/home/adityareddy/dev/experiments/code-graphs/.cache/agent-ws/99bcd8b0605e/crg-e284cdad90/crg_home",
+          "HF_HUB_OFFLINE": "1",
+          "TOKENIZERS_PARALLELISM": "false"
+        }
+      },
+      "build_ms": 649.9,
+      "startup_ms": 892,
+      "initialize_ms": 892,
+      "server_info": {
+        "name": "code-review-graph",
+        "version": "2.3.9"
+      },
+      "tool_count": 30,
+      "tool_names": [
+        "build_or_update_graph_tool",
+        "run_postprocess_tool",
+        "get_minimal_context_tool",
+        "get_impact_radius_tool",
+        "query_graph_tool",
+        "get_review_context_tool",
+        "semantic_search_nodes_tool",
+        "embed_graph_tool",
+        "list_graph_stats_tool",
+        "get_docs_section_tool",
+        "find_large_functions_tool",
+        "list_flows_tool",
+        "get_flow_tool",
+        "get_affected_flows_tool",
+        "list_communities_tool",
+        "get_community_tool",
+        "get_architecture_overview_tool",
+        "detect_changes_tool",
+        "refactor_tool",
+        "apply_refactor_tool",
+        "generate_wiki_tool",
+        "get_wiki_page_tool",
+        "get_hub_nodes_tool",
+        "get_bridge_nodes_tool",
+        "get_knowledge_gaps_tool",
+        "get_surprising_connections_tool",
+        "get_suggested_questions_tool",
+        "traverse_graph_tool",
+        "list_repos_tool",
+        "cross_repo_search_tool"
+      ],
+      "tools_list_tokens": 8242,
+      "tools_list_payload_tokens": 8902,
+      "tool_tokens": {
+        "build_or_update_graph_tool": 498,
+        "run_postprocess_tool": 293,
+        "get_minimal_context_tool": 252,
+        "get_impact_radius_tool": 406,
+        "query_graph_tool": 475,
+        "get_review_context_tool": 348,
+        "semantic_search_nodes_tool": 400,
+        "embed_graph_tool": 511,
+        "list_graph_stats_tool": 98,
+        "get_docs_section_tool": 212,
+        "find_large_functions_tool": 216,
+        "list_flows_tool": 250,
+        "get_flow_tool": 277,
+        "get_affected_flows_tool": 300,
+        "list_communities_tool": 274,
+        "get_community_tool": 254,
+        "get_architecture_overview_tool": 232,
+        "detect_changes_tool": 425,
+        "refactor_tool": 424,
+        "apply_refactor_tool": 288,
+        "generate_wiki_tool": 189,
+        "get_wiki_page_tool": 156,
+        "get_hub_nodes_tool": 176,
+        "get_bridge_nodes_tool": 179,
+        "get_knowledge_gaps_tool": 181,
+        "get_surprising_connections_tool": 194,
+        "get_suggested_questions_tool": 102,
+        "traverse_graph_tool": 228,
+        "list_repos_tool": 85,
+        "cross_repo_search_tool": 317
+      },
+      "sample": {
+        "tool": "semantic_search_nodes_tool",
+        "args": {
+          "query": "Users get 401 Unauthorized on every request after logging in; the JWT token verification seems to reject valid tokens"
+        },
+        "cold_latency_ms": 6160,
+        "warm_latency_ms": 7,
+        "result_tokens": 2502,
+        "result_chars": 9677,
+        "is_error": false,
+        "preview": "{\"status\":\"ok\",\"query\":\"Users get 401 Unauthorized on every request after logging in; the JWT token verification seems to reject valid tokens\",\"search_mode\":\"fts\",\"summary\":\"Found 20 node(s) matching 'Users get 401 Unauthorized on every request after logging in; the JWT token verification seems to reject valid tokens'\",\"results\":[{\"name\":\"Tokens\",\"qualified_name\":\"/tmp/work/e284cdad90/app/src/soci"
+      },
+      "path_leak_hits": [],
+      "stderr_tail": "[11/08/26 18:09:26] INFO     Starting MCP server                transport.py:241\n                             'code-review-graph' with transport                 \n                             'stdio'                                            \n"
+    }
+  ],
+  "failures": [],
+  "embedding_consistency": {
+    "reference": "embed.py one-batch path (experiment 1 Embedder) vs embed_server.py one-at-a-time",
+    "min_cosine": 0.9999960682019701,
+    "results": [
+      {
+        "query": "Users get 401 Unauthorized on every request after logging in; the JWT token verification seems to reject valid tokens",
+        "cosine": 0.9999961413743766,
+        "tokens_server": 45,
+        "tokens_cached": 45
+      },
+      {
+        "query": "Refresh token endpoint returns the same token pair twice and old sessions are never invalidated",
+        "cosine": 0.9999971245865298,
+        "tokens_server": 37,
+        "tokens_cached": 37
+      },
+      {
+        "query": "password reset link can be reused after the password was already changed",
+        "cosine": 0.9999964159528485,
+        "tokens_server": 34,
+        "tokens_cached": 34
+      },
+      {
+        "query": "AuthService.validateLogin",
+        "cosine": 0.9999960682019701,
+        "tokens_server": 25,
+        "tokens_cached": 25
+      },
+      {
+        "query": "TypeError: Cannot read properties of undefined (reading 'id') at UsersService.findOne",
+        "cosine": 0.9999960827631861,
+        "tokens_server": 38,
+        "tokens_cached": 38
+      },
+      {
+        "query": "Social login creates a duplicate user when the email already exists in the database",
+        "cosine": 0.9999964390462482,
+        "tokens_server": 36,
+        "tokens_cached": 36
+      }
+    ]
+  }
+}

@@ -84,16 +84,29 @@ export function dot(a: Float32Array, b: Float32Array): number {
   return s;
 }
 
+/**
+ * Optional, opt-in replacement for the per-call Python query embedding (experiment 2, agent loop).
+ * Same model/revision/instruction, but served by a long-lived process (scripts/embeddings/embed_server.py).
+ */
+export interface QueryEmbedder {
+  embedQuery(text: string): Promise<{ vector: Float32Array; tokens: number }>;
+}
+
 export class EmbeddingRetriever implements RetrievalMethod {
   readonly name = 'embeddings';
+  /** Opt-in globals (default null = experiment-1 behaviour). Read at construction/prepare time. */
+  static defaultQueryEmbedder: QueryEmbedder | null = null;
+  /** Overrides the content-hash vector cache dir (default: sibling `embeddings/` of the corpus cacheDir). */
+  static embeddingCacheDir: string | null = null;
   chunks: Chunk[] = [];
   vecs: Float32Array[] = [];
   embedder!: Embedder;
   private queryCache = new Map<string, { v: Float32Array; tokens: number }>();
+  private queryEmbedder: QueryEmbedder | null = EmbeddingRetriever.defaultQueryEmbedder;
 
   async prepare(corpus: Corpus): Promise<IndexStats> {
     const t0 = performance.now();
-    this.embedder = new Embedder(path.join(path.dirname(corpus.cacheDir), 'embeddings')); // content-hash cache shared across snapshots
+    this.embedder = new Embedder(EmbeddingRetriever.embeddingCacheDir ?? path.join(path.dirname(corpus.cacheDir), 'embeddings')); // content-hash cache shared across snapshots
     const symIndex = new SymbolIndex(corpus.repoRoot, corpus.files);
     this.chunks = buildChunks(symIndex);
     const { vectors, tokens, computed } = this.embedder.embed(this.chunks.map((c) => ({ id: c.id + '#' + c.start_line, text: c.text, kind: 'doc' as const })));
@@ -111,8 +124,18 @@ export class EmbeddingRetriever implements RetrievalMethod {
     for (const q of qs) this.queryCache.set(q.query, { v: vectors.get(q.task_id)!, tokens: tokens.get(q.task_id)! });
   }
 
+  /** Async query embedding through the pluggable QueryEmbedder (no-op when none is configured). */
+  async prewarmQuery(query: string): Promise<void> {
+    if (!this.queryEmbedder || this.queryCache.has(query)) return;
+    const r = await this.queryEmbedder.embedQuery(query);
+    this.queryCache.set(query, { v: r.vector, tokens: r.tokens });
+  }
+
   scoreAll(query: string): number[] {
-    if (!this.queryCache.has(query)) this.warmQueries([{ task_id: '_q', query }]);
+    if (!this.queryCache.has(query)) {
+      if (this.queryEmbedder) throw new Error('query not embedded: call prewarmQuery() first (a query embedder is configured)');
+      this.warmQueries([{ task_id: '_q', query }]);
+    }
     const qv = this.queryCache.get(query)!.v;
     return this.vecs.map((v) => dot(qv, v));
   }

@@ -50,7 +50,7 @@ export const localQwen: SingleShotBackend = {
     fs.mkdirSync(workDir, { recursive: true });
     const inp = path.join(workDir, 'local-in.jsonl'), out = path.join(workDir, 'local-out.jsonl');
     fs.writeFileSync(inp, items.map((i) => JSON.stringify({ id: i.id, system: i.system, prompt: i.prompt })).join('\n') + '\n');
-    let r = spawnSync('true');
+    let r = spawnSync('true', { encoding: 'utf8' });
     for (let attempt = 0; attempt < 3; attempt++) { // resumable; retries after OOM kills
       r = spawnSync(abs('vendor/.venvs/embeddings/bin/python'), ['-I', abs('scripts/agent-eval/local_llm.py'), '--model', this.model, '--in', inp, '--out', out], {
         encoding: 'utf8', env: { ...process.env, HF_HUB_OFFLINE: '1', TOKENIZERS_PARALLELISM: 'false' }, maxBuffer: 64 * 1024 * 1024,

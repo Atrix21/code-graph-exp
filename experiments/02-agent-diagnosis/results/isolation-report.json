@@ -1,0 +1,5902 @@
+{
+ "generated": "2026-11-08T14:02:29.737Z",
+ "claude_version": "2.1.319 (Claude Code)",
+ "project": "code-graph-retrieval-benchmark",
+ "workspace": "/tmp/work/87ba94e5b0/app",
+ "skipped": [],
+ "scenarios": [
+  {
+   "profile": "restricted-oauth",
+   "kind": "demo:inject-extra-tool",
+   "ok": true,
+   "requests": 0,
+   "tools_offered": [
+    "Bash",
+    "Glob",
+    "Grep",
+    "Read",
+    "StructuredOutput"
+   ],
+   "outcome": {
+    "status": "init_mismatch",
+    "reason": "extra_tool"
+   },
+   "init_check": {
+    "categories": [
+     "extra_tool"
+    ],
+    "details": [
+     "unexpected tool: Bash"
+    ]
+   },
+   "mcp_tools": [],
+   "home_writes": {
+    "attributed": [],
+    "unattributed": 1,
+    "unattributed_paths": [
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json"
+    ]
+   },
+   "result": {
+    "missing": true
+   }
+  },
+  {
+   "profile": "restricted-oauth",
+   "kind": "demo:infra-401",
+   "ok": true,
+   "requests": 1,
+   "paths": {
+    "POST /v1/messages": 1
+   },
+   "tools_offered": [
+    "Glob",
+    "Grep",
+    "Read",
+    "DeferredToolPlaceholder",
+    "StructuredOutput"
+   ],
+   "tool_schema_tokens": 1672,
+   "tool_schema_tokens_by_tool": {
+    "Glob": 157,
+    "Grep": 776,
+    "Read": 466,
+    "DeferredToolPlaceholder": 41,
+    "StructuredOutput": 231
+   },
+   "system_prompt_tokens": 108,
+   "system_prompt_text": "x-anthropic-billing-header: cc_version=2.1.319.3d1; cc_entrypoint=sdk-cli;\nYou are a Claude agent, built on Anthropic's Claude Agent SDK.\nYou are a senior software engineer diagnosing a bug in the codebase in your current working directory. You can read and search files but you cannot run code, run tests, use git, or modify files. Investigate until you are confident, then give your diagnosis. Be efficient: do not read files you do not need.",
+   "mcp_tools": [],
+   "mcp_as_expected": true,
+   "mcp_status": [],
+   "init_check": {
+    "categories": [],
+    "details": []
+   },
+   "outcome": {
+    "status": "infra_error",
+    "infra_kind": "auth",
+    "reason": "error result: Invalid API key · Fix external API key",
+    "text": "Invalid API key · Fix external API key  "
+   },
+   "mcp_connected": null,
+   "mcp_tool_schema_tokens": 1,
+   "denied_expected": [],
+   "denied_present": [],
+   "claude_md_hits": [],
+   "claude_md_files_considered": [
+    "/home/adityareddy/.claude/CLAUDE.md"
+   ],
+   "skill_hits": [],
+   "memory_hits": [],
+   "cwd_visible": {
+    "found": true,
+    "where": [
+     "messages[1:system]"
+    ]
+   },
+   "banned_offered": [],
+   "exchanges": [],
+   "forbidden_read": {
+    "denied": false,
+    "text": "(no exchange recorded)"
+   },
+   "outside_reads": [],
+   "banned_attempts": {},
+   "result": {
+    "subtype": "success",
+    "is_error": true,
+    "num_turns": 1,
+    "duration_ms": 72,
+    "duration_api_ms": 0,
+    "total_cost_usd": 0,
+    "usage": {
+     "output_tokens_details": {
+      "thinking_tokens": 0
+     },
+     "input_tokens": 0,
+     "cache_creation_input_tokens": 0,
+     "cache_read_input_tokens": 0,
+     "output_tokens": 0,
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     },
+     "service_tier": "standard",
+     "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+     },
+     "inference_geo": "",
+     "iterations": [],
+     "speed": "standard",
+     "fallback_credit": null
+    },
+    "modelUsage": {},
+    "structured_output_present": false,
+    "permission_denials": 0,
+    "stop_reason": "stop_sequence"
+   },
+   "model_in_request": "claude-sonnet-5-5",
+   "request_keys": [
+    "model",
+    "messages",
+    "system",
+    "tools",
+    "metadata",
+    "max_tokens",
+    "thinking",
+    "context_management",
+    "output_config",
+    "stream"
+   ],
+   "metadata_keys": [
+    "user_id"
+   ],
+   "init_extra": {
+    "apiKeySource": "ANTHROPIC_API_KEY",
+    "skills": [],
+    "slash_commands": [],
+    "agents": [
+     "claude",
+     "Explore",
+     "general-purpose",
+     "Plan",
+     "statusline-setup"
+    ],
+    "plugins": [
+     "cc-plugin-agents-md",
+     "cc-plugin-privacy",
+     "cc-plugin-plugin-authoring"
+    ],
+    "permissionMode": "dontAsk"
+   },
+   "workspace_changes": {
+    "added": [],
+    "removed": [],
+    "changed": []
+   },
+   "stderr_tail": "",
+   "home_writes": {
+    "attributed": [],
+    "unattributed": 1,
+    "unattributed_paths": [
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json"
+    ]
+   }
+  },
+  {
+   "profile": "control",
+   "kind": "baseline",
+   "ok": true,
+   "requests": 1,
+   "paths": {
+    "HEAD /api/hello": 1,
+    "POST /v1/messages": 1
+   },
+   "tools_offered": [
+    "Read",
+    "mcp__android__adb_shell",
+    "mcp__android__clear_logs",
+    "mcp__android__double_tap",
+    "mcp__android__get_current_activity",
+    "mcp__android__get_device_info",
+    "mcp__android__get_logs",
+    "mcp__android__get_ui_tree",
+    "mcp__android__install_apk",
+    "mcp__android__launch_app",
+    "mcp__android__list_avds",
+    "mcp__android__list_devices",
+    "mcp__android__long_press",
+    "mcp__android__multi_tap",
+    "mcp__android__press_key",
+    "mcp__android__pull_file",
+    "mcp__android__screenshot",
+    "mcp__android__scroll_to_element",
+    "mcp__android__start_emulator",
+    "mcp__android__swipe",
+    "mcp__android__tap",
+    "mcp__android__tap_and_wait",
+    "mcp__android__tap_element",
+    "mcp__android__tap_sequence",
+    "mcp__android__type_text",
+    "DeferredToolPlaceholder",
+    "mcp__android__wait_for_element"
+   ],
+   "tool_schema_tokens": 3720,
+   "tool_schema_tokens_by_tool": {
+    "Read": 466,
+    "mcp__android__adb_shell": 86,
+    "mcp__android__clear_logs": 75,
+    "mcp__android__double_tap": 130,
+    "mcp__android__get_current_activity": 66,
+    "mcp__android__get_device_info": 78,
+    "mcp__android__get_logs": 216,
+    "mcp__android__get_ui_tree": 91,
+    "mcp__android__install_apk": 88,
+    "mcp__android__launch_app": 113,
+    "mcp__android__list_avds": 46,
+    "mcp__android__list_devices": 47,
+    "mcp__android__long_press": 134,
+    "mcp__android__multi_tap": 171,
+    "mcp__android__press_key": 128,
+    "mcp__android__pull_file": 122,
+    "mcp__android__screenshot": 102,
+    "mcp__android__scroll_to_element": 140,
+    "mcp__android__start_emulator": 87,
+    "mcp__android__swipe": 159,
+    "mcp__android__tap": 92,
+    "mcp__android__tap_and_wait": 167,
+    "mcp__android__tap_element": 129,
+    "mcp__android__tap_sequence": 517,
+    "mcp__android__type_text": 83,
+    "DeferredToolPlaceholder": 41,
+    "mcp__android__wait_for_element": 145
+   },
+   "system_prompt_tokens": 1320,
+   "system_prompt_text": "x-anthropic-billing-header: cc_version=2.1.319.3d1; cc_entrypoint=sdk-cli;\nYou are a Claude agent, built on Anthropic's Claude Agent SDK.\n\nYou are an agent working with the user toward their goals, using your own judgment along the way.\n\nIMPORTANT: Assist with authorized security testing, defensive security, CTF challenges, and educational contexts. Refuse requests for destructive techniques, DoS attacks, mass targeting, supply chain compromise, or detection evasion for malicious purposes. Dual-use security tools (C2 frameworks, credential testing, exploit development) require clear authorizat…",
+   "mcp_tools": [
+    "mcp__android__adb_shell",
+    "mcp__android__clear_logs",
+    "mcp__android__double_tap",
+    "mcp__android__get_current_activity",
+    "mcp__android__get_device_info",
+    "mcp__android__get_logs",
+    "mcp__android__get_ui_tree",
+    "mcp__android__install_apk",
+    "mcp__android__launch_app",
+    "mcp__android__list_avds",
+    "mcp__android__list_devices",
+    "mcp__android__long_press",
+    "mcp__android__multi_tap",
+    "mcp__android__press_key",
+    "mcp__android__pull_file",
+    "mcp__android__screenshot",
+    "mcp__android__scroll_to_element",
+    "mcp__android__start_emulator",
+    "mcp__android__swipe",
+    "mcp__android__tap",
+    "mcp__android__tap_and_wait",
+    "mcp__android__tap_element",
+    "mcp__android__tap_sequence",
+    "mcp__android__type_text",
+    "mcp__android__wait_for_element"
+   ],
+   "mcp_as_expected": false,
+   "mcp_status": [
+    {
+     "name": "android",
+     "status": "connected",
+     "source": "user"
+    }
+   ],
+   "outcome": {
+    "status": "no_structured_output"
+   },
+   "mcp_connected": null,
+   "mcp_tool_schema_tokens": 3214,
+   "denied_expected": [],
+   "denied_present": [],
+   "claude_md_hits": [
+    {
+     "needle": "any input to knowledge graph",
+     "where": "messages[0:user]"
+    },
+    {
+     "needle": "user's private global instructions",
+     "where": "messages[0:user]"
+    },
+    {
+     "needle": "invoke the Skill tool with",
+     "where": "messages[0:user]"
+    },
+    {
+     "needle": "userEmail",
+     "where": "messages[0:user]"
+    },
+    {
+     "needle": "graphify",
+     "where": "messages[0:user]"
+    },
+    {
+     "needle": "claude-md-line#babe6f7a7f",
+     "where": "messages[0:user]"
+    },
+    {
+     "needle": "claude-md-line#b5ca4887ff",
+     "where": "messages[0:user]"
+    },
+    {
+     "needle": "claude-md-line#320a724720",
+     "where": "messages[0:user]"
+    }
+   ],
+   "claude_md_files_considered": [
+    "/home/adityareddy/.claude/CLAUDE.md"
+   ],
+   "skill_hits": [
+    {
+     "needle": "claude-md-line#2c36ca3471",
+     "where": "messages[0:user]"
+    }
+   ],
+   "memory_hits": [
+    {
+     "needle": "claude-md-line#fe1ee86356",
+     "where": "system[2]"
+    }
+   ],
+   "cwd_visible": {
+    "found": true,
+    "where": [
+     "messages[1:system]"
+    ]
+   },
+   "banned_offered": [],
+   "exchanges": [],
+   "forbidden_read": {
+    "denied": false,
+    "text": "(no exchange recorded)"
+   },
+   "outside_reads": [],
+   "banned_attempts": {},
+   "result": {
+    "subtype": "success",
+    "is_error": false,
+    "num_turns": 1,
+    "duration_ms": 57,
+    "duration_api_ms": 21,
+    "total_cost_usd": 0.0013243999999999999,
+    "usage": {
+     "input_tokens": 3,
+     "cache_creation_input_tokens": 264,
+     "cache_read_input_tokens": 5484,
+     "output_tokens": 11,
+     "output_tokens_details": {
+      "thinking_tokens": 0
+     },
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     },
+     "service_tier": "standard",
+     "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+     },
+     "inference_geo": "",
+     "iterations": [],
+     "speed": "standard",
+     "fallback_credit": null
+    },
+    "modelUsage": {
+     "claude-sonnet-5-5": {
+      "inputTokens": 3,
+      "outputTokens": 11,
+      "cacheReadInputTokens": 5484,
+      "cacheCreationInputTokens": 264,
+      "webSearchRequests": 0,
+      "costUSD": 0.0013243999999999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 0,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+     }
+    },
+    "structured_output_present": false,
+    "permission_denials": 0,
+    "stop_reason": "end_turn"
+   },
+   "model_in_request": "claude-sonnet-5-5",
+   "request_keys": [
+    "model",
+    "messages",
+    "system",
+    "tools",
+    "metadata",
+    "max_tokens",
+    "thinking",
+    "context_management",
+    "output_config",
+    "stream"
+   ],
+   "metadata_keys": [
+    "user_id"
+   ],
+   "init_extra": {
+    "apiKeySource": "ANTHROPIC_API_KEY",
+    "skills": [
+     "graphify",
+     "ig-audit",
+     "ig-caption",
+     "ig-carousel",
+     "ig-comment",
+     "ig-dm",
+     "ig-human",
+     "ig-plan",
+     "ig-profile",
+     "ig-reel",
+     "ig-reply",
+     "ig-repurpose",
+     "ig-story",
+     "ig-viral",
+     "paxel-remote-setup",
+     "security-audit",
+     "test-audit",
+     "unity-mcp-skill",
+     "watchos-app-engineering",
+     "watchos-linux-xtool",
+     "watchos-ui-design",
+     "deep-research",
+     "design",
+     "design-sync",
+     "dataviz",
+     "update-config",
+     "verify",
+     "debug",
+     "code-review",
+     "simplify",
+     "batch",
+     "fewer-permission-prompts",
+     "doctor",
+     "loop",
+     "claude-api",
+     "workflow-authoring",
+     "run",
+     "run-skill-generator",
+     "plugin-authoring",
+     "anthropic-skills:built-in-browser",
+     "anthropic-skills:chrome-browser",
+     "anthropic-skills:computer-use",
+     "anthropic-skills:deep-research",
+     "anthropic-skills:docs",
+     "anthropic-skills:docx",
+     "anthropic-skills:google-workspace",
+     "anthropic-skills:import-memory",
+     "anthropic-skills:morning",
+     "anthropic-skills:pdf",
+     "anthropic-skills:pptx",
+     "anthropic-skills:skill-creator",
+     "anthropic-skills:xlsx"
+    ],
+    "slash_commands": [
+     "graphify",
+     "ig-audit",
+     "ig-caption",
+     "ig-carousel",
+     "ig-comment",
+     "ig-dm",
+     "ig-human",
+     "ig-plan",
+     "ig-profile",
+     "ig-reel",
+     "ig-reply",
+     "ig-repurpose",
+     "ig-story",
+     "ig-viral",
+     "paxel-remote-setup",
+     "security-audit",
+     "test-audit",
+     "unity-mcp-skill",
+     "watchos-app-engineering",
+     "watchos-linux-xtool",
+     "watchos-ui-design",
+     "deep-research",
+     "design",
+     "design-sync",
+     "dataviz",
+     "update-config",
+     "verify",
+     "debug",
+     "code-review",
+     "simplify",
+     "batch",
+     "fewer-permission-prompts",
+     "doctor",
+     "loop",
+     "claude-api",
+     "workflow-authoring",
+     "run",
+     "run-skill-generator",
+     "plugin-authoring",
+     "advisor",
+     "agents",
+     "auto-mode-setup",
+     "autocompact",
+     "clear",
+     "color",
+     "compact",
+     "config",
+     "output-style",
+     "context",
+     "effort",
+     "fast",
+     "focus",
+     "heapdump",
+     "init",
+     "mcp",
+     "import",
+     "model",
+     "__remote-workflow",
+     "workflow-launch-exec",
+     "reload-plugins",
+     "reload-skills",
+     "rename",
+     "security-review",
+     "usage",
+     "insights",
+     "recap",
+     "skill-doctor",
+     "goal",
+     "design-consent",
+     "design-revoke",
+     "list-agents",
+     "team-onboarding",
+     "anthropic-skills:built-in-browser",
+     "anthropic-skills:chrome-browser",
+     "anthropic-skills:computer-use",
+     "anthropic-skills:deep-research",
+     "anthropic-skills:docs",
+     "anthropic-skills:docx",
+     "anthropic-skills:google-workspace",
+     "anthropic-skills:import-memory",
+     "anthropic-skills:morning",
+     "anthropic-skills:pdf",
+     "anthropic-skills:pptx",
+     "anthropic-skills:skill-creator",
+     "anthropic-skills:xlsx"
+    ],
+    "agents": [
+     "claude",
+     "Explore",
+     "general-purpose",
+     "Plan",
+     "statusline-setup",
+     "web-fetch"
+    ],
+    "plugins": [
+     "swift-lsp",
+     "cc-plugin-agents-md",
+     "cc-plugin-telemetry",
+     "cc-plugin-privacy",
+     "cc-plugin-plugin-authoring"
+    ],
+    "permissionMode": "dontAsk",
+    "memory_paths": {
+     "auto": "/home/adityareddy/.claude/projects/-tmp-work-87ba94e5b0-app/memory/"
+    }
+   },
+   "workspace_changes": {
+    "added": [],
+    "removed": [],
+    "changed": []
+   },
+   "stderr_tail": "⚠ claude.ai connectors are disabled because ANTHROPIC_API_KEY or another auth source is set and takes precedence over your claude.ai login · Unset it to load your organization's connectors\n",
+   "home_writes": {
+    "attributed": [
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json"
+    ],
+    "unattributed": 5,
+    "unattributed_paths": [
+     "/home/adityareddy/.claude/backups/.claude.json.backup.1794146507487",
+     "/home/adityareddy/.claude/plugins/synced/844d688b-1262-461a-bbee-85143f6da0ca_1443505e-7930-4a5b-96c2-54a90b3e8e67/.last-complete-round",
+     "/home/adityareddy/.claude/skills/synced/844d688b-1262-461a-bbee-85143f6da0ca_1443505e-7930-4a5b-96c2-54a90b3e8e67/.last-complete-round",
+     "/home/adityareddy/.claude/skills/synced/844d688b-1262-461a-bbee-85143f6da0ca_1443505e-7930-4a5b-96c2-54a90b3e8e67/manifest.json",
+     "/home/adityareddy/.claude.json"
+    ]
+   }
+  },
+  {
+   "profile": "bare",
+   "kind": "baseline",
+   "ok": true,
+   "requests": 11,
+   "paths": {
+    "POST /v1/messages": 11
+   },
+   "tools_offered": [
+    "Read",
+    "StructuredOutput"
+   ],
+   "tool_schema_tokens": 485,
+   "tool_schema_tokens_by_tool": {
+    "Read": 277,
+    "StructuredOutput": 206
+   },
+   "system_prompt_tokens": 108,
+   "system_prompt_text": "x-anthropic-billing-header: cc_version=2.1.319.3d1; cc_entrypoint=sdk-cli;\nYou are a Claude agent, built on Anthropic's Claude Agent SDK.\nYou are a senior software engineer diagnosing a bug in the codebase in your current working directory. You can read and search files but you cannot run code, run tests, use git, or modify files. Investigate until you are confident, then give your diagnosis. Be efficient: do not read files you do not need.",
+   "mcp_tools": [],
+   "mcp_as_expected": true,
+   "mcp_status": [],
+   "init_check": {
+    "categories": [
+     "missing_tool",
+     "plugins"
+    ],
+    "details": [
+     "missing tool: Grep",
+     "missing tool: Glob",
+     "non-builtin plugins: swift-lsp"
+    ]
+   },
+   "outcome": {
+    "status": "submitted"
+   },
+   "mcp_connected": null,
+   "mcp_tool_schema_tokens": 1,
+   "denied_expected": [],
+   "denied_present": [],
+   "claude_md_hits": [],
+   "claude_md_files_considered": [
+    "/home/adityareddy/.claude/CLAUDE.md"
+   ],
+   "skill_hits": [],
+   "memory_hits": [],
+   "cwd_visible": {
+    "found": false,
+    "where": []
+   },
+   "banned_offered": [],
+   "exchanges": [
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "refresh"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Grep. Grep is not among the tools available here. Continue with the tools you have.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Glob",
+     "input": {
+      "pattern": "src/auth/*.ts"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Glob. Glob is not among the tools available here. Continue with the tools you have.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "src/auth/auth.service.ts"
+     },
+     "result": "1\timport {\n2\t  HttpStatus,\n3\t  Injectable,\n4\t  NotFoundException,\n5\t  UnauthorizedException,\n6\t  UnprocessableEntityException,\n7\t} from '@nestjs/common';\n8\timport ms from 'ms';\n9\timport crypto from 'c…",
+     "is_error": false
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json"
+     },
+     "result": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting bl…",
+     "is_error": true
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "result": "/etc/hostname is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory wit…",
+     "is_error": true
+    },
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Grep. Grep is not among the tools available here. Continue with the tools you have.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "ls"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "WebFetch",
+     "input": {
+      "url": "https://example.com",
+      "prompt": "x"
+     },
+     "result": "<tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Agent",
+     "input": {
+      "description": "x",
+      "prompt": "x",
+      "subagent_type": "general-purpose"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Skill",
+     "input": {
+      "skill": "graphify"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    }
+   ],
+   "forbidden_read": {
+    "denied": true,
+    "is_error": true,
+    "text": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-dir, or to r…"
+   },
+   "outside_reads": [
+    {
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "denied": true,
+     "text": "/etc/hostname is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-dir, or to remove that setting."
+    },
+    {
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "denied": true,
+     "text": "<tool_use_error>Error: No such tool available: Grep. Grep is not among the tools available here. Continue with the tools you have.</tool_use_error>"
+    }
+   ],
+   "banned_attempts": {
+    "Bash": "[error] <tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "WebFetch": "[error] <tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Agent": "[error] <tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Skill": "[error] <tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>"
+   },
+   "result": {
+    "subtype": "success",
+    "is_error": false,
+    "num_turns": 12,
+    "duration_ms": 264,
+    "duration_api_ms": 196,
+    "total_cost_usd": 0.027539800000000007,
+    "usage": {
+     "input_tokens": 33,
+     "cache_creation_input_tokens": 6715,
+     "cache_read_input_tokens": 54363,
+     "output_tokens": 525,
+     "output_tokens_details": {
+      "thinking_tokens": 0
+     },
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     },
+     "service_tier": "standard",
+     "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+     },
+     "inference_geo": "",
+     "iterations": [],
+     "speed": "standard",
+     "fallback_credit": null
+    },
+    "modelUsage": {
+     "claude-sonnet-5-5": {
+      "inputTokens": 33,
+      "outputTokens": 525,
+      "cacheReadInputTokens": 54363,
+      "cacheCreationInputTokens": 6715,
+      "webSearchRequests": 0,
+      "costUSD": 0.027539800000000007,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 0,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+     }
+    },
+    "structured_output_present": true,
+    "structured_output": {
+     "candidates": [
+      {
+       "file": "src/auth/auth.service.ts",
+       "symbol": "AuthService.refreshToken",
+       "start_line": 1,
+       "end_line": 2,
+       "explanation": "mock diagnosis (no model was called)"
+      }
+     ]
+    },
+    "permission_denials": 2,
+    "stop_reason": "tool_use"
+   },
+   "model_in_request": "claude-sonnet-5-5",
+   "request_keys": [
+    "model",
+    "messages",
+    "system",
+    "tools",
+    "metadata",
+    "max_tokens",
+    "thinking",
+    "context_management",
+    "output_config",
+    "stream"
+   ],
+   "metadata_keys": [
+    "user_id"
+   ],
+   "init_extra": {
+    "apiKeySource": "ANTHROPIC_API_KEY",
+    "skills": [],
+    "slash_commands": [],
+    "agents": [
+     "claude",
+     "Explore",
+     "general-purpose",
+     "Plan",
+     "statusline-setup"
+    ],
+    "plugins": [
+     "swift-lsp",
+     "cc-plugin-agents-md",
+     "cc-plugin-privacy",
+     "cc-plugin-plugin-authoring"
+    ],
+    "permissionMode": "dontAsk"
+   },
+   "workspace_changes": {
+    "added": [],
+    "removed": [],
+    "changed": []
+   },
+   "stderr_tail": "",
+   "home_writes": {
+    "attributed": [
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json"
+    ],
+    "unattributed": 0,
+    "unattributed_paths": []
+   }
+  },
+  {
+   "profile": "bare",
+   "kind": "bm25",
+   "ok": true,
+   "requests": 12,
+   "paths": {
+    "POST /v1/messages": 12
+   },
+   "tools_offered": [
+    "Read",
+    "StructuredOutput",
+    "mcp__retrieval__search_code"
+   ],
+   "tool_schema_tokens": 551,
+   "tool_schema_tokens_by_tool": {
+    "Read": 277,
+    "StructuredOutput": 206,
+    "mcp__retrieval__search_code": 66
+   },
+   "system_prompt_tokens": 108,
+   "system_prompt_text": "x-anthropic-billing-header: cc_version=2.1.319.3d1; cc_entrypoint=sdk-cli;\nYou are a Claude agent, built on Anthropic's Claude Agent SDK.\nYou are a senior software engineer diagnosing a bug in the codebase in your current working directory. You can read and search files but you cannot run code, run tests, use git, or modify files. Investigate until you are confident, then give your diagnosis. Be efficient: do not read files you do not need.",
+   "mcp_tools": [
+    "mcp__retrieval__search_code"
+   ],
+   "mcp_expected": "mcp__retrieval__*",
+   "mcp_as_expected": true,
+   "mcp_status": [
+    {
+     "name": "retrieval",
+     "status": "connected",
+     "source": "dynamic"
+    }
+   ],
+   "init_check": {
+    "categories": [
+     "missing_tool",
+     "plugins"
+    ],
+    "details": [
+     "missing tool: Grep",
+     "missing tool: Glob",
+     "non-builtin plugins: swift-lsp"
+    ]
+   },
+   "outcome": {
+    "status": "submitted"
+   },
+   "mcp_connected": true,
+   "mcp_tool_schema_tokens": 68,
+   "denied_expected": [],
+   "denied_present": [],
+   "claude_md_hits": [],
+   "claude_md_files_considered": [
+    "/home/adityareddy/.claude/CLAUDE.md"
+   ],
+   "skill_hits": [],
+   "memory_hits": [],
+   "cwd_visible": {
+    "found": false,
+    "where": []
+   },
+   "banned_offered": [],
+   "exchanges": [
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "refresh"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Grep. Grep is not among the tools available here. Continue with the tools you have.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Glob",
+     "input": {
+      "pattern": "src/auth/*.ts"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Glob. Glob is not among the tools available here. Continue with the tools you have.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "mcp__retrieval__search_code",
+     "input": {
+      "query": "refresh token"
+     },
+     "result": "// src/auth/dto/refresh-response.dto.ts:7-8 RefreshResponseDto.refreshToken\n  @ApiProperty()\n  refreshToken: string;\n\n// src/auth/dto/refresh-response.dto.ts:4-5 RefreshResponseDto.token\n  @ApiPropert…",
+     "is_error": false
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "src/auth/auth.service.ts"
+     },
+     "result": "1\timport {\n2\t  HttpStatus,\n3\t  Injectable,\n4\t  NotFoundException,\n5\t  UnauthorizedException,\n6\t  UnprocessableEntityException,\n7\t} from '@nestjs/common';\n8\timport ms from 'ms';\n9\timport crypto from 'c…",
+     "is_error": false
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json"
+     },
+     "result": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting bl…",
+     "is_error": true
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "result": "/etc/hostname is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory wit…",
+     "is_error": true
+    },
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Grep. Grep is not among the tools available here. Continue with the tools you have.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "ls"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "WebFetch",
+     "input": {
+      "url": "https://example.com",
+      "prompt": "x"
+     },
+     "result": "<tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Agent",
+     "input": {
+      "description": "x",
+      "prompt": "x",
+      "subagent_type": "general-purpose"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Skill",
+     "input": {
+      "skill": "graphify"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    }
+   ],
+   "forbidden_read": {
+    "denied": true,
+    "is_error": true,
+    "text": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-dir, or to r…"
+   },
+   "outside_reads": [
+    {
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "denied": true,
+     "text": "/etc/hostname is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-dir, or to remove that setting."
+    },
+    {
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "denied": true,
+     "text": "<tool_use_error>Error: No such tool available: Grep. Grep is not among the tools available here. Continue with the tools you have.</tool_use_error>"
+    }
+   ],
+   "banned_attempts": {
+    "Bash": "[error] <tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "WebFetch": "[error] <tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Agent": "[error] <tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Skill": "[error] <tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>"
+   },
+   "result": {
+    "subtype": "success",
+    "is_error": false,
+    "num_turns": 13,
+    "duration_ms": 920,
+    "duration_api_ms": 275,
+    "total_cost_usd": 0.0353747,
+    "usage": {
+     "input_tokens": 36,
+     "cache_creation_input_tokens": 8892,
+     "cache_read_input_tokens": 73827,
+     "output_tokens": 569,
+     "output_tokens_details": {
+      "thinking_tokens": 0
+     },
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     },
+     "service_tier": "standard",
+     "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+     },
+     "inference_geo": "",
+     "iterations": [],
+     "speed": "standard",
+     "fallback_credit": null
+    },
+    "modelUsage": {
+     "claude-sonnet-5-5": {
+      "inputTokens": 36,
+      "outputTokens": 569,
+      "cacheReadInputTokens": 73827,
+      "cacheCreationInputTokens": 8892,
+      "webSearchRequests": 0,
+      "costUSD": 0.0353747,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 0,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+     }
+    },
+    "structured_output_present": true,
+    "structured_output": {
+     "candidates": [
+      {
+       "file": "src/auth/auth.service.ts",
+       "symbol": "AuthService.refreshToken",
+       "start_line": 1,
+       "end_line": 2,
+       "explanation": "mock diagnosis (no model was called)"
+      }
+     ]
+    },
+    "permission_denials": 2,
+    "stop_reason": "tool_use"
+   },
+   "model_in_request": "claude-sonnet-5-5",
+   "request_keys": [
+    "model",
+    "messages",
+    "system",
+    "tools",
+    "metadata",
+    "max_tokens",
+    "thinking",
+    "context_management",
+    "output_config",
+    "stream"
+   ],
+   "metadata_keys": [
+    "user_id"
+   ],
+   "init_extra": {
+    "apiKeySource": "ANTHROPIC_API_KEY",
+    "skills": [],
+    "slash_commands": [],
+    "agents": [
+     "claude",
+     "Explore",
+     "general-purpose",
+     "Plan",
+     "statusline-setup"
+    ],
+    "plugins": [
+     "swift-lsp",
+     "cc-plugin-agents-md",
+     "cc-plugin-privacy",
+     "cc-plugin-plugin-authoring"
+    ],
+    "permissionMode": "dontAsk"
+   },
+   "workspace_changes": {
+    "added": [],
+    "removed": [],
+    "changed": []
+   },
+   "stderr_tail": "",
+   "home_writes": {
+    "attributed": [
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json"
+    ],
+    "unattributed": 0,
+    "unattributed_paths": []
+   }
+  },
+  {
+   "profile": "bare",
+   "kind": "graphify",
+   "ok": true,
+   "requests": 13,
+   "paths": {
+    "POST /v1/messages": 13
+   },
+   "tools_offered": [
+    "Read",
+    "StructuredOutput",
+    "mcp__graphify__get_community",
+    "mcp__graphify__get_neighbors",
+    "mcp__graphify__get_node",
+    "mcp__graphify__god_nodes",
+    "mcp__graphify__graph_stats",
+    "mcp__graphify__query_graph",
+    "mcp__graphify__shortest_path"
+   ],
+   "tool_schema_tokens": 1428,
+   "tool_schema_tokens_by_tool": {
+    "Read": 277,
+    "StructuredOutput": 206,
+    "mcp__graphify__get_community": 116,
+    "mcp__graphify__get_neighbors": 132,
+    "mcp__graphify__get_node": 107,
+    "mcp__graphify__god_nodes": 124,
+    "mcp__graphify__graph_stats": 75,
+    "mcp__graphify__query_graph": 207,
+    "mcp__graphify__shortest_path": 182
+   },
+   "system_prompt_tokens": 108,
+   "system_prompt_text": "x-anthropic-billing-header: cc_version=2.1.319.3d1; cc_entrypoint=sdk-cli;\nYou are a Claude agent, built on Anthropic's Claude Agent SDK.\nYou are a senior software engineer diagnosing a bug in the codebase in your current working directory. You can read and search files but you cannot run code, run tests, use git, or modify files. Investigate until you are confident, then give your diagnosis. Be efficient: do not read files you do not need.",
+   "mcp_tools": [
+    "mcp__graphify__get_community",
+    "mcp__graphify__get_neighbors",
+    "mcp__graphify__get_node",
+    "mcp__graphify__god_nodes",
+    "mcp__graphify__graph_stats",
+    "mcp__graphify__query_graph",
+    "mcp__graphify__shortest_path"
+   ],
+   "mcp_expected": "mcp__graphify__*",
+   "mcp_as_expected": true,
+   "mcp_status": [
+    {
+     "name": "graphify",
+     "status": "connected",
+     "source": "dynamic"
+    }
+   ],
+   "init_check": {
+    "categories": [
+     "missing_tool",
+     "plugins"
+    ],
+    "details": [
+     "missing tool: Grep",
+     "missing tool: Glob",
+     "non-builtin plugins: swift-lsp"
+    ]
+   },
+   "outcome": {
+    "status": "submitted"
+   },
+   "mcp_connected": true,
+   "mcp_tool_schema_tokens": 945,
+   "denied_expected": [
+    "mcp__graphify__list_prs",
+    "mcp__graphify__get_pr_impact",
+    "mcp__graphify__triage_prs"
+   ],
+   "denied_present": [],
+   "claude_md_hits": [],
+   "claude_md_files_considered": [
+    "/home/adityareddy/.claude/CLAUDE.md"
+   ],
+   "skill_hits": [],
+   "memory_hits": [],
+   "cwd_visible": {
+    "found": false,
+    "where": []
+   },
+   "banned_offered": [],
+   "exchanges": [
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "refresh"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Grep. Grep is not among the tools available here. Continue with the tools you have.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Glob",
+     "input": {
+      "pattern": "src/auth/*.ts"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Glob. Glob is not among the tools available here. Continue with the tools you have.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "mcp__graphify__query_graph",
+     "input": {
+      "question": "refresh token"
+     },
+     "result": "Graph: /tmp/work/87ba94e5b0/idx/graphify-out/graph.json (1176 nodes) | Traversal: BFS depth=3 | Start: ['RefreshResponseDto', 'refresh-response.dto.ts', 'Tokens', '.refresh()'] | 312 nodes found\n\n[!] …",
+     "is_error": false
+    },
+    {
+     "tool": "mcp__graphify__list_prs",
+     "input": {},
+     "result": "<tool_use_error>Error: No such tool available: mcp__graphify__list_prs</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "src/auth/auth.service.ts"
+     },
+     "result": "1\timport {\n2\t  HttpStatus,\n3\t  Injectable,\n4\t  NotFoundException,\n5\t  UnauthorizedException,\n6\t  UnprocessableEntityException,\n7\t} from '@nestjs/common';\n8\timport ms from 'ms';\n9\timport crypto from 'c…",
+     "is_error": false
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json"
+     },
+     "result": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting bl…",
+     "is_error": true
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "result": "/etc/hostname is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory wit…",
+     "is_error": true
+    },
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Grep. Grep is not among the tools available here. Continue with the tools you have.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "ls"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "WebFetch",
+     "input": {
+      "url": "https://example.com",
+      "prompt": "x"
+     },
+     "result": "<tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Agent",
+     "input": {
+      "description": "x",
+      "prompt": "x",
+      "subagent_type": "general-purpose"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Skill",
+     "input": {
+      "skill": "graphify"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    }
+   ],
+   "forbidden_read": {
+    "denied": true,
+    "is_error": true,
+    "text": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-dir, or to r…"
+   },
+   "outside_reads": [
+    {
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "denied": true,
+     "text": "/etc/hostname is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-dir, or to remove that setting."
+    },
+    {
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "denied": true,
+     "text": "<tool_use_error>Error: No such tool available: Grep. Grep is not among the tools available here. Continue with the tools you have.</tool_use_error>"
+    }
+   ],
+   "banned_attempts": {
+    "Bash": "[error] <tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "WebFetch": "[error] <tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Agent": "[error] <tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Skill": "[error] <tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>"
+   },
+   "denied_attempt": "<tool_use_error>Error: No such tool available: mcp__graphify__list_prs</tool_use_error>",
+   "result": {
+    "subtype": "success",
+    "is_error": false,
+    "num_turns": 14,
+    "duration_ms": 500,
+    "duration_api_ms": 321,
+    "total_cost_usd": 0.036509,
+    "usage": {
+     "input_tokens": 39,
+     "cache_creation_input_tokens": 8686,
+     "cache_read_input_tokens": 86860,
+     "output_tokens": 603,
+     "output_tokens_details": {
+      "thinking_tokens": 0
+     },
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     },
+     "service_tier": "standard",
+     "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+     },
+     "inference_geo": "",
+     "iterations": [],
+     "speed": "standard",
+     "fallback_credit": null
+    },
+    "modelUsage": {
+     "claude-sonnet-5-5": {
+      "inputTokens": 39,
+      "outputTokens": 603,
+      "cacheReadInputTokens": 86860,
+      "cacheCreationInputTokens": 8686,
+      "webSearchRequests": 0,
+      "costUSD": 0.036509,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 0,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+     }
+    },
+    "structured_output_present": true,
+    "structured_output": {
+     "candidates": [
+      {
+       "file": "src/auth/auth.service.ts",
+       "symbol": "AuthService.refreshToken",
+       "start_line": 1,
+       "end_line": 2,
+       "explanation": "mock diagnosis (no model was called)"
+      }
+     ]
+    },
+    "permission_denials": 2,
+    "stop_reason": "tool_use"
+   },
+   "model_in_request": "claude-sonnet-5-5",
+   "request_keys": [
+    "model",
+    "messages",
+    "system",
+    "tools",
+    "metadata",
+    "max_tokens",
+    "thinking",
+    "context_management",
+    "output_config",
+    "stream"
+   ],
+   "metadata_keys": [
+    "user_id"
+   ],
+   "init_extra": {
+    "apiKeySource": "ANTHROPIC_API_KEY",
+    "skills": [],
+    "slash_commands": [],
+    "agents": [
+     "claude",
+     "Explore",
+     "general-purpose",
+     "Plan",
+     "statusline-setup"
+    ],
+    "plugins": [
+     "swift-lsp",
+     "cc-plugin-agents-md",
+     "cc-plugin-privacy",
+     "cc-plugin-plugin-authoring"
+    ],
+    "permissionMode": "dontAsk"
+   },
+   "workspace_changes": {
+    "added": [],
+    "removed": [],
+    "changed": []
+   },
+   "stderr_tail": "",
+   "home_writes": {
+    "attributed": [
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json"
+    ],
+    "unattributed": 0,
+    "unattributed_paths": []
+   }
+  },
+  {
+   "profile": "bare",
+   "kind": "crg",
+   "ok": true,
+   "requests": 13,
+   "paths": {
+    "POST /v1/messages": 13
+   },
+   "tools_offered": [
+    "Read",
+    "StructuredOutput",
+    "mcp__code-review-graph__detect_changes_tool",
+    "mcp__code-review-graph__find_large_functions_tool",
+    "mcp__code-review-graph__get_affected_flows_tool",
+    "mcp__code-review-graph__get_architecture_overview_tool",
+    "mcp__code-review-graph__get_bridge_nodes_tool",
+    "mcp__code-review-graph__get_community_tool",
+    "mcp__code-review-graph__get_docs_section_tool",
+    "mcp__code-review-graph__get_flow_tool",
+    "mcp__code-review-graph__get_hub_nodes_tool",
+    "mcp__code-review-graph__get_impact_radius_tool",
+    "mcp__code-review-graph__get_knowledge_gaps_tool",
+    "mcp__code-review-graph__get_minimal_context_tool",
+    "mcp__code-review-graph__get_review_context_tool",
+    "mcp__code-review-graph__get_suggested_questions_tool",
+    "mcp__code-review-graph__get_surprising_connections_tool",
+    "mcp__code-review-graph__get_wiki_page_tool",
+    "mcp__code-review-graph__list_communities_tool",
+    "mcp__code-review-graph__list_flows_tool",
+    "mcp__code-review-graph__list_graph_stats_tool",
+    "mcp__code-review-graph__query_graph_tool",
+    "mcp__code-review-graph__refactor_tool",
+    "mcp__code-review-graph__semantic_search_nodes_tool",
+    "mcp__code-review-graph__traverse_graph_tool"
+   ],
+   "tool_schema_tokens": 5299,
+   "tool_schema_tokens_by_tool": {
+    "Read": 277,
+    "StructuredOutput": 206,
+    "mcp__code-review-graph__detect_changes_tool": 333,
+    "mcp__code-review-graph__find_large_functions_tool": 197,
+    "mcp__code-review-graph__get_affected_flows_tool": 261,
+    "mcp__code-review-graph__get_architecture_overview_tool": 208,
+    "mcp__code-review-graph__get_bridge_nodes_tool": 151,
+    "mcp__code-review-graph__get_community_tool": 211,
+    "mcp__code-review-graph__get_docs_section_tool": 113,
+    "mcp__code-review-graph__get_flow_tool": 233,
+    "mcp__code-review-graph__get_hub_nodes_tool": 154,
+    "mcp__code-review-graph__get_impact_radius_tool": 320,
+    "mcp__code-review-graph__get_knowledge_gaps_tool": 153,
+    "mcp__code-review-graph__get_minimal_context_tool": 185,
+    "mcp__code-review-graph__get_review_context_tool": 335,
+    "mcp__code-review-graph__get_suggested_questions_tool": 77,
+    "mcp__code-review-graph__get_surprising_connections_tool": 149,
+    "mcp__code-review-graph__get_wiki_page_tool": 135,
+    "mcp__code-review-graph__list_communities_tool": 241,
+    "mcp__code-review-graph__list_flows_tool": 217,
+    "mcp__code-review-graph__list_graph_stats_tool": 75,
+    "mcp__code-review-graph__query_graph_tool": 220,
+    "mcp__code-review-graph__refactor_tool": 323,
+    "mcp__code-review-graph__semantic_search_nodes_tool": 328,
+    "mcp__code-review-graph__traverse_graph_tool": 195
+   },
+   "system_prompt_tokens": 108,
+   "system_prompt_text": "x-anthropic-billing-header: cc_version=2.1.319.3d1; cc_entrypoint=sdk-cli;\nYou are a Claude agent, built on Anthropic's Claude Agent SDK.\nYou are a senior software engineer diagnosing a bug in the codebase in your current working directory. You can read and search files but you cannot run code, run tests, use git, or modify files. Investigate until you are confident, then give your diagnosis. Be efficient: do not read files you do not need.",
+   "mcp_tools": [
+    "mcp__code-review-graph__detect_changes_tool",
+    "mcp__code-review-graph__find_large_functions_tool",
+    "mcp__code-review-graph__get_affected_flows_tool",
+    "mcp__code-review-graph__get_architecture_overview_tool",
+    "mcp__code-review-graph__get_bridge_nodes_tool",
+    "mcp__code-review-graph__get_community_tool",
+    "mcp__code-review-graph__get_docs_section_tool",
+    "mcp__code-review-graph__get_flow_tool",
+    "mcp__code-review-graph__get_hub_nodes_tool",
+    "mcp__code-review-graph__get_impact_radius_tool",
+    "mcp__code-review-graph__get_knowledge_gaps_tool",
+    "mcp__code-review-graph__get_minimal_context_tool",
+    "mcp__code-review-graph__get_review_context_tool",
+    "mcp__code-review-graph__get_suggested_questions_tool",
+    "mcp__code-review-graph__get_surprising_connections_tool",
+    "mcp__code-review-graph__get_wiki_page_tool",
+    "mcp__code-review-graph__list_communities_tool",
+    "mcp__code-review-graph__list_flows_tool",
+    "mcp__code-review-graph__list_graph_stats_tool",
+    "mcp__code-review-graph__query_graph_tool",
+    "mcp__code-review-graph__refactor_tool",
+    "mcp__code-review-graph__semantic_search_nodes_tool",
+    "mcp__code-review-graph__traverse_graph_tool"
+   ],
+   "mcp_expected": "mcp__code-review-graph__*",
+   "mcp_as_expected": true,
+   "mcp_status": [
+    {
+     "name": "code-review-graph",
+     "status": "connected",
+     "source": "dynamic"
+    }
+   ],
+   "init_check": {
+    "categories": [
+     "missing_tool",
+     "plugins"
+    ],
+    "details": [
+     "missing tool: Grep",
+     "missing tool: Glob",
+     "non-builtin plugins: swift-lsp"
+    ]
+   },
+   "outcome": {
+    "status": "submitted"
+   },
+   "mcp_connected": true,
+   "mcp_tool_schema_tokens": 4816,
+   "denied_expected": [
+    "mcp__code-review-graph__apply_refactor_tool",
+    "mcp__code-review-graph__generate_wiki_tool",
+    "mcp__code-review-graph__build_or_update_graph_tool",
+    "mcp__code-review-graph__embed_graph_tool",
+    "mcp__code-review-graph__run_postprocess_tool",
+    "mcp__code-review-graph__cross_repo_search_tool",
+    "mcp__code-review-graph__list_repos_tool"
+   ],
+   "denied_present": [],
+   "claude_md_hits": [],
+   "claude_md_files_considered": [
+    "/home/adityareddy/.claude/CLAUDE.md"
+   ],
+   "skill_hits": [],
+   "memory_hits": [],
+   "cwd_visible": {
+    "found": false,
+    "where": []
+   },
+   "banned_offered": [],
+   "exchanges": [
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "refresh"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Grep. Grep is not among the tools available here. Continue with the tools you have.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Glob",
+     "input": {
+      "pattern": "src/auth/*.ts"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Glob. Glob is not among the tools available here. Continue with the tools you have.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "mcp__code-review-graph__find_large_functions_tool",
+     "input": {
+      "min_lines": 0,
+      "kind": "refresh token",
+      "file_path_pattern": "refresh token",
+      "limit": 0,
+      "repo_root": "refresh token"
+     },
+     "result": "Error calling tool 'find_large_functions_tool': repo_root is not an existing directory: /tmp/work/87ba94e5b0/app/refresh token",
+     "is_error": true
+    },
+    {
+     "tool": "mcp__code-review-graph__apply_refactor_tool",
+     "input": {},
+     "result": "<tool_use_error>Error: No such tool available: mcp__code-review-graph__apply_refactor_tool</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "src/auth/auth.service.ts"
+     },
+     "result": "1\timport {\n2\t  HttpStatus,\n3\t  Injectable,\n4\t  NotFoundException,\n5\t  UnauthorizedException,\n6\t  UnprocessableEntityException,\n7\t} from '@nestjs/common';\n8\timport ms from 'ms';\n9\timport crypto from 'c…",
+     "is_error": false
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json"
+     },
+     "result": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting bl…",
+     "is_error": true
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "result": "/etc/hostname is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory wit…",
+     "is_error": true
+    },
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Grep. Grep is not among the tools available here. Continue with the tools you have.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "ls"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "WebFetch",
+     "input": {
+      "url": "https://example.com",
+      "prompt": "x"
+     },
+     "result": "<tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Agent",
+     "input": {
+      "description": "x",
+      "prompt": "x",
+      "subagent_type": "general-purpose"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Skill",
+     "input": {
+      "skill": "graphify"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    }
+   ],
+   "forbidden_read": {
+    "denied": true,
+    "is_error": true,
+    "text": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-dir, or to r…"
+   },
+   "outside_reads": [
+    {
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "denied": true,
+     "text": "/etc/hostname is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-dir, or to remove that setting."
+    },
+    {
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "denied": true,
+     "text": "<tool_use_error>Error: No such tool available: Grep. Grep is not among the tools available here. Continue with the tools you have.</tool_use_error>"
+    }
+   ],
+   "banned_attempts": {
+    "Bash": "[error] <tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "WebFetch": "[error] <tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Agent": "[error] <tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Skill": "[error] <tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>"
+   },
+   "denied_attempt": "<tool_use_error>Error: No such tool available: mcp__code-review-graph__apply_refactor_tool</tool_use_error>",
+   "result": {
+    "subtype": "success",
+    "is_error": false,
+    "num_turns": 14,
+    "duration_ms": 576,
+    "duration_api_ms": 396,
+    "total_cost_usd": 0.0356871,
+    "usage": {
+     "input_tokens": 39,
+     "cache_creation_input_tokens": 6869,
+     "cache_read_input_tokens": 121266,
+     "output_tokens": 631,
+     "output_tokens_details": {
+      "thinking_tokens": 0
+     },
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     },
+     "service_tier": "standard",
+     "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+     },
+     "inference_geo": "",
+     "iterations": [],
+     "speed": "standard",
+     "fallback_credit": null
+    },
+    "modelUsage": {
+     "claude-sonnet-5-5": {
+      "inputTokens": 39,
+      "outputTokens": 631,
+      "cacheReadInputTokens": 121266,
+      "cacheCreationInputTokens": 6869,
+      "webSearchRequests": 0,
+      "costUSD": 0.0356871,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 0,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+     }
+    },
+    "structured_output_present": true,
+    "structured_output": {
+     "candidates": [
+      {
+       "file": "src/auth/auth.service.ts",
+       "symbol": "AuthService.refreshToken",
+       "start_line": 1,
+       "end_line": 2,
+       "explanation": "mock diagnosis (no model was called)"
+      }
+     ]
+    },
+    "permission_denials": 2,
+    "stop_reason": "tool_use"
+   },
+   "model_in_request": "claude-sonnet-5-5",
+   "request_keys": [
+    "model",
+    "messages",
+    "system",
+    "tools",
+    "metadata",
+    "max_tokens",
+    "thinking",
+    "context_management",
+    "output_config",
+    "stream"
+   ],
+   "metadata_keys": [
+    "user_id"
+   ],
+   "init_extra": {
+    "apiKeySource": "ANTHROPIC_API_KEY",
+    "skills": [],
+    "slash_commands": [
+     "mcp__code-review-graph__review_changes",
+     "mcp__code-review-graph__architecture_map",
+     "mcp__code-review-graph__debug_issue",
+     "mcp__code-review-graph__onboard_developer",
+     "mcp__code-review-graph__pre_merge_check"
+    ],
+    "agents": [
+     "claude",
+     "Explore",
+     "general-purpose",
+     "Plan",
+     "statusline-setup"
+    ],
+    "plugins": [
+     "swift-lsp",
+     "cc-plugin-agents-md",
+     "cc-plugin-privacy",
+     "cc-plugin-plugin-authoring"
+    ],
+    "permissionMode": "dontAsk"
+   },
+   "workspace_changes": {
+    "added": [],
+    "removed": [],
+    "changed": []
+   },
+   "stderr_tail": "",
+   "home_writes": {
+    "attributed": [
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json"
+    ],
+    "unattributed": 0,
+    "unattributed_paths": []
+   }
+  },
+  {
+   "profile": "bare",
+   "kind": "max-turns(2)",
+   "ok": true,
+   "requests": 2,
+   "paths": {
+    "POST /v1/messages": 2
+   },
+   "tools_offered": [
+    "Read",
+    "StructuredOutput"
+   ],
+   "tool_schema_tokens": 485,
+   "tool_schema_tokens_by_tool": {
+    "Read": 277,
+    "StructuredOutput": 206
+   },
+   "system_prompt_tokens": 108,
+   "system_prompt_text": "x-anthropic-billing-header: cc_version=2.1.319.3d1; cc_entrypoint=sdk-cli;\nYou are a Claude agent, built on Anthropic's Claude Agent SDK.\nYou are a senior software engineer diagnosing a bug in the codebase in your current working directory. You can read and search files but you cannot run code, run tests, use git, or modify files. Investigate until you are confident, then give your diagnosis. Be efficient: do not read files you do not need.",
+   "mcp_tools": [],
+   "mcp_as_expected": true,
+   "mcp_status": [],
+   "init_check": {
+    "categories": [
+     "missing_tool",
+     "plugins"
+    ],
+    "details": [
+     "missing tool: Grep",
+     "missing tool: Glob",
+     "non-builtin plugins: swift-lsp"
+    ]
+   },
+   "outcome": {
+    "status": "max_turns"
+   },
+   "mcp_connected": null,
+   "mcp_tool_schema_tokens": 1,
+   "denied_expected": [],
+   "denied_present": [],
+   "claude_md_hits": [],
+   "claude_md_files_considered": [
+    "/home/adityareddy/.claude/CLAUDE.md"
+   ],
+   "skill_hits": [],
+   "memory_hits": [],
+   "cwd_visible": {
+    "found": false,
+    "where": []
+   },
+   "banned_offered": [],
+   "exchanges": [
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "refresh"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Grep. Grep is not among the tools available here. Continue with the tools you have.</tool_use_error>",
+     "is_error": true
+    }
+   ],
+   "forbidden_read": {
+    "denied": false,
+    "text": "(no exchange recorded)"
+   },
+   "outside_reads": [],
+   "banned_attempts": {},
+   "result": {
+    "subtype": "error_max_turns",
+    "is_error": true,
+    "num_turns": 3,
+    "duration_ms": 123,
+    "duration_api_ms": 60,
+    "total_cost_usd": 0.0011832,
+    "usage": {
+     "input_tokens": 6,
+     "cache_creation_input_tokens": 105,
+     "cache_read_input_tokens": 1387,
+     "output_tokens": 77,
+     "output_tokens_details": {
+      "thinking_tokens": 0
+     },
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     },
+     "service_tier": "standard",
+     "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+     },
+     "inference_geo": "",
+     "iterations": [],
+     "speed": "standard",
+     "fallback_credit": null
+    },
+    "modelUsage": {
+     "claude-sonnet-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 77,
+      "cacheReadInputTokens": 1387,
+      "cacheCreationInputTokens": 105,
+      "webSearchRequests": 0,
+      "costUSD": 0.0011832,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 0,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+     }
+    },
+    "structured_output_present": false,
+    "permission_denials": 0,
+    "stop_reason": "tool_use",
+    "errors": [
+     "Reached maximum number of turns (2)"
+    ]
+   },
+   "model_in_request": "claude-sonnet-5-5",
+   "request_keys": [
+    "model",
+    "messages",
+    "system",
+    "tools",
+    "metadata",
+    "max_tokens",
+    "thinking",
+    "context_management",
+    "output_config",
+    "stream"
+   ],
+   "metadata_keys": [
+    "user_id"
+   ],
+   "init_extra": {
+    "apiKeySource": "ANTHROPIC_API_KEY",
+    "skills": [],
+    "slash_commands": [],
+    "agents": [
+     "claude",
+     "Explore",
+     "general-purpose",
+     "Plan",
+     "statusline-setup"
+    ],
+    "plugins": [
+     "swift-lsp",
+     "cc-plugin-agents-md",
+     "cc-plugin-privacy",
+     "cc-plugin-plugin-authoring"
+    ],
+    "permissionMode": "dontAsk"
+   },
+   "workspace_changes": {
+    "added": [],
+    "removed": [],
+    "changed": []
+   },
+   "stderr_tail": "",
+   "home_writes": {
+    "attributed": [],
+    "unattributed": 1,
+    "unattributed_paths": [
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json"
+    ]
+   }
+  },
+  {
+   "profile": "bare",
+   "kind": "single-shot",
+   "ok": true,
+   "requests": 1,
+   "paths": {
+    "POST /v1/messages": 1
+   },
+   "tools_offered": [
+    "StructuredOutput"
+   ],
+   "tool_schema_tokens": 208,
+   "tool_schema_tokens_by_tool": {
+    "StructuredOutput": 206
+   },
+   "system_prompt_tokens": 65,
+   "system_prompt_text": "x-anthropic-billing-header: cc_version=2.1.319.7fd; cc_entrypoint=sdk-cli;\nYou are a Claude agent, built on Anthropic's Claude Agent SDK.\nYou are a senior software engineer diagnosing a bug from a bug report and the material provided. Answer with JSON only.",
+   "mcp_tools": [],
+   "mcp_as_expected": true,
+   "mcp_status": [],
+   "outcome": {
+    "status": "submitted"
+   },
+   "mcp_connected": null,
+   "mcp_tool_schema_tokens": 1,
+   "denied_expected": [],
+   "denied_present": [],
+   "claude_md_hits": [],
+   "claude_md_files_considered": [
+    "/home/adityareddy/.claude/CLAUDE.md"
+   ],
+   "skill_hits": [],
+   "memory_hits": [],
+   "cwd_visible": {
+    "found": false,
+    "where": []
+   },
+   "banned_offered": [],
+   "exchanges": [],
+   "forbidden_read": {
+    "denied": false,
+    "text": "(no exchange recorded)"
+   },
+   "outside_reads": [],
+   "banned_attempts": {},
+   "result": {
+    "subtype": "success",
+    "is_error": false,
+    "num_turns": 2,
+    "duration_ms": 53,
+    "duration_api_ms": 23,
+    "total_cost_usd": 0.0008557000000000001,
+    "usage": {
+     "input_tokens": 3,
+     "cache_creation_input_tokens": 18,
+     "cache_read_input_tokens": 347,
+     "output_tokens": 77,
+     "output_tokens_details": {
+      "thinking_tokens": 0
+     },
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     },
+     "service_tier": "standard",
+     "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+     },
+     "inference_geo": "",
+     "iterations": [],
+     "speed": "standard",
+     "fallback_credit": null
+    },
+    "modelUsage": {
+     "claude-sonnet-5-5": {
+      "inputTokens": 3,
+      "outputTokens": 77,
+      "cacheReadInputTokens": 347,
+      "cacheCreationInputTokens": 18,
+      "webSearchRequests": 0,
+      "costUSD": 0.0008557000000000001,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 0,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+     }
+    },
+    "structured_output_present": true,
+    "structured_output": {
+     "candidates": [
+      {
+       "file": "src/auth/auth.service.ts",
+       "symbol": "AuthService.refreshToken",
+       "start_line": 1,
+       "end_line": 2,
+       "explanation": "mock diagnosis (no model was called)"
+      }
+     ]
+    },
+    "permission_denials": 0,
+    "stop_reason": "tool_use"
+   },
+   "model_in_request": "claude-sonnet-5-5",
+   "request_keys": [
+    "model",
+    "messages",
+    "system",
+    "tools",
+    "metadata",
+    "max_tokens",
+    "thinking",
+    "context_management",
+    "output_config",
+    "stream"
+   ],
+   "metadata_keys": [
+    "user_id"
+   ],
+   "init_extra": {
+    "apiKeySource": "ANTHROPIC_API_KEY",
+    "skills": [],
+    "slash_commands": [],
+    "agents": [
+     "claude",
+     "Explore",
+     "general-purpose",
+     "Plan",
+     "statusline-setup"
+    ],
+    "plugins": [
+     "swift-lsp",
+     "cc-plugin-agents-md",
+     "cc-plugin-privacy",
+     "cc-plugin-plugin-authoring"
+    ],
+    "permissionMode": "dontAsk"
+   },
+   "workspace_changes": {
+    "added": [],
+    "removed": [],
+    "changed": []
+   },
+   "stderr_tail": "",
+   "home_writes": {
+    "attributed": [],
+    "unattributed": 1,
+    "unattributed_paths": [
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json"
+    ]
+   }
+  },
+  {
+   "profile": "restricted-oauth",
+   "kind": "baseline",
+   "ok": true,
+   "requests": 11,
+   "paths": {
+    "POST /v1/messages": 11
+   },
+   "tools_offered": [
+    "Glob",
+    "Grep",
+    "Read",
+    "DeferredToolPlaceholder",
+    "StructuredOutput"
+   ],
+   "tool_schema_tokens": 1672,
+   "tool_schema_tokens_by_tool": {
+    "Glob": 157,
+    "Grep": 776,
+    "Read": 466,
+    "DeferredToolPlaceholder": 41,
+    "StructuredOutput": 231
+   },
+   "system_prompt_tokens": 108,
+   "system_prompt_text": "x-anthropic-billing-header: cc_version=2.1.319.3d1; cc_entrypoint=sdk-cli;\nYou are a Claude agent, built on Anthropic's Claude Agent SDK.\nYou are a senior software engineer diagnosing a bug in the codebase in your current working directory. You can read and search files but you cannot run code, run tests, use git, or modify files. Investigate until you are confident, then give your diagnosis. Be efficient: do not read files you do not need.",
+   "mcp_tools": [],
+   "mcp_as_expected": true,
+   "mcp_status": [],
+   "init_check": {
+    "categories": [],
+    "details": []
+   },
+   "outcome": {
+    "status": "submitted"
+   },
+   "mcp_connected": null,
+   "mcp_tool_schema_tokens": 1,
+   "denied_expected": [],
+   "denied_present": [],
+   "claude_md_hits": [],
+   "claude_md_files_considered": [
+    "/home/adityareddy/.claude/CLAUDE.md"
+   ],
+   "skill_hits": [],
+   "memory_hits": [],
+   "cwd_visible": {
+    "found": true,
+    "where": [
+     "messages[1:system]"
+    ]
+   },
+   "banned_offered": [],
+   "exchanges": [
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "refresh"
+     },
+     "result": "Found 10 files\nsrc/auth/auth.controller.ts\nsrc/auth/auth.module.ts\nsrc/auth/auth.service.ts\nsrc/auth/config/auth-config.type.ts\nsrc/auth/config/auth.config.ts\nsrc/auth/dto/login-response.dto.ts\nsrc/au…",
+     "is_error": false
+    },
+    {
+     "tool": "Glob",
+     "input": {
+      "pattern": "src/auth/*.ts"
+     },
+     "result": "src/auth/auth.service.ts\nsrc/auth/auth-providers.enum.ts\nsrc/auth/auth.module.ts\nsrc/auth/auth.controller.ts",
+     "is_error": false
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "src/auth/auth.service.ts"
+     },
+     "result": "1\timport {\n2\t  HttpStatus,\n3\t  Injectable,\n4\t  NotFoundException,\n5\t  UnauthorizedException,\n6\t  UnprocessableEntityException,\n7\t} from '@nestjs/common';\n8\timport ms from 'ms';\n9\timport crypto from 'c…",
+     "is_error": false
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json"
+     },
+     "result": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory.",
+     "is_error": true
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "result": "/etc/hostname is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory.",
+     "is_error": true
+    },
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "result": "/etc is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory.",
+     "is_error": true
+    },
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "ls"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "WebFetch",
+     "input": {
+      "url": "https://example.com",
+      "prompt": "x"
+     },
+     "result": "<tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Agent",
+     "input": {
+      "description": "x",
+      "prompt": "x",
+      "subagent_type": "general-purpose"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Skill",
+     "input": {
+      "skill": "graphify"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    }
+   ],
+   "forbidden_read": {
+    "denied": true,
+    "is_error": true,
+    "text": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory."
+   },
+   "outside_reads": [
+    {
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "denied": true,
+     "text": "/etc/hostname is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory."
+    },
+    {
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "denied": true,
+     "text": "/etc is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory."
+    }
+   ],
+   "banned_attempts": {
+    "Bash": "[error] <tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "WebFetch": "[error] <tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Agent": "[error] <tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Skill": "[error] <tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>"
+   },
+   "result": {
+    "subtype": "success",
+    "is_error": false,
+    "num_turns": 12,
+    "duration_ms": 392,
+    "duration_api_ms": 266,
+    "total_cost_usd": 0.029427599999999998,
+    "usage": {
+     "input_tokens": 33,
+     "cache_creation_input_tokens": 6864,
+     "cache_read_input_tokens": 69916,
+     "output_tokens": 521,
+     "output_tokens_details": {
+      "thinking_tokens": 0
+     },
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     },
+     "service_tier": "standard",
+     "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+     },
+     "inference_geo": "",
+     "iterations": [],
+     "speed": "standard",
+     "fallback_credit": null
+    },
+    "modelUsage": {
+     "claude-sonnet-5-5": {
+      "inputTokens": 33,
+      "outputTokens": 521,
+      "cacheReadInputTokens": 69916,
+      "cacheCreationInputTokens": 6864,
+      "webSearchRequests": 0,
+      "costUSD": 0.029427599999999998,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 0,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+     }
+    },
+    "structured_output_present": true,
+    "structured_output": {
+     "candidates": [
+      {
+       "file": "src/auth/auth.service.ts",
+       "symbol": "AuthService.refreshToken",
+       "start_line": 1,
+       "end_line": 2,
+       "explanation": "mock diagnosis (no model was called)"
+      }
+     ]
+    },
+    "permission_denials": 3,
+    "stop_reason": "tool_use"
+   },
+   "model_in_request": "claude-sonnet-5-5",
+   "request_keys": [
+    "model",
+    "messages",
+    "system",
+    "tools",
+    "metadata",
+    "max_tokens",
+    "thinking",
+    "context_management",
+    "output_config",
+    "stream"
+   ],
+   "metadata_keys": [
+    "user_id"
+   ],
+   "init_extra": {
+    "apiKeySource": "ANTHROPIC_API_KEY",
+    "skills": [],
+    "slash_commands": [],
+    "agents": [
+     "claude",
+     "Explore",
+     "general-purpose",
+     "Plan",
+     "statusline-setup"
+    ],
+    "plugins": [
+     "cc-plugin-agents-md",
+     "cc-plugin-privacy",
+     "cc-plugin-plugin-authoring"
+    ],
+    "permissionMode": "dontAsk"
+   },
+   "workspace_changes": {
+    "added": [],
+    "removed": [],
+    "changed": []
+   },
+   "stderr_tail": "",
+   "home_writes": {
+    "attributed": [],
+    "unattributed": 1,
+    "unattributed_paths": [
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json"
+    ]
+   }
+  },
+  {
+   "profile": "restricted-oauth",
+   "kind": "bm25",
+   "ok": true,
+   "requests": 12,
+   "paths": {
+    "POST /v1/messages": 12
+   },
+   "tools_offered": [
+    "Glob",
+    "Grep",
+    "Read",
+    "StructuredOutput",
+    "DeferredToolPlaceholder",
+    "mcp__retrieval__search_code"
+   ],
+   "tool_schema_tokens": 1738,
+   "tool_schema_tokens_by_tool": {
+    "Glob": 157,
+    "Grep": 776,
+    "Read": 466,
+    "StructuredOutput": 231,
+    "DeferredToolPlaceholder": 41,
+    "mcp__retrieval__search_code": 66
+   },
+   "system_prompt_tokens": 108,
+   "system_prompt_text": "x-anthropic-billing-header: cc_version=2.1.319.3d1; cc_entrypoint=sdk-cli;\nYou are a Claude agent, built on Anthropic's Claude Agent SDK.\nYou are a senior software engineer diagnosing a bug in the codebase in your current working directory. You can read and search files but you cannot run code, run tests, use git, or modify files. Investigate until you are confident, then give your diagnosis. Be efficient: do not read files you do not need.",
+   "mcp_tools": [
+    "mcp__retrieval__search_code"
+   ],
+   "mcp_expected": "mcp__retrieval__*",
+   "mcp_as_expected": true,
+   "mcp_status": [
+    {
+     "name": "retrieval",
+     "status": "connected",
+     "source": "dynamic"
+    }
+   ],
+   "init_check": {
+    "categories": [],
+    "details": []
+   },
+   "outcome": {
+    "status": "submitted"
+   },
+   "mcp_connected": true,
+   "mcp_tool_schema_tokens": 68,
+   "denied_expected": [],
+   "denied_present": [],
+   "claude_md_hits": [],
+   "claude_md_files_considered": [
+    "/home/adityareddy/.claude/CLAUDE.md"
+   ],
+   "skill_hits": [],
+   "memory_hits": [],
+   "cwd_visible": {
+    "found": true,
+    "where": [
+     "messages[1:system]"
+    ]
+   },
+   "banned_offered": [],
+   "exchanges": [
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "refresh"
+     },
+     "result": "Found 10 files\nsrc/auth/auth.controller.ts\nsrc/auth/auth.module.ts\nsrc/auth/auth.service.ts\nsrc/auth/config/auth-config.type.ts\nsrc/auth/config/auth.config.ts\nsrc/auth/dto/login-response.dto.ts\nsrc/au…",
+     "is_error": false
+    },
+    {
+     "tool": "Glob",
+     "input": {
+      "pattern": "src/auth/*.ts"
+     },
+     "result": "src/auth/auth.service.ts\nsrc/auth/auth-providers.enum.ts\nsrc/auth/auth.module.ts\nsrc/auth/auth.controller.ts",
+     "is_error": false
+    },
+    {
+     "tool": "mcp__retrieval__search_code",
+     "input": {
+      "query": "refresh token"
+     },
+     "result": "// src/auth/dto/refresh-response.dto.ts:7-8 RefreshResponseDto.refreshToken\n  @ApiProperty()\n  refreshToken: string;\n\n// src/auth/dto/refresh-response.dto.ts:4-5 RefreshResponseDto.token\n  @ApiPropert…",
+     "is_error": false
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "src/auth/auth.service.ts"
+     },
+     "result": "1\timport {\n2\t  HttpStatus,\n3\t  Injectable,\n4\t  NotFoundException,\n5\t  UnauthorizedException,\n6\t  UnprocessableEntityException,\n7\t} from '@nestjs/common';\n8\timport ms from 'ms';\n9\timport crypto from 'c…",
+     "is_error": false
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json"
+     },
+     "result": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory.",
+     "is_error": true
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "result": "/etc/hostname is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory.",
+     "is_error": true
+    },
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "result": "/etc is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory.",
+     "is_error": true
+    },
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "ls"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "WebFetch",
+     "input": {
+      "url": "https://example.com",
+      "prompt": "x"
+     },
+     "result": "<tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Agent",
+     "input": {
+      "description": "x",
+      "prompt": "x",
+      "subagent_type": "general-purpose"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Skill",
+     "input": {
+      "skill": "graphify"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    }
+   ],
+   "forbidden_read": {
+    "denied": true,
+    "is_error": true,
+    "text": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory."
+   },
+   "outside_reads": [
+    {
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "denied": true,
+     "text": "/etc/hostname is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory."
+    },
+    {
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "denied": true,
+     "text": "/etc is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory."
+    }
+   ],
+   "banned_attempts": {
+    "Bash": "[error] <tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "WebFetch": "[error] <tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Agent": "[error] <tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Skill": "[error] <tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>"
+   },
+   "result": {
+    "subtype": "success",
+    "is_error": false,
+    "num_turns": 13,
+    "duration_ms": 1314,
+    "duration_api_ms": 339,
+    "total_cost_usd": 0.0372377,
+    "usage": {
+     "input_tokens": 36,
+     "cache_creation_input_tokens": 9015,
+     "cache_read_input_tokens": 90882,
+     "output_tokens": 554,
+     "output_tokens_details": {
+      "thinking_tokens": 0
+     },
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     },
+     "service_tier": "standard",
+     "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+     },
+     "inference_geo": "",
+     "iterations": [],
+     "speed": "standard",
+     "fallback_credit": null
+    },
+    "modelUsage": {
+     "claude-sonnet-5-5": {
+      "inputTokens": 36,
+      "outputTokens": 554,
+      "cacheReadInputTokens": 90882,
+      "cacheCreationInputTokens": 9015,
+      "webSearchRequests": 0,
+      "costUSD": 0.0372377,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 0,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+     }
+    },
+    "structured_output_present": true,
+    "structured_output": {
+     "candidates": [
+      {
+       "file": "src/auth/auth.service.ts",
+       "symbol": "AuthService.refreshToken",
+       "start_line": 1,
+       "end_line": 2,
+       "explanation": "mock diagnosis (no model was called)"
+      }
+     ]
+    },
+    "permission_denials": 3,
+    "stop_reason": "tool_use"
+   },
+   "model_in_request": "claude-sonnet-5-5",
+   "request_keys": [
+    "model",
+    "messages",
+    "system",
+    "tools",
+    "metadata",
+    "max_tokens",
+    "thinking",
+    "context_management",
+    "output_config",
+    "stream"
+   ],
+   "metadata_keys": [
+    "user_id"
+   ],
+   "init_extra": {
+    "apiKeySource": "ANTHROPIC_API_KEY",
+    "skills": [],
+    "slash_commands": [],
+    "agents": [
+     "claude",
+     "Explore",
+     "general-purpose",
+     "Plan",
+     "statusline-setup"
+    ],
+    "plugins": [
+     "cc-plugin-agents-md",
+     "cc-plugin-privacy",
+     "cc-plugin-plugin-authoring"
+    ],
+    "permissionMode": "dontAsk"
+   },
+   "workspace_changes": {
+    "added": [],
+    "removed": [],
+    "changed": []
+   },
+   "stderr_tail": "",
+   "home_writes": {
+    "attributed": [],
+    "unattributed": 1,
+    "unattributed_paths": [
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json"
+    ]
+   }
+  },
+  {
+   "profile": "restricted-oauth",
+   "kind": "graphify",
+   "ok": true,
+   "requests": 13,
+   "paths": {
+    "POST /v1/messages": 13
+   },
+   "tools_offered": [
+    "Glob",
+    "Grep",
+    "Read",
+    "StructuredOutput",
+    "mcp__graphify__get_community",
+    "mcp__graphify__get_neighbors",
+    "mcp__graphify__get_node",
+    "mcp__graphify__god_nodes",
+    "mcp__graphify__graph_stats",
+    "mcp__graphify__query_graph",
+    "DeferredToolPlaceholder",
+    "mcp__graphify__shortest_path"
+   ],
+   "tool_schema_tokens": 2615,
+   "tool_schema_tokens_by_tool": {
+    "Glob": 157,
+    "Grep": 776,
+    "Read": 466,
+    "StructuredOutput": 231,
+    "mcp__graphify__get_community": 116,
+    "mcp__graphify__get_neighbors": 132,
+    "mcp__graphify__get_node": 107,
+    "mcp__graphify__god_nodes": 124,
+    "mcp__graphify__graph_stats": 75,
+    "mcp__graphify__query_graph": 207,
+    "DeferredToolPlaceholder": 41,
+    "mcp__graphify__shortest_path": 182
+   },
+   "system_prompt_tokens": 108,
+   "system_prompt_text": "x-anthropic-billing-header: cc_version=2.1.319.3d1; cc_entrypoint=sdk-cli;\nYou are a Claude agent, built on Anthropic's Claude Agent SDK.\nYou are a senior software engineer diagnosing a bug in the codebase in your current working directory. You can read and search files but you cannot run code, run tests, use git, or modify files. Investigate until you are confident, then give your diagnosis. Be efficient: do not read files you do not need.",
+   "mcp_tools": [
+    "mcp__graphify__get_community",
+    "mcp__graphify__get_neighbors",
+    "mcp__graphify__get_node",
+    "mcp__graphify__god_nodes",
+    "mcp__graphify__graph_stats",
+    "mcp__graphify__query_graph",
+    "mcp__graphify__shortest_path"
+   ],
+   "mcp_expected": "mcp__graphify__*",
+   "mcp_as_expected": true,
+   "mcp_status": [
+    {
+     "name": "graphify",
+     "status": "connected",
+     "source": "dynamic"
+    }
+   ],
+   "init_check": {
+    "categories": [],
+    "details": []
+   },
+   "outcome": {
+    "status": "submitted"
+   },
+   "mcp_connected": true,
+   "mcp_tool_schema_tokens": 945,
+   "denied_expected": [
+    "mcp__graphify__list_prs",
+    "mcp__graphify__get_pr_impact",
+    "mcp__graphify__triage_prs"
+   ],
+   "denied_present": [],
+   "claude_md_hits": [],
+   "claude_md_files_considered": [
+    "/home/adityareddy/.claude/CLAUDE.md"
+   ],
+   "skill_hits": [],
+   "memory_hits": [],
+   "cwd_visible": {
+    "found": true,
+    "where": [
+     "messages[1:system]"
+    ]
+   },
+   "banned_offered": [],
+   "exchanges": [
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "refresh"
+     },
+     "result": "Found 10 files\nsrc/auth/auth.controller.ts\nsrc/auth/auth.module.ts\nsrc/auth/auth.service.ts\nsrc/auth/config/auth-config.type.ts\nsrc/auth/config/auth.config.ts\nsrc/auth/dto/login-response.dto.ts\nsrc/au…",
+     "is_error": false
+    },
+    {
+     "tool": "Glob",
+     "input": {
+      "pattern": "src/auth/*.ts"
+     },
+     "result": "src/auth/auth.service.ts\nsrc/auth/auth-providers.enum.ts\nsrc/auth/auth.module.ts\nsrc/auth/auth.controller.ts",
+     "is_error": false
+    },
+    {
+     "tool": "mcp__graphify__query_graph",
+     "input": {
+      "question": "refresh token"
+     },
+     "result": "Graph: /tmp/work/87ba94e5b0/idx/graphify-out/graph.json (1176 nodes) | Traversal: BFS depth=3 | Start: ['RefreshResponseDto', 'refresh-response.dto.ts', 'Tokens', '.refresh()'] | 312 nodes found\n\n[!] …",
+     "is_error": false
+    },
+    {
+     "tool": "mcp__graphify__list_prs",
+     "input": {},
+     "result": "<tool_use_error>Error: No such tool available: mcp__graphify__list_prs</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "src/auth/auth.service.ts"
+     },
+     "result": "1\timport {\n2\t  HttpStatus,\n3\t  Injectable,\n4\t  NotFoundException,\n5\t  UnauthorizedException,\n6\t  UnprocessableEntityException,\n7\t} from '@nestjs/common';\n8\timport ms from 'ms';\n9\timport crypto from 'c…",
+     "is_error": false
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json"
+     },
+     "result": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory.",
+     "is_error": true
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "result": "/etc/hostname is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory.",
+     "is_error": true
+    },
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "result": "/etc is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory.",
+     "is_error": true
+    },
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "ls"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "WebFetch",
+     "input": {
+      "url": "https://example.com",
+      "prompt": "x"
+     },
+     "result": "<tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Agent",
+     "input": {
+      "description": "x",
+      "prompt": "x",
+      "subagent_type": "general-purpose"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Skill",
+     "input": {
+      "skill": "graphify"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    }
+   ],
+   "forbidden_read": {
+    "denied": true,
+    "is_error": true,
+    "text": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory."
+   },
+   "outside_reads": [
+    {
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "denied": true,
+     "text": "/etc/hostname is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory."
+    },
+    {
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "denied": true,
+     "text": "/etc is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory."
+    }
+   ],
+   "banned_attempts": {
+    "Bash": "[error] <tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "WebFetch": "[error] <tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Agent": "[error] <tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Skill": "[error] <tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>"
+   },
+   "denied_attempt": "<tool_use_error>Error: No such tool available: mcp__graphify__list_prs</tool_use_error>",
+   "result": {
+    "subtype": "success",
+    "is_error": false,
+    "num_turns": 14,
+    "duration_ms": 592,
+    "duration_api_ms": 345,
+    "total_cost_usd": 0.025135400000000002,
+    "usage": {
+     "input_tokens": 39,
+     "cache_creation_input_tokens": 3087,
+     "cache_read_input_tokens": 111399,
+     "output_tokens": 620,
+     "output_tokens_details": {
+      "thinking_tokens": 0
+     },
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     },
+     "service_tier": "standard",
+     "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+     },
+     "inference_geo": "",
+     "iterations": [],
+     "speed": "standard",
+     "fallback_credit": null
+    },
+    "modelUsage": {
+     "claude-sonnet-5-5": {
+      "inputTokens": 39,
+      "outputTokens": 620,
+      "cacheReadInputTokens": 111399,
+      "cacheCreationInputTokens": 3087,
+      "webSearchRequests": 0,
+      "costUSD": 0.025135400000000002,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 0,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+     }
+    },
+    "structured_output_present": true,
+    "structured_output": {
+     "candidates": [
+      {
+       "file": "src/auth/auth.service.ts",
+       "symbol": "AuthService.refreshToken",
+       "start_line": 1,
+       "end_line": 2,
+       "explanation": "mock diagnosis (no model was called)"
+      }
+     ]
+    },
+    "permission_denials": 3,
+    "stop_reason": "tool_use"
+   },
+   "model_in_request": "claude-sonnet-5-5",
+   "request_keys": [
+    "model",
+    "messages",
+    "system",
+    "tools",
+    "metadata",
+    "max_tokens",
+    "thinking",
+    "context_management",
+    "output_config",
+    "stream"
+   ],
+   "metadata_keys": [
+    "user_id"
+   ],
+   "init_extra": {
+    "apiKeySource": "ANTHROPIC_API_KEY",
+    "skills": [],
+    "slash_commands": [],
+    "agents": [
+     "claude",
+     "Explore",
+     "general-purpose",
+     "Plan",
+     "statusline-setup"
+    ],
+    "plugins": [
+     "cc-plugin-agents-md",
+     "cc-plugin-privacy",
+     "cc-plugin-plugin-authoring"
+    ],
+    "permissionMode": "dontAsk"
+   },
+   "workspace_changes": {
+    "added": [],
+    "removed": [],
+    "changed": []
+   },
+   "stderr_tail": "",
+   "home_writes": {
+    "attributed": [],
+    "unattributed": 3,
+    "unattributed_paths": [
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json",
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-diff_builtin-3903e77c01b1.json",
+     "/home/adityareddy/.claude/projects/-home-adityareddy-dev-experiments-code-graphs/23e3bc90-9e59-4b21-8b1a-a3b8f2648e0b.jsonl"
+    ]
+   }
+  },
+  {
+   "profile": "restricted-oauth",
+   "kind": "crg",
+   "ok": true,
+   "requests": 13,
+   "paths": {
+    "POST /v1/messages": 13
+   },
+   "tools_offered": [
+    "Glob",
+    "Grep",
+    "Read",
+    "StructuredOutput",
+    "mcp__code-review-graph__detect_changes_tool",
+    "mcp__code-review-graph__find_large_functions_tool",
+    "mcp__code-review-graph__get_affected_flows_tool",
+    "mcp__code-review-graph__get_architecture_overview_tool",
+    "mcp__code-review-graph__get_bridge_nodes_tool",
+    "mcp__code-review-graph__get_community_tool",
+    "mcp__code-review-graph__get_docs_section_tool",
+    "mcp__code-review-graph__get_flow_tool",
+    "mcp__code-review-graph__get_hub_nodes_tool",
+    "mcp__code-review-graph__get_impact_radius_tool",
+    "mcp__code-review-graph__get_knowledge_gaps_tool",
+    "mcp__code-review-graph__get_minimal_context_tool",
+    "mcp__code-review-graph__get_review_context_tool",
+    "mcp__code-review-graph__get_suggested_questions_tool",
+    "mcp__code-review-graph__get_surprising_connections_tool",
+    "mcp__code-review-graph__get_wiki_page_tool",
+    "mcp__code-review-graph__list_communities_tool",
+    "mcp__code-review-graph__list_flows_tool",
+    "mcp__code-review-graph__list_graph_stats_tool",
+    "mcp__code-review-graph__query_graph_tool",
+    "mcp__code-review-graph__refactor_tool",
+    "mcp__code-review-graph__semantic_search_nodes_tool",
+    "DeferredToolPlaceholder",
+    "mcp__code-review-graph__traverse_graph_tool"
+   ],
+   "tool_schema_tokens": 7915,
+   "tool_schema_tokens_by_tool": {
+    "Glob": 157,
+    "Grep": 776,
+    "Read": 466,
+    "StructuredOutput": 231,
+    "mcp__code-review-graph__detect_changes_tool": 433,
+    "mcp__code-review-graph__find_large_functions_tool": 224,
+    "mcp__code-review-graph__get_affected_flows_tool": 308,
+    "mcp__code-review-graph__get_architecture_overview_tool": 240,
+    "mcp__code-review-graph__get_bridge_nodes_tool": 187,
+    "mcp__code-review-graph__get_community_tool": 262,
+    "mcp__code-review-graph__get_docs_section_tool": 220,
+    "mcp__code-review-graph__get_flow_tool": 285,
+    "mcp__code-review-graph__get_hub_nodes_tool": 184,
+    "mcp__code-review-graph__get_impact_radius_tool": 414,
+    "mcp__code-review-graph__get_knowledge_gaps_tool": 189,
+    "mcp__code-review-graph__get_minimal_context_tool": 260,
+    "mcp__code-review-graph__get_review_context_tool": 356,
+    "mcp__code-review-graph__get_suggested_questions_tool": 110,
+    "mcp__code-review-graph__get_surprising_connections_tool": 202,
+    "mcp__code-review-graph__get_wiki_page_tool": 164,
+    "mcp__code-review-graph__list_communities_tool": 282,
+    "mcp__code-review-graph__list_flows_tool": 258,
+    "mcp__code-review-graph__list_graph_stats_tool": 106,
+    "mcp__code-review-graph__query_graph_tool": 483,
+    "mcp__code-review-graph__refactor_tool": 432,
+    "mcp__code-review-graph__semantic_search_nodes_tool": 408,
+    "DeferredToolPlaceholder": 41,
+    "mcp__code-review-graph__traverse_graph_tool": 236
+   },
+   "system_prompt_tokens": 108,
+   "system_prompt_text": "x-anthropic-billing-header: cc_version=2.1.319.3d1; cc_entrypoint=sdk-cli;\nYou are a Claude agent, built on Anthropic's Claude Agent SDK.\nYou are a senior software engineer diagnosing a bug in the codebase in your current working directory. You can read and search files but you cannot run code, run tests, use git, or modify files. Investigate until you are confident, then give your diagnosis. Be efficient: do not read files you do not need.",
+   "mcp_tools": [
+    "mcp__code-review-graph__detect_changes_tool",
+    "mcp__code-review-graph__find_large_functions_tool",
+    "mcp__code-review-graph__get_affected_flows_tool",
+    "mcp__code-review-graph__get_architecture_overview_tool",
+    "mcp__code-review-graph__get_bridge_nodes_tool",
+    "mcp__code-review-graph__get_community_tool",
+    "mcp__code-review-graph__get_docs_section_tool",
+    "mcp__code-review-graph__get_flow_tool",
+    "mcp__code-review-graph__get_hub_nodes_tool",
+    "mcp__code-review-graph__get_impact_radius_tool",
+    "mcp__code-review-graph__get_knowledge_gaps_tool",
+    "mcp__code-review-graph__get_minimal_context_tool",
+    "mcp__code-review-graph__get_review_context_tool",
+    "mcp__code-review-graph__get_suggested_questions_tool",
+    "mcp__code-review-graph__get_surprising_connections_tool",
+    "mcp__code-review-graph__get_wiki_page_tool",
+    "mcp__code-review-graph__list_communities_tool",
+    "mcp__code-review-graph__list_flows_tool",
+    "mcp__code-review-graph__list_graph_stats_tool",
+    "mcp__code-review-graph__query_graph_tool",
+    "mcp__code-review-graph__refactor_tool",
+    "mcp__code-review-graph__semantic_search_nodes_tool",
+    "mcp__code-review-graph__traverse_graph_tool"
+   ],
+   "mcp_expected": "mcp__code-review-graph__*",
+   "mcp_as_expected": true,
+   "mcp_status": [
+    {
+     "name": "code-review-graph",
+     "status": "connected",
+     "source": "dynamic"
+    }
+   ],
+   "init_check": {
+    "categories": [],
+    "details": []
+   },
+   "outcome": {
+    "status": "submitted"
+   },
+   "mcp_connected": true,
+   "mcp_tool_schema_tokens": 6245,
+   "denied_expected": [
+    "mcp__code-review-graph__apply_refactor_tool",
+    "mcp__code-review-graph__generate_wiki_tool",
+    "mcp__code-review-graph__build_or_update_graph_tool",
+    "mcp__code-review-graph__embed_graph_tool",
+    "mcp__code-review-graph__run_postprocess_tool",
+    "mcp__code-review-graph__cross_repo_search_tool",
+    "mcp__code-review-graph__list_repos_tool"
+   ],
+   "denied_present": [],
+   "claude_md_hits": [],
+   "claude_md_files_considered": [
+    "/home/adityareddy/.claude/CLAUDE.md"
+   ],
+   "skill_hits": [],
+   "memory_hits": [],
+   "cwd_visible": {
+    "found": true,
+    "where": [
+     "messages[1:system]"
+    ]
+   },
+   "banned_offered": [],
+   "exchanges": [
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "refresh"
+     },
+     "result": "Found 10 files\nsrc/auth/auth.controller.ts\nsrc/auth/auth.module.ts\nsrc/auth/auth.service.ts\nsrc/auth/config/auth-config.type.ts\nsrc/auth/config/auth.config.ts\nsrc/auth/dto/login-response.dto.ts\nsrc/au…",
+     "is_error": false
+    },
+    {
+     "tool": "Glob",
+     "input": {
+      "pattern": "src/auth/*.ts"
+     },
+     "result": "src/auth/auth.service.ts\nsrc/auth/auth-providers.enum.ts\nsrc/auth/auth.module.ts\nsrc/auth/auth.controller.ts",
+     "is_error": false
+    },
+    {
+     "tool": "mcp__code-review-graph__find_large_functions_tool",
+     "input": {
+      "min_lines": 0,
+      "kind": "refresh token",
+      "file_path_pattern": "refresh token",
+      "limit": 0,
+      "repo_root": "refresh token"
+     },
+     "result": "Error calling tool 'find_large_functions_tool': repo_root is not an existing directory: /tmp/work/87ba94e5b0/app/refresh token",
+     "is_error": true
+    },
+    {
+     "tool": "mcp__code-review-graph__apply_refactor_tool",
+     "input": {},
+     "result": "<tool_use_error>Error: No such tool available: mcp__code-review-graph__apply_refactor_tool</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "src/auth/auth.service.ts"
+     },
+     "result": "1\timport {\n2\t  HttpStatus,\n3\t  Injectable,\n4\t  NotFoundException,\n5\t  UnauthorizedException,\n6\t  UnprocessableEntityException,\n7\t} from '@nestjs/common';\n8\timport ms from 'ms';\n9\timport crypto from 'c…",
+     "is_error": false
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json"
+     },
+     "result": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory.",
+     "is_error": true
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "result": "/etc/hostname is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory.",
+     "is_error": true
+    },
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "result": "/etc is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory.",
+     "is_error": true
+    },
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "ls"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "WebFetch",
+     "input": {
+      "url": "https://example.com",
+      "prompt": "x"
+     },
+     "result": "<tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Agent",
+     "input": {
+      "description": "x",
+      "prompt": "x",
+      "subagent_type": "general-purpose"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Skill",
+     "input": {
+      "skill": "graphify"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    }
+   ],
+   "forbidden_read": {
+    "denied": true,
+    "is_error": true,
+    "text": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory."
+   },
+   "outside_reads": [
+    {
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "denied": true,
+     "text": "/etc/hostname is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory."
+    },
+    {
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "denied": true,
+     "text": "/etc is outside /tmp/work/87ba94e5b0/app; --restricted confines the file tools to the working directory."
+    }
+   ],
+   "banned_attempts": {
+    "Bash": "[error] <tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "WebFetch": "[error] <tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Agent": "[error] <tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Skill": "[error] <tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>"
+   },
+   "denied_attempt": "<tool_use_error>Error: No such tool available: mcp__code-review-graph__apply_refactor_tool</tool_use_error>",
+   "result": {
+    "subtype": "success",
+    "is_error": false,
+    "num_turns": 14,
+    "duration_ms": 756,
+    "duration_api_ms": 509,
+    "total_cost_usd": 0.0263693,
+    "usage": {
+     "input_tokens": 39,
+     "cache_creation_input_tokens": 1334,
+     "cache_read_input_tokens": 165063,
+     "output_tokens": 645,
+     "output_tokens_details": {
+      "thinking_tokens": 0
+     },
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     },
+     "service_tier": "standard",
+     "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+     },
+     "inference_geo": "",
+     "iterations": [],
+     "speed": "standard",
+     "fallback_credit": null
+    },
+    "modelUsage": {
+     "claude-sonnet-5-5": {
+      "inputTokens": 39,
+      "outputTokens": 645,
+      "cacheReadInputTokens": 165063,
+      "cacheCreationInputTokens": 1334,
+      "webSearchRequests": 0,
+      "costUSD": 0.0263693,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 0,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+     }
+    },
+    "structured_output_present": true,
+    "structured_output": {
+     "candidates": [
+      {
+       "file": "src/auth/auth.service.ts",
+       "symbol": "AuthService.refreshToken",
+       "start_line": 1,
+       "end_line": 2,
+       "explanation": "mock diagnosis (no model was called)"
+      }
+     ]
+    },
+    "permission_denials": 3,
+    "stop_reason": "tool_use"
+   },
+   "model_in_request": "claude-sonnet-5-5",
+   "request_keys": [
+    "model",
+    "messages",
+    "system",
+    "tools",
+    "metadata",
+    "max_tokens",
+    "thinking",
+    "context_management",
+    "output_config",
+    "stream"
+   ],
+   "metadata_keys": [
+    "user_id"
+   ],
+   "init_extra": {
+    "apiKeySource": "ANTHROPIC_API_KEY",
+    "skills": [],
+    "slash_commands": [
+     "mcp__code-review-graph__review_changes",
+     "mcp__code-review-graph__architecture_map",
+     "mcp__code-review-graph__debug_issue",
+     "mcp__code-review-graph__onboard_developer",
+     "mcp__code-review-graph__pre_merge_check"
+    ],
+    "agents": [
+     "claude",
+     "Explore",
+     "general-purpose",
+     "Plan",
+     "statusline-setup"
+    ],
+    "plugins": [
+     "cc-plugin-agents-md",
+     "cc-plugin-privacy",
+     "cc-plugin-plugin-authoring"
+    ],
+    "permissionMode": "dontAsk"
+   },
+   "workspace_changes": {
+    "added": [],
+    "removed": [],
+    "changed": []
+   },
+   "stderr_tail": "",
+   "home_writes": {
+    "attributed": [
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json"
+    ],
+    "unattributed": 1,
+    "unattributed_paths": [
+     "/home/adityareddy/.claude/projects/-home-adityareddy-dev-experiments-code-graphs/23e3bc90-9e59-4b21-8b1a-a3b8f2648e0b.jsonl"
+    ]
+   }
+  },
+  {
+   "profile": "restricted-oauth",
+   "kind": "graphify(no-deny)",
+   "ok": true,
+   "requests": 1,
+   "paths": {
+    "POST /v1/messages": 1
+   },
+   "tools_offered": [
+    "Glob",
+    "Grep",
+    "Read",
+    "StructuredOutput",
+    "mcp__graphify__get_community",
+    "mcp__graphify__get_neighbors",
+    "mcp__graphify__get_node",
+    "mcp__graphify__get_pr_impact",
+    "mcp__graphify__god_nodes",
+    "mcp__graphify__graph_stats",
+    "mcp__graphify__list_prs",
+    "mcp__graphify__query_graph",
+    "mcp__graphify__shortest_path",
+    "DeferredToolPlaceholder",
+    "mcp__graphify__triage_prs"
+   ],
+   "tool_schema_tokens": 3080,
+   "tool_schema_tokens_by_tool": {
+    "Glob": 157,
+    "Grep": 776,
+    "Read": 466,
+    "StructuredOutput": 231,
+    "mcp__graphify__get_community": 116,
+    "mcp__graphify__get_neighbors": 132,
+    "mcp__graphify__get_node": 107,
+    "mcp__graphify__get_pr_impact": 149,
+    "mcp__graphify__god_nodes": 124,
+    "mcp__graphify__graph_stats": 75,
+    "mcp__graphify__list_prs": 152,
+    "mcp__graphify__query_graph": 207,
+    "mcp__graphify__shortest_path": 182,
+    "DeferredToolPlaceholder": 41,
+    "mcp__graphify__triage_prs": 164
+   },
+   "system_prompt_tokens": 108,
+   "system_prompt_text": "x-anthropic-billing-header: cc_version=2.1.319.3d1; cc_entrypoint=sdk-cli;\nYou are a Claude agent, built on Anthropic's Claude Agent SDK.\nYou are a senior software engineer diagnosing a bug in the codebase in your current working directory. You can read and search files but you cannot run code, run tests, use git, or modify files. Investigate until you are confident, then give your diagnosis. Be efficient: do not read files you do not need.",
+   "mcp_tools": [
+    "mcp__graphify__get_community",
+    "mcp__graphify__get_neighbors",
+    "mcp__graphify__get_node",
+    "mcp__graphify__get_pr_impact",
+    "mcp__graphify__god_nodes",
+    "mcp__graphify__graph_stats",
+    "mcp__graphify__list_prs",
+    "mcp__graphify__query_graph",
+    "mcp__graphify__shortest_path",
+    "mcp__graphify__triage_prs"
+   ],
+   "mcp_expected": "mcp__graphify__*",
+   "mcp_as_expected": true,
+   "mcp_status": [
+    {
+     "name": "graphify",
+     "status": "connected",
+     "source": "dynamic"
+    }
+   ],
+   "init_check": {
+    "categories": [
+     "extra_tool"
+    ],
+    "details": [
+     "unexpected tool: mcp__graphify__get_pr_impact",
+     "unexpected tool: mcp__graphify__list_prs",
+     "unexpected tool: mcp__graphify__triage_prs"
+    ]
+   },
+   "outcome": {
+    "status": "submitted"
+   },
+   "mcp_connected": true,
+   "mcp_tool_schema_tokens": 1410,
+   "denied_expected": [],
+   "denied_present": [],
+   "claude_md_hits": [],
+   "claude_md_files_considered": [
+    "/home/adityareddy/.claude/CLAUDE.md"
+   ],
+   "skill_hits": [],
+   "memory_hits": [],
+   "cwd_visible": {
+    "found": true,
+    "where": [
+     "messages[1:system]"
+    ]
+   },
+   "banned_offered": [],
+   "exchanges": [],
+   "forbidden_read": {
+    "denied": false,
+    "text": "(no exchange recorded)"
+   },
+   "outside_reads": [],
+   "banned_attempts": {},
+   "result": {
+    "subtype": "success",
+    "is_error": false,
+    "num_turns": 2,
+    "duration_ms": 111,
+    "duration_api_ms": 37,
+    "total_cost_usd": 0.0017336000000000003,
+    "usage": {
+     "input_tokens": 3,
+     "cache_creation_input_tokens": 253,
+     "cache_read_input_tokens": 3251,
+     "output_tokens": 77,
+     "output_tokens_details": {
+      "thinking_tokens": 0
+     },
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     },
+     "service_tier": "standard",
+     "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+     },
+     "inference_geo": "",
+     "iterations": [],
+     "speed": "standard",
+     "fallback_credit": null
+    },
+    "modelUsage": {
+     "claude-sonnet-5-5": {
+      "inputTokens": 3,
+      "outputTokens": 77,
+      "cacheReadInputTokens": 3251,
+      "cacheCreationInputTokens": 253,
+      "webSearchRequests": 0,
+      "costUSD": 0.0017336000000000003,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 0,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+     }
+    },
+    "structured_output_present": true,
+    "structured_output": {
+     "candidates": [
+      {
+       "file": "src/auth/auth.service.ts",
+       "symbol": "AuthService.refreshToken",
+       "start_line": 1,
+       "end_line": 2,
+       "explanation": "mock diagnosis (no model was called)"
+      }
+     ]
+    },
+    "permission_denials": 0,
+    "stop_reason": "tool_use"
+   },
+   "model_in_request": "claude-sonnet-5-5",
+   "request_keys": [
+    "model",
+    "messages",
+    "system",
+    "tools",
+    "metadata",
+    "max_tokens",
+    "thinking",
+    "context_management",
+    "output_config",
+    "stream"
+   ],
+   "metadata_keys": [
+    "user_id"
+   ],
+   "init_extra": {
+    "apiKeySource": "ANTHROPIC_API_KEY",
+    "skills": [],
+    "slash_commands": [],
+    "agents": [
+     "claude",
+     "Explore",
+     "general-purpose",
+     "Plan",
+     "statusline-setup"
+    ],
+    "plugins": [
+     "cc-plugin-agents-md",
+     "cc-plugin-privacy",
+     "cc-plugin-plugin-authoring"
+    ],
+    "permissionMode": "dontAsk"
+   },
+   "workspace_changes": {
+    "added": [],
+    "removed": [],
+    "changed": []
+   },
+   "stderr_tail": "",
+   "home_writes": {
+    "attributed": [
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json",
+     "/home/adityareddy/.claude/projects/-home-adityareddy-dev-experiments-code-graphs/23e3bc90-9e59-4b21-8b1a-a3b8f2648e0b.jsonl"
+    ],
+    "unattributed": 0,
+    "unattributed_paths": []
+   }
+  },
+  {
+   "profile": "restricted-oauth",
+   "kind": "crg(no-deny)",
+   "ok": true,
+   "requests": 1,
+   "paths": {
+    "POST /v1/messages": 1
+   },
+   "tools_offered": [
+    "Glob",
+    "Grep",
+    "Read",
+    "StructuredOutput",
+    "mcp__code-review-graph__apply_refactor_tool",
+    "mcp__code-review-graph__build_or_update_graph_tool",
+    "mcp__code-review-graph__cross_repo_search_tool",
+    "mcp__code-review-graph__detect_changes_tool",
+    "mcp__code-review-graph__embed_graph_tool",
+    "mcp__code-review-graph__find_large_functions_tool",
+    "mcp__code-review-graph__generate_wiki_tool",
+    "mcp__code-review-graph__get_affected_flows_tool",
+    "mcp__code-review-graph__get_architecture_overview_tool",
+    "mcp__code-review-graph__get_bridge_nodes_tool",
+    "mcp__code-review-graph__get_community_tool",
+    "mcp__code-review-graph__get_docs_section_tool",
+    "mcp__code-review-graph__get_flow_tool",
+    "mcp__code-review-graph__get_hub_nodes_tool",
+    "mcp__code-review-graph__get_impact_radius_tool",
+    "mcp__code-review-graph__get_knowledge_gaps_tool",
+    "mcp__code-review-graph__get_minimal_context_tool",
+    "mcp__code-review-graph__get_review_context_tool",
+    "mcp__code-review-graph__get_suggested_questions_tool",
+    "mcp__code-review-graph__get_surprising_connections_tool",
+    "mcp__code-review-graph__get_wiki_page_tool",
+    "mcp__code-review-graph__list_communities_tool",
+    "mcp__code-review-graph__list_flows_tool",
+    "mcp__code-review-graph__list_graph_stats_tool",
+    "mcp__code-review-graph__list_repos_tool",
+    "mcp__code-review-graph__query_graph_tool",
+    "mcp__code-review-graph__refactor_tool",
+    "mcp__code-review-graph__run_postprocess_tool",
+    "mcp__code-review-graph__semantic_search_nodes_tool",
+    "DeferredToolPlaceholder",
+    "mcp__code-review-graph__traverse_graph_tool"
+   ],
+   "tool_schema_tokens": 10152,
+   "tool_schema_tokens_by_tool": {
+    "Glob": 157,
+    "Grep": 776,
+    "Read": 466,
+    "StructuredOutput": 231,
+    "mcp__code-review-graph__apply_refactor_tool": 296,
+    "mcp__code-review-graph__build_or_update_graph_tool": 506,
+    "mcp__code-review-graph__cross_repo_search_tool": 325,
+    "mcp__code-review-graph__detect_changes_tool": 433,
+    "mcp__code-review-graph__embed_graph_tool": 519,
+    "mcp__code-review-graph__find_large_functions_tool": 224,
+    "mcp__code-review-graph__generate_wiki_tool": 197,
+    "mcp__code-review-graph__get_affected_flows_tool": 308,
+    "mcp__code-review-graph__get_architecture_overview_tool": 240,
+    "mcp__code-review-graph__get_bridge_nodes_tool": 187,
+    "mcp__code-review-graph__get_community_tool": 262,
+    "mcp__code-review-graph__get_docs_section_tool": 220,
+    "mcp__code-review-graph__get_flow_tool": 285,
+    "mcp__code-review-graph__get_hub_nodes_tool": 184,
+    "mcp__code-review-graph__get_impact_radius_tool": 414,
+    "mcp__code-review-graph__get_knowledge_gaps_tool": 189,
+    "mcp__code-review-graph__get_minimal_context_tool": 260,
+    "mcp__code-review-graph__get_review_context_tool": 356,
+    "mcp__code-review-graph__get_suggested_questions_tool": 110,
+    "mcp__code-review-graph__get_surprising_connections_tool": 202,
+    "mcp__code-review-graph__get_wiki_page_tool": 164,
+    "mcp__code-review-graph__list_communities_tool": 282,
+    "mcp__code-review-graph__list_flows_tool": 258,
+    "mcp__code-review-graph__list_graph_stats_tool": 106,
+    "mcp__code-review-graph__list_repos_tool": 93,
+    "mcp__code-review-graph__query_graph_tool": 483,
+    "mcp__code-review-graph__refactor_tool": 432,
+    "mcp__code-review-graph__run_postprocess_tool": 301,
+    "mcp__code-review-graph__semantic_search_nodes_tool": 408,
+    "DeferredToolPlaceholder": 41,
+    "mcp__code-review-graph__traverse_graph_tool": 236
+   },
+   "system_prompt_tokens": 108,
+   "system_prompt_text": "x-anthropic-billing-header: cc_version=2.1.319.3d1; cc_entrypoint=sdk-cli;\nYou are a Claude agent, built on Anthropic's Claude Agent SDK.\nYou are a senior software engineer diagnosing a bug in the codebase in your current working directory. You can read and search files but you cannot run code, run tests, use git, or modify files. Investigate until you are confident, then give your diagnosis. Be efficient: do not read files you do not need.",
+   "mcp_tools": [
+    "mcp__code-review-graph__apply_refactor_tool",
+    "mcp__code-review-graph__build_or_update_graph_tool",
+    "mcp__code-review-graph__cross_repo_search_tool",
+    "mcp__code-review-graph__detect_changes_tool",
+    "mcp__code-review-graph__embed_graph_tool",
+    "mcp__code-review-graph__find_large_functions_tool",
+    "mcp__code-review-graph__generate_wiki_tool",
+    "mcp__code-review-graph__get_affected_flows_tool",
+    "mcp__code-review-graph__get_architecture_overview_tool",
+    "mcp__code-review-graph__get_bridge_nodes_tool",
+    "mcp__code-review-graph__get_community_tool",
+    "mcp__code-review-graph__get_docs_section_tool",
+    "mcp__code-review-graph__get_flow_tool",
+    "mcp__code-review-graph__get_hub_nodes_tool",
+    "mcp__code-review-graph__get_impact_radius_tool",
+    "mcp__code-review-graph__get_knowledge_gaps_tool",
+    "mcp__code-review-graph__get_minimal_context_tool",
+    "mcp__code-review-graph__get_review_context_tool",
+    "mcp__code-review-graph__get_suggested_questions_tool",
+    "mcp__code-review-graph__get_surprising_connections_tool",
+    "mcp__code-review-graph__get_wiki_page_tool",
+    "mcp__code-review-graph__list_communities_tool",
+    "mcp__code-review-graph__list_flows_tool",
+    "mcp__code-review-graph__list_graph_stats_tool",
+    "mcp__code-review-graph__list_repos_tool",
+    "mcp__code-review-graph__query_graph_tool",
+    "mcp__code-review-graph__refactor_tool",
+    "mcp__code-review-graph__run_postprocess_tool",
+    "mcp__code-review-graph__semantic_search_nodes_tool",
+    "mcp__code-review-graph__traverse_graph_tool"
+   ],
+   "mcp_expected": "mcp__code-review-graph__*",
+   "mcp_as_expected": true,
+   "mcp_status": [
+    {
+     "name": "code-review-graph",
+     "status": "connected",
+     "source": "dynamic"
+    }
+   ],
+   "init_check": {
+    "categories": [
+     "extra_tool"
+    ],
+    "details": [
+     "unexpected tool: mcp__code-review-graph__apply_refactor_tool",
+     "unexpected tool: mcp__code-review-graph__build_or_update_graph_tool",
+     "unexpected tool: mcp__code-review-graph__cross_repo_search_tool",
+     "unexpected tool: mcp__code-review-graph__embed_graph_tool",
+     "unexpected tool: mcp__code-review-graph__generate_wiki_tool",
+     "unexpected tool: mcp__code-review-graph__list_repos_tool",
+     "unexpected tool: mcp__code-review-graph__run_postprocess_tool"
+    ]
+   },
+   "outcome": {
+    "status": "submitted"
+   },
+   "mcp_connected": true,
+   "mcp_tool_schema_tokens": 8482,
+   "denied_expected": [],
+   "denied_present": [],
+   "claude_md_hits": [],
+   "claude_md_files_considered": [
+    "/home/adityareddy/.claude/CLAUDE.md"
+   ],
+   "skill_hits": [],
+   "memory_hits": [],
+   "cwd_visible": {
+    "found": true,
+    "where": [
+     "messages[1:system]"
+    ]
+   },
+   "banned_offered": [],
+   "exchanges": [],
+   "forbidden_read": {
+    "denied": false,
+    "text": "(no exchange recorded)"
+   },
+   "outside_reads": [],
+   "banned_attempts": {},
+   "result": {
+    "subtype": "success",
+    "is_error": false,
+    "num_turns": 2,
+    "duration_ms": 95,
+    "duration_api_ms": 52,
+    "total_cost_usd": 0.0026033000000000002,
+    "usage": {
+     "input_tokens": 3,
+     "cache_creation_input_tokens": 318,
+     "cache_read_input_tokens": 10323,
+     "output_tokens": 77,
+     "output_tokens_details": {
+      "thinking_tokens": 0
+     },
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     },
+     "service_tier": "standard",
+     "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+     },
+     "inference_geo": "",
+     "iterations": [],
+     "speed": "standard",
+     "fallback_credit": null
+    },
+    "modelUsage": {
+     "claude-sonnet-5-5": {
+      "inputTokens": 3,
+      "outputTokens": 77,
+      "cacheReadInputTokens": 10323,
+      "cacheCreationInputTokens": 318,
+      "webSearchRequests": 0,
+      "costUSD": 0.0026033000000000002,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 0,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+     }
+    },
+    "structured_output_present": true,
+    "structured_output": {
+     "candidates": [
+      {
+       "file": "src/auth/auth.service.ts",
+       "symbol": "AuthService.refreshToken",
+       "start_line": 1,
+       "end_line": 2,
+       "explanation": "mock diagnosis (no model was called)"
+      }
+     ]
+    },
+    "permission_denials": 0,
+    "stop_reason": "tool_use"
+   },
+   "model_in_request": "claude-sonnet-5-5",
+   "request_keys": [
+    "model",
+    "messages",
+    "system",
+    "tools",
+    "metadata",
+    "max_tokens",
+    "thinking",
+    "context_management",
+    "output_config",
+    "stream"
+   ],
+   "metadata_keys": [
+    "user_id"
+   ],
+   "init_extra": {
+    "apiKeySource": "ANTHROPIC_API_KEY",
+    "skills": [],
+    "slash_commands": [
+     "mcp__code-review-graph__review_changes",
+     "mcp__code-review-graph__architecture_map",
+     "mcp__code-review-graph__debug_issue",
+     "mcp__code-review-graph__onboard_developer",
+     "mcp__code-review-graph__pre_merge_check"
+    ],
+    "agents": [
+     "claude",
+     "Explore",
+     "general-purpose",
+     "Plan",
+     "statusline-setup"
+    ],
+    "plugins": [
+     "cc-plugin-agents-md",
+     "cc-plugin-privacy",
+     "cc-plugin-plugin-authoring"
+    ],
+    "permissionMode": "dontAsk"
+   },
+   "workspace_changes": {
+    "added": [],
+    "removed": [],
+    "changed": []
+   },
+   "stderr_tail": "",
+   "home_writes": {
+    "attributed": [
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json"
+    ],
+    "unattributed": 0,
+    "unattributed_paths": []
+   }
+  },
+  {
+   "profile": "restricted-oauth",
+   "kind": "max-turns(2)",
+   "ok": true,
+   "requests": 2,
+   "paths": {
+    "POST /v1/messages": 2
+   },
+   "tools_offered": [
+    "Glob",
+    "Grep",
+    "Read",
+    "DeferredToolPlaceholder",
+    "StructuredOutput"
+   ],
+   "tool_schema_tokens": 1672,
+   "tool_schema_tokens_by_tool": {
+    "Glob": 157,
+    "Grep": 776,
+    "Read": 466,
+    "DeferredToolPlaceholder": 41,
+    "StructuredOutput": 231
+   },
+   "system_prompt_tokens": 108,
+   "system_prompt_text": "x-anthropic-billing-header: cc_version=2.1.319.3d1; cc_entrypoint=sdk-cli;\nYou are a Claude agent, built on Anthropic's Claude Agent SDK.\nYou are a senior software engineer diagnosing a bug in the codebase in your current working directory. You can read and search files but you cannot run code, run tests, use git, or modify files. Investigate until you are confident, then give your diagnosis. Be efficient: do not read files you do not need.",
+   "mcp_tools": [],
+   "mcp_as_expected": true,
+   "mcp_status": [],
+   "init_check": {
+    "categories": [],
+    "details": []
+   },
+   "outcome": {
+    "status": "max_turns"
+   },
+   "mcp_connected": null,
+   "mcp_tool_schema_tokens": 1,
+   "denied_expected": [],
+   "denied_present": [],
+   "claude_md_hits": [],
+   "claude_md_files_considered": [
+    "/home/adityareddy/.claude/CLAUDE.md"
+   ],
+   "skill_hits": [],
+   "memory_hits": [],
+   "cwd_visible": {
+    "found": true,
+    "where": [
+     "messages[1:system]"
+    ]
+   },
+   "banned_offered": [],
+   "exchanges": [
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "refresh"
+     },
+     "result": "Found 10 files\nsrc/auth/auth.controller.ts\nsrc/auth/auth.module.ts\nsrc/auth/auth.service.ts\nsrc/auth/config/auth-config.type.ts\nsrc/auth/config/auth.config.ts\nsrc/auth/dto/login-response.dto.ts\nsrc/au…",
+     "is_error": false
+    }
+   ],
+   "forbidden_read": {
+    "denied": false,
+    "text": "(no exchange recorded)"
+   },
+   "outside_reads": [],
+   "banned_attempts": {},
+   "result": {
+    "subtype": "error_max_turns",
+    "is_error": true,
+    "num_turns": 3,
+    "duration_ms": 145,
+    "duration_api_ms": 66,
+    "total_cost_usd": 0.0021785,
+    "usage": {
+     "input_tokens": 6,
+     "cache_creation_input_tokens": 388,
+     "cache_read_input_tokens": 3965,
+     "output_tokens": 80,
+     "output_tokens_details": {
+      "thinking_tokens": 0
+     },
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     },
+     "service_tier": "standard",
+     "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+     },
+     "inference_geo": "",
+     "iterations": [],
+     "speed": "standard",
+     "fallback_credit": null
+    },
+    "modelUsage": {
+     "claude-sonnet-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 80,
+      "cacheReadInputTokens": 3965,
+      "cacheCreationInputTokens": 388,
+      "webSearchRequests": 0,
+      "costUSD": 0.0021785,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 0,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+     }
+    },
+    "structured_output_present": false,
+    "permission_denials": 0,
+    "stop_reason": "tool_use",
+    "errors": [
+     "Reached maximum number of turns (2)"
+    ]
+   },
+   "model_in_request": "claude-sonnet-5-5",
+   "request_keys": [
+    "model",
+    "messages",
+    "system",
+    "tools",
+    "metadata",
+    "max_tokens",
+    "thinking",
+    "context_management",
+    "output_config",
+    "stream"
+   ],
+   "metadata_keys": [
+    "user_id"
+   ],
+   "init_extra": {
+    "apiKeySource": "ANTHROPIC_API_KEY",
+    "skills": [],
+    "slash_commands": [],
+    "agents": [
+     "claude",
+     "Explore",
+     "general-purpose",
+     "Plan",
+     "statusline-setup"
+    ],
+    "plugins": [
+     "cc-plugin-agents-md",
+     "cc-plugin-privacy",
+     "cc-plugin-plugin-authoring"
+    ],
+    "permissionMode": "dontAsk"
+   },
+   "workspace_changes": {
+    "added": [],
+    "removed": [],
+    "changed": []
+   },
+   "stderr_tail": "",
+   "home_writes": {
+    "attributed": [
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json"
+    ],
+    "unattributed": 0,
+    "unattributed_paths": []
+   }
+  },
+  {
+   "profile": "restricted-oauth",
+   "kind": "single-shot",
+   "ok": true,
+   "requests": 1,
+   "paths": {
+    "POST /v1/messages": 1
+   },
+   "tools_offered": [
+    "DeferredToolPlaceholder",
+    "StructuredOutput"
+   ],
+   "tool_schema_tokens": 273,
+   "tool_schema_tokens_by_tool": {
+    "DeferredToolPlaceholder": 41,
+    "StructuredOutput": 231
+   },
+   "system_prompt_tokens": 65,
+   "system_prompt_text": "x-anthropic-billing-header: cc_version=2.1.319.7fd; cc_entrypoint=sdk-cli;\nYou are a Claude agent, built on Anthropic's Claude Agent SDK.\nYou are a senior software engineer diagnosing a bug from a bug report and the material provided. Answer with JSON only.",
+   "mcp_tools": [],
+   "mcp_as_expected": true,
+   "mcp_status": [],
+   "outcome": {
+    "status": "submitted"
+   },
+   "mcp_connected": null,
+   "mcp_tool_schema_tokens": 1,
+   "denied_expected": [],
+   "denied_present": [],
+   "claude_md_hits": [],
+   "claude_md_files_considered": [
+    "/home/adityareddy/.claude/CLAUDE.md"
+   ],
+   "skill_hits": [],
+   "memory_hits": [],
+   "cwd_visible": {
+    "found": false,
+    "where": []
+   },
+   "banned_offered": [],
+   "exchanges": [],
+   "forbidden_read": {
+    "denied": false,
+    "text": "(no exchange recorded)"
+   },
+   "outside_reads": [],
+   "banned_attempts": {},
+   "result": {
+    "subtype": "success",
+    "is_error": false,
+    "num_turns": 2,
+    "duration_ms": 87,
+    "duration_api_ms": 47,
+    "total_cost_usd": 0.0014206,
+    "usage": {
+     "input_tokens": 3,
+     "cache_creation_input_tokens": 250,
+     "cache_read_input_tokens": 396,
+     "output_tokens": 75,
+     "output_tokens_details": {
+      "thinking_tokens": 0
+     },
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     },
+     "service_tier": "standard",
+     "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+     },
+     "inference_geo": "",
+     "iterations": [],
+     "speed": "standard",
+     "fallback_credit": null
+    },
+    "modelUsage": {
+     "claude-sonnet-5-5": {
+      "inputTokens": 3,
+      "outputTokens": 75,
+      "cacheReadInputTokens": 396,
+      "cacheCreationInputTokens": 250,
+      "webSearchRequests": 0,
+      "costUSD": 0.0014206,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 0,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+     }
+    },
+    "structured_output_present": true,
+    "structured_output": {
+     "candidates": [
+      {
+       "file": "src/auth/auth.service.ts",
+       "symbol": "AuthService.refreshToken",
+       "start_line": 1,
+       "end_line": 2,
+       "explanation": "mock diagnosis (no model was called)"
+      }
+     ]
+    },
+    "permission_denials": 0,
+    "stop_reason": "tool_use"
+   },
+   "model_in_request": "claude-sonnet-5-5",
+   "request_keys": [
+    "model",
+    "messages",
+    "system",
+    "tools",
+    "metadata",
+    "max_tokens",
+    "thinking",
+    "context_management",
+    "output_config",
+    "stream"
+   ],
+   "metadata_keys": [
+    "user_id"
+   ],
+   "init_extra": {
+    "apiKeySource": "ANTHROPIC_API_KEY",
+    "skills": [],
+    "slash_commands": [],
+    "agents": [
+     "claude",
+     "Explore",
+     "general-purpose",
+     "Plan",
+     "statusline-setup"
+    ],
+    "plugins": [
+     "cc-plugin-agents-md",
+     "cc-plugin-privacy",
+     "cc-plugin-plugin-authoring"
+    ],
+    "permissionMode": "dontAsk"
+   },
+   "workspace_changes": {
+    "added": [],
+    "removed": [],
+    "changed": []
+   },
+   "stderr_tail": "",
+   "home_writes": {
+    "attributed": [],
+    "unattributed": 1,
+    "unattributed_paths": [
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json"
+    ]
+   }
+  },
+  {
+   "profile": "safe-mode",
+   "kind": "baseline",
+   "ok": true,
+   "requests": 11,
+   "paths": {
+    "POST /v1/messages": 11
+   },
+   "tools_offered": [
+    "Glob",
+    "Grep",
+    "Read",
+    "DeferredToolPlaceholder",
+    "StructuredOutput"
+   ],
+   "tool_schema_tokens": 1672,
+   "tool_schema_tokens_by_tool": {
+    "Glob": 157,
+    "Grep": 776,
+    "Read": 466,
+    "DeferredToolPlaceholder": 41,
+    "StructuredOutput": 231
+   },
+   "system_prompt_tokens": 108,
+   "system_prompt_text": "x-anthropic-billing-header: cc_version=2.1.319.3d1; cc_entrypoint=sdk-cli;\nYou are a Claude agent, built on Anthropic's Claude Agent SDK.\nYou are a senior software engineer diagnosing a bug in the codebase in your current working directory. You can read and search files but you cannot run code, run tests, use git, or modify files. Investigate until you are confident, then give your diagnosis. Be efficient: do not read files you do not need.",
+   "mcp_tools": [],
+   "mcp_as_expected": true,
+   "mcp_status": [],
+   "init_check": {
+    "categories": [
+     "plugins"
+    ],
+    "details": [
+     "non-builtin plugins: swift-lsp"
+    ]
+   },
+   "outcome": {
+    "status": "submitted"
+   },
+   "mcp_connected": null,
+   "mcp_tool_schema_tokens": 1,
+   "denied_expected": [],
+   "denied_present": [],
+   "claude_md_hits": [],
+   "claude_md_files_considered": [
+    "/home/adityareddy/.claude/CLAUDE.md"
+   ],
+   "skill_hits": [],
+   "memory_hits": [],
+   "cwd_visible": {
+    "found": true,
+    "where": [
+     "messages[1:system]"
+    ]
+   },
+   "banned_offered": [],
+   "exchanges": [
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "refresh"
+     },
+     "result": "Found 10 files\nsrc/auth/auth.controller.ts\nsrc/auth/auth.module.ts\nsrc/auth/auth.service.ts\nsrc/auth/config/auth-config.type.ts\nsrc/auth/config/auth.config.ts\nsrc/auth/dto/login-response.dto.ts\nsrc/au…",
+     "is_error": false
+    },
+    {
+     "tool": "Glob",
+     "input": {
+      "pattern": "src/auth/*.ts"
+     },
+     "result": "src/auth/auth.service.ts\nsrc/auth/auth-providers.enum.ts\nsrc/auth/auth.module.ts\nsrc/auth/auth.controller.ts",
+     "is_error": false
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "src/auth/auth.service.ts"
+     },
+     "result": "1\timport {\n2\t  HttpStatus,\n3\t  Injectable,\n4\t  NotFoundException,\n5\t  UnauthorizedException,\n6\t  UnprocessableEntityException,\n7\t} from '@nestjs/common';\n8\timport ms from 'ms';\n9\timport crypto from 'c…",
+     "is_error": false
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json"
+     },
+     "result": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting bl…",
+     "is_error": true
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "result": "/etc/hostname is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory wit…",
+     "is_error": true
+    },
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "result": "/etc is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-di…",
+     "is_error": true
+    },
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "ls"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "WebFetch",
+     "input": {
+      "url": "https://example.com",
+      "prompt": "x"
+     },
+     "result": "<tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Agent",
+     "input": {
+      "description": "x",
+      "prompt": "x",
+      "subagent_type": "general-purpose"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Skill",
+     "input": {
+      "skill": "graphify"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    }
+   ],
+   "forbidden_read": {
+    "denied": true,
+    "is_error": true,
+    "text": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-dir, or to r…"
+   },
+   "outside_reads": [
+    {
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "denied": true,
+     "text": "/etc/hostname is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-dir, or to remove that setting."
+    },
+    {
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "denied": true,
+     "text": "/etc is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-dir, or to remove that setting."
+    }
+   ],
+   "banned_attempts": {
+    "Bash": "[error] <tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "WebFetch": "[error] <tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Agent": "[error] <tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Skill": "[error] <tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>"
+   },
+   "result": {
+    "subtype": "success",
+    "is_error": false,
+    "num_turns": 12,
+    "duration_ms": 433,
+    "duration_api_ms": 282,
+    "total_cost_usd": 0.029631699999999997,
+    "usage": {
+     "input_tokens": 33,
+     "cache_creation_input_tokens": 6926,
+     "cache_read_input_tokens": 70407,
+     "output_tokens": 521,
+     "output_tokens_details": {
+      "thinking_tokens": 0
+     },
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     },
+     "service_tier": "standard",
+     "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+     },
+     "inference_geo": "",
+     "iterations": [],
+     "speed": "standard",
+     "fallback_credit": null
+    },
+    "modelUsage": {
+     "claude-sonnet-5-5": {
+      "inputTokens": 33,
+      "outputTokens": 521,
+      "cacheReadInputTokens": 70407,
+      "cacheCreationInputTokens": 6926,
+      "webSearchRequests": 0,
+      "costUSD": 0.029631699999999997,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 0,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+     }
+    },
+    "structured_output_present": true,
+    "structured_output": {
+     "candidates": [
+      {
+       "file": "src/auth/auth.service.ts",
+       "symbol": "AuthService.refreshToken",
+       "start_line": 1,
+       "end_line": 2,
+       "explanation": "mock diagnosis (no model was called)"
+      }
+     ]
+    },
+    "permission_denials": 3,
+    "stop_reason": "tool_use"
+   },
+   "model_in_request": "claude-sonnet-5-5",
+   "request_keys": [
+    "model",
+    "messages",
+    "system",
+    "tools",
+    "metadata",
+    "max_tokens",
+    "thinking",
+    "context_management",
+    "output_config",
+    "stream"
+   ],
+   "metadata_keys": [
+    "user_id"
+   ],
+   "init_extra": {
+    "apiKeySource": "ANTHROPIC_API_KEY",
+    "skills": [],
+    "slash_commands": [],
+    "agents": [
+     "claude",
+     "Explore",
+     "general-purpose",
+     "Plan"
+    ],
+    "plugins": [
+     "swift-lsp",
+     "cc-plugin-agents-md",
+     "cc-plugin-privacy",
+     "cc-plugin-plugin-authoring"
+    ],
+    "permissionMode": "dontAsk"
+   },
+   "workspace_changes": {
+    "added": [],
+    "removed": [],
+    "changed": []
+   },
+   "stderr_tail": "",
+   "home_writes": {
+    "attributed": [
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json"
+    ],
+    "unattributed": 0,
+    "unattributed_paths": []
+   }
+  },
+  {
+   "profile": "safe-mode",
+   "kind": "bm25",
+   "ok": true,
+   "requests": 12,
+   "paths": {
+    "POST /v1/messages": 12
+   },
+   "tools_offered": [
+    "Glob",
+    "Grep",
+    "Read",
+    "DeferredToolPlaceholder",
+    "StructuredOutput"
+   ],
+   "tool_schema_tokens": 1672,
+   "tool_schema_tokens_by_tool": {
+    "Glob": 157,
+    "Grep": 776,
+    "Read": 466,
+    "DeferredToolPlaceholder": 41,
+    "StructuredOutput": 231
+   },
+   "system_prompt_tokens": 108,
+   "system_prompt_text": "x-anthropic-billing-header: cc_version=2.1.319.3d1; cc_entrypoint=sdk-cli;\nYou are a Claude agent, built on Anthropic's Claude Agent SDK.\nYou are a senior software engineer diagnosing a bug in the codebase in your current working directory. You can read and search files but you cannot run code, run tests, use git, or modify files. Investigate until you are confident, then give your diagnosis. Be efficient: do not read files you do not need.",
+   "mcp_tools": [],
+   "mcp_expected": "mcp__retrieval__*",
+   "mcp_as_expected": false,
+   "mcp_status": [],
+   "init_check": {
+    "categories": [
+     "mcp_servers",
+     "missing_tool",
+     "plugins"
+    ],
+    "details": [
+     "missing tool: mcp__retrieval__search_code",
+     "non-builtin plugins: swift-lsp",
+     "mcp servers [] != [\"retrieval\"]"
+    ]
+   },
+   "outcome": {
+    "status": "submitted"
+   },
+   "mcp_connected": false,
+   "mcp_tool_schema_tokens": 1,
+   "denied_expected": [],
+   "denied_present": [],
+   "claude_md_hits": [],
+   "claude_md_files_considered": [
+    "/home/adityareddy/.claude/CLAUDE.md"
+   ],
+   "skill_hits": [],
+   "memory_hits": [],
+   "cwd_visible": {
+    "found": true,
+    "where": [
+     "messages[1:system]"
+    ]
+   },
+   "banned_offered": [],
+   "exchanges": [
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "refresh"
+     },
+     "result": "Found 10 files\nsrc/auth/auth.controller.ts\nsrc/auth/auth.module.ts\nsrc/auth/auth.service.ts\nsrc/auth/config/auth-config.type.ts\nsrc/auth/config/auth.config.ts\nsrc/auth/dto/login-response.dto.ts\nsrc/au…",
+     "is_error": false
+    },
+    {
+     "tool": "Glob",
+     "input": {
+      "pattern": "src/auth/*.ts"
+     },
+     "result": "src/auth/auth.service.ts\nsrc/auth/auth-providers.enum.ts\nsrc/auth/auth.module.ts\nsrc/auth/auth.controller.ts",
+     "is_error": false
+    },
+    {
+     "tool": "mcp__none__not_offered",
+     "input": {
+      "$fill": "refresh token"
+     },
+     "result": "<tool_use_error>Error: No such tool available: mcp__none__not_offered</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "src/auth/auth.service.ts"
+     },
+     "result": "1\timport {\n2\t  HttpStatus,\n3\t  Injectable,\n4\t  NotFoundException,\n5\t  UnauthorizedException,\n6\t  UnprocessableEntityException,\n7\t} from '@nestjs/common';\n8\timport ms from 'ms';\n9\timport crypto from 'c…",
+     "is_error": false
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json"
+     },
+     "result": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting bl…",
+     "is_error": true
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "result": "/etc/hostname is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory wit…",
+     "is_error": true
+    },
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "result": "/etc is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-di…",
+     "is_error": true
+    },
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "ls"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "WebFetch",
+     "input": {
+      "url": "https://example.com",
+      "prompt": "x"
+     },
+     "result": "<tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Agent",
+     "input": {
+      "description": "x",
+      "prompt": "x",
+      "subagent_type": "general-purpose"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Skill",
+     "input": {
+      "skill": "graphify"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    }
+   ],
+   "forbidden_read": {
+    "denied": true,
+    "is_error": true,
+    "text": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-dir, or to r…"
+   },
+   "outside_reads": [
+    {
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "denied": true,
+     "text": "/etc/hostname is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-dir, or to remove that setting."
+    },
+    {
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "denied": true,
+     "text": "/etc is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-dir, or to remove that setting."
+    }
+   ],
+   "banned_attempts": {
+    "Bash": "[error] <tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "WebFetch": "[error] <tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Agent": "[error] <tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Skill": "[error] <tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>"
+   },
+   "result": {
+    "subtype": "success",
+    "is_error": false,
+    "num_turns": 13,
+    "duration_ms": 443,
+    "duration_api_ms": 297,
+    "total_cost_usd": 0.030430699999999998,
+    "usage": {
+     "input_tokens": 36,
+     "cache_creation_input_tokens": 6973,
+     "cache_read_input_tokens": 73762,
+     "output_tokens": 555,
+     "output_tokens_details": {
+      "thinking_tokens": 0
+     },
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     },
+     "service_tier": "standard",
+     "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+     },
+     "inference_geo": "",
+     "iterations": [],
+     "speed": "standard",
+     "fallback_credit": null
+    },
+    "modelUsage": {
+     "claude-sonnet-5-5": {
+      "inputTokens": 36,
+      "outputTokens": 555,
+      "cacheReadInputTokens": 73762,
+      "cacheCreationInputTokens": 6973,
+      "webSearchRequests": 0,
+      "costUSD": 0.030430699999999998,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 0,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+     }
+    },
+    "structured_output_present": true,
+    "structured_output": {
+     "candidates": [
+      {
+       "file": "src/auth/auth.service.ts",
+       "symbol": "AuthService.refreshToken",
+       "start_line": 1,
+       "end_line": 2,
+       "explanation": "mock diagnosis (no model was called)"
+      }
+     ]
+    },
+    "permission_denials": 3,
+    "stop_reason": "tool_use"
+   },
+   "model_in_request": "claude-sonnet-5-5",
+   "request_keys": [
+    "model",
+    "messages",
+    "system",
+    "tools",
+    "metadata",
+    "max_tokens",
+    "thinking",
+    "context_management",
+    "output_config",
+    "stream"
+   ],
+   "metadata_keys": [
+    "user_id"
+   ],
+   "init_extra": {
+    "apiKeySource": "ANTHROPIC_API_KEY",
+    "skills": [],
+    "slash_commands": [],
+    "agents": [
+     "claude",
+     "Explore",
+     "general-purpose",
+     "Plan"
+    ],
+    "plugins": [
+     "swift-lsp",
+     "cc-plugin-agents-md",
+     "cc-plugin-privacy",
+     "cc-plugin-plugin-authoring"
+    ],
+    "permissionMode": "dontAsk"
+   },
+   "workspace_changes": {
+    "added": [],
+    "removed": [],
+    "changed": []
+   },
+   "stderr_tail": "",
+   "home_writes": {
+    "attributed": [
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json"
+    ],
+    "unattributed": 0,
+    "unattributed_paths": []
+   }
+  },
+  {
+   "profile": "safe-mode",
+   "kind": "graphify",
+   "ok": true,
+   "requests": 13,
+   "paths": {
+    "POST /v1/messages": 13
+   },
+   "tools_offered": [
+    "Glob",
+    "Grep",
+    "Read",
+    "DeferredToolPlaceholder",
+    "StructuredOutput"
+   ],
+   "tool_schema_tokens": 1672,
+   "tool_schema_tokens_by_tool": {
+    "Glob": 157,
+    "Grep": 776,
+    "Read": 466,
+    "DeferredToolPlaceholder": 41,
+    "StructuredOutput": 231
+   },
+   "system_prompt_tokens": 108,
+   "system_prompt_text": "x-anthropic-billing-header: cc_version=2.1.319.3d1; cc_entrypoint=sdk-cli;\nYou are a Claude agent, built on Anthropic's Claude Agent SDK.\nYou are a senior software engineer diagnosing a bug in the codebase in your current working directory. You can read and search files but you cannot run code, run tests, use git, or modify files. Investigate until you are confident, then give your diagnosis. Be efficient: do not read files you do not need.",
+   "mcp_tools": [],
+   "mcp_expected": "mcp__graphify__*",
+   "mcp_as_expected": false,
+   "mcp_status": [],
+   "init_check": {
+    "categories": [
+     "mcp_servers",
+     "missing_tool",
+     "plugins"
+    ],
+    "details": [
+     "missing tool: mcp__graphify__query_graph",
+     "missing tool: mcp__graphify__get_node",
+     "missing tool: mcp__graphify__get_neighbors",
+     "missing tool: mcp__graphify__get_community",
+     "missing tool: mcp__graphify__god_nodes",
+     "missing tool: mcp__graphify__graph_stats",
+     "missing tool: mcp__graphify__shortest_path",
+     "non-builtin plugins: swift-lsp",
+     "mcp servers [] != [\"graphify\"]"
+    ]
+   },
+   "outcome": {
+    "status": "submitted"
+   },
+   "mcp_connected": false,
+   "mcp_tool_schema_tokens": 1,
+   "denied_expected": [
+    "mcp__graphify__list_prs",
+    "mcp__graphify__get_pr_impact",
+    "mcp__graphify__triage_prs"
+   ],
+   "denied_present": [],
+   "claude_md_hits": [],
+   "claude_md_files_considered": [
+    "/home/adityareddy/.claude/CLAUDE.md"
+   ],
+   "skill_hits": [],
+   "memory_hits": [],
+   "cwd_visible": {
+    "found": true,
+    "where": [
+     "messages[1:system]"
+    ]
+   },
+   "banned_offered": [],
+   "exchanges": [
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "refresh"
+     },
+     "result": "Found 10 files\nsrc/auth/auth.controller.ts\nsrc/auth/auth.module.ts\nsrc/auth/auth.service.ts\nsrc/auth/config/auth-config.type.ts\nsrc/auth/config/auth.config.ts\nsrc/auth/dto/login-response.dto.ts\nsrc/au…",
+     "is_error": false
+    },
+    {
+     "tool": "Glob",
+     "input": {
+      "pattern": "src/auth/*.ts"
+     },
+     "result": "src/auth/auth.service.ts\nsrc/auth/auth-providers.enum.ts\nsrc/auth/auth.module.ts\nsrc/auth/auth.controller.ts",
+     "is_error": false
+    },
+    {
+     "tool": "mcp__none__not_offered",
+     "input": {
+      "$fill": "refresh token"
+     },
+     "result": "<tool_use_error>Error: No such tool available: mcp__none__not_offered</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "mcp__graphify__list_prs",
+     "input": {},
+     "result": "<tool_use_error>Error: No such tool available: mcp__graphify__list_prs</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "src/auth/auth.service.ts"
+     },
+     "result": "1\timport {\n2\t  HttpStatus,\n3\t  Injectable,\n4\t  NotFoundException,\n5\t  UnauthorizedException,\n6\t  UnprocessableEntityException,\n7\t} from '@nestjs/common';\n8\timport ms from 'ms';\n9\timport crypto from 'c…",
+     "is_error": false
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json"
+     },
+     "result": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting bl…",
+     "is_error": true
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "result": "/etc/hostname is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory wit…",
+     "is_error": true
+    },
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "result": "/etc is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-di…",
+     "is_error": true
+    },
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "ls"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "WebFetch",
+     "input": {
+      "url": "https://example.com",
+      "prompt": "x"
+     },
+     "result": "<tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Agent",
+     "input": {
+      "description": "x",
+      "prompt": "x",
+      "subagent_type": "general-purpose"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Skill",
+     "input": {
+      "skill": "graphify"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    }
+   ],
+   "forbidden_read": {
+    "denied": true,
+    "is_error": true,
+    "text": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-dir, or to r…"
+   },
+   "outside_reads": [
+    {
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "denied": true,
+     "text": "/etc/hostname is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-dir, or to remove that setting."
+    },
+    {
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "denied": true,
+     "text": "/etc is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-dir, or to remove that setting."
+    }
+   ],
+   "banned_attempts": {
+    "Bash": "[error] <tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "WebFetch": "[error] <tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Agent": "[error] <tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Skill": "[error] <tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>"
+   },
+   "denied_attempt": "<tool_use_error>Error: No such tool available: mcp__graphify__list_prs</tool_use_error>",
+   "result": {
+    "subtype": "success",
+    "is_error": false,
+    "num_turns": 14,
+    "duration_ms": 526,
+    "duration_api_ms": 359,
+    "total_cost_usd": 0.0179092,
+    "usage": {
+     "input_tokens": 39,
+     "cache_creation_input_tokens": 1343,
+     "cache_read_input_tokens": 83237,
+     "output_tokens": 615,
+     "output_tokens_details": {
+      "thinking_tokens": 0
+     },
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     },
+     "service_tier": "standard",
+     "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+     },
+     "inference_geo": "",
+     "iterations": [],
+     "speed": "standard",
+     "fallback_credit": null
+    },
+    "modelUsage": {
+     "claude-sonnet-5-5": {
+      "inputTokens": 39,
+      "outputTokens": 615,
+      "cacheReadInputTokens": 83237,
+      "cacheCreationInputTokens": 1343,
+      "webSearchRequests": 0,
+      "costUSD": 0.0179092,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 0,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+     }
+    },
+    "structured_output_present": true,
+    "structured_output": {
+     "candidates": [
+      {
+       "file": "src/auth/auth.service.ts",
+       "symbol": "AuthService.refreshToken",
+       "start_line": 1,
+       "end_line": 2,
+       "explanation": "mock diagnosis (no model was called)"
+      }
+     ]
+    },
+    "permission_denials": 3,
+    "stop_reason": "tool_use"
+   },
+   "model_in_request": "claude-sonnet-5-5",
+   "request_keys": [
+    "model",
+    "messages",
+    "system",
+    "tools",
+    "metadata",
+    "max_tokens",
+    "thinking",
+    "context_management",
+    "output_config",
+    "stream"
+   ],
+   "metadata_keys": [
+    "user_id"
+   ],
+   "init_extra": {
+    "apiKeySource": "ANTHROPIC_API_KEY",
+    "skills": [],
+    "slash_commands": [],
+    "agents": [
+     "claude",
+     "Explore",
+     "general-purpose",
+     "Plan"
+    ],
+    "plugins": [
+     "swift-lsp",
+     "cc-plugin-agents-md",
+     "cc-plugin-privacy",
+     "cc-plugin-plugin-authoring"
+    ],
+    "permissionMode": "dontAsk"
+   },
+   "workspace_changes": {
+    "added": [],
+    "removed": [],
+    "changed": []
+   },
+   "stderr_tail": "",
+   "home_writes": {
+    "attributed": [
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json"
+    ],
+    "unattributed": 0,
+    "unattributed_paths": []
+   }
+  },
+  {
+   "profile": "safe-mode",
+   "kind": "crg",
+   "ok": true,
+   "requests": 13,
+   "paths": {
+    "POST /v1/messages": 13
+   },
+   "tools_offered": [
+    "Glob",
+    "Grep",
+    "Read",
+    "DeferredToolPlaceholder",
+    "StructuredOutput"
+   ],
+   "tool_schema_tokens": 1672,
+   "tool_schema_tokens_by_tool": {
+    "Glob": 157,
+    "Grep": 776,
+    "Read": 466,
+    "DeferredToolPlaceholder": 41,
+    "StructuredOutput": 231
+   },
+   "system_prompt_tokens": 108,
+   "system_prompt_text": "x-anthropic-billing-header: cc_version=2.1.319.3d1; cc_entrypoint=sdk-cli;\nYou are a Claude agent, built on Anthropic's Claude Agent SDK.\nYou are a senior software engineer diagnosing a bug in the codebase in your current working directory. You can read and search files but you cannot run code, run tests, use git, or modify files. Investigate until you are confident, then give your diagnosis. Be efficient: do not read files you do not need.",
+   "mcp_tools": [],
+   "mcp_expected": "mcp__code-review-graph__*",
+   "mcp_as_expected": false,
+   "mcp_status": [],
+   "init_check": {
+    "categories": [
+     "mcp_servers",
+     "missing_tool",
+     "plugins"
+    ],
+    "details": [
+     "missing tool: mcp__code-review-graph__get_minimal_context_tool",
+     "missing tool: mcp__code-review-graph__get_impact_radius_tool",
+     "missing tool: mcp__code-review-graph__query_graph_tool",
+     "missing tool: mcp__code-review-graph__get_review_context_tool",
+     "missing tool: mcp__code-review-graph__semantic_search_nodes_tool",
+     "missing tool: mcp__code-review-graph__list_graph_stats_tool",
+     "missing tool: mcp__code-review-graph__get_docs_section_tool",
+     "missing tool: mcp__code-review-graph__find_large_functions_tool",
+     "missing tool: mcp__code-review-graph__list_flows_tool",
+     "missing tool: mcp__code-review-graph__get_flow_tool",
+     "missing tool: mcp__code-review-graph__get_affected_flows_tool",
+     "missing tool: mcp__code-review-graph__list_communities_tool",
+     "missing tool: mcp__code-review-graph__get_community_tool",
+     "missing tool: mcp__code-review-graph__get_architecture_overview_tool",
+     "missing tool: mcp__code-review-graph__detect_changes_tool",
+     "missing tool: mcp__code-review-graph__refactor_tool",
+     "missing tool: mcp__code-review-graph__get_wiki_page_tool",
+     "missing tool: mcp__code-review-graph__get_hub_nodes_tool",
+     "missing tool: mcp__code-review-graph__get_bridge_nodes_tool",
+     "missing tool: mcp__code-review-graph__get_knowledge_gaps_tool",
+     "missing tool: mcp__code-review-graph__get_surprising_connections_tool",
+     "missing tool: mcp__code-review-graph__get_suggested_questions_tool",
+     "missing tool: mcp__code-review-graph__traverse_graph_tool",
+     "non-builtin plugins: swift-lsp",
+     "mcp servers [] != [\"code-review-graph\"]"
+    ]
+   },
+   "outcome": {
+    "status": "submitted"
+   },
+   "mcp_connected": false,
+   "mcp_tool_schema_tokens": 1,
+   "denied_expected": [
+    "mcp__code-review-graph__apply_refactor_tool",
+    "mcp__code-review-graph__generate_wiki_tool",
+    "mcp__code-review-graph__build_or_update_graph_tool",
+    "mcp__code-review-graph__embed_graph_tool",
+    "mcp__code-review-graph__run_postprocess_tool",
+    "mcp__code-review-graph__cross_repo_search_tool",
+    "mcp__code-review-graph__list_repos_tool"
+   ],
+   "denied_present": [],
+   "claude_md_hits": [],
+   "claude_md_files_considered": [
+    "/home/adityareddy/.claude/CLAUDE.md"
+   ],
+   "skill_hits": [],
+   "memory_hits": [],
+   "cwd_visible": {
+    "found": true,
+    "where": [
+     "messages[1:system]"
+    ]
+   },
+   "banned_offered": [],
+   "exchanges": [
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "refresh"
+     },
+     "result": "Found 10 files\nsrc/auth/auth.controller.ts\nsrc/auth/auth.module.ts\nsrc/auth/auth.service.ts\nsrc/auth/config/auth-config.type.ts\nsrc/auth/config/auth.config.ts\nsrc/auth/dto/login-response.dto.ts\nsrc/au…",
+     "is_error": false
+    },
+    {
+     "tool": "Glob",
+     "input": {
+      "pattern": "src/auth/*.ts"
+     },
+     "result": "src/auth/auth.service.ts\nsrc/auth/auth-providers.enum.ts\nsrc/auth/auth.module.ts\nsrc/auth/auth.controller.ts",
+     "is_error": false
+    },
+    {
+     "tool": "mcp__none__not_offered",
+     "input": {
+      "$fill": "refresh token"
+     },
+     "result": "<tool_use_error>Error: No such tool available: mcp__none__not_offered</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "mcp__code-review-graph__apply_refactor_tool",
+     "input": {},
+     "result": "<tool_use_error>Error: No such tool available: mcp__code-review-graph__apply_refactor_tool</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "src/auth/auth.service.ts"
+     },
+     "result": "1\timport {\n2\t  HttpStatus,\n3\t  Injectable,\n4\t  NotFoundException,\n5\t  UnauthorizedException,\n6\t  UnprocessableEntityException,\n7\t} from '@nestjs/common';\n8\timport ms from 'ms';\n9\timport crypto from 'c…",
+     "is_error": false
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json"
+     },
+     "result": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting bl…",
+     "is_error": true
+    },
+    {
+     "tool": "Read",
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "result": "/etc/hostname is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory wit…",
+     "is_error": true
+    },
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "result": "/etc is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-di…",
+     "is_error": true
+    },
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "ls"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "WebFetch",
+     "input": {
+      "url": "https://example.com",
+      "prompt": "x"
+     },
+     "result": "<tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Agent",
+     "input": {
+      "description": "x",
+      "prompt": "x",
+      "subagent_type": "general-purpose"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    },
+    {
+     "tool": "Skill",
+     "input": {
+      "skill": "graphify"
+     },
+     "result": "<tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>",
+     "is_error": true
+    }
+   ],
+   "forbidden_read": {
+    "denied": true,
+    "is_error": true,
+    "text": "/home/adityareddy/dev/experiments/code-graphs/evaluation/dataset/tasks/auth_jwt_secret_01.json is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-dir, or to r…"
+   },
+   "outside_reads": [
+    {
+     "input": {
+      "file_path": "../../../../etc/hostname"
+     },
+     "denied": true,
+     "text": "/etc/hostname is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-dir, or to remove that setting."
+    },
+    {
+     "input": {
+      "pattern": "x",
+      "path": "/etc"
+     },
+     "denied": true,
+     "text": "/etc is outside /tmp/work/87ba94e5b0/app, /tmp; the permissions.blockReadsOutsideWorkingDirectories setting blocks reads outside the working directories. Ask the user to add the directory with /add-dir, or to remove that setting."
+    }
+   ],
+   "banned_attempts": {
+    "Bash": "[error] <tool_use_error>Error: No such tool available: Bash. Bash is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "WebFetch": "[error] <tool_use_error>Error: No such tool available: WebFetch. WebFetch is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Agent": "[error] <tool_use_error>Error: No such tool available: Agent. Agent is disabled for this session, in subagents as well as here.</tool_use_error>",
+    "Skill": "[error] <tool_use_error>Error: No such tool available: Skill. Skill is disabled for this session, in subagents as well as here.</tool_use_error>"
+   },
+   "denied_attempt": "<tool_use_error>Error: No such tool available: mcp__code-review-graph__apply_refactor_tool</tool_use_error>",
+   "result": {
+    "subtype": "success",
+    "is_error": false,
+    "num_turns": 14,
+    "duration_ms": 478,
+    "duration_api_ms": 328,
+    "total_cost_usd": 0.017885,
+    "usage": {
+     "input_tokens": 39,
+     "cache_creation_input_tokens": 1344,
+     "cache_read_input_tokens": 83170,
+     "output_tokens": 613,
+     "output_tokens_details": {
+      "thinking_tokens": 0
+     },
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     },
+     "service_tier": "standard",
+     "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+     },
+     "inference_geo": "",
+     "iterations": [],
+     "speed": "standard",
+     "fallback_credit": null
+    },
+    "modelUsage": {
+     "claude-sonnet-5-5": {
+      "inputTokens": 39,
+      "outputTokens": 613,
+      "cacheReadInputTokens": 83170,
+      "cacheCreationInputTokens": 1344,
+      "webSearchRequests": 0,
+      "costUSD": 0.017885,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 0,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+     }
+    },
+    "structured_output_present": true,
+    "structured_output": {
+     "candidates": [
+      {
+       "file": "src/auth/auth.service.ts",
+       "symbol": "AuthService.refreshToken",
+       "start_line": 1,
+       "end_line": 2,
+       "explanation": "mock diagnosis (no model was called)"
+      }
+     ]
+    },
+    "permission_denials": 3,
+    "stop_reason": "tool_use"
+   },
+   "model_in_request": "claude-sonnet-5-5",
+   "request_keys": [
+    "model",
+    "messages",
+    "system",
+    "tools",
+    "metadata",
+    "max_tokens",
+    "thinking",
+    "context_management",
+    "output_config",
+    "stream"
+   ],
+   "metadata_keys": [
+    "user_id"
+   ],
+   "init_extra": {
+    "apiKeySource": "ANTHROPIC_API_KEY",
+    "skills": [],
+    "slash_commands": [],
+    "agents": [
+     "claude",
+     "Explore",
+     "general-purpose",
+     "Plan"
+    ],
+    "plugins": [
+     "swift-lsp",
+     "cc-plugin-agents-md",
+     "cc-plugin-privacy",
+     "cc-plugin-plugin-authoring"
+    ],
+    "permissionMode": "dontAsk"
+   },
+   "workspace_changes": {
+    "added": [],
+    "removed": [],
+    "changed": []
+   },
+   "stderr_tail": "",
+   "home_writes": {
+    "attributed": [
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json",
+     "/home/adityareddy/.claude/projects/-home-adityareddy-dev-experiments-code-graphs/23e3bc90-9e59-4b21-8b1a-a3b8f2648e0b.jsonl"
+    ],
+    "unattributed": 0,
+    "unattributed_paths": []
+   }
+  },
+  {
+   "profile": "safe-mode",
+   "kind": "max-turns(2)",
+   "ok": true,
+   "requests": 2,
+   "paths": {
+    "POST /v1/messages": 2
+   },
+   "tools_offered": [
+    "Glob",
+    "Grep",
+    "Read",
+    "DeferredToolPlaceholder",
+    "StructuredOutput"
+   ],
+   "tool_schema_tokens": 1672,
+   "tool_schema_tokens_by_tool": {
+    "Glob": 157,
+    "Grep": 776,
+    "Read": 466,
+    "DeferredToolPlaceholder": 41,
+    "StructuredOutput": 231
+   },
+   "system_prompt_tokens": 108,
+   "system_prompt_text": "x-anthropic-billing-header: cc_version=2.1.319.3d1; cc_entrypoint=sdk-cli;\nYou are a Claude agent, built on Anthropic's Claude Agent SDK.\nYou are a senior software engineer diagnosing a bug in the codebase in your current working directory. You can read and search files but you cannot run code, run tests, use git, or modify files. Investigate until you are confident, then give your diagnosis. Be efficient: do not read files you do not need.",
+   "mcp_tools": [],
+   "mcp_as_expected": true,
+   "mcp_status": [],
+   "init_check": {
+    "categories": [
+     "plugins"
+    ],
+    "details": [
+     "non-builtin plugins: swift-lsp"
+    ]
+   },
+   "outcome": {
+    "status": "max_turns"
+   },
+   "mcp_connected": null,
+   "mcp_tool_schema_tokens": 1,
+   "denied_expected": [],
+   "denied_present": [],
+   "claude_md_hits": [],
+   "claude_md_files_considered": [
+    "/home/adityareddy/.claude/CLAUDE.md"
+   ],
+   "skill_hits": [],
+   "memory_hits": [],
+   "cwd_visible": {
+    "found": true,
+    "where": [
+     "messages[1:system]"
+    ]
+   },
+   "banned_offered": [],
+   "exchanges": [
+    {
+     "tool": "Grep",
+     "input": {
+      "pattern": "refresh"
+     },
+     "result": "Found 10 files\nsrc/auth/auth.controller.ts\nsrc/auth/auth.module.ts\nsrc/auth/auth.service.ts\nsrc/auth/config/auth-config.type.ts\nsrc/auth/config/auth.config.ts\nsrc/auth/dto/login-response.dto.ts\nsrc/au…",
+     "is_error": false
+    }
+   ],
+   "forbidden_read": {
+    "denied": false,
+    "text": "(no exchange recorded)"
+   },
+   "outside_reads": [],
+   "banned_attempts": {},
+   "result": {
+    "subtype": "error_max_turns",
+    "is_error": true,
+    "num_turns": 3,
+    "duration_ms": 109,
+    "duration_api_ms": 49,
+    "total_cost_usd": 0.0021797,
+    "usage": {
+     "input_tokens": 6,
+     "cache_creation_input_tokens": 400,
+     "cache_read_input_tokens": 3977,
+     "output_tokens": 77,
+     "output_tokens_details": {
+      "thinking_tokens": 0
+     },
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     },
+     "service_tier": "standard",
+     "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+     },
+     "inference_geo": "",
+     "iterations": [],
+     "speed": "standard",
+     "fallback_credit": null
+    },
+    "modelUsage": {
+     "claude-sonnet-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 77,
+      "cacheReadInputTokens": 3977,
+      "cacheCreationInputTokens": 400,
+      "webSearchRequests": 0,
+      "costUSD": 0.0021797,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 0,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+     }
+    },
+    "structured_output_present": false,
+    "permission_denials": 0,
+    "stop_reason": "tool_use",
+    "errors": [
+     "Reached maximum number of turns (2)"
+    ]
+   },
+   "model_in_request": "claude-sonnet-5-5",
+   "request_keys": [
+    "model",
+    "messages",
+    "system",
+    "tools",
+    "metadata",
+    "max_tokens",
+    "thinking",
+    "context_management",
+    "output_config",
+    "stream"
+   ],
+   "metadata_keys": [
+    "user_id"
+   ],
+   "init_extra": {
+    "apiKeySource": "ANTHROPIC_API_KEY",
+    "skills": [],
+    "slash_commands": [],
+    "agents": [
+     "claude",
+     "Explore",
+     "general-purpose",
+     "Plan"
+    ],
+    "plugins": [
+     "swift-lsp",
+     "cc-plugin-agents-md",
+     "cc-plugin-privacy",
+     "cc-plugin-plugin-authoring"
+    ],
+    "permissionMode": "dontAsk"
+   },
+   "workspace_changes": {
+    "added": [],
+    "removed": [],
+    "changed": []
+   },
+   "stderr_tail": "",
+   "home_writes": {
+    "attributed": [
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json"
+    ],
+    "unattributed": 0,
+    "unattributed_paths": []
+   }
+  },
+  {
+   "profile": "safe-mode",
+   "kind": "single-shot",
+   "ok": true,
+   "requests": 1,
+   "paths": {
+    "POST /v1/messages": 1
+   },
+   "tools_offered": [
+    "DeferredToolPlaceholder",
+    "StructuredOutput"
+   ],
+   "tool_schema_tokens": 273,
+   "tool_schema_tokens_by_tool": {
+    "DeferredToolPlaceholder": 41,
+    "StructuredOutput": 231
+   },
+   "system_prompt_tokens": 65,
+   "system_prompt_text": "x-anthropic-billing-header: cc_version=2.1.319.7fd; cc_entrypoint=sdk-cli;\nYou are a Claude agent, built on Anthropic's Claude Agent SDK.\nYou are a senior software engineer diagnosing a bug from a bug report and the material provided. Answer with JSON only.",
+   "mcp_tools": [],
+   "mcp_as_expected": true,
+   "mcp_status": [],
+   "outcome": {
+    "status": "submitted"
+   },
+   "mcp_connected": null,
+   "mcp_tool_schema_tokens": 1,
+   "denied_expected": [],
+   "denied_present": [],
+   "claude_md_hits": [],
+   "claude_md_files_considered": [
+    "/home/adityareddy/.claude/CLAUDE.md"
+   ],
+   "skill_hits": [],
+   "memory_hits": [],
+   "cwd_visible": {
+    "found": false,
+    "where": []
+   },
+   "banned_offered": [],
+   "exchanges": [],
+   "forbidden_read": {
+    "denied": false,
+    "text": "(no exchange recorded)"
+   },
+   "outside_reads": [],
+   "banned_attempts": {},
+   "result": {
+    "subtype": "success",
+    "is_error": false,
+    "num_turns": 2,
+    "duration_ms": 54,
+    "duration_api_ms": 31,
+    "total_cost_usd": 0.0014681,
+    "usage": {
+     "input_tokens": 3,
+     "cache_creation_input_tokens": 261,
+     "cache_read_input_tokens": 396,
+     "output_tokens": 77,
+     "output_tokens_details": {
+      "thinking_tokens": 0
+     },
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     },
+     "service_tier": "standard",
+     "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+     },
+     "inference_geo": "",
+     "iterations": [],
+     "speed": "standard",
+     "fallback_credit": null
+    },
+    "modelUsage": {
+     "claude-sonnet-5-5": {
+      "inputTokens": 3,
+      "outputTokens": 77,
+      "cacheReadInputTokens": 396,
+      "cacheCreationInputTokens": 261,
+      "webSearchRequests": 0,
+      "costUSD": 0.0014681,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 0,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+     }
+    },
+    "structured_output_present": true,
+    "structured_output": {
+     "candidates": [
+      {
+       "file": "src/auth/auth.service.ts",
+       "symbol": "AuthService.refreshToken",
+       "start_line": 1,
+       "end_line": 2,
+       "explanation": "mock diagnosis (no model was called)"
+      }
+     ]
+    },
+    "permission_denials": 0,
+    "stop_reason": "tool_use"
+   },
+   "model_in_request": "claude-sonnet-5-5",
+   "request_keys": [
+    "model",
+    "messages",
+    "system",
+    "tools",
+    "metadata",
+    "max_tokens",
+    "thinking",
+    "context_management",
+    "output_config",
+    "stream"
+   ],
+   "metadata_keys": [
+    "user_id"
+   ],
+   "init_extra": {
+    "apiKeySource": "ANTHROPIC_API_KEY",
+    "skills": [],
+    "slash_commands": [],
+    "agents": [
+     "claude",
+     "Explore",
+     "general-purpose",
+     "Plan"
+    ],
+    "plugins": [
+     "swift-lsp",
+     "cc-plugin-agents-md",
+     "cc-plugin-privacy",
+     "cc-plugin-plugin-authoring"
+    ],
+    "permissionMode": "dontAsk"
+   },
+   "workspace_changes": {
+    "added": [],
+    "removed": [],
+    "changed": []
+   },
+   "stderr_tail": "",
+   "home_writes": {
+    "attributed": [],
+    "unattributed": 1,
+    "unattributed_paths": [
+     "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json"
+    ]
+   }
+  }
+ ],
+ "filesystem": {
+  "roots": [
+   "/home/adityareddy/.claude",
+   "/home/adityareddy/.claude.json",
+   "/home/adityareddy/.config/claude-accounts"
+  ],
+  "files_before": 6839,
+  "files_after": 6839,
+  "added": 1,
+  "changed": 8,
+  "removed": 1,
+  "attributed_to_verify_children": [
+   "/home/adityareddy/.claude/plugins/store/cc-plugin-agents-md_builtin-b049b47b3618.json",
+   "/home/adityareddy/.claude/projects/-home-adityareddy-dev-experiments-code-graphs/23e3bc90-9e59-4b21-8b1a-a3b8f2648e0b.jsonl"
+  ],
+  "unattributed_changes": 7,
+  "unattributed_sample": [
+   "/home/adityareddy/.claude/backups/.claude.json.backup.1794146507487",
+   "/home/adityareddy/.claude/plugins/store/cc-plugin-diff_builtin-3903e77c01b1.json",
+   "/home/adityareddy/.claude/plugins/synced/844d688b-1262-461a-bbee-85143f6da0ca_1443505e-7930-4a5b-96c2-54a90b3e8e67/.last-complete-round",
+   "/home/adityareddy/.claude/session-guardian/daemon.json",
+   "/home/adityareddy/.claude/skills/synced/844d688b-1262-461a-bbee-85143f6da0ca_1443505e-7930-4a5b-96c2-54a90b3e8e67/.last-complete-round",
+   "/home/adityareddy/.claude/skills/synced/844d688b-1262-461a-bbee-85143f6da0ca_1443505e-7930-4a5b-96c2-54a90b3e8e67/manifest.json",
+   "/home/adityareddy/.claude.json"
+  ],
+  "note": "Unattributed changes come from OTHER live Claude Code sessions (including the one running this script); they mention neither a verify child session id nor the verify workspace path."
+ }
+}

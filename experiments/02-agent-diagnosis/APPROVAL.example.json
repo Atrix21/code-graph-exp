@@ -1,0 +1,9 @@
+{
+  "_comment": "TEMPLATE ONLY. The harness reads APPROVAL.json (not this file). It is written by the lead only after the project owner explicitly approves a stage. Each entry is the most a single invocation may spend; the harness also enforces per-run caps (--run-usd).",
+  "approved_by": "<project owner>",
+  "approved_at": "<ISO timestamp>",
+  "approvals": [
+    { "_stage": "1 smoke pilot", "protocol": "agentic", "conditions": ["baseline", "embeddings", "hybrid", "graphify", "crg"], "model": "claude-sonnet-5-5", "split": "dev", "max_total_usd": 3 },
+    { "_stage": "1 smoke pilot", "protocol": "single_shot", "conditions": "*", "model": "claude-sonnet-5-5", "split": "dev", "max_total_usd": 1 }
+  ]
+}

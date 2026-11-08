@@ -76,3 +76,77 @@ export function report(runs: ScoredRun[], reference?: string): string {
   }
   return out.join('\n');
 }
+
+/* ---------------------------- Confirmatory analysis (protocol §Analysis plan) ---------------------------- */
+
+export interface Comparison { id: string; hypothesis: string; a: string; b: string; metric: string; lowerIsBetter?: boolean; subset?: 'all' | 'both-correct' }
+
+export const CONFIRMATORY: Comparison[] = [
+  { id: 'H1a', hypothesis: 'agentic hybrid > agentic baseline (RC+line@1)', a: 'agentic:hybrid', b: 'agentic:baseline', metric: PRIMARY },
+  { id: 'H1b', hypothesis: 'agentic hybrid > agentic embeddings (RC+line@1)', a: 'agentic:hybrid', b: 'agentic:embeddings', metric: PRIMARY },
+  { id: 'H1c-2k', hypothesis: 'single-shot hybrid > embeddings @2k (RC+line@1)', a: 'single:hybrid@2000', b: 'single:embeddings@2000', metric: PRIMARY },
+  { id: 'H1c-8k', hypothesis: 'single-shot hybrid > embeddings @8k (RC+line@1)', a: 'single:hybrid@8000', b: 'single:embeddings@8000', metric: PRIMARY },
+  { id: 'H2-tokens', hypothesis: 'agentic hybrid uses fewer tokens/run than baseline', a: 'agentic:hybrid', b: 'agentic:baseline', metric: 'tokens', lowerIsBetter: true },
+  { id: 'H2-cost', hypothesis: 'agentic hybrid costs less/run than baseline', a: 'agentic:hybrid', b: 'agentic:baseline', metric: 'cost', lowerIsBetter: true },
+];
+
+export const EXPLORATORY_EFFICIENCY: Comparison[] = [
+  { id: 'E-tokens-both-correct', hypothesis: 'tokens/run, tasks where both are correct', a: 'agentic:hybrid', b: 'agentic:baseline', metric: 'tokens', lowerIsBetter: true, subset: 'both-correct' },
+  { id: 'E-latency', hypothesis: 'latency/run', a: 'agentic:hybrid', b: 'agentic:baseline', metric: 'latency', lowerIsBetter: true },
+  { id: 'E-turns', hypothesis: 'turns/run', a: 'agentic:hybrid', b: 'agentic:baseline', metric: 'turns', lowerIsBetter: true },
+];
+
+/** Paired comparison over shared tasks. "Improvement" is a−b, sign-flipped for lower-is-better metrics. p ≈ P(improvement ≤ 0) under the bootstrap. */
+export function compare(pt: Map<string, Map<string, Record<string, number>>>, c: Comparison) {
+  const A = pt.get(c.a), B = pt.get(c.b);
+  if (!A || !B) return { ...c, n: 0, missing: true as const };
+  let ids = [...A.keys()].filter((t) => B.has(t)).sort();
+  if (c.subset === 'both-correct') ids = ids.filter((t) => A.get(t)![PRIMARY] >= 0.5 && B.get(t)![PRIMARY] >= 0.5);
+  const sign = c.lowerIsBetter ? -1 : 1;
+  const a = ids.map((t) => sign * A.get(t)![c.metric]), b = ids.map((t) => sign * B.get(t)![c.metric]);
+  if (!ids.length || a.some((x) => !Number.isFinite(x)) || b.some((x) => !Number.isFinite(x))) return { ...c, n: ids.length, missing: true as const };
+  const p = pairedBootstrap(a, b);
+  const w = a.filter((x, i) => x > b[i]).length, l = a.filter((x, i) => x < b[i]).length;
+  return { ...c, n: ids.length, missing: false as const, mean_a: sign * mean(a), mean_b: sign * mean(b), improvement: p.mean_diff, ci: p.ci, p_one_sided: p.p_le_0, wins: w, losses: l, ties: ids.length - w - l };
+}
+
+/** Holm–Bonferroni over the confirmatory family (one-sided bootstrap p-values). */
+export function holm(ps: number[], alpha = 0.05): { adjusted: number[]; reject: boolean[] } {
+  const order = ps.map((p, i) => [p, i] as const).sort((x, y) => x[0] - y[0]);
+  const adjusted = new Array(ps.length).fill(1);
+  let running = 0;
+  order.forEach(([p, i], k) => { running = Math.max(running, Math.min(1, (ps.length - k) * p)); adjusted[i] = running; });
+  return { adjusted, reject: adjusted.map((p) => p <= alpha) };
+}
+
+export function repeatAgreement(runs: ScoredRun[]): Record<string, number> {
+  const pt = perTask(runs);
+  const out: Record<string, number> = {};
+  for (const [c, tasks] of pt) {
+    const v = [...tasks.values()].map((t) => t.repeat_agreement).filter(Number.isFinite);
+    out[c] = v.length ? mean(v) : NaN;
+  }
+  return out;
+}
+
+export function confirmatoryReport(runs: ScoredRun[]): string {
+  const pt = perTask(runs);
+  const conf = CONFIRMATORY.map((c) => compare(pt, c));
+  const present = conf.filter((c) => !c.missing) as Extract<ReturnType<typeof compare>, { missing: false }>[];
+  const h = holm(present.map((c) => c.p_one_sided));
+  const fmt = (x: number, m: string) => (m === 'cost' ? x.toFixed(4) : m === PRIMARY ? x.toFixed(2) : Math.round(x).toLocaleString('en-US'));
+  const lines = ['| ID | Hypothesis | n tasks | A | B | Improvement [95% CI] | W/L/T | p (one-sided) | Holm-adjusted | Supported at α=0.05 |', '|---|---|---:|---:|---:|---:|---:|---:|---:|---|'];
+  for (const c of conf) {
+    if (c.missing) { lines.push(`| ${c.id} | ${c.hypothesis} | — | — | — | not run | — | — | — | — |`); continue; }
+    const k = present.indexOf(c as any);
+    lines.push(`| ${c.id} | ${c.hypothesis} | ${c.n} | ${fmt(c.mean_a, c.metric)} | ${fmt(c.mean_b, c.metric)} | ${fmt(c.improvement, c.metric)} [${fmt(c.ci[0], c.metric)}, ${fmt(c.ci[1], c.metric)}] | ${c.wins}/${c.losses}/${c.ties} | ${c.p_one_sided.toFixed(3)} | ${h.adjusted[k].toFixed(3)} | ${h.reject[k] ? 'yes' : 'no'} |`);
+  }
+  lines.push('', 'Exploratory efficiency (not part of the confirmatory family):', '', '| ID | Comparison | n | A | B | Improvement [95% CI] | W/L/T |', '|---|---|---:|---:|---:|---:|---:|');
+  for (const c of EXPLORATORY_EFFICIENCY.map((x) => compare(pt, x))) {
+    if (c.missing) { lines.push(`| ${c.id} | ${c.hypothesis} | — | — | — | not run | — |`); continue; }
+    lines.push(`| ${c.id} | ${c.hypothesis} | ${c.n} | ${fmt(c.mean_a, c.metric)} | ${fmt(c.mean_b, c.metric)} | ${fmt(c.improvement, c.metric)} [${fmt(c.ci[0], c.metric)}, ${fmt(c.ci[1], c.metric)}] | ${c.wins}/${c.losses}/${c.ties} |`);
+  }
+  const ra = repeatAgreement(runs);
+  lines.push('', 'Repeat agreement (share of tasks whose primary outcome is identical across repeats): ' + Object.entries(ra).map(([c, v]) => `${c} ${Number.isFinite(v) ? v.toFixed(2) : '—'}`).join(' · '));
+  return lines.join('\n');
+}

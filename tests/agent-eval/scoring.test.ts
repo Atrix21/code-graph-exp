@@ -2,9 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { loadConfig } from '../../src/config.js';
 import { loadTasks } from '../../src/evaluation/ground-truth.js';
 import { abs } from '../../src/config.js';
-import { checkoutSnapshot } from '../../src/evaluation/corpus.js';
-import { SymbolIndex } from '../../src/evaluation/symbol-index.js';
-import { bugLocations, parseDiagnosis, scoreDiagnosis } from '../../src/agent-eval/scoring.js';
+import { bugLocations, parseDiagnosis, scoreDiagnosis, snapshotIndex } from '../../src/agent-eval/scoring.js';
 
 const cfg = loadConfig();
 const tasks = loadTasks(abs(cfg.dataset.tasks_dir));
@@ -12,8 +10,7 @@ const tasks = loadTasks(abs(cfg.dataset.tasks_dir));
 describe('diagnosis scorer on every task', () => {
   for (const t of tasks) {
     it(`${t.task_id}: perfect=1, right-symbol-wrong-line partial, wrong=0`, () => {
-      const corpus = checkoutSnapshot(cfg, t.task_id);
-      const index = new SymbolIndex(corpus.repoRoot, corpus.files);
+      const index = snapshotIndex(cfg, t.task_id, 'test-scoring'); // read-only export: safe when test files run in parallel
       const bugs = bugLocations(cfg, t.task_id);
       const [file, sym] = t.root_cause_symbols[0].split('::');
       const line = bugs.find((b) => b.file === file)!.lines[0];

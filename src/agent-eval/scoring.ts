@@ -17,10 +17,28 @@ import type { Diagnosis } from './types.js';
 import { buildWorkspace } from './workspace.js';
 
 export const LINE_SLACK = 2;
+/** A candidate's line range earns line credit only if it is at most (span of the declaration containing the defect + this). */
+export const RANGE_ALLOWANCE = 10;
+
+/** Workspace prefixes an agent may report (Claude Code tools print absolute paths; CRG output is absolute). */
+const WORKSPACE_PREFIX = /^(?:\/tmp\/work\/[^/]+\/app|\/workspace\/app|\/tmp\/cgbench\/w)\//;
+
+/** Normalise a reported file: strip workspace prefixes, './', and a trailing ':line' or ':a-b' (audit F-02). */
+export function normaliseCandidateFile(f: string): { file: string; line?: number; end?: number } {
+  let file = (f ?? '').trim().replace(WORKSPACE_PREFIX, '').replace(/^\.\//, '');
+  const m = /^(.*?\.tsx?):(\d+)(?:-(\d+))?$/.exec(file);
+  if (m) return { file: m[1], line: Number(m[2]), end: m[3] ? Number(m[3]) : undefined };
+  return { file };
+}
+
+/** Strip prose annotations and call syntax from a reported symbol (audit F-13). */
+export function normaliseCandidateSymbol(sym: string): string {
+  return (sym ?? '').trim().replace(/\s*\(.*$/s, '').replace(/\s+.*$/s, '').trim();
+}
 
 /** Symbol index of a task snapshot built from a read-only `git archive` export (safe under concurrency). */
-export function snapshotIndex(cfg: BenchmarkConfig, taskId: string): SymbolIndex {
-  const ws = buildWorkspace(cfg, taskId, 'score');
+export function snapshotIndex(cfg: BenchmarkConfig, taskId: string, tag = 'score'): SymbolIndex {
+  const ws = buildWorkspace(cfg, taskId, tag);
   return new SymbolIndex(ws.dir, ws.files);
 }
 
@@ -69,16 +87,26 @@ export function scoreDiagnosis(index: SymbolIndex, gt: GroundTruthTask, bugs: Bu
   if (!d || !Array.isArray(d.candidates) || !d.candidates.length) return zero;
   const rc = new Set(gt.root_cause_symbols);
   const rcFiles = new Set(gt.root_cause_symbols.map((k) => k.split('::')[0]));
-  const cands = d.candidates.slice(0, 3);
+  const cands = d.candidates.slice(0, 3).map((c) => {
+    const nf = normaliseCandidateFile(c.file);
+    const start = c.start_line ?? nf.line;
+    return { ...c, file: nf.file, symbol: normaliseCandidateSymbol(c.symbol), start_line: start, end_line: c.end_line ?? nf.end ?? start };
+  });
   const resolved = cands.map((c, i) => normaliseItem(index, {
     file: c.file, symbol: c.symbol, start_line: c.start_line ?? null, end_line: c.end_line ?? c.start_line ?? null, score: null,
   }, i + 1).symbolKey);
   const lineHit = (i: number) => {
     const c = cands[i];
-    const f = c.file?.replace(/^\.\//, '');
     if (c.start_line == null) return false;
-    const a = c.start_line, b = c.end_line ?? c.start_line;
-    return bugs.some((bl) => bl.file === f && bl.lines.some((x) => x >= a - LINE_SLACK && x <= b + LINE_SLACK));
+    const a = c.start_line, b = Math.max(c.end_line ?? c.start_line, c.start_line);
+    return bugs.some((bl) => {
+      if (bl.file !== c.file) return false;
+      // Audit F-12: a range much wider than the defective declaration (e.g. the whole file) earns no line credit.
+      const decl = index.symbolAtLine(bl.file, bl.lines[0]);
+      const span = decl && decl.kind !== 'module' ? decl.end_line - decl.start_line + 1 : 40;
+      if (b - a + 1 > span + RANGE_ALLOWANCE) return false;
+      return bl.lines.some((x) => x >= a - LINE_SLACK && x <= b + LINE_SLACK);
+    });
   };
   const rcRank = resolved.findIndex((k) => k != null && rc.has(k));
   const top = cands[0];
@@ -86,7 +114,7 @@ export function scoreDiagnosis(index: SymbolIndex, gt: GroundTruthTask, bugs: Bu
     valid: 1,
     rc_at_1: rcRank === 0 ? 1 : 0,
     rc_at_3: rcRank >= 0 ? 1 : 0,
-    file_at_1: rcFiles.has((top.file ?? '').replace(/^\.\//, '')) ? 1 : 0,
+    file_at_1: rcFiles.has(top.file) ? 1 : 0,
     line_at_1: lineHit(0) ? 1 : 0,
     line_at_3: cands.some((_, i) => lineHit(i)) ? 1 : 0,
     rc_line_at_1: rcRank === 0 && lineHit(0) ? 1 : 0,
