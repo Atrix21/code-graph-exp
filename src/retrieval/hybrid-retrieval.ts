@@ -13,7 +13,7 @@ import type { Corpus, IndexStats, RetrievalBudget, RetrievalMethod, RetrievalOut
 import { BM25Retriever } from './bm25.js';
 import { EmbeddingRetriever } from './embeddings.js';
 import { DEFAULT_GRAPH_CONFIG, GraphEngine, basePrior, type GraphConfig } from './graph-engine.js';
-import { DEFAULT_SNIPPETS, loadOrBuildGraph, renderRanked, type RankedSymbol, type SnippetConfig } from './graph-retrieval.js';
+import { DEFAULT_SNIPPETS, loadOrBuildGraph, renderRanked, resetSourceCache, type RankedSymbol, type SnippetConfig } from './graph-retrieval.js';
 import { extractIdentifierLikeTerms, tokenize } from './text.js';
 
 export interface HybridConfig {
@@ -43,6 +43,7 @@ export class HybridRetriever implements RetrievalMethod {
   async prepare(corpus: Corpus): Promise<IndexStats> {
     const t0 = performance.now();
     this.repoRoot = corpus.repoRoot;
+    resetSourceCache();
     const b = await this.bm25.prepare(corpus);
     const needEmb = this.cfg.wSem > 0;
     const e = needEmb ? await this.emb.prepare(corpus) : null;

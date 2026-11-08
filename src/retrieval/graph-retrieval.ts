@@ -43,7 +43,10 @@ export const DEFAULT_SNIPPETS: SnippetConfig = { fullTop: 5, maxLinesFull: 80, s
 
 export interface RankedSymbol { node: GraphNode | null; key: string; file: string; qualified: string; start: number; end: number; score: number; why: string[]; prop?: Propagated }
 
+// Source-line cache for snippet rendering. Cleared on every prepare(): all snapshots live at the same path,
+// so a path-keyed cache would otherwise serve another snapshot's source (bug fix D-023).
 const lineCache = new Map<string, string[]>();
+export function resetSourceCache() { lineCache.clear(); }
 function fileLines(repoRoot: string, file: string): string[] {
   const k = repoRoot + '\0' + file;
   let l = lineCache.get(k);
@@ -110,6 +113,7 @@ export class GraphRetriever implements RetrievalMethod {
     const t0 = performance.now();
     const g = await loadOrBuildGraph(corpus);
     this.repoRoot = corpus.repoRoot;
+    resetSourceCache();
     this.engine = new GraphEngine(g.nodes, g.edges, this.cfg.graph);
     return {
       method: this.name, index_ms: g.cached ? g.build_ms + (performance.now() - t0) : performance.now() - t0, index_llm_tokens: 0, embedding_tokens: null,

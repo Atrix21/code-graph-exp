@@ -1,0 +1,527 @@
+[
+  {
+    "comparison": "hybrid vs embeddings (8k)",
+    "metric": "sym_recall_10",
+    "mean_a": 0.6666666666666667,
+    "mean_b": 0.4702380952380953,
+    "diff": 0.19642857142857142,
+    "ci": [
+      0.029761904761904764,
+      0.3630952380952381
+    ],
+    "p_le_0": 0.0118,
+    "wins": 8,
+    "losses": 2,
+    "ties": 4
+  },
+  {
+    "comparison": "custom_graph vs embeddings (8k)",
+    "metric": "sym_recall_10",
+    "mean_a": 0.5952380952380952,
+    "mean_b": 0.4702380952380953,
+    "diff": 0.125,
+    "ci": [
+      -0.07142857142857141,
+      0.3154761904761904
+    ],
+    "p_le_0": 0.1132,
+    "wins": 5,
+    "losses": 2,
+    "ties": 7
+  },
+  {
+    "comparison": "hybrid vs custom_graph (8k)",
+    "metric": "sym_recall_10",
+    "mean_a": 0.6666666666666667,
+    "mean_b": 0.5952380952380952,
+    "diff": 0.07142857142857142,
+    "ci": [
+      -3.96508223080413e-18,
+      0.15476190476190474
+    ],
+    "p_le_0": 0.0382,
+    "wins": 4,
+    "losses": 1,
+    "ties": 9
+  },
+  {
+    "comparison": "hybrid@2k vs embeddings@8k",
+    "metric": "sym_recall_10",
+    "mean_a": 0.6428571428571429,
+    "mean_b": 0.4702380952380953,
+    "diff": 0.17261904761904762,
+    "ci": [
+      0.005952380952380951,
+      0.33928571428571436
+    ],
+    "p_le_0": 0.0212,
+    "wins": 7,
+    "losses": 2,
+    "ties": 5
+  },
+  {
+    "comparison": "hybrid@2k vs embeddings@2k",
+    "metric": "sym_recall_10",
+    "mean_a": 0.6428571428571429,
+    "mean_b": 0.4464285714285715,
+    "diff": 0.19642857142857142,
+    "ci": [
+      0.035714285714285705,
+      0.36309523809523814
+    ],
+    "p_le_0": 0.0116,
+    "wins": 8,
+    "losses": 2,
+    "ties": 4
+  },
+  {
+    "comparison": "custom_graph vs graphify (8k)",
+    "metric": "sym_recall_10",
+    "mean_a": 0.5952380952380952,
+    "mean_b": 0.07738095238095237,
+    "diff": 0.5178571428571428,
+    "ci": [
+      0.32142857142857145,
+      0.7142857142857143
+    ],
+    "p_le_0": 0,
+    "wins": 11,
+    "losses": 0,
+    "ties": 3
+  },
+  {
+    "comparison": "custom_graph vs code_review_graph (8k)",
+    "metric": "sym_recall_10",
+    "mean_a": 0.5952380952380952,
+    "mean_b": 0.10714285714285714,
+    "diff": 0.48809523809523814,
+    "ci": [
+      0.2857142857142857,
+      0.6904761904761905
+    ],
+    "p_le_0": 0,
+    "wins": 10,
+    "losses": 0,
+    "ties": 4
+  },
+  {
+    "comparison": "hybrid vs embeddings (8k)",
+    "metric": "rc_mrr",
+    "mean_a": 0.40466642797469865,
+    "mean_b": 0.36445184932027036,
+    "diff": 0.04021457865442827,
+    "ci": [
+      -0.21330409356725147,
+      0.2862050960735171
+    ],
+    "p_le_0": 0.3786,
+    "wins": 7,
+    "losses": 7,
+    "ties": 0
+  },
+  {
+    "comparison": "custom_graph vs embeddings (8k)",
+    "metric": "rc_mrr",
+    "mean_a": 0.3540900438766293,
+    "mean_b": 0.36445184932027036,
+    "diff": -0.010361805443641124,
+    "ci": [
+      -0.23656885268727373,
+      0.17980548964181825
+    ],
+    "p_le_0": 0.5082,
+    "wins": 7,
+    "losses": 6,
+    "ties": 1
+  },
+  {
+    "comparison": "hybrid vs custom_graph (8k)",
+    "metric": "rc_mrr",
+    "mean_a": 0.40466642797469865,
+    "mean_b": 0.3540900438766293,
+    "diff": 0.0505763840980694,
+    "ci": [
+      -0.14105518223549582,
+      0.24687064884433302
+    ],
+    "p_le_0": 0.3178,
+    "wins": 8,
+    "losses": 5,
+    "ties": 1
+  },
+  {
+    "comparison": "hybrid@2k vs embeddings@8k",
+    "metric": "rc_mrr",
+    "mean_a": 0.38333333333333336,
+    "mean_b": 0.36445184932027036,
+    "diff": 0.01888148401306295,
+    "ci": [
+      -0.23744588744588743,
+      0.2722222222222222
+    ],
+    "p_le_0": 0.4394,
+    "wins": 6,
+    "losses": 8,
+    "ties": 0
+  },
+  {
+    "comparison": "hybrid@2k vs embeddings@2k",
+    "metric": "rc_mrr",
+    "mean_a": 0.38333333333333336,
+    "mean_b": 0.35218253968253965,
+    "diff": 0.031150793650793644,
+    "ci": [
+      -0.22718253968253968,
+      0.2865079365079365
+    ],
+    "p_le_0": 0.4058,
+    "wins": 6,
+    "losses": 6,
+    "ties": 2
+  },
+  {
+    "comparison": "custom_graph vs graphify (8k)",
+    "metric": "rc_mrr",
+    "mean_a": 0.3540900438766293,
+    "mean_b": 0.04639820213799806,
+    "diff": 0.30769184173863123,
+    "ci": [
+      0.11243386243386243,
+      0.5193016840882695
+    ],
+    "p_le_0": 0,
+    "wins": 12,
+    "losses": 1,
+    "ties": 1
+  },
+  {
+    "comparison": "custom_graph vs code_review_graph (8k)",
+    "metric": "rc_mrr",
+    "mean_a": 0.3540900438766293,
+    "mean_b": 0.04661654135338346,
+    "diff": 0.30747350252324585,
+    "ci": [
+      0.1537924248290102,
+      0.4789229170487194
+    ],
+    "p_le_0": 0,
+    "wins": 13,
+    "losses": 0,
+    "ties": 1
+  },
+  {
+    "comparison": "hybrid vs embeddings (8k)",
+    "metric": "rc_hit_5",
+    "mean_a": 0.6428571428571429,
+    "mean_b": 0.5,
+    "diff": 0.14285714285714285,
+    "ci": [
+      -0.21428571428571427,
+      0.5
+    ],
+    "p_le_0": 0.2572,
+    "wins": 4,
+    "losses": 2,
+    "ties": 8
+  },
+  {
+    "comparison": "custom_graph vs embeddings (8k)",
+    "metric": "rc_hit_5",
+    "mean_a": 0.6428571428571429,
+    "mean_b": 0.5,
+    "diff": 0.14285714285714285,
+    "ci": [
+      -0.14285714285714285,
+      0.42857142857142855
+    ],
+    "p_le_0": 0.2094,
+    "wins": 3,
+    "losses": 1,
+    "ties": 10
+  },
+  {
+    "comparison": "hybrid vs custom_graph (8k)",
+    "metric": "rc_hit_5",
+    "mean_a": 0.6428571428571429,
+    "mean_b": 0.6428571428571429,
+    "diff": 0,
+    "ci": [
+      -0.21428571428571427,
+      0.21428571428571427
+    ],
+    "p_le_0": 0.6466,
+    "wins": 1,
+    "losses": 1,
+    "ties": 12
+  },
+  {
+    "comparison": "hybrid@2k vs embeddings@8k",
+    "metric": "rc_hit_5",
+    "mean_a": 0.6428571428571429,
+    "mean_b": 0.5,
+    "diff": 0.14285714285714285,
+    "ci": [
+      -0.21428571428571427,
+      0.5
+    ],
+    "p_le_0": 0.2572,
+    "wins": 4,
+    "losses": 2,
+    "ties": 8
+  },
+  {
+    "comparison": "hybrid@2k vs embeddings@2k",
+    "metric": "rc_hit_5",
+    "mean_a": 0.6428571428571429,
+    "mean_b": 0.5,
+    "diff": 0.14285714285714285,
+    "ci": [
+      -0.21428571428571427,
+      0.5
+    ],
+    "p_le_0": 0.2572,
+    "wins": 4,
+    "losses": 2,
+    "ties": 8
+  },
+  {
+    "comparison": "custom_graph vs graphify (8k)",
+    "metric": "rc_hit_5",
+    "mean_a": 0.6428571428571429,
+    "mean_b": 0.07142857142857142,
+    "diff": 0.5714285714285714,
+    "ci": [
+      0.2857142857142857,
+      0.7857142857142857
+    ],
+    "p_le_0": 0,
+    "wins": 8,
+    "losses": 0,
+    "ties": 6
+  },
+  {
+    "comparison": "custom_graph vs code_review_graph (8k)",
+    "metric": "rc_hit_5",
+    "mean_a": 0.6428571428571429,
+    "mean_b": 0.14285714285714285,
+    "diff": 0.5,
+    "ci": [
+      0.21428571428571427,
+      0.7142857142857143
+    ],
+    "p_le_0": 0,
+    "wins": 7,
+    "losses": 0,
+    "ties": 7
+  },
+  {
+    "comparison": "hybrid vs embeddings (8k)",
+    "metric": "sym_precision_10",
+    "mean_a": 0.20714285714285716,
+    "mean_b": 0.13571428571428573,
+    "diff": 0.07142857142857144,
+    "ci": [
+      0.01428571428571429,
+      0.1285714285714286
+    ],
+    "p_le_0": 0.0048,
+    "wins": 8,
+    "losses": 2,
+    "ties": 4
+  },
+  {
+    "comparison": "custom_graph vs embeddings (8k)",
+    "metric": "sym_precision_10",
+    "mean_a": 0.18571428571428572,
+    "mean_b": 0.13571428571428573,
+    "diff": 0.05,
+    "ci": [
+      -0.0142857142857143,
+      0.12142857142857143
+    ],
+    "p_le_0": 0.0832,
+    "wins": 5,
+    "losses": 2,
+    "ties": 7
+  },
+  {
+    "comparison": "hybrid vs custom_graph (8k)",
+    "metric": "sym_precision_10",
+    "mean_a": 0.20714285714285716,
+    "mean_b": 0.18571428571428572,
+    "diff": 0.021428571428571432,
+    "ci": [
+      -0.007142857142857139,
+      0.049999999999999996
+    ],
+    "p_le_0": 0.0526,
+    "wins": 4,
+    "losses": 1,
+    "ties": 9
+  },
+  {
+    "comparison": "hybrid@2k vs embeddings@8k",
+    "metric": "sym_precision_10",
+    "mean_a": 0.20000000000000004,
+    "mean_b": 0.13571428571428573,
+    "diff": 0.0642857142857143,
+    "ci": [
+      0.007142857142857147,
+      0.12142857142857144
+    ],
+    "p_le_0": 0.0098,
+    "wins": 7,
+    "losses": 2,
+    "ties": 5
+  },
+  {
+    "comparison": "hybrid@2k vs embeddings@2k",
+    "metric": "sym_precision_10",
+    "mean_a": 0.20000000000000004,
+    "mean_b": 0.1285714285714286,
+    "diff": 0.07142857142857144,
+    "ci": [
+      0.014285714285714289,
+      0.1285714285714286
+    ],
+    "p_le_0": 0.006,
+    "wins": 8,
+    "losses": 2,
+    "ties": 4
+  },
+  {
+    "comparison": "custom_graph vs graphify (8k)",
+    "metric": "sym_precision_10",
+    "mean_a": 0.18571428571428572,
+    "mean_b": 0.028571428571428574,
+    "diff": 0.1571428571428572,
+    "ci": [
+      0.09999999999999999,
+      0.21428571428571427
+    ],
+    "p_le_0": 0,
+    "wins": 11,
+    "losses": 0,
+    "ties": 3
+  },
+  {
+    "comparison": "custom_graph vs code_review_graph (8k)",
+    "metric": "sym_precision_10",
+    "mean_a": 0.18571428571428572,
+    "mean_b": 0.028571428571428574,
+    "diff": 0.15714285714285717,
+    "ci": [
+      0.08571428571428573,
+      0.22857142857142856
+    ],
+    "p_le_0": 0,
+    "wins": 10,
+    "losses": 0,
+    "ties": 4
+  },
+  {
+    "comparison": "hybrid vs embeddings (8k)",
+    "metric": "ttr",
+    "mean_a": 1777.642857142857,
+    "mean_b": 3327.4285714285716,
+    "diff": -1549.7857142857142,
+    "ci": [
+      -4762.214285714285,
+      1060.5
+    ],
+    "p_le_0": 0.1482,
+    "wins": 7,
+    "losses": 7,
+    "ties": 0
+  },
+  {
+    "comparison": "custom_graph vs embeddings (8k)",
+    "metric": "ttr",
+    "mean_a": 2821.3571428571427,
+    "mean_b": 3327.4285714285716,
+    "diff": -506.07142857142856,
+    "ci": [
+      -4057.1428571428573,
+      2678.5714285714284
+    ],
+    "p_le_0": 0.3972,
+    "wins": 6,
+    "losses": 7,
+    "ties": 1
+  },
+  {
+    "comparison": "hybrid vs custom_graph (8k)",
+    "metric": "ttr",
+    "mean_a": 1777.642857142857,
+    "mean_b": 2821.3571428571427,
+    "diff": -1043.7142857142858,
+    "ci": [
+      -3043.4285714285716,
+      263.5
+    ],
+    "p_le_0": 0.1014,
+    "wins": 7,
+    "losses": 6,
+    "ties": 1
+  },
+  {
+    "comparison": "hybrid@2k vs embeddings@8k",
+    "metric": "ttr",
+    "mean_a": 5046.714285714285,
+    "mean_b": 3327.4285714285716,
+    "diff": 1719.2857142857142,
+    "ci": [
+      -3113.1428571428573,
+      6502.142857142857
+    ],
+    "p_le_0": 0.74,
+    "wins": 6,
+    "losses": 8,
+    "ties": 0
+  },
+  {
+    "comparison": "hybrid@2k vs embeddings@2k",
+    "metric": "ttr",
+    "mean_a": 5046.714285714285,
+    "mean_b": 6095.857142857143,
+    "diff": -1049.142857142857,
+    "ci": [
+      -5419.928571428572,
+      3381.0714285714284
+    ],
+    "p_le_0": 0.3348,
+    "wins": 6,
+    "losses": 6,
+    "ties": 2
+  },
+  {
+    "comparison": "custom_graph vs graphify (8k)",
+    "metric": "ttr",
+    "mean_a": 2821.3571428571427,
+    "mean_b": 12322.285714285714,
+    "diff": -9500.92857142857,
+    "ci": [
+      -12559.357142857143,
+      -6248.214285714285
+    ],
+    "p_le_0": 0,
+    "wins": 12,
+    "losses": 1,
+    "ties": 1
+  },
+  {
+    "comparison": "custom_graph vs code_review_graph (8k)",
+    "metric": "ttr",
+    "mean_a": 2821.3571428571427,
+    "mean_b": 11927,
+    "diff": -9105.642857142857,
+    "ci": [
+      -12187.92857142857,
+      -5855.5
+    ],
+    "p_le_0": 0,
+    "wins": 13,
+    "losses": 0,
+    "ties": 1
+  }
+]

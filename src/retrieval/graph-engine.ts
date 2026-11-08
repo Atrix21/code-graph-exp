@@ -41,6 +41,8 @@ export interface GraphConfig {
   priors: { enabled: boolean; types: Record<string, number>; testPath: number };
   /** Control-flow richness bonus: score × (1 + cfBonus·min(1, #conditions/4)). Uses CHECKS/condition nodes. */
   cfBonus: number;
+  /** Analysis-only ablation switch (default empty = frozen behaviour): drop edges with these verification statuses. */
+  excludeVerification?: string[];
 }
 
 export const TEST_PATH_RE = /(^|\/)test\/|\.(e2e-)?spec\.ts$|\.test\.ts$/;
@@ -168,6 +170,7 @@ export class GraphEngine {
     const best = new Map<string, PEdge>(); // dedupe parallel projected edges: keep strongest
     for (const e of this.edges) {
       if (!this.edgeAllowed(e.type)) continue;
+      if (this.cfg.excludeVerification?.includes(e.verification)) continue;
       const a = this.owner.get(e.src) ?? e.src;
       const b = this.owner.get(e.dst) ?? e.dst;
       if (a === b) continue;

@@ -112,6 +112,9 @@ export function evaluateOutputs(index: SymbolIndex, tasks: GroundTruthTask[], ou
 }
 
 export function writeRun(dir: string, runs: MethodRun[], meta: Record<string, unknown>) {
+  // Guard (D-023): every benchmark output must come from runPerTask on its task's own snapshot.
+  const untagged = runs.flatMap((r) => r.outputs).filter((o) => !o.metadata?.snapshot_commit);
+  if (untagged.length) throw new Error(`${untagged.length} outputs are not tagged with a per-task snapshot commit; use runPerTask`);
   fs.mkdirSync(path.join(dir, 'raw'), { recursive: true });
   for (const r of runs) {
     fs.writeFileSync(path.join(dir, 'raw', `${r.method}.jsonl`), r.outputs.map((o) => JSON.stringify(o)).join('\n') + '\n');

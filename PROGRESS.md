@@ -2,41 +2,50 @@
 
 Living status file. Another session should be able to continue from here plus `research/decision-log.md`.
 
-## Current milestone: M1 (minimal working benchmark), in progress
+## Status: M1–M5 complete (final report: `research/findings.md`)
 
-### Done
-- Environment: Node 22.22, TypeScript Compiler API 5.9.3, uv/Python 3.12, CUDA GPU (RTX 3060 6 GB). No LLM API keys (no LLM is used by any method).
-- Target selected and verified: `brocoders/nestjs-boilerplate@9620f159` (type-checks clean). Target deps in `targets/deps` (symlinked `targets/node_modules`).
-- Competitors investigated, pinned, and wrapped (notes in `research/notes/`):
-  - Graphify `Graphify-Labs/graphify` v0.9.104 `433a57a0`. Code-only extract plus the `graphify query` CLI.
-  - Code Review Graph `tirth8205/code-review-graph` v2.3.9 `343ab7ce`. Full build plus the search → callers/callees policy.
-- Ground truth: 20 injected-bug tasks (Agent A), stratified split of 6 dev / 14 test. **Audit (Agent B) running.**
-- Benchmark snapshot builder (`npm run setup:target`): upstream plus 20 patches, pruned to src/test, with a reproducible commit hash.
-- Baselines: ripgrep (rg 15.0.0 pinned), BM25, embeddings (Qwen3-Embedding-0.6B, revision pinned). Competitor wrappers are in TS.
-- Evaluation harness: canonical symbol index, normalisation, metrics (R/P@k, RC Acc/MRR, file-level, tokens-to-root-cause, recall@token-budget), bootstrap CIs, and per-run markdown reports.
-- Plumbing smoke test (2 throwaway tasks, `tests/fixtures/smoke-tasks`): all 5 non-graph methods ran end to end. This found and fixed a silent mean-pooling bug in the embedding setup (D-008).
-- Graph retrieval and hybrid code are written against the graph schema (`src/retrieval/graph-engine.ts`, `graph-retrieval.ts`, `hybrid-retrieval.ts`). The ablation command is written.
+| Milestone | Status | Evidence |
+|---|---|---|
+| M1 minimal benchmark (7 methods, common interface, metrics, report) | done | `evaluation/results/m1-dev/report.md` |
+| M2 richer graph (structural, calls, control flow, data flow, provenance, coverage checks) | done | `research/graph-coverage.md`, `evaluation/results/graph-validation.json` |
+| M3 20 tasks, independent audit, dev/test split | done | `evaluation/dataset/{AUDIT,ADJUDICATION}.md`, `FROZEN.json` (v1.0) |
+| M4 ablations + dev-only tuning, frozen configs, single held-out run | done | `evaluation/results/tuning-dev`, `evaluation/configs/FROZEN-CONFIG.json`, `final-test`, `ablation-test` |
+| M5 final report | done | `research/findings.md` |
 
-### In progress
-- Graph builder (Agent, Sonnet): `src/parser/*`, `src/graph/{graph-builder,graph-store,graph-validator,build-cli}.ts`, tests.
-- Ground-truth audit (Agent B) → lead adjudication → freeze.
-- Harness review plus unit tests (Agent C).
-
-### Working commands
+## Reproduce (all commands verified in this session)
 ```bash
 npm install
-npm run setup:competitors        # clones + pinned venvs + target deps (idempotent)
-npm run setup:target             # builds targets/bench snapshot
-npx tsx src/cli/index.ts validate-gt
-npm run benchmark -- --split dev --methods ripgrep,bm25,embeddings,graphify,code_review_graph
+npm run setup:competitors        # pinned clones + venvs + target deps (idempotent)
+npm run setup:target             # 20 single-bug snapshots + base, reproducible commit hashes
+npm run graph:build              # custom graph for every snapshot (cached by commit)
+npm run graph:validate           # coverage + integrity + build-twice hash check
+npm run benchmark -- --split test --run final-test
+npm run benchmark:ablation -- --split test --run ablation-test
+npm run report                   # regenerate every evaluation/results/*/report.md
+npm test                         # 85 tests (graph extractor + harness)
 ```
+`npm run index` pre-builds all caches. `npx tsx scripts/tune-dev.ts` re-runs the dev-only tuning (it rewrites `evaluation/configs/*.json`; do not run it after a held-out evaluation without logging a decision).
 
-### Known limitations so far
-- Proxy tokenizer (o200k_base), because no Claude token counting is available.
-- Graphify's budget is character-based and can overflow. CRG has no budget.
-- CRG needs absolute paths, so it runs on a neutral clone path `/tmp/cgbench/w`.
+## Headline results (held-out test, n=14; details in research/findings.md)
+- hybrid: Recall@10 0.67, RC MRR 0.40, Precision@10 0.21, native tokens 6.3k (8k budget) / Recall@10 0.64 at 1.9k tokens.
+- best baseline (embeddings): Recall@10 0.47, RC MRR 0.36, Precision@10 0.14, 5.5k tokens.
+- custom_graph 0.60 / 0.35; BM25 0.40 / 0.24; ripgrep 0.23 / 0.16; CRG 0.11 / 0.05; Graphify 0.08 / 0.05.
+- Significant: hybrid > embeddings on Recall@10 (+0.20 [0.03, 0.36]) and Precision@10; not significant on root-cause MRR.
+- Ablations: graph traversal is the only component with a CI excluding 0. Control flow, confidence, application and DI edges show no measurable effect.
 
-### Next
-1. Integrate the graph builder, then run all 7 methods on dev (M1 report).
-2. Adjudicate the audit, freeze the dataset (FROZEN.json), and commit.
-3. M2: measure each graph capability on dev. M4: tune on dev, freeze configs, run test once, run ablations on test. M5: final report.
+## Key decisions (see decision-log.md)
+- Single-bug snapshots (D-017), because the combined snapshot had cross-task masking found by the audit.
+- Harness fixes from the independent review (D-018): cap at 50 items; unresolved and file-only items occupy rank slots; module chunks; file nodes; multi-line property chunks.
+- Ranking priors and the control-flow bonus were added during dev iteration (D-019) and ablated on test.
+- D-023: a post-freeze bug (ablation runner used the pristine snapshot; stale snippet cache) was found by a cross-check, fixed, and re-run with the frozen configs. Invalid runs are in `evaluation/results/_invalid/`.
+
+## Known limitations
+- 14 held-out tasks from one repository. CIs are wide.
+- No LLM in the loop: Graphify and CRG are used without the agent they were designed for.
+- Proxy tokenizer (o200k_base).
+- The downstream "LLM identifies the root cause from each method's context" experiment was not run (see findings §H).
+
+## Next steps (if continuing)
+1. Downstream agent experiment: same model, each method's context, measure root-cause identification and real Claude token usage.
+2. A second repository, and historical (non-injected) bugs.
+3. An LLM-agent query-rewriting variant for all methods (would make Graphify/CRG closer to their intended use).

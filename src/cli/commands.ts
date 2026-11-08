@@ -4,7 +4,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { abs, type BenchmarkConfig } from '../config.js';
-import { loadCorpus, checkoutSnapshot, setupTarget } from '../evaluation/corpus.js';
+import { checkoutSnapshot, setupTarget } from '../evaluation/corpus.js';
 import { loadTasks, validateTasks } from '../evaluation/ground-truth.js';
 import { SymbolIndex } from '../evaluation/symbol-index.js';
 import { REGISTRY, PRIMARY_METHODS } from '../evaluation/methods.js';
@@ -35,15 +35,21 @@ export async function run(cmd: string, cfg: BenchmarkConfig, _repo: string) {
       return;
     }
     case 'index': {
-      // Builds every index that can be cached (embeddings, competitor graphs, custom graph).
-      const corpus = loadCorpus(cfg);
+      // Builds every cacheable index (embeddings, custom graph, competitor graphs) for every snapshot.
+      const manifest = JSON.parse(fs.readFileSync(abs('targets/bench.manifest.json'), 'utf8'));
       const names = (arg('methods') ?? 'bm25,embeddings,graphify,code_review_graph,custom_graph').split(',');
-      for (const n of names) {
-        const m = await REGISTRY[n]();
-        const s = await m.prepare(corpus);
-        console.log(JSON.stringify(s));
-        await m.close?.();
+      const { precomputeEmbeddings } = await import('../evaluation/runner.js');
+      if (names.includes('embeddings')) await precomputeEmbeddings(cfg, selectTasks(cfg, 'all'));
+      for (const snap of ['base', ...Object.keys(manifest.tasks).sort()]) {
+        const corpus = checkoutSnapshot(cfg, snap);
+        for (const n of names) {
+          const m = await REGISTRY[n]();
+          const st = await m.prepare(corpus);
+          console.log(JSON.stringify({ snapshot: snap, method: st.method, index_ms: Math.round(st.index_ms) }));
+          await m.close?.();
+        }
       }
+      checkoutSnapshot(cfg, 'base');
       return;
     }
     case 'graph-build':

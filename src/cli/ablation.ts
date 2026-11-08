@@ -6,10 +6,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { abs, type BenchmarkConfig } from '../config.js';
-import { loadCorpus } from '../evaluation/corpus.js';
-import { SymbolIndex } from '../evaluation/symbol-index.js';
 import { customGraphConfig, hybridConfig, type DeepPartial } from '../evaluation/configs.js';
-import { evaluateOutputs, runMethod, toQueries, writeRun, type MethodRun } from '../evaluation/runner.js';
+import { runPerTask, writeRun, type NamedFactory } from '../evaluation/runner.js';
 import { generateReport } from '../evaluation/report.js';
 import { HybridRetriever, type HybridConfig } from '../retrieval/hybrid-retrieval.js';
 import { GraphRetriever, type CustomGraphConfig } from '../retrieval/graph-retrieval.js';
@@ -52,6 +50,9 @@ export function variants(): Variant[] {
     h('no_priors', 'extra', { graph: { priors: { enabled: false } } }),
     h('no_cf_bonus', 'extra', { graph: { cfBonus: 0 } }),
     h('no_hub_damping', 'extra', { graph: { hubPenalty: 0 } }),
+    // post-freeze, analysis-only: remove framework-inferred edges (DI dispatch abstract->concrete, NestJS/TypeORM roles, config keys)
+    h('no_framework_inferred_edges', 'post-freeze', { graph: { excludeVerification: ['framework_inferred'] } }),
+    g('custom_graph_no_framework_inferred_edges', 'post-freeze', { graph: { excludeVerification: ['framework_inferred'] } }),
     // traversal depth
     h('depth_1', 'depth', { graph: { depth: 1 } }),
     h('depth_2', 'depth', { graph: { depth: 2 } }),
@@ -81,23 +82,19 @@ export async function ablationCommand(cfg: BenchmarkConfig) {
   const split = arg('split', 'test')!;
   const runId = arg('run', `ablation-${split}`)!;
   const only = arg('only')?.split(',');
-  const corpus = loadCorpus(cfg);
   const tasks = selectTasks(cfg, split);
-  const index = new SymbolIndex(corpus.repoRoot, corpus.files);
-  const queries = toQueries(tasks);
-  const runs: MethodRun[] = [];
-  const groups: Record<string, string> = {};
-  for (const v of variants()) {
-    if (only && !only.includes(v.name)) continue;
-    const budget: RetrievalBudget = { ...cfg.budget, ...v.budget };
-    const m = v.make();
-    const { index: st, outputs } = await runMethod(m, corpus, queries, budget, () => {});
-    runs.push({ method: v.name, index: st, outputs, metrics: evaluateOutputs(index, tasks, outputs) });
-    groups[v.name] = v.group;
-    console.error(`[ablation] ${v.name} done`);
-  }
+  const vs = variants().filter((v) => !only || only.includes(v.name));
+  // Single-bug snapshots (D-017): every variant indexes each task's own snapshot (bug fix D-023: this
+  // command previously evaluated against whatever snapshot was checked out, i.e. the pristine base).
+  const runs = await runPerTask(cfg, tasks, vs.map((v): NamedFactory => ({ name: v.name, make: v.make, budget: { ...cfg.budget, ...v.budget } })), cfg.budget);
+  const groups = Object.fromEntries(vs.map((v) => [v.name, v.group]));
+  const manifest = JSON.parse(fs.readFileSync(abs('targets/bench.manifest.json'), 'utf8'));
   const dir = path.join(abs(cfg.results_dir), runId);
-  writeRun(dir, runs, { run_id: runId, split, methods: runs.map((r) => r.method), groups, budget: cfg.budget, commit: corpus.commit, n_tasks: tasks.length, n_files: corpus.files.length, dataset_version: cfg.dataset.version, created: new Date().toISOString() });
+  writeRun(dir, runs, {
+    run_id: runId, split, methods: runs.map((r) => r.method), groups, budget: cfg.budget,
+    commit: `per-task snapshots (base ${manifest.base.commit})`, n_tasks: tasks.length, n_files: manifest.base.corpus_files,
+    dataset_version: cfg.dataset.version, created: new Date().toISOString(),
+  });
   fs.writeFileSync(path.join(dir, 'report.md'), generateReport(dir));
   console.log(fs.readFileSync(path.join(dir, 'report.md'), 'utf8'));
 }
