@@ -1,6 +1,6 @@
 # Experiment 2: does graph-enhanced retrieval make a coding agent better at diagnosing bugs?
 
-Status: **pre-registration draft. No billable agent run has been made.** This document is frozen (hash in `FROZEN.json`) before the first billable test-split run. Changes after that are logged with reasons in `decision-log.md`.
+Status: **frozen 2026-11-08 before any test-split run** (hashes in `FROZEN.json`), after the billable dev pilot (stages 1–2). Amendment A below records the changes made from dev data; later changes are logged with reasons in `decision-log.md`.
 
 Experiment 1 (`research/findings.md`) showed that hybrid retrieval returns more of the relevant code than the baselines (Recall@10 0.67 vs 0.47), but **not** that it pinpoints root causes better (MRR 0.40 vs 0.36, n.s.). Experiment 2 asks the downstream question.
 
@@ -85,3 +85,18 @@ One model call, no tools: the bug report plus one method's native retrieved cont
 1. **Smoke pilot (billable, tiny):** 2 dev tasks × 5 agentic conditions × 1 repeat, plus single-shot on 2 dev tasks. Verifies real isolation (init event), parse rates and real per-run cost.
 2. **Dev pilot (billable, small):** all 6 dev tasks. Prompts are frozen afterwards; real costs replace the estimate's assumptions.
 3. **Main run (billable):** 14 test tasks × conditions × 3 repeats, with a hard cumulative cost cap enforced by the harness.
+
+## Amendment A (2026-11-08, from the dev pilot, before any test-split run)
+
+Dev pilot (6 dev tasks, 1 repeat; `results/stage1-*`, `results/stage2-*`; decision-log E2-D17): 60 agentic runs and 108 single-shot runs, all valid, 0 exclusions, $6.02 list-price total.
+
+- **Agentic accuracy is at ceiling on dev:** RC+line@1 = 1.00 in every condition under both prompts. Test tasks may be harder, but an accuracy difference between agentic conditions may well be undetectable. H2 (efficiency) is then the informative agentic comparison.
+- **Under p1 the agent never calls an attached retrieval tool** (0 calls in 24 MCP-condition runs). It solves every task with Grep + Read in 4–10 turns, so p1 conditions differ only by tool-schema overhead.
+- **Prompt arm p2 added** (`prompt.ts::agentSystemPrompt('p2')`): p1 plus one sentence, identical in every condition, directing the agent to an attached MCP code-search or code-graph tool (a no-op for the baseline). On dev, p2 made the agent call `search_code` in 4 of 6 tasks (embeddings and hybrid), with about 40% fewer turns, 20–30% fewer tokens and 30% less wall time than the baseline at equal accuracy. The agent still never called the Graphify or CRG tools.
+
+**Changes to the plan:**
+
+1. **Main run (test split)**: 14 tasks × 5 agentic conditions × 3 repeats under **both p2 and p1** (420 agentic runs), plus single-shot as before (9 methods × 2 budgets × 3 repeats = 756 runs). Execution is strictly sequential, in this order: agentic p2, single-shot 2k, single-shot 8k, agentic p1. Each run uses the seeded within-run order.
+2. **Confirmatory family (unchanged size, Holm over 6):** H1a, H1b, H2-tokens and H2-cost are evaluated on the **p2** arm; H1c-2k and H1c-8k on single-shot as before. The same comparisons on the p1 arm are reported in full as secondary (natural tool choice), not corrected and not confirmatory.
+3. **Pre-specified secondary measures:** tool adoption (fraction of runs with at least one retrieval call) per condition × prompt, and efficiency restricted to runs that used the tool.
+4. Cost is Claude Code's `total_cost_usd` as before. Because the prompt cache lives for 1 hour across runs (E2-D18), efficiency is reported in total tokens as well, and cost/latency comparisons are within a run (same cache regime).

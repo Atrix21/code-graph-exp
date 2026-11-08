@@ -1,0 +1,225 @@
+=== 2026-11-08T21:21:15+05:30 agentic --split dev --conditions baseline,embeddings,hybrid,graphify,crg --task-ids auth_reset_link_reuse_01,auth_social_link_01,auth_update_email_dup_01,users_update_noop_01 --repeats 1 --prompt p1 --account personal --run-usd 1 --max-usd 15 --parallel 1 --run stage2-agentic-dev-p1
+20 planned, 0 scored, 0 finally excluded, 20 to run
+warming custom-graph cache for auth_reset_link_reuse_01
+warming custom-graph cache for users_update_noop_01
+warming custom-graph cache for auth_social_link_01
+warming custom-graph cache for auth_update_email_dup_01
+[#0] auth_reset_link_reuse_01|agentic:embeddings|0 submitted turns=7 ledger=$0.0303 rc_line=1
+[#1] users_update_noop_01|agentic:baseline|0 submitted turns=7 ledger=$0.0313 rc_line=1
+[#2] auth_social_link_01|agentic:baseline|0 submitted turns=4 ledger=$0.0228 rc_line=1
+[#3] auth_update_email_dup_01|agentic:hybrid|0 submitted turns=4 ledger=$0.0182 rc_line=1
+[#4] auth_reset_link_reuse_01|agentic:crg|0 submitted turns=7 ledger=$0.0440 rc_line=1
+[#5] auth_social_link_01|agentic:graphify|0 submitted turns=4 ledger=$0.0210 rc_line=1
+[#6] auth_reset_link_reuse_01|agentic:hybrid|0 submitted turns=7 ledger=$0.0281 rc_line=1
+[#7] auth_update_email_dup_01|agentic:graphify|0 submitted turns=5 ledger=$0.0259 rc_line=1
+[#8] auth_update_email_dup_01|agentic:baseline|0 submitted turns=4 ledger=$0.0187 rc_line=1
+[#9] auth_reset_link_reuse_01|agentic:graphify|0 submitted turns=7 ledger=$0.0334 rc_line=1
+[#10] users_update_noop_01|agentic:graphify|0 submitted turns=7 ledger=$0.0411 rc_line=1
+[#11] auth_reset_link_reuse_01|agentic:baseline|0 submitted turns=7 ledger=$0.0318 rc_line=1
+[#12] auth_update_email_dup_01|agentic:embeddings|0 submitted turns=4 ledger=$0.0156 rc_line=1
+[#13] users_update_noop_01|agentic:embeddings|0 submitted turns=7 ledger=$0.0410 rc_line=1
+[#14] auth_social_link_01|agentic:crg|0 submitted turns=5 ledger=$0.0399 rc_line=1
+[#15] users_update_noop_01|agentic:crg|0 submitted turns=6 ledger=$0.0505 rc_line=1
+[#16] auth_social_link_01|agentic:hybrid|0 submitted turns=4 ledger=$0.0228 rc_line=1
+[#17] auth_update_email_dup_01|agentic:crg|0 submitted turns=4 ledger=$0.0250 rc_line=1
+[#18] users_update_noop_01|agentic:hybrid|0 submitted turns=7 ledger=$0.0276 rc_line=1
+[#19] auth_social_link_01|agentic:embeddings|0 submitted turns=4 ledger=$0.0196 rc_line=1
+| Condition | tasks | RC+line@1 [95% CI] | RC@1 | RC@3 | Line@1 | File@1 | Valid | Tokens/run | Cost/run (USD) | Latency p50 (ms) | Turns | Retrieval calls | RC+line@1 per $ |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| agentic:baseline | 4 | 1.00 [1.00–1.00] | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 19,562 | 0.0246 | 10,188 | 5.50 | 0.00 | 40.58 |
+| agentic:crg | 4 | 1.00 [1.00–1.00] | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 66,302 | 0.0338 | 16,338 | 5.50 | 0.00 | 29.61 |
+| agentic:embeddings | 4 | 1.00 [1.00–1.00] | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 22,276 | 0.0248 | 15,046 | 5.50 | 0.00 | 40.27 |
+| agentic:graphify | 4 | 1.00 [1.00–1.00] | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 28,024 | 0.0280 | 18,444 | 5.75 | 0.00 | 35.66 |
+| agentic:hybrid | 4 | 1.00 [1.00–1.00] | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 19,769 | 0.0226 | 11,849 | 5.50 | 0.00 | 44.27 |
+
+Paired differences vs `agentic:baseline` (per-task means over repeats; Δ = condition − reference):
+
+| Condition | Δ RC+line@1 [95% CI] | Δ tokens/run | Δ cost/run | W/L/T |
+|---|---:|---:|---:|---:|
+| agentic:crg | 0.00 [0.00, 0.00] | 46,741 | 0.0091 | 0/0/4 |
+| agentic:embeddings | 0.00 [0.00, 0.00] | 2,715 | 0.0002 | 0/0/4 |
+| agentic:graphify | 0.00 [0.00, 0.00] | 8,463 | 0.0034 | 0/0/4 |
+| agentic:hybrid | 0.00 [0.00, 0.00] | 207 | -0.0021 | 0/0/4 |
+wrote /home/adityareddy/dev/experiments/code-graphs/experiments/02-agent-diagnosis/results/stage2-agentic-dev-p1/runs.jsonl (20 scored runs)
+=== 2026-11-08T21:26:13+05:30 agentic --split dev --conditions baseline,embeddings,hybrid,graphify,crg --task-ids auth_refresh_expiry_01,session_refresh_replay_01,auth_reset_link_reuse_01,auth_social_link_01,auth_update_email_dup_01,users_update_noop_01 --repeats 1 --prompt p2 --account personal --run-usd 1 --max-usd 15 --parallel 1 --run stage2-agentic-dev-p2
+30 planned, 0 scored, 0 finally excluded, 30 to run
+warming custom-graph cache for auth_refresh_expiry_01
+warming custom-graph cache for session_refresh_replay_01
+warming custom-graph cache for auth_update_email_dup_01
+warming custom-graph cache for auth_social_link_01
+warming custom-graph cache for users_update_noop_01
+warming custom-graph cache for auth_reset_link_reuse_01
+[#0] auth_refresh_expiry_01|agentic:embeddings|0 submitted turns=5 ledger=$0.0218 rc_line=1
+[#1] session_refresh_replay_01|agentic:baseline|0 submitted turns=10 ledger=$0.0489 rc_line=1
+[#2] auth_update_email_dup_01|agentic:crg|0 submitted turns=4 ledger=$0.0260 rc_line=1
+[#3] auth_social_link_01|agentic:graphify|0 submitted turns=4 ledger=$0.0203 rc_line=1
+[#4] auth_update_email_dup_01|agentic:baseline|0 submitted turns=5 ledger=$0.0243 rc_line=1
+[#5] session_refresh_replay_01|agentic:graphify|0 submitted turns=9 ledger=$0.0465 rc_line=1
+[#6] auth_refresh_expiry_01|agentic:crg|0 submitted turns=4 ledger=$0.0262 rc_line=1
+[#7] users_update_noop_01|agentic:embeddings|0 submitted turns=3 ledger=$0.0356 rc_line=1
+[#8] auth_refresh_expiry_01|agentic:graphify|0 submitted turns=4 ledger=$0.0197 rc_line=1
+[#9] users_update_noop_01|agentic:baseline|0 submitted turns=8 ledger=$0.0357 rc_line=1
+[#10] auth_reset_link_reuse_01|agentic:embeddings|0 submitted turns=3 ledger=$0.0276 rc_line=1
+[#11] auth_update_email_dup_01|agentic:hybrid|0 submitted turns=3 ledger=$0.0127 rc_line=1
+[#12] auth_refresh_expiry_01|agentic:hybrid|0 submitted turns=4 ledger=$0.0176 rc_line=1
+[#13] users_update_noop_01|agentic:graphify|0 submitted turns=7 ledger=$0.0412 rc_line=1
+[#14] auth_social_link_01|agentic:crg|0 submitted turns=4 ledger=$0.0324 rc_line=1
+[#15] users_update_noop_01|agentic:crg|0 submitted turns=7 ledger=$0.0386 rc_line=1
+[#16] auth_reset_link_reuse_01|agentic:baseline|0 submitted turns=7 ledger=$0.0318 rc_line=1
+[#17] session_refresh_replay_01|agentic:crg|0 submitted turns=10 ledger=$0.0574 rc_line=1
+[#18] auth_reset_link_reuse_01|agentic:graphify|0 submitted turns=7 ledger=$0.0308 rc_line=1
+[#19] auth_reset_link_reuse_01|agentic:hybrid|0 submitted turns=3 ledger=$0.0285 rc_line=1
+[#20] auth_update_email_dup_01|agentic:graphify|0 submitted turns=5 ledger=$0.0272 rc_line=1
+[#21] auth_refresh_expiry_01|agentic:baseline|0 submitted turns=4 ledger=$0.0220 rc_line=1
+[#22] session_refresh_replay_01|agentic:embeddings|0 submitted turns=4 ledger=$0.0437 rc_line=1
+[#23] auth_social_link_01|agentic:hybrid|0 submitted turns=3 ledger=$0.0386 rc_line=1
+[#24] auth_update_email_dup_01|agentic:embeddings|0 submitted turns=3 ledger=$0.0103 rc_line=1
+[#25] auth_social_link_01|agentic:baseline|0 submitted turns=4 ledger=$0.0225 rc_line=1
+[#26] auth_social_link_01|agentic:embeddings|0 submitted turns=3 ledger=$0.0311 rc_line=1
+[#27] session_refresh_replay_01|agentic:hybrid|0 submitted turns=4 ledger=$0.0462 rc_line=1
+[#28] users_update_noop_01|agentic:hybrid|0 submitted turns=6 ledger=$0.0505 rc_line=1
+[#29] auth_reset_link_reuse_01|agentic:crg|0 submitted turns=7 ledger=$0.0434 rc_line=1
+| Condition | tasks | RC+line@1 [95% CI] | RC@1 | RC@3 | Line@1 | File@1 | Valid | Tokens/run | Cost/run (USD) | Latency p50 (ms) | Turns | Retrieval calls | RC+line@1 per $ |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| agentic:baseline | 6 | 1.00 [1.00–1.00] | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 23,040 | 0.0291 | 14,335 | 6.33 | 0.00 | 34.38 |
+| agentic:crg | 6 | 1.00 [1.00–1.00] | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 63,108 | 0.0315 | 13,292 | 6.00 | 0.00 | 31.71 |
+| agentic:embeddings | 6 | 1.00 [1.00–1.00] | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 16,040 | 0.0273 | 10,239 | 3.50 | 0.67 | 36.62 |
+| agentic:graphify | 6 | 1.00 [1.00–1.00] | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 30,516 | 0.0284 | 12,849 | 6.00 | 0.00 | 35.21 |
+| agentic:hybrid | 6 | 1.00 [1.00–1.00] | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 18,602 | 0.0311 | 11,558 | 3.83 | 0.67 | 32.12 |
+
+Paired differences vs `agentic:baseline` (per-task means over repeats; Δ = condition − reference):
+
+| Condition | Δ RC+line@1 [95% CI] | Δ tokens/run | Δ cost/run | W/L/T |
+|---|---:|---:|---:|---:|
+| agentic:crg | 0.00 [0.00, 0.00] | 40,068 | 0.0025 | 0/0/6 |
+| agentic:embeddings | 0.00 [0.00, 0.00] | -7,000 | -0.0018 | 0/0/6 |
+| agentic:graphify | 0.00 [0.00, 0.00] | 7,476 | -0.0007 | 0/0/6 |
+| agentic:hybrid | 0.00 [0.00, 0.00] | -4,438 | 0.0020 | 0/0/6 |
+wrote /home/adityareddy/dev/experiments/code-graphs/experiments/02-agent-diagnosis/results/stage2-agentic-dev-p2/runs.jsonl (30 scored runs)
+=== 2026-11-08T21:32:47+05:30 single --backend claude-code --split dev --budget 2000 --repeats 1 --task-ids auth_reset_link_reuse_01,auth_social_link_01,auth_update_email_dup_01,users_update_noop_01 --account personal --run-usd 0.25 --max-usd 15 --run stage2-single-dev-2000
+single-shot: 36 items, 0 done, 0 finally excluded, 36 to run
+auth_update_email_dup_01|single:bm25@2000|0 submitted ledger=$0.0277 wall=12.9s
+auth_update_email_dup_01|single:none@2000|0 submitted ledger=$0.0278 wall=9.3s
+auth_update_email_dup_01|single:code_review_graph@2000|0 submitted ledger=$0.0876 wall=13.1s
+users_update_noop_01|single:graphify@2000|0 submitted ledger=$0.0258 wall=9.4s
+auth_reset_link_reuse_01|single:embeddings@2000|0 submitted ledger=$0.0194 wall=5.7s
+users_update_noop_01|single:oracle@2000|0 submitted ledger=$0.0156 wall=5.6s
+users_update_noop_01|single:code_review_graph@2000|0 submitted ledger=$0.0432 wall=15.2s
+auth_reset_link_reuse_01|single:bm25@2000|0 submitted ledger=$0.0177 wall=8.8s
+auth_social_link_01|single:oracle@2000|0 submitted ledger=$0.0162 wall=8.4s
+auth_reset_link_reuse_01|single:ripgrep@2000|0 submitted ledger=$0.0283 wall=12.8s
+auth_social_link_01|single:custom_graph@2000|0 submitted ledger=$0.0220 wall=8.2s
+auth_reset_link_reuse_01|single:code_review_graph@2000|0 submitted ledger=$0.0883 wall=17.9s
+auth_reset_link_reuse_01|single:oracle@2000|0 submitted ledger=$0.0129 wall=5.3s
+auth_update_email_dup_01|single:hybrid@2000|0 submitted ledger=$0.0229 wall=6.8s
+auth_reset_link_reuse_01|single:custom_graph@2000|0 submitted ledger=$0.0211 wall=5.2s
+users_update_noop_01|single:bm25@2000|0 submitted ledger=$0.0272 wall=15.2s
+users_update_noop_01|single:ripgrep@2000|0 submitted ledger=$0.0278 wall=11.8s
+auth_update_email_dup_01|single:graphify@2000|0 submitted ledger=$0.0164 wall=10.0s
+auth_reset_link_reuse_01|single:graphify@2000|0 submitted ledger=$0.0257 wall=10.8s
+users_update_noop_01|single:none@2000|0 submitted ledger=$0.0278 wall=12.3s
+users_update_noop_01|single:embeddings@2000|0 submitted ledger=$0.0263 wall=10.7s
+auth_social_link_01|single:embeddings@2000|0 submitted ledger=$0.0226 wall=5.4s
+auth_reset_link_reuse_01|single:hybrid@2000|0 submitted ledger=$0.0196 wall=6.9s
+auth_update_email_dup_01|single:embeddings@2000|0 submitted ledger=$0.0286 wall=11.5s
+auth_social_link_01|single:ripgrep@2000|0 submitted ledger=$0.0311 wall=11.0s
+auth_social_link_01|single:none@2000|0 submitted ledger=$0.0268 wall=9.9s
+auth_update_email_dup_01|single:custom_graph@2000|0 submitted ledger=$0.0226 wall=6.1s
+auth_reset_link_reuse_01|single:none@2000|0 submitted ledger=$0.0256 wall=10.9s
+users_update_noop_01|single:hybrid@2000|0 submitted ledger=$0.0284 wall=11.7s
+auth_social_link_01|single:hybrid@2000|0 submitted ledger=$0.0219 wall=7.2s
+auth_update_email_dup_01|single:ripgrep@2000|0 submitted ledger=$0.0246 wall=11.3s
+auth_social_link_01|single:graphify@2000|0 submitted ledger=$0.0268 wall=14.2s
+auth_social_link_01|single:code_review_graph@2000|0 submitted ledger=$0.0750 wall=11.3s
+auth_update_email_dup_01|single:oracle@2000|0 submitted ledger=$0.0207 wall=14.2s
+users_update_noop_01|single:custom_graph@2000|0 submitted ledger=$0.0353 wall=20.4s
+auth_social_link_01|single:bm25@2000|0 submitted ledger=$0.0270 wall=16.3s
+| Condition | tasks | RC+line@1 [95% CI] | RC@1 | RC@3 | Line@1 | File@1 | Valid | Tokens/run | Cost/run (USD) | Latency p50 (ms) | Turns | Retrieval calls | RC+line@1 per $ |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| single:bm25@2000 | 4 | 0.75 [0.25–1.00] | 1.00 | 1.00 | 0.75 | 1.00 | 1.00 | 5,486 | 0.0248 | 14,024 | 1.00 | 0.00 | 30.20 |
+| single:code_review_graph@2000 | 4 | 0.25 [0.00–0.75] | 0.50 | 0.75 | 0.25 | 0.50 | 1.00 | 21,199 | 0.0730 | 14,122 | 1.00 | 0.00 | 3.42 |
+| single:custom_graph@2000 | 4 | 0.50 [0.00–1.00] | 0.75 | 0.75 | 0.50 | 0.75 | 1.00 | 5,882 | 0.0252 | 7,117 | 1.00 | 0.00 | 19.87 |
+| single:embeddings@2000 | 4 | 0.75 [0.25–1.00] | 1.00 | 1.00 | 0.75 | 1.00 | 1.00 | 6,867 | 0.0241 | 8,222 | 1.00 | 0.00 | 31.18 |
+| single:graphify@2000 | 4 | 0.50 [0.00–1.00] | 0.75 | 0.75 | 0.50 | 1.00 | 1.00 | 5,152 | 0.0236 | 10,395 | 1.00 | 0.00 | 21.19 |
+| single:hybrid@2000 | 4 | 0.25 [0.00–0.75] | 0.75 | 1.00 | 0.25 | 0.75 | 1.00 | 5,637 | 0.0231 | 7,019 | 1.00 | 0.00 | 10.80 |
+| single:none@2000 | 4 | 0.00 [0.00–0.00] | 0.75 | 0.75 | 0.00 | 1.00 | 1.00 | 6,059 | 0.0269 | 10,355 | 1.00 | 0.00 | 0.00 |
+| single:oracle@2000 | 4 | 0.75 [0.25–1.00] | 1.00 | 1.00 | 0.75 | 1.00 | 1.00 | 4,916 | 0.0162 | 6,998 | 1.00 | 0.00 | 46.36 |
+| single:ripgrep@2000 | 4 | 0.50 [0.00–1.00] | 0.75 | 0.75 | 0.75 | 1.00 | 1.00 | 7,577 | 0.0277 | 11,556 | 1.00 | 0.00 | 18.02 |
+
+Paired differences vs `single:none@2000` (per-task means over repeats; Δ = condition − reference):
+
+| Condition | Δ RC+line@1 [95% CI] | Δ tokens/run | Δ cost/run | W/L/T |
+|---|---:|---:|---:|---:|
+| single:bm25@2000 | 0.75 [0.25, 1.00] | -573 | -0.0021 | 3/0/1 |
+| single:code_review_graph@2000 | 0.25 [0.00, 0.75] | 15,140 | 0.0461 | 1/0/3 |
+| single:custom_graph@2000 | 0.50 [0.00, 1.00] | -177 | -0.0018 | 2/0/2 |
+| single:embeddings@2000 | 0.75 [0.25, 1.00] | 808 | -0.0029 | 3/0/1 |
+| single:graphify@2000 | 0.50 [0.00, 1.00] | -907 | -0.0033 | 2/0/2 |
+| single:hybrid@2000 | 0.25 [0.00, 0.75] | -422 | -0.0038 | 1/0/3 |
+| single:oracle@2000 | 0.75 [0.25, 1.00] | -1,143 | -0.0107 | 3/0/1 |
+| single:ripgrep@2000 | 0.50 [0.00, 1.00] | 1,518 | 0.0008 | 2/0/2 |
+single-shot stage2-single-dev-2000: completed, 36 scored
+=== 2026-11-08T21:39:12+05:30 single --backend claude-code --split dev --budget 8000 --repeats 1 --task-ids auth_reset_link_reuse_01,auth_social_link_01,auth_update_email_dup_01,users_update_noop_01 --account personal --run-usd 0.25 --max-usd 15 --run stage2-single-dev-8000
+single-shot: 36 items, 0 done, 0 finally excluded, 36 to run
+auth_update_email_dup_01|single:bm25@8000|0 submitted ledger=$0.0640 wall=8.8s
+auth_update_email_dup_01|single:none@8000|0 submitted ledger=$0.0133 wall=13.2s
+auth_update_email_dup_01|single:code_review_graph@8000|0 submitted ledger=$0.0153 wall=10.2s
+users_update_noop_01|single:graphify@8000|0 submitted ledger=$0.0601 wall=14.6s
+auth_reset_link_reuse_01|single:embeddings@8000|0 submitted ledger=$0.0510 wall=11.3s
+users_update_noop_01|single:oracle@8000|0 submitted ledger=$0.0069 wall=10.0s
+users_update_noop_01|single:code_review_graph@8000|0 submitted ledger=$0.0130 wall=9.8s
+auth_reset_link_reuse_01|single:bm25@8000|0 submitted ledger=$0.0632 wall=5.2s
+auth_social_link_01|single:oracle@8000|0 submitted ledger=$0.0076 wall=8.2s
+auth_reset_link_reuse_01|single:ripgrep@8000|0 submitted ledger=$0.0368 wall=10.1s
+auth_social_link_01|single:custom_graph@8000|0 submitted ledger=$0.0545 wall=8.4s
+auth_reset_link_reuse_01|single:code_review_graph@8000|0 submitted ledger=$0.0753 wall=11.7s
+auth_reset_link_reuse_01|single:oracle@8000|0 submitted ledger=$0.0049 wall=4.7s
+auth_update_email_dup_01|single:hybrid@8000|0 submitted ledger=$0.0570 wall=6.7s
+auth_reset_link_reuse_01|single:custom_graph@8000|0 submitted ledger=$0.0488 wall=9.4s
+users_update_noop_01|single:bm25@8000|0 submitted ledger=$0.0712 wall=13.5s
+users_update_noop_01|single:ripgrep@8000|0 submitted ledger=$0.0482 wall=12.4s
+auth_update_email_dup_01|single:graphify@8000|0 submitted ledger=$0.0107 wall=10.2s
+auth_reset_link_reuse_01|single:graphify@8000|0 submitted ledger=$0.0748 wall=16.4s
+users_update_noop_01|single:none@8000|0 submitted ledger=$0.0145 wall=44.6s
+users_update_noop_01|single:embeddings@8000|0 submitted ledger=$0.0617 wall=6.6s
+auth_social_link_01|single:embeddings@8000|0 submitted ledger=$0.0580 wall=9.0s
+auth_reset_link_reuse_01|single:hybrid@8000|0 submitted ledger=$0.0542 wall=8.1s
+auth_update_email_dup_01|single:embeddings@8000|0 submitted ledger=$0.0643 wall=6.3s
+auth_social_link_01|single:ripgrep@8000|0 submitted ledger=$0.0454 wall=10.1s
+auth_social_link_01|single:none@8000|0 submitted ledger=$0.0126 wall=8.6s
+auth_update_email_dup_01|single:custom_graph@8000|0 submitted ledger=$0.0521 wall=6.9s
+auth_reset_link_reuse_01|single:none@8000|0 submitted ledger=$0.0121 wall=9.0s
+users_update_noop_01|single:hybrid@8000|0 submitted ledger=$0.0800 wall=21.6s
+auth_social_link_01|single:hybrid@8000|0 submitted ledger=$0.0601 wall=7.9s
+auth_update_email_dup_01|single:ripgrep@8000|0 submitted ledger=$0.0420 wall=9.8s
+auth_social_link_01|single:graphify@8000|0 submitted ledger=$0.0612 wall=15.0s
+auth_social_link_01|single:code_review_graph@8000|0 submitted ledger=$0.0132 wall=11.1s
+auth_update_email_dup_01|single:oracle@8000|0 submitted ledger=$0.0070 wall=5.3s
+users_update_noop_01|single:custom_graph@8000|0 submitted ledger=$0.0793 wall=26.6s
+auth_social_link_01|single:bm25@8000|0 submitted ledger=$0.0633 wall=6.3s
+| Condition | tasks | RC+line@1 [95% CI] | RC@1 | RC@3 | Line@1 | File@1 | Valid | Tokens/run | Cost/run (USD) | Latency p50 (ms) | Turns | Retrieval calls | RC+line@1 per $ |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| single:bm25@8000 | 4 | 0.50 [0.00–1.00] | 0.75 | 1.00 | 0.50 | 0.75 | 1.00 | 16,136 | 0.0654 | 7,513 | 1.00 | 0.00 | 7.65 |
+| single:code_review_graph@8000 | 4 | 0.25 [0.00–0.75] | 0.50 | 0.75 | 0.25 | 0.50 | 1.00 | 16,444 | 0.0280 | 10,652 | 1.00 | 0.00 | 8.91 |
+| single:custom_graph@8000 | 4 | 0.75 [0.25–1.00] | 1.00 | 1.00 | 0.75 | 1.00 | 1.00 | 16,922 | 0.0583 | 8,886 | 1.00 | 0.00 | 12.87 |
+| single:embeddings@8000 | 4 | 0.75 [0.25–1.00] | 1.00 | 1.00 | 0.75 | 1.00 | 1.00 | 14,636 | 0.0587 | 7,779 | 1.00 | 0.00 | 12.78 |
+| single:graphify@8000 | 4 | 0.50 [0.00–1.00] | 0.75 | 1.00 | 0.50 | 1.00 | 1.00 | 15,106 | 0.0513 | 14,790 | 1.00 | 0.00 | 9.76 |
+| single:hybrid@8000 | 4 | 0.50 [0.00–1.00] | 1.00 | 1.00 | 0.50 | 1.00 | 1.00 | 18,352 | 0.0624 | 7,979 | 1.00 | 0.00 | 8.01 |
+| single:none@8000 | 4 | 0.50 [0.00–1.00] | 0.75 | 0.75 | 0.50 | 1.00 | 1.00 | 6,181 | 0.0126 | 11,113 | 1.00 | 0.00 | 39.56 |
+| single:oracle@8000 | 4 | 0.75 [0.25–1.00] | 1.00 | 1.00 | 0.75 | 1.00 | 1.00 | 3,879 | 0.0063 | 6,763 | 1.00 | 0.00 | 119.39 |
+| single:ripgrep@8000 | 4 | 0.50 [0.00–1.00] | 0.50 | 0.50 | 0.50 | 0.75 | 1.00 | 12,153 | 0.0428 | 10,100 | 1.00 | 0.00 | 11.68 |
+
+Paired differences vs `single:none@8000` (per-task means over repeats; Δ = condition − reference):
+
+| Condition | Δ RC+line@1 [95% CI] | Δ tokens/run | Δ cost/run | W/L/T |
+|---|---:|---:|---:|---:|
+| single:bm25@8000 | 0.00 [-0.75, 0.75] | 9,955 | 0.0527 | 1/1/2 |
+| single:code_review_graph@8000 | -0.25 [-0.75, 0.00] | 10,262 | 0.0154 | 0/1/3 |
+| single:custom_graph@8000 | 0.25 [-0.50, 1.00] | 10,740 | 0.0456 | 2/1/1 |
+| single:embeddings@8000 | 0.25 [0.00, 0.75] | 8,454 | 0.0460 | 1/0/3 |
+| single:graphify@8000 | 0.00 [0.00, 0.00] | 8,925 | 0.0386 | 0/0/4 |
+| single:hybrid@8000 | 0.00 [-0.75, 0.75] | 12,171 | 0.0498 | 1/1/2 |
+| single:oracle@8000 | 0.25 [0.00, 0.75] | -2,303 | -0.0064 | 1/0/3 |
+| single:ripgrep@8000 | 0.00 [-0.75, 0.75] | 5,972 | 0.0302 | 1/1/2 |
+single-shot stage2-single-dev-8000: completed, 36 scored
+=== 2026-11-08T21:46:01+05:30 STAGE 2 DONE
