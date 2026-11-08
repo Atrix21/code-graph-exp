@@ -17,9 +17,11 @@
     "benchmark:ablation": "tsx src/cli/index.ts ablation",
     "report": "tsx src/cli/index.ts report",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit -p ."
+    "typecheck": "tsc --noEmit -p .",
+    "agent-eval": "tsx src/agent-eval/cli.ts"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
     "@vscode/ripgrep": "1.18.0",
     "js-tiktoken": "1.0.21",
     "stemmer": "2.0.1",
