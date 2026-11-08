@@ -1,7 +1,7 @@
 {
   "approved_by": "project owner (chat, 2026-11-08 ~21:00 IST): \"run the experiments on the 'cc personal' claude code profile, and do it one experiment at once, not parallely\"",
   "approved_at": "2026-11-08T21:00:00+05:30",
-  "_scope": "Stages 1 (smoke pilot, done) and 2 (dev pilot: remaining dev tasks; agentic p1 and p2; single-shot) on the dev split. Stage 3 (test split) is added after stage 2. Caps are cumulative over spend-ledger.jsonl (all protocols). Subscription billing: the dollar figures are list-price estimates used as a runaway guard; the real limit is the account's plan usage.",
+  "_scope": "Stages 1-2 (dev pilot, done) and 3 (main run on the test split, per protocol Amendment A: agentic p2 + p1, single-shot 2k + 8k, 3 repeats). Caps are cumulative over spend-ledger.jsonl (all protocols). Subscription billing: the dollar figures are list-price estimates used as a runaway guard; the real limit is the account's plan usage.",
   "approvals": [
     {
       "_stage": "1 smoke pilot + 2 dev pilot",
@@ -28,6 +28,32 @@
       "billing": "subscription",
       "account": "personal",
       "max_total_usd": 15
+    },
+    {
+      "_stage": "3 main run",
+      "protocol": "agentic",
+      "conditions": [
+        "baseline",
+        "embeddings",
+        "hybrid",
+        "graphify",
+        "crg"
+      ],
+      "model": "claude-sonnet-5-5",
+      "split": "test",
+      "billing": "subscription",
+      "account": "personal",
+      "max_total_usd": 75
+    },
+    {
+      "_stage": "3 main run",
+      "protocol": "single_shot",
+      "conditions": "*",
+      "model": "claude-sonnet-5-5",
+      "split": "test",
+      "billing": "subscription",
+      "account": "personal",
+      "max_total_usd": 75
     }
   ]
 }

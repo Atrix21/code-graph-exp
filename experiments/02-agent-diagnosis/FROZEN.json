@@ -1,0 +1,31 @@
+{
+  "frozen_at": "2026-11-08T21:50:00+05:30",
+  "git_commit": "337b6ac39d967191019612d3a4afd0d12d280fae",
+  "claude_code_version": "2.1.319",
+  "model": "claude-sonnet-5-5",
+  "effort": "high",
+  "profile": "restricted-oauth",
+  "prompt_versions": {
+    "agentic": [
+      "p2 (confirmatory)",
+      "p1 (secondary)"
+    ],
+    "single_shot": "p1"
+  },
+  "note": "No test-split run had been made when this file was written. Verify with: sha256sum <file>.",
+  "sha256": {
+    "experiments/02-agent-diagnosis/protocol.md": "ddc6e9ec28a5a7201fcf7afcc3b4bacf54e6bab570868755f7b75b5addd27e9a",
+    "src/agent-eval/prompt.ts": "9e688f78c317bcce45519497e5a2db92354c6a3d4b35c2f6ae7b74b00beafb09",
+    "src/agent-eval/scoring.ts": "0102a14714a612dc95a357e454e7543c77392d71b2584d7ece36e8f7455d3bcf",
+    "src/agent-eval/analysis.ts": "db3d791d1646f2ab1eebb625c94227cc6b557b752679d1b18f51a4b710801206",
+    "src/agent-eval/agentic.ts": "9c446a3d79cdf94d023f196729a9ac8f2680f8789e54cc6186304779fff8c131",
+    "src/agent-eval/runner.ts": "f878152f03611cff6c7e693c31990dcea092a85cdcdeef616bb0426369b0fff0",
+    "src/agent-eval/backends/claude-code.ts": "463ef99cf54f3e36925ba9c4297d9ed276fa12282912b6e5fef6c29a0e40bbbe",
+    "src/agent-eval/workspace.ts": "64eb24c0cc2205f484cbd53a026dc3f890a9f0a9e5d6517c7024adff5d819b50",
+    "src/agent-eval/mcp/retrieval-server.ts": "7e7456eb3fd0c189a898b4cc9d46377429ad2d68310e45578fc68165b0c052a2",
+    "src/agent-eval/mcp/competitor-servers.ts": "04b7af0978257392184e512486bd179ddf06f26a5489992da63a61a6478011d4",
+    "src/agent-eval/types.ts": "d35692dc41ea0ae88b62986550c32e401d867abf6df215254de7f7295d260d87",
+    "experiments/02-agent-diagnosis/contexts/test-2000.jsonl": "44c5d70b376731cf67aa8d2405214343228abaecf2c8a2da9ae5e0470bd0ff40",
+    "experiments/02-agent-diagnosis/contexts/test-8000.jsonl": "b9f51b913dd8f95d29c8c957813202e72e83c8906235d54b38ad289e0779161c"
+  }
+}
