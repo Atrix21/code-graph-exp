@@ -1,0 +1,12 @@
+diff --git a/src/utils/infinity-pagination.ts b/src/utils/infinity-pagination.ts
+index f5d713c..1fe08bf 100644
+--- a/src/utils/infinity-pagination.ts
++++ b/src/utils/infinity-pagination.ts
+@@ -7,6 +7,6 @@ export const infinityPagination = <T>(
+ ): InfinityPaginationResponseDto<T> => {
+   return {
+     data,
+-    hasNextPage: data.length === options.limit,
++    hasNextPage: data.length > options.limit,
+   };
+ };

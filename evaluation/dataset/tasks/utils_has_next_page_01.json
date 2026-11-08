@@ -1,0 +1,46 @@
+{
+  "task_id": "utils_has_next_page_01",
+  "split": "test",
+  "description": "The paginated lists never tell the client that more results are available: the 'has next page' flag is always false even when the returned page is completely full and more records exist, so our infinite scroll stops after the first batch.",
+  "root_cause_symbols": [
+    "src/utils/infinity-pagination.ts::infinityPagination"
+  ],
+  "relevant_symbols": [
+    "src/utils/infinity-pagination.ts::infinityPagination",
+    "src/users/users.controller.ts::UsersController.findAll",
+    "src/users/users.service.ts::UsersService.findManyWithPagination"
+  ],
+  "relevant_files": [
+    "src/utils/infinity-pagination.ts",
+    "src/users/users.controller.ts",
+    "src/users/users.service.ts"
+  ],
+  "expected_relationships": [
+    [
+      "src/users/users.controller.ts::UsersController.findAll",
+      "CALLS",
+      "src/utils/infinity-pagination.ts::infinityPagination"
+    ]
+  ],
+  "data_flow": [
+    "UsersController.findAll passes the fetched page and {page, limit} to infinityPagination, which derives hasNextPage from data.length compared to limit",
+    "A page can never contain more than limit rows, so a strict greater-than comparison is always false"
+  ],
+  "control_flow_conditions": [
+    {
+      "symbol": "src/utils/infinity-pagination.ts::infinityPagination",
+      "condition": "hasNextPage: data.length > options.limit",
+      "line": 10
+    }
+  ],
+  "distractor_symbols": [
+    "src/users/infrastructure/persistence/relational/repositories/user.repository.ts::UsersRelationalRepository.findManyWithPagination",
+    "src/utils/dto/infinity-pagination-response.dto.ts::InfinityPaginationResponse"
+  ],
+  "difficulty": "easy",
+  "lexical_overlap": "low",
+  "bug_category": "wrong-comparison",
+  "call_distance": 1,
+  "fix": "Compute hasNextPage as data.length === options.limit.",
+  "notes": "Single util used by the users list endpoint. The service and repository return correct rows; only the flag is wrong."
+}

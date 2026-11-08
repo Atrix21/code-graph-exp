@@ -1,0 +1,13 @@
+diff --git a/src/auth/auth.service.ts b/src/auth/auth.service.ts
+index 988f3ab..916a039 100644
+--- a/src/auth/auth.service.ts
++++ b/src/auth/auth.service.ts
+@@ -593,7 +593,7 @@ export class AuthService {
+       infer: true,
+     });
+ 
+-    return `${forgotSecret}${user.password ?? ''}`;
++    return `${forgotSecret}${user.email ?? ''}`;
+   }
+ 
+   private async getTokensData(data: {

@@ -1,0 +1,65 @@
+{
+  "task_id": "auth_refresh_expiry_01",
+  "split": "dev",
+  "description": "AUTH_REFRESH_TOKEN_EXPIRES_IN is set to 30d in our environment, but POST /api/v1/auth/refresh starts returning 401 for clients as soon as the short access-token lifetime has passed. Decoding a freshly issued refreshToken shows its exp is only minutes after iat.",
+  "root_cause_symbols": [
+    "src/auth/auth.service.ts::AuthService.getTokensData"
+  ],
+  "relevant_symbols": [
+    "src/auth/auth.service.ts::AuthService.getTokensData",
+    "src/auth/auth.controller.ts::AuthController.refresh",
+    "src/auth/auth.service.ts::AuthService.refreshToken",
+    "src/auth/strategies/jwt-refresh.strategy.ts::JwtRefreshStrategy.validate",
+    "src/auth/config/auth.config.ts::EnvironmentVariablesValidator.AUTH_REFRESH_TOKEN_EXPIRES_IN"
+  ],
+  "relevant_files": [
+    "src/auth/auth.service.ts",
+    "src/auth/auth.controller.ts",
+    "src/auth/strategies/jwt-refresh.strategy.ts",
+    "src/auth/config/auth.config.ts"
+  ],
+  "expected_relationships": [
+    [
+      "src/auth/auth.controller.ts::AuthController.refresh",
+      "ROUTES_TO",
+      "src/auth/auth.service.ts::AuthService.refreshToken"
+    ],
+    [
+      "src/auth/auth.service.ts::AuthService.refreshToken",
+      "CALLS",
+      "src/auth/auth.service.ts::AuthService.getTokensData"
+    ],
+    [
+      "src/auth/auth.service.ts::AuthService.validateLogin",
+      "CALLS",
+      "src/auth/auth.service.ts::AuthService.getTokensData"
+    ],
+    [
+      "src/auth/auth.service.ts::AuthService.getTokensData",
+      "READS",
+      "src/auth/config/auth.config.ts::EnvironmentVariablesValidator.AUTH_REFRESH_TOKEN_EXPIRES_IN"
+    ]
+  ],
+  "data_flow": [
+    "getTokensData signs the access token with auth.secret/auth.expires and the refresh token with auth.refreshSecret and an expiresIn that must come from auth.refreshExpires (AUTH_REFRESH_TOKEN_EXPIRES_IN)",
+    "The refresh JWT exp therefore equals the access token lifetime, and JwtRefreshStrategy rejects it after expiry"
+  ],
+  "control_flow_conditions": [
+    {
+      "symbol": "src/auth/auth.service.ts::AuthService.getTokensData",
+      "condition": "expiresIn: this.configService.getOrThrow('auth.expires', { infer: true })",
+      "line": 628
+    }
+  ],
+  "distractor_symbols": [
+    "src/auth/auth.service.ts::AuthService.forgotPassword",
+    "src/auth/config/auth.config.ts::EnvironmentVariablesValidator.AUTH_JWT_TOKEN_EXPIRES_IN",
+    "src/auth/strategies/jwt-refresh.strategy.ts::JwtRefreshStrategy.constructor"
+  ],
+  "difficulty": "medium",
+  "lexical_overlap": "high",
+  "bug_category": "wrong-config",
+  "call_distance": 1,
+  "fix": "Use the 'auth.refreshExpires' config key for the refresh token expiresIn.",
+  "notes": "Shared helper getTokensData is used by login, social login and refresh. The config key for the second signAsync call was swapped to the access-token key. The access-token expiry computed at the top is correct."
+}

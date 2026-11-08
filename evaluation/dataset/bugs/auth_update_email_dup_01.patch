@@ -1,0 +1,13 @@
+diff --git a/src/auth/auth.service.ts b/src/auth/auth.service.ts
+index 988f3ab..b7b8134 100644
+--- a/src/auth/auth.service.ts
++++ b/src/auth/auth.service.ts
+@@ -480,7 +480,7 @@ export class AuthService {
+     if (userDto.email && userDto.email !== currentUser.email) {
+       const userByEmail = await this.usersService.findByEmail(userDto.email);
+ 
+-      if (userByEmail && userByEmail.id !== currentUser.id) {
++      if (userByEmail && userByEmail.id === currentUser.id) {
+         throw new UnprocessableEntityException({
+           status: HttpStatus.UNPROCESSABLE_ENTITY,
+           errors: {

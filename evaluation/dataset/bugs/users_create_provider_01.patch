@@ -1,0 +1,13 @@
+diff --git a/src/users/users.service.ts b/src/users/users.service.ts
+index b832856..f2caeaf 100644
+--- a/src/users/users.service.ts
++++ b/src/users/users.service.ts
+@@ -123,7 +123,7 @@ export class UsersService {
+       photo: photo,
+       role: role,
+       status: status,
+-      provider: createUserDto.provider ?? AuthProvidersEnum.email,
++      provider: createUserDto.provider ?? AuthProvidersEnum.google,
+       socialId: createUserDto.socialId,
+     });
+   }

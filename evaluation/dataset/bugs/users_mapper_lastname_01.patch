@@ -1,0 +1,13 @@
+diff --git a/src/users/infrastructure/persistence/relational/mappers/user.mapper.ts b/src/users/infrastructure/persistence/relational/mappers/user.mapper.ts
+index 2eb2889..51a60c3 100644
+--- a/src/users/infrastructure/persistence/relational/mappers/user.mapper.ts
++++ b/src/users/infrastructure/persistence/relational/mappers/user.mapper.ts
+@@ -60,7 +60,7 @@ export class UserMapper {
+     persistenceEntity.provider = domainEntity.provider;
+     persistenceEntity.socialId = domainEntity.socialId;
+     persistenceEntity.firstName = domainEntity.firstName;
+-    persistenceEntity.lastName = domainEntity.lastName;
++    persistenceEntity.lastName = domainEntity.firstName;
+     persistenceEntity.photo = photo;
+     persistenceEntity.role = role;
+     persistenceEntity.status = status;

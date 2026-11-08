@@ -1,0 +1,58 @@
+{
+  "task_id": "users_create_provider_01",
+  "split": "test",
+  "description": "Right after registering via POST /api/v1/auth/email/register and confirming the email, the new user cannot log in: POST /api/v1/auth/email/login answers 422 with `email: needLoginViaProvider:google` although they never used Google.",
+  "root_cause_symbols": [
+    "src/users/users.service.ts::UsersService.create"
+  ],
+  "relevant_symbols": [
+    "src/users/users.service.ts::UsersService.create",
+    "src/auth/auth.controller.ts::AuthController.register",
+    "src/auth/auth.service.ts::AuthService.register",
+    "src/auth/auth.service.ts::AuthService.validateLogin"
+  ],
+  "relevant_files": [
+    "src/users/users.service.ts",
+    "src/auth/auth.controller.ts",
+    "src/auth/auth.service.ts"
+  ],
+  "expected_relationships": [
+    [
+      "src/auth/auth.controller.ts::AuthController.register",
+      "ROUTES_TO",
+      "src/auth/auth.service.ts::AuthService.register"
+    ],
+    [
+      "src/auth/auth.service.ts::AuthService.register",
+      "CALLS",
+      "src/users/users.service.ts::UsersService.create"
+    ],
+    [
+      "src/auth/auth.service.ts::AuthService.validateLogin",
+      "THROWS",
+      "src/auth/auth.service.ts::AuthService.invalidLoginException"
+    ]
+  ],
+  "data_flow": [
+    "AuthService.register does not set a provider on the CreateUserDto, so UsersService.create must default it to AuthProvidersEnum.email",
+    "AuthService.validateLogin rejects users whose provider is not email with needLoginViaProvider:<provider>"
+  ],
+  "control_flow_conditions": [
+    {
+      "symbol": "src/users/users.service.ts::UsersService.create",
+      "condition": "provider: createUserDto.provider ?? AuthProvidersEnum.google",
+      "line": 126
+    }
+  ],
+  "distractor_symbols": [
+    "src/auth/auth.service.ts::AuthService.validateSocialLogin",
+    "src/users/infrastructure/persistence/relational/repositories/user.repository.ts::UsersRelationalRepository.create",
+    "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts::UserMapper.toPersistence"
+  ],
+  "difficulty": "easy",
+  "lexical_overlap": "high",
+  "bug_category": "wrong-enum-constant",
+  "call_distance": 1,
+  "fix": "Default provider to AuthProvidersEnum.email.",
+  "notes": "The wrong enum member is the default; social flows pass provider explicitly so they are unaffected. The symptom surfaces in validateLogin."
+}

@@ -1,0 +1,46 @@
+{
+  "task_id": "files_presigned_size_01",
+  "split": "test",
+  "description": "With FILE_DRIVER=s3-presigned, POST /api/v1/files/upload rejects a 200 KB png with 413 'File too large', while a 20 MB file gets a signed upload URL.",
+  "root_cause_symbols": [
+    "src/files/infrastructure/uploader/s3-presigned/files.service.ts::FilesS3PresignedService.create"
+  ],
+  "relevant_symbols": [
+    "src/files/infrastructure/uploader/s3-presigned/files.service.ts::FilesS3PresignedService.create",
+    "src/files/infrastructure/uploader/s3-presigned/files.controller.ts::FilesS3PresignedController.uploadFile",
+    "src/files/infrastructure/uploader/s3-presigned/dto/file.dto.ts::FileUploadDto.fileSize"
+  ],
+  "relevant_files": [
+    "src/files/infrastructure/uploader/s3-presigned/files.service.ts",
+    "src/files/infrastructure/uploader/s3-presigned/files.controller.ts",
+    "src/files/infrastructure/uploader/s3-presigned/dto/file.dto.ts"
+  ],
+  "expected_relationships": [
+    [
+      "src/files/infrastructure/uploader/s3-presigned/files.controller.ts::FilesS3PresignedController.uploadFile",
+      "CALLS",
+      "src/files/infrastructure/uploader/s3-presigned/files.service.ts::FilesS3PresignedService.create"
+    ]
+  ],
+  "data_flow": [
+    "file.fileSize from FileUploadDto is compared against file.maxFileSize (5 MB) from config; PayloadTooLargeException must be thrown only when the size exceeds the limit"
+  ],
+  "control_flow_conditions": [
+    {
+      "symbol": "src/files/infrastructure/uploader/s3-presigned/files.service.ts::FilesS3PresignedService.create",
+      "condition": "file.fileSize < (this.configService.get('file.maxFileSize', { infer: true }) || 0)",
+      "line": 60
+    }
+  ],
+  "distractor_symbols": [
+    "src/files/infrastructure/uploader/local/files.module.ts::FilesLocalModule",
+    "src/files/config/file.config.ts::EnvironmentVariablesValidator.FILE_DRIVER",
+    "src/files/infrastructure/uploader/s3/files.service.ts::FilesS3Service.create"
+  ],
+  "difficulty": "easy",
+  "lexical_overlap": "high",
+  "bug_category": "wrong-comparison",
+  "call_distance": 0,
+  "fix": "Throw PayloadTooLargeException when file.fileSize > the configured max.",
+  "notes": "Inverted comparison operator in the size guard of the presigned uploader; local and S3 uploaders enforce size via multer limits."
+}

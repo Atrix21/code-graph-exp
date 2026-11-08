@@ -1,0 +1,15 @@
+diff --git a/src/auth/auth.service.ts b/src/auth/auth.service.ts
+index 988f3ab..ebfc5b1 100644
+--- a/src/auth/auth.service.ts
++++ b/src/auth/auth.service.ts
+@@ -412,10 +412,6 @@ export class AuthService {
+ 
+     user.password = password;
+ 
+-    await this.sessionService.deleteByUserId({
+-      userId: user.id,
+-    });
+-
+     await this.usersService.update(user.id, user);
+   }
+ 

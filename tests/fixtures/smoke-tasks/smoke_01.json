@@ -1,0 +1,8 @@
+{
+  "task_id": "smoke_01",
+  "split": "dev",
+  "description": "PLUMBING SMOKE TEST ONLY (not part of the benchmark). After logging out, the old refresh token still works and returns new access tokens.",
+  "root_cause_symbols": ["src/auth/auth.service.ts::AuthService.refreshToken"],
+  "relevant_symbols": ["src/auth/auth.service.ts::AuthService.refreshToken", "src/auth/auth.controller.ts::AuthController.refresh", "src/session/session.service.ts::SessionService.findById"],
+  "relevant_files": ["src/auth/auth.service.ts", "src/auth/auth.controller.ts", "src/session/session.service.ts"]
+}

@@ -1,0 +1,50 @@
+{
+  "task_id": "auth_uniform_login_01",
+  "split": "test",
+  "description": "We run with AUTH_UNIFORM_ERRORS=true so the API does not reveal which emails are registered, yet POST /api/v1/auth/email/login with an unknown email still answers 422 with `email: notFound`, and a wrong password gives `incorrectPassword`. When we leave the variable unset the response is the generic `incorrectEmailOrPassword` on both fields instead.",
+  "root_cause_symbols": [
+    "src/auth/auth.service.ts::AuthService.invalidLoginException"
+  ],
+  "relevant_symbols": [
+    "src/auth/auth.service.ts::AuthService.invalidLoginException",
+    "src/auth/auth.controller.ts::AuthController.login",
+    "src/auth/auth.service.ts::AuthService.validateLogin"
+  ],
+  "relevant_files": [
+    "src/auth/auth.service.ts",
+    "src/auth/auth.controller.ts"
+  ],
+  "expected_relationships": [
+    [
+      "src/auth/auth.controller.ts::AuthController.login",
+      "ROUTES_TO",
+      "src/auth/auth.service.ts::AuthService.validateLogin"
+    ],
+    [
+      "src/auth/auth.service.ts::AuthService.validateLogin",
+      "CALLS",
+      "src/auth/auth.service.ts::AuthService.invalidLoginException"
+    ]
+  ],
+  "data_flow": [
+    "auth.uniformErrors is read from AUTH_UNIFORM_ERRORS in auth.config and read again by AuthService.invalidLoginException",
+    "The specific error map built in AuthService.validateLogin (notFound / incorrectPassword / needLoginViaProvider) is passed into invalidLoginException and chosen or replaced by the generic payload based on the flag"
+  ],
+  "control_flow_conditions": [
+    {
+      "symbol": "src/auth/auth.service.ts::AuthService.invalidLoginException",
+      "condition": "errors: !uniformErrors ? { email: 'incorrectEmailOrPassword', password: 'incorrectEmailOrPassword' } : errors",
+      "line": 575
+    }
+  ],
+  "distractor_symbols": [
+    "src/auth/auth.service.ts::AuthService.forgotPassword",
+    "src/auth/config/auth.config.ts::EnvironmentVariablesValidator.AUTH_UNIFORM_ERRORS"
+  ],
+  "difficulty": "medium",
+  "lexical_overlap": "high",
+  "bug_category": "wrong-condition",
+  "call_distance": 1,
+  "fix": "Use the uniform payload when uniformErrors is true (drop the negation) and the specific errors otherwise.",
+  "notes": "validateLogin delegates all failure responses to invalidLoginException; the negated flag inverts which payload is returned. forgotPassword reads the same flag but is correct."
+}

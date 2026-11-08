@@ -1,0 +1,33 @@
+{
+  "name": "code-graph-retrieval-benchmark",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Reproducible benchmark: does a richer code graph help agents localise bugs with fewer tokens?",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "setup:target": "tsx src/cli/index.ts setup-target",
+    "setup:competitors": "bash scripts/setup-competitors.sh",
+    "index": "tsx src/cli/index.ts index",
+    "graph:build": "tsx src/cli/index.ts graph-build",
+    "graph:validate": "tsx src/cli/index.ts graph-validate",
+    "benchmark": "tsx src/cli/index.ts benchmark",
+    "benchmark:ablation": "tsx src/cli/index.ts ablation",
+    "report": "tsx src/cli/index.ts report",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p ."
+  },
+  "dependencies": {
+    "@vscode/ripgrep": "1.18.0",
+    "js-tiktoken": "1.0.21",
+    "stemmer": "2.0.1",
+    "typescript": "5.9.3"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.1",
+    "tsx": "4.20.6",
+    "vitest": "3.2.4"
+  }
+}

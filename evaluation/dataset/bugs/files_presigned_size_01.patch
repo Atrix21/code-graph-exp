@@ -1,0 +1,13 @@
+diff --git a/src/files/infrastructure/uploader/s3-presigned/files.service.ts b/src/files/infrastructure/uploader/s3-presigned/files.service.ts
+index e0be1fd..44c6af8 100644
+--- a/src/files/infrastructure/uploader/s3-presigned/files.service.ts
++++ b/src/files/infrastructure/uploader/s3-presigned/files.service.ts
+@@ -57,7 +57,7 @@ export class FilesS3PresignedService {
+     }
+ 
+     if (
+-      file.fileSize >
++      file.fileSize <
+       (this.configService.get('file.maxFileSize', {
+         infer: true,
+       }) || 0)

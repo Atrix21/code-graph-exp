@@ -1,0 +1,29 @@
+{
+  "upstream": "https://github.com/brocoders/nestjs-boilerplate.git",
+  "upstream_commit": "9620f159eefe38f47747d02ab162852367c5472c",
+  "bench_commit": "0d40b0facdba47c69e7cbe54f6787c08606ca8a5",
+  "patches": {
+    "auth_jwt_secret_01.patch": "55c94e6d488b214880ac193b87234a4da7f2f15807846441a266851d83357969",
+    "auth_refresh_expiry_01.patch": "14dcc94c6fb50609df40b68b9b2cc2bdaed956d12df93566a0e2f8a92ca68fa6",
+    "auth_reset_link_reuse_01.patch": "6b7f878583c5dce8f7c5e4fef03791755991c74fbde7e4efd0a02e3c4c4d38d3",
+    "auth_reset_sessions_01.patch": "4c697a3e9c3d5cfb38e296bf3ba1d8143eac277071c3294917e1f465bd8f8b8a",
+    "auth_social_link_01.patch": "d7dd164fa6d8996706da02ca46a6b7c3d57270cffd340f1da4c6261e30064734",
+    "auth_uniform_login_01.patch": "b4779547dad880a88b8adedc9e693c089e4cd0f4d401cfd4462d44edec93d9b8",
+    "auth_update_email_dup_01.patch": "e978d1bf0a82e26adff66c0b28e05dddad784104a131a65c507aaedce85ef9ec",
+    "files_local_path_01.patch": "7b89aca43d85e8456e3d38f0fd16909e8f3763ffdc4fc1dd139e4f925ee26ca1",
+    "files_photo_url_01.patch": "7ca56f6c7c5e748e8b6421ca07ba4c4458f0834ba73818852c91f78a06f8a4a3",
+    "files_presigned_size_01.patch": "6c8fa83ac05f87ba868c0688831dd9a8facda36d2209ffdbffee34e13270c0c5",
+    "mail_new_email_link_01.patch": "272eb675ed500faa3d0b3ae5396484e2cdfd186898d84455430e0e5583d4138d",
+    "roles_admin_guard_01.patch": "0de4363a010860d5a21eaae8fd11087ac18a93965c11ddaff351e34d32e54f99",
+    "session_password_change_01.patch": "bba2050421661ba7f85c7b194b0febb3927652463efa775b599f537f3aeba917",
+    "session_refresh_replay_01.patch": "3cd9c5528dd5e3999da9f0b355f65f34d5775672d94d5ce400860051229544f6",
+    "users_create_provider_01.patch": "24cc13302400dd8f5350572ba33c07dc019fddbb7cf3443524ec530c4c81b7dc",
+    "users_list_page_01.patch": "8bba2c25dbd2f77f22d3fa8c5a362ed04ce614e3e5620738fed5281cb3e2bec0",
+    "users_mapper_lastname_01.patch": "066dad8e499da7b5bcd6de51d3e5aa2f2bef0c9bd2e327c38c0981856c653226",
+    "users_photo_cleared_01.patch": "3d33b97d596e005023f43edb214117c8b1c80a57a4676300ba1ce39aed915319",
+    "users_update_noop_01.patch": "bbe6b310e332d249d32c54868c1b00dd115134bcee831dca30a9fcc07afb30dc",
+    "utils_has_next_page_01.patch": "39dabb558ef6b00f9c8c8b155d12d40d209c128a92cc5a9577a2764ab9916786"
+  },
+  "corpus_files": 170,
+  "corpus_sha256": "0352add032609569487ee0f3a1912a2f6f5c1033a44a5dfd6c4d1ac8f09e2f50"
+}

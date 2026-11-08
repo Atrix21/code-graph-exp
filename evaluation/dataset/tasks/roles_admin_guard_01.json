@@ -1,0 +1,52 @@
+{
+  "task_id": "roles_admin_guard_01",
+  "split": "test",
+  "description": "Only the very first account in the system, the seeded super admin, can open the admin-only user management endpoints. Admins created later get 403 Forbidden even though their role is admin and their token is valid.",
+  "root_cause_symbols": [
+    "src/roles/roles.guard.ts::RolesGuard.canActivate"
+  ],
+  "relevant_symbols": [
+    "src/roles/roles.guard.ts::RolesGuard.canActivate",
+    "src/users/users.controller.ts::UsersController.findAll",
+    "src/auth/strategies/jwt.strategy.ts::JwtStrategy.validate"
+  ],
+  "relevant_files": [
+    "src/roles/roles.guard.ts",
+    "src/users/users.controller.ts",
+    "src/auth/strategies/jwt.strategy.ts"
+  ],
+  "expected_relationships": [
+    [
+      "src/users/users.controller.ts::UsersController.findAll",
+      "CHECKS",
+      "src/roles/roles.guard.ts::RolesGuard.canActivate"
+    ],
+    [
+      "src/auth/strategies/jwt.strategy.ts::JwtStrategy.validate",
+      "RETURNS_VALUE_TO",
+      "src/roles/roles.guard.ts::RolesGuard.canActivate"
+    ]
+  ],
+  "data_flow": [
+    "JwtStrategy.validate puts the JWT payload (id, role, sessionId) on request.user; RolesGuard compares the required roles from @Roles(RoleEnum.admin) to request.user.role.id",
+    "Comparing against request.user.id instead of the role id only matches when the user id happens to equal the admin role id (1)"
+  ],
+  "control_flow_conditions": [
+    {
+      "symbol": "src/roles/roles.guard.ts::RolesGuard.canActivate",
+      "condition": "roles.map(String).includes(String(request.user?.id))",
+      "line": 21
+    }
+  ],
+  "distractor_symbols": [
+    "src/roles/roles.decorator.ts::Roles",
+    "src/auth/auth.service.ts::AuthService.getTokensData",
+    "src/users/users.controller.ts::UsersController.findOne"
+  ],
+  "difficulty": "medium",
+  "lexical_overlap": "low",
+  "bug_category": "wrong-field",
+  "call_distance": 1,
+  "fix": "Compare against request.user?.role?.id.",
+  "notes": "RoleEnum.admin = 1 and the seeded admin has user id 1, hiding the bug for the first account only."
+}

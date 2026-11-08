@@ -1,0 +1,52 @@
+{
+  "task_id": "mail_new_email_link_01",
+  "split": "test",
+  "description": "After a user changes their email in the profile, the verification mail sent to the new address links to the same page as the sign-up activation mail, and following it never completes the email change.",
+  "root_cause_symbols": [
+    "src/mail/mail.service.ts::MailService.confirmNewEmail"
+  ],
+  "relevant_symbols": [
+    "src/mail/mail.service.ts::MailService.confirmNewEmail",
+    "src/auth/auth.controller.ts::AuthController.update",
+    "src/auth/auth.service.ts::AuthService.update"
+  ],
+  "relevant_files": [
+    "src/mail/mail.service.ts",
+    "src/auth/auth.controller.ts",
+    "src/auth/auth.service.ts"
+  ],
+  "expected_relationships": [
+    [
+      "src/auth/auth.controller.ts::AuthController.update",
+      "ROUTES_TO",
+      "src/auth/auth.service.ts::AuthService.update"
+    ],
+    [
+      "src/auth/auth.service.ts::AuthService.update",
+      "CALLS",
+      "src/mail/mail.service.ts::MailService.confirmNewEmail"
+    ]
+  ],
+  "data_flow": [
+    "AuthService.update signs a hash with confirmEmailUserId+newEmail and passes it to MailService.confirmNewEmail, which builds the frontend URL (frontendDomain + route) with ?hash=",
+    "The route path must be the new-email confirmation page so the frontend calls the confirm-new-email endpoint"
+  ],
+  "control_flow_conditions": [
+    {
+      "symbol": "src/mail/mail.service.ts::MailService.confirmNewEmail",
+      "condition": "}) + '/confirm-email',",
+      "line": 141
+    }
+  ],
+  "distractor_symbols": [
+    "src/mail/mail.service.ts::MailService.userSignUp",
+    "src/mail/mail.service.ts::MailService.forgotPassword",
+    "src/auth/auth.service.ts::AuthService.confirmNewEmail"
+  ],
+  "difficulty": "easy",
+  "lexical_overlap": "medium",
+  "bug_category": "wrong-constant",
+  "call_distance": 1,
+  "fix": "Use the '/confirm-new-email' path.",
+  "notes": "String constant copied from userSignUp. The template name and i18n keys are still the new-email ones, so the mail otherwise looks right."
+}

@@ -1,0 +1,13 @@
+diff --git a/src/users/infrastructure/persistence/relational/repositories/user.repository.ts b/src/users/infrastructure/persistence/relational/repositories/user.repository.ts
+index 7bba7e3..8b4df4e 100644
+--- a/src/users/infrastructure/persistence/relational/repositories/user.repository.ts
++++ b/src/users/infrastructure/persistence/relational/repositories/user.repository.ts
+@@ -42,7 +42,7 @@ export class UsersRelationalRepository implements UserRepository {
+     }
+ 
+     const entities = await this.usersRepository.find({
+-      skip: (paginationOptions.page - 1) * paginationOptions.limit,
++      skip: paginationOptions.page * paginationOptions.limit,
+       take: paginationOptions.limit,
+       where: where,
+       order: sortOptions?.reduce(

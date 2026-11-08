@@ -1,0 +1,58 @@
+{
+  "task_id": "users_update_noop_01",
+  "split": "dev",
+  "description": "As an admin I edit another user's name and role with PATCH on the users endpoint; I get 200 OK and a response, but the values are exactly as before and the database is unchanged.",
+  "root_cause_symbols": [
+    "src/users/infrastructure/persistence/relational/repositories/user.repository.ts::UsersRelationalRepository.update"
+  ],
+  "relevant_symbols": [
+    "src/users/infrastructure/persistence/relational/repositories/user.repository.ts::UsersRelationalRepository.update",
+    "src/users/users.controller.ts::UsersController.update",
+    "src/users/users.service.ts::UsersService.update",
+    "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts::UserMapper.toPersistence"
+  ],
+  "relevant_files": [
+    "src/users/infrastructure/persistence/relational/repositories/user.repository.ts",
+    "src/users/users.controller.ts",
+    "src/users/users.service.ts",
+    "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts"
+  ],
+  "expected_relationships": [
+    [
+      "src/users/users.controller.ts::UsersController.update",
+      "ROUTES_TO",
+      "src/users/users.service.ts::UsersService.update"
+    ],
+    [
+      "src/users/users.service.ts::UsersService.update",
+      "CALLS",
+      "src/users/infrastructure/persistence/relational/repositories/user.repository.ts::UsersRelationalRepository.update"
+    ],
+    [
+      "src/users/infrastructure/persistence/relational/repositories/user.repository.ts::UsersRelationalRepository.update",
+      "CALLS",
+      "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts::UserMapper.toPersistence"
+    ]
+  ],
+  "data_flow": [
+    "UsersService.update builds a partial payload (firstName, role, ...) and passes it to the repository",
+    "The repository merges the existing domain object with the payload; the payload must take precedence, otherwise the old values overwrite the new ones before saving"
+  ],
+  "control_flow_conditions": [
+    {
+      "symbol": "src/users/infrastructure/persistence/relational/repositories/user.repository.ts::UsersRelationalRepository.update",
+      "condition": "...payload, ...UserMapper.toDomain(entity),",
+      "line": 114
+    }
+  ],
+  "distractor_symbols": [
+    "src/users/infrastructure/persistence/document/repositories/user.repository.ts::UsersDocumentRepository.update",
+    "src/session/infrastructure/persistence/relational/repositories/session.repository.ts::SessionRelationalRepository.update"
+  ],
+  "difficulty": "medium",
+  "lexical_overlap": "low",
+  "bug_category": "wrong-argument-order",
+  "call_distance": 1,
+  "fix": "Spread UserMapper.toDomain(entity) first and payload second.",
+  "notes": "Spread order swapped so existing values win. Broad effect on every update (profile, password, status) but the report is tied to the admin PATCH path; the root cause is in the relational repository. Session repository has a similarly shaped update that is intact."
+}

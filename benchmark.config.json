@@ -1,0 +1,43 @@
+{
+  "target": {
+    "name": "brocoders/nestjs-boilerplate",
+    "upstream": "https://github.com/brocoders/nestjs-boilerplate.git",
+    "upstream_commit": "9620f159eefe38f47747d02ab162852367c5472c",
+    "bench_dir": "targets/bench",
+    "include_dirs": [
+      "src",
+      "test"
+    ],
+    "keep": [
+      "src",
+      "test",
+      "package.json",
+      "tsconfig.json",
+      "tsconfig.build.json",
+      "nest-cli.json",
+      "LICENSE",
+      ".gitignore"
+    ]
+  },
+  "dataset": {
+    "tasks_dir": "evaluation/dataset/tasks",
+    "bugs_dir": "evaluation/dataset/bugs",
+    "version": "unfrozen",
+    "split_seed": 20261108
+  },
+  "budget": {
+    "maxResults": 50,
+    "maxContextTokens": 8000
+  },
+  "embeddings": {
+    "model": "Qwen/Qwen3-Embedding-0.6B",
+    "python": "vendor/.venvs/embeddings/bin/python",
+    "script": "scripts/embeddings/embed.py",
+    "batch": 16,
+    "max_seq": 1024,
+    "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3"
+  },
+  "results_dir": "evaluation/results",
+  "cache_dir": ".cache",
+  "seed": 1234
+}

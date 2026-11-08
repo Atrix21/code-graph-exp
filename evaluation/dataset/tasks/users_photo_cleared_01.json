@@ -1,0 +1,59 @@
+{
+  "task_id": "users_photo_cleared_01",
+  "split": "test",
+  "description": "Whenever a user edits just their first name from the profile page, their avatar picture disappears (photo comes back null). Uploading the picture again brings it back until the next profile edit.",
+  "root_cause_symbols": [
+    "src/users/users.service.ts::UsersService.update"
+  ],
+  "relevant_symbols": [
+    "src/users/users.service.ts::UsersService.update",
+    "src/auth/auth.controller.ts::AuthController.update",
+    "src/auth/auth.service.ts::AuthService.update",
+    "src/users/infrastructure/persistence/relational/repositories/user.repository.ts::UsersRelationalRepository.update"
+  ],
+  "relevant_files": [
+    "src/users/users.service.ts",
+    "src/auth/auth.controller.ts",
+    "src/auth/auth.service.ts",
+    "src/users/infrastructure/persistence/relational/repositories/user.repository.ts"
+  ],
+  "expected_relationships": [
+    [
+      "src/auth/auth.controller.ts::AuthController.update",
+      "ROUTES_TO",
+      "src/auth/auth.service.ts::AuthService.update"
+    ],
+    [
+      "src/auth/auth.service.ts::AuthService.update",
+      "CALLS",
+      "src/users/users.service.ts::UsersService.update"
+    ],
+    [
+      "src/users/users.service.ts::UsersService.update",
+      "CALLS",
+      "src/users/infrastructure/persistence/relational/repositories/user.repository.ts::UsersRelationalRepository.update"
+    ]
+  ],
+  "data_flow": [
+    "AuthService.update forwards the AuthUpdateDto (photo absent) to UsersService.update, which builds a payload with photo undefined to mean 'leave unchanged' and null to mean 'remove'",
+    "UsersRelationalRepository.update merges the payload over the existing domain user, so photo=null removes the stored avatar"
+  ],
+  "control_flow_conditions": [
+    {
+      "symbol": "src/users/users.service.ts::UsersService.update",
+      "condition": "} else if (updateUserDto.photo === undefined) {",
+      "line": 226
+    }
+  ],
+  "distractor_symbols": [
+    "src/users/users.service.ts::UsersService.create",
+    "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts::UserMapper.toPersistence",
+    "src/files/files.service.ts::FilesService.findById"
+  ],
+  "difficulty": "medium",
+  "lexical_overlap": "medium",
+  "bug_category": "wrong-condition",
+  "call_distance": 1,
+  "fix": "Set photo to null only when updateUserDto.photo === null.",
+  "notes": "The null-vs-undefined distinction for removing a photo is inverted, so any update lacking a photo key clears it, while an explicit null no longer does."
+}

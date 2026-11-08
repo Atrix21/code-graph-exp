@@ -1,0 +1,14 @@
+diff --git a/src/users/infrastructure/persistence/relational/repositories/user.repository.ts b/src/users/infrastructure/persistence/relational/repositories/user.repository.ts
+index 7bba7e3..020fc78 100644
+--- a/src/users/infrastructure/persistence/relational/repositories/user.repository.ts
++++ b/src/users/infrastructure/persistence/relational/repositories/user.repository.ts
+@@ -111,8 +111,8 @@ export class UsersRelationalRepository implements UserRepository {
+     const updatedEntity = await this.usersRepository.save(
+       this.usersRepository.create(
+         UserMapper.toPersistence({
+-          ...UserMapper.toDomain(entity),
+           ...payload,
++          ...UserMapper.toDomain(entity),
+         }),
+       ),
+     );

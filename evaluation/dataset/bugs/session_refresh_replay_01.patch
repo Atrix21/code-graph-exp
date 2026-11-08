@@ -1,0 +1,13 @@
+diff --git a/src/session/infrastructure/persistence/relational/repositories/session.repository.ts b/src/session/infrastructure/persistence/relational/repositories/session.repository.ts
+index 18cd5d6..f440795 100644
+--- a/src/session/infrastructure/persistence/relational/repositories/session.repository.ts
++++ b/src/session/infrastructure/persistence/relational/repositories/session.repository.ts
+@@ -67,7 +67,7 @@ export class SessionRelationalRepository implements SessionRepository {
+     >,
+   ): Promise<Session | null> {
+     const result = await this.sessionRepository.update(
+-      { id: Number(conditions.id), hash: conditions.hash },
++      { id: Number(conditions.id) },
+       { hash: payload.hash },
+     );
+ 

@@ -1,0 +1,13 @@
+diff --git a/src/files/infrastructure/uploader/local/files.service.ts b/src/files/infrastructure/uploader/local/files.service.ts
+index 55ed26f..0837541 100644
+--- a/src/files/infrastructure/uploader/local/files.service.ts
++++ b/src/files/infrastructure/uploader/local/files.service.ts
+@@ -30,7 +30,7 @@ export class FilesLocalService {
+       file: await this.fileRepository.create({
+         path: `/${this.configService.get('app.apiPrefix', {
+           infer: true,
+-        })}/v1/${file.path}`,
++        })}/v1/${file.filename}`,
+       }),
+     };
+   }

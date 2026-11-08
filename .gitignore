@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.cache/
+vendor/*/
+targets/*/
+*.sqlite
+*.sqlite-journal
+.venv/
+__pycache__/
+targets/node_modules
+evaluation/results/smoke*/

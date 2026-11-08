@@ -1,0 +1,8 @@
+{
+  "task_id": "smoke_02",
+  "split": "dev",
+  "description": "PLUMBING SMOKE TEST ONLY (not part of the benchmark). Uploading an avatar image to S3 fails for files with uppercase extensions like .PNG.",
+  "root_cause_symbols": ["src/files/infrastructure/uploader/s3/files.module.ts::FilesS3Module"],
+  "relevant_symbols": ["src/files/infrastructure/uploader/s3/files.module.ts::FilesS3Module"],
+  "relevant_files": ["src/files/infrastructure/uploader/s3/files.module.ts"]
+}

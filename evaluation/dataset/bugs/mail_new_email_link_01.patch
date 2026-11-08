@@ -1,0 +1,13 @@
+diff --git a/src/mail/mail.service.ts b/src/mail/mail.service.ts
+index 3bdfd44..3676f34 100644
+--- a/src/mail/mail.service.ts
++++ b/src/mail/mail.service.ts
+@@ -138,7 +138,7 @@ export class MailService {
+     const url = new URL(
+       this.configService.getOrThrow('app.frontendDomain', {
+         infer: true,
+-      }) + '/confirm-new-email',
++      }) + '/confirm-email',
+     );
+     url.searchParams.set('hash', mailData.data.hash);
+ 

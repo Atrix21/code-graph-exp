@@ -1,0 +1,71 @@
+{
+  "task_id": "users_mapper_lastname_01",
+  "split": "test",
+  "description": "New users who register end up with their last name identical to their first name: someone signing up as Jane Smith is stored and returned as Jane Jane. Editing the profile later also overwrites the surname with the first name.",
+  "root_cause_symbols": [
+    "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts::UserMapper.toPersistence"
+  ],
+  "relevant_symbols": [
+    "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts::UserMapper.toPersistence",
+    "src/auth/auth.controller.ts::AuthController.register",
+    "src/auth/auth.service.ts::AuthService.register",
+    "src/users/users.service.ts::UsersService.create",
+    "src/users/infrastructure/persistence/relational/repositories/user.repository.ts::UsersRelationalRepository.create"
+  ],
+  "relevant_files": [
+    "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts",
+    "src/auth/auth.controller.ts",
+    "src/auth/auth.service.ts",
+    "src/users/users.service.ts",
+    "src/users/infrastructure/persistence/relational/repositories/user.repository.ts"
+  ],
+  "expected_relationships": [
+    [
+      "src/auth/auth.controller.ts::AuthController.register",
+      "ROUTES_TO",
+      "src/auth/auth.service.ts::AuthService.register"
+    ],
+    [
+      "src/auth/auth.service.ts::AuthService.register",
+      "CALLS",
+      "src/users/users.service.ts::UsersService.create"
+    ],
+    [
+      "src/users/users.service.ts::UsersService.create",
+      "CALLS",
+      "src/users/infrastructure/persistence/relational/repositories/user.repository.ts::UsersRelationalRepository.create"
+    ],
+    [
+      "src/users/infrastructure/persistence/relational/repositories/user.repository.ts::UsersRelationalRepository.create",
+      "CALLS",
+      "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts::UserMapper.toPersistence"
+    ],
+    [
+      "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts::UserMapper.toPersistence",
+      "RETURNS_VALUE_TO",
+      "src/users/infrastructure/persistence/relational/repositories/user.repository.ts::UsersRelationalRepository.create"
+    ]
+  ],
+  "data_flow": [
+    "AuthRegisterLoginDto.lastName is copied by AuthService.register -> UsersService.create into the User domain payload (lastName: createUserDto.lastName)",
+    "UserMapper.toPersistence builds the UserEntity from the domain object; lastName is assigned from domainEntity.firstName"
+  ],
+  "control_flow_conditions": [
+    {
+      "symbol": "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts::UserMapper.toPersistence",
+      "condition": "persistenceEntity.lastName = domainEntity.firstName;",
+      "line": 63
+    }
+  ],
+  "distractor_symbols": [
+    "src/users/infrastructure/persistence/document/mappers/user.mapper.ts::UserMapper.toPersistence",
+    "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts::UserMapper.toDomain",
+    "src/users/infrastructure/persistence/relational/repositories/user.repository.ts::UsersRelationalRepository.update"
+  ],
+  "difficulty": "hard",
+  "lexical_overlap": "low",
+  "bug_category": "wrong-field",
+  "call_distance": 3,
+  "fix": "Assign persistenceEntity.lastName = domainEntity.lastName.",
+  "notes": "Service and DTO pass the right lastName; the relational mapper copies the wrong property when persisting. Applies to create and update since both call toPersistence. Document mapper twin is intact."
+}

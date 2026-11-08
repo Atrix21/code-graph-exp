@@ -1,0 +1,57 @@
+{
+  "task_id": "users_list_page_01",
+  "split": "test",
+  "description": "As admin, the first page of the user list (page 1, limit 10) starts at the eleventh user, and on a fresh install with only the two seeded accounts the list comes back empty. Page 2 begins at the 21st user.",
+  "root_cause_symbols": [
+    "src/users/infrastructure/persistence/relational/repositories/user.repository.ts::UsersRelationalRepository.findManyWithPagination"
+  ],
+  "relevant_symbols": [
+    "src/users/infrastructure/persistence/relational/repositories/user.repository.ts::UsersRelationalRepository.findManyWithPagination",
+    "src/users/users.controller.ts::UsersController.findAll",
+    "src/users/users.service.ts::UsersService.findManyWithPagination"
+  ],
+  "relevant_files": [
+    "src/users/infrastructure/persistence/relational/repositories/user.repository.ts",
+    "src/users/users.controller.ts",
+    "src/users/users.service.ts"
+  ],
+  "expected_relationships": [
+    [
+      "src/users/users.controller.ts::UsersController.findAll",
+      "CALLS",
+      "src/users/users.service.ts::UsersService.findManyWithPagination"
+    ],
+    [
+      "src/users/users.service.ts::UsersService.findManyWithPagination",
+      "CALLS",
+      "src/users/infrastructure/persistence/relational/repositories/user.repository.ts::UsersRelationalRepository.findManyWithPagination"
+    ],
+    [
+      "src/users/infrastructure/persistence/relational/repositories/user.repository.ts::UsersRelationalRepository.findManyWithPagination",
+      "QUERIES_DATABASE",
+      "src/users/infrastructure/persistence/relational/entities/user.entity.ts::UserEntity"
+    ]
+  ],
+  "data_flow": [
+    "UsersController.findAll defaults page=1,limit=10 and passes paginationOptions to the service and repository",
+    "The repository converts the 1-based page into a TypeORM skip; skipping page*limit instead of (page-1)*limit drops the first page"
+  ],
+  "control_flow_conditions": [
+    {
+      "symbol": "src/users/infrastructure/persistence/relational/repositories/user.repository.ts::UsersRelationalRepository.findManyWithPagination",
+      "condition": "skip: paginationOptions.page * paginationOptions.limit",
+      "line": 45
+    }
+  ],
+  "distractor_symbols": [
+    "src/users/infrastructure/persistence/document/repositories/user.repository.ts::UsersDocumentRepository.findManyWithPagination",
+    "src/utils/infinity-pagination.ts::infinityPagination",
+    "src/users/dto/query-user.dto.ts::QueryUserDto.page"
+  ],
+  "difficulty": "medium",
+  "lexical_overlap": "medium",
+  "bug_category": "off-by-one",
+  "call_distance": 1,
+  "fix": "Use skip: (page - 1) * limit.",
+  "notes": "Off-by-one in page-to-offset conversion in the relational repository; the document twin and the controller defaults are fine."
+}

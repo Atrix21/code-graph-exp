@@ -1,0 +1,59 @@
+{
+  "task_id": "auth_social_link_01",
+  "split": "dev",
+  "description": "A customer who registered with email and password, confirmed the address and is active, later tapped 'Sign in with Google' using the same email. Afterwards their account's provider is shown as google and the regular email login now tells them to log in via provider google. Social sign-in should not take over an active password account.",
+  "root_cause_symbols": [
+    "src/auth/auth.service.ts::AuthService.validateSocialLogin"
+  ],
+  "relevant_symbols": [
+    "src/auth/auth.service.ts::AuthService.validateSocialLogin",
+    "src/auth-google/auth-google.controller.ts::AuthGoogleController.login",
+    "src/users/users.service.ts::UsersService.findByEmail",
+    "src/users/users.service.ts::UsersService.update",
+    "src/auth/auth.service.ts::AuthService.validateLogin"
+  ],
+  "relevant_files": [
+    "src/auth/auth.service.ts",
+    "src/auth-google/auth-google.controller.ts",
+    "src/users/users.service.ts"
+  ],
+  "expected_relationships": [
+    [
+      "src/auth-google/auth-google.controller.ts::AuthGoogleController.login",
+      "CALLS",
+      "src/auth/auth.service.ts::AuthService.validateSocialLogin"
+    ],
+    [
+      "src/auth/auth.service.ts::AuthService.validateSocialLogin",
+      "CALLS",
+      "src/users/users.service.ts::UsersService.findByEmail"
+    ],
+    [
+      "src/auth/auth.service.ts::AuthService.validateSocialLogin",
+      "CALLS",
+      "src/users/users.service.ts::UsersService.update"
+    ]
+  ],
+  "data_flow": [
+    "userByEmail found by the social email is only re-linked (provider and socialId overwritten, then persisted via UsersService.update) when its status is inactive",
+    "Overwritten provider makes AuthService.validateLogin throw needLoginViaProvider:google for password login"
+  ],
+  "control_flow_conditions": [
+    {
+      "symbol": "src/auth/auth.service.ts::AuthService.validateSocialLogin",
+      "condition": "user.status?.id?.toString() !== StatusEnum.inactive.toString()",
+      "line": 135
+    }
+  ],
+  "distractor_symbols": [
+    "src/auth-facebook/auth-facebook.controller.ts::AuthFacebookController.login",
+    "src/auth-google/auth-google.service.ts::AuthGoogleService.getProfileByToken",
+    "src/auth/auth.service.ts::AuthService.confirmEmail"
+  ],
+  "difficulty": "medium",
+  "lexical_overlap": "medium",
+  "bug_category": "wrong-condition",
+  "call_distance": 0,
+  "fix": "Re-link the provider only when the status is inactive (use ===).",
+  "notes": "The comparison is inverted: active accounts get their provider/socialId rewritten while inactive ones are left alone. Same logic is shared by google, facebook and apple controllers."
+}

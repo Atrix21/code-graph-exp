@@ -1,0 +1,56 @@
+{
+  "task_id": "auth_reset_link_reuse_01",
+  "split": "dev",
+  "description": "Password reset links do not seem to be single use: after I successfully set a new password with the emailed link, opening the very same link again let me set yet another password.",
+  "root_cause_symbols": [
+    "src/auth/auth.service.ts::AuthService.getForgotSecret"
+  ],
+  "relevant_symbols": [
+    "src/auth/auth.service.ts::AuthService.getForgotSecret",
+    "src/auth/auth.controller.ts::AuthController.resetPassword",
+    "src/auth/auth.service.ts::AuthService.resetPassword",
+    "src/auth/auth.service.ts::AuthService.forgotPassword"
+  ],
+  "relevant_files": [
+    "src/auth/auth.service.ts",
+    "src/auth/auth.controller.ts"
+  ],
+  "expected_relationships": [
+    [
+      "src/auth/auth.controller.ts::AuthController.resetPassword",
+      "ROUTES_TO",
+      "src/auth/auth.service.ts::AuthService.resetPassword"
+    ],
+    [
+      "src/auth/auth.service.ts::AuthService.resetPassword",
+      "CALLS",
+      "src/auth/auth.service.ts::AuthService.getForgotSecret"
+    ],
+    [
+      "src/auth/auth.service.ts::AuthService.forgotPassword",
+      "CALLS",
+      "src/auth/auth.service.ts::AuthService.getForgotSecret"
+    ]
+  ],
+  "data_flow": [
+    "The forgot-password JWT is signed in forgotPassword and verified in resetPassword with a per-user secret returned by getForgotSecret",
+    "The secret must be forgotSecret concatenated with the current password hash so changing the password invalidates old links; using the email keeps it constant"
+  ],
+  "control_flow_conditions": [
+    {
+      "symbol": "src/auth/auth.service.ts::AuthService.getForgotSecret",
+      "condition": "return `${forgotSecret}${user.email ?? ''}`;",
+      "line": 592
+    }
+  ],
+  "distractor_symbols": [
+    "src/session/session.service.ts::SessionService.deleteByUserId",
+    "src/auth/auth.service.ts::AuthService.confirmEmail"
+  ],
+  "difficulty": "hard",
+  "lexical_overlap": "low",
+  "bug_category": "wrong-field",
+  "call_distance": 1,
+  "fix": "Append user.password to the forgot secret so each link stops verifying once the password changes.",
+  "notes": "No code compares or stores used links; single-use relies on the secret embedding the password hash. Swapping the field to email makes the secret stable across password changes. The bug is in the private helper, not in resetPassword."
+}

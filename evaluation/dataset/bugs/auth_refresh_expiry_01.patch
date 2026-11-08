@@ -1,0 +1,13 @@
+diff --git a/src/auth/auth.service.ts b/src/auth/auth.service.ts
+index 988f3ab..3fd3c01 100644
+--- a/src/auth/auth.service.ts
++++ b/src/auth/auth.service.ts
+@@ -629,7 +629,7 @@ export class AuthService {
+           secret: this.configService.getOrThrow('auth.refreshSecret', {
+             infer: true,
+           }),
+-          expiresIn: this.configService.getOrThrow('auth.refreshExpires', {
++          expiresIn: this.configService.getOrThrow('auth.expires', {
+             infer: true,
+           }),
+         },

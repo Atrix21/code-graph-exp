@@ -1,0 +1,65 @@
+{
+  "task_id": "session_refresh_replay_01",
+  "split": "dev",
+  "description": "Security finding: after I exchange a refresh token for a new token pair, the old refresh token still works. I replayed it a second time and again got a fresh pair of tokens. A rotated refresh token should be rejected.",
+  "root_cause_symbols": [
+    "src/session/infrastructure/persistence/relational/repositories/session.repository.ts::SessionRelationalRepository.updateByHash"
+  ],
+  "relevant_symbols": [
+    "src/session/infrastructure/persistence/relational/repositories/session.repository.ts::SessionRelationalRepository.updateByHash",
+    "src/auth/auth.controller.ts::AuthController.refresh",
+    "src/auth/auth.service.ts::AuthService.refreshToken",
+    "src/session/session.service.ts::SessionService.updateByHash",
+    "src/auth/strategies/jwt-refresh.strategy.ts::JwtRefreshStrategy.validate"
+  ],
+  "relevant_files": [
+    "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+    "src/auth/auth.controller.ts",
+    "src/auth/auth.service.ts",
+    "src/session/session.service.ts",
+    "src/auth/strategies/jwt-refresh.strategy.ts"
+  ],
+  "expected_relationships": [
+    [
+      "src/auth/auth.controller.ts::AuthController.refresh",
+      "ROUTES_TO",
+      "src/auth/auth.service.ts::AuthService.refreshToken"
+    ],
+    [
+      "src/auth/auth.service.ts::AuthService.refreshToken",
+      "CALLS",
+      "src/session/session.service.ts::SessionService.updateByHash"
+    ],
+    [
+      "src/session/session.service.ts::SessionService.updateByHash",
+      "CALLS",
+      "src/session/infrastructure/persistence/relational/repositories/session.repository.ts::SessionRelationalRepository.updateByHash"
+    ],
+    [
+      "src/session/infrastructure/persistence/relational/repositories/session.repository.ts::SessionRelationalRepository.updateByHash",
+      "QUERIES_DATABASE",
+      "src/session/infrastructure/persistence/relational/entities/session.entity.ts::SessionEntity"
+    ]
+  ],
+  "data_flow": [
+    "The refresh JWT payload hash (data.hash) is passed to updateByHash as conditions.hash; the update must match both session id and the stored hash, then replace the hash with a new random value",
+    "If the hash is not part of the where clause, any old refresh token for the session id matches and returns affected=1"
+  ],
+  "control_flow_conditions": [
+    {
+      "symbol": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts::SessionRelationalRepository.updateByHash",
+      "condition": "{ id: Number(conditions.id) },",
+      "line": 70
+    }
+  ],
+  "distractor_symbols": [
+    "src/session/infrastructure/persistence/document/repositories/session.repository.ts::SessionDocumentRepository.updateByHash",
+    "src/session/infrastructure/persistence/relational/repositories/session.repository.ts::SessionRelationalRepository.update"
+  ],
+  "difficulty": "hard",
+  "lexical_overlap": "medium",
+  "bug_category": "missing-check",
+  "call_distance": 2,
+  "fix": "Include hash: conditions.hash in the update's where clause.",
+  "notes": "AuthService.refreshToken correctly generates a new hash and treats a null session as 401, but the repository no longer filters by the previous hash so rotation does not invalidate old refresh tokens."
+}

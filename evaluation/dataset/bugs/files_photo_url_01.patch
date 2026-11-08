@@ -1,0 +1,13 @@
+diff --git a/src/files/domain/file.ts b/src/files/domain/file.ts
+index db32ec5..83d393e 100644
+--- a/src/files/domain/file.ts
++++ b/src/files/domain/file.ts
+@@ -24,7 +24,7 @@ export class FileType {
+   @Transform(
+     ({ value }) => {
+       if ((fileConfig() as FileConfig).driver === FileDriver.LOCAL) {
+-        return (appConfig() as AppConfig).backendDomain + value;
++        return (appConfig() as AppConfig).frontendDomain + value;
+       } else if (
+         [FileDriver.S3_PRESIGNED, FileDriver.S3].includes(
+           (fileConfig() as FileConfig).driver,

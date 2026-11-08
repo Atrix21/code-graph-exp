@@ -1,0 +1,46 @@
+{
+  "task_id": "files_local_path_01",
+  "split": "test",
+  "description": "With the local file driver, uploading an image succeeds, but the file path stored and returned does not include the files directory, so opening the returned link gives 404 even though the file is saved on disk.",
+  "root_cause_symbols": [
+    "src/files/infrastructure/uploader/local/files.service.ts::FilesLocalService.create"
+  ],
+  "relevant_symbols": [
+    "src/files/infrastructure/uploader/local/files.service.ts::FilesLocalService.create",
+    "src/files/infrastructure/uploader/local/files.controller.ts::FilesLocalController.uploadFile",
+    "src/files/infrastructure/uploader/local/files.controller.ts::FilesLocalController.download"
+  ],
+  "relevant_files": [
+    "src/files/infrastructure/uploader/local/files.service.ts",
+    "src/files/infrastructure/uploader/local/files.controller.ts"
+  ],
+  "expected_relationships": [
+    [
+      "src/files/infrastructure/uploader/local/files.controller.ts::FilesLocalController.uploadFile",
+      "CALLS",
+      "src/files/infrastructure/uploader/local/files.service.ts::FilesLocalService.create"
+    ]
+  ],
+  "data_flow": [
+    "Multer diskStorage writes the file to ./files and sets file.path to 'files/<name>'; FilesLocalService.create builds the stored path as /<apiPrefix>/v1/<file.path> and the download route serves it by name from ./files",
+    "Using file.filename drops the 'files/' segment so the URL no longer matches the download route"
+  ],
+  "control_flow_conditions": [
+    {
+      "symbol": "src/files/infrastructure/uploader/local/files.service.ts::FilesLocalService.create",
+      "condition": "path: `/${apiPrefix}/v1/${file.filename}`",
+      "line": 33
+    }
+  ],
+  "distractor_symbols": [
+    "src/files/infrastructure/uploader/s3/files.service.ts::FilesS3Service.create",
+    "src/files/infrastructure/uploader/s3-presigned/files.service.ts::FilesS3PresignedService.create",
+    "src/files/domain/file.ts::FileType.path"
+  ],
+  "difficulty": "easy",
+  "lexical_overlap": "medium",
+  "bug_category": "wrong-field",
+  "call_distance": 0,
+  "fix": "Build the path from file.path instead of file.filename.",
+  "notes": "Wrong Multer field. S3 variants use different fields (key) and are separate services."
+}

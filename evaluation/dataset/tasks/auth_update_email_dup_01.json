@@ -1,0 +1,58 @@
+{
+  "task_id": "auth_update_email_dup_01",
+  "split": "dev",
+  "description": "PATCH /api/v1/auth/me with an email that already belongs to a different account returns 200 and a confirmation mail goes out, instead of the 422 with `emailExists` we expect.",
+  "root_cause_symbols": [
+    "src/auth/auth.service.ts::AuthService.update"
+  ],
+  "relevant_symbols": [
+    "src/auth/auth.service.ts::AuthService.update",
+    "src/auth/auth.controller.ts::AuthController.update",
+    "src/users/users.service.ts::UsersService.findByEmail",
+    "src/auth/auth.service.ts::AuthService.confirmNewEmail"
+  ],
+  "relevant_files": [
+    "src/auth/auth.service.ts",
+    "src/auth/auth.controller.ts",
+    "src/users/users.service.ts"
+  ],
+  "expected_relationships": [
+    [
+      "src/auth/auth.controller.ts::AuthController.update",
+      "ROUTES_TO",
+      "src/auth/auth.service.ts::AuthService.update"
+    ],
+    [
+      "src/auth/auth.service.ts::AuthService.update",
+      "CALLS",
+      "src/users/users.service.ts::UsersService.findByEmail"
+    ],
+    [
+      "src/auth/auth.service.ts::AuthService.update",
+      "CALLS",
+      "src/mail/mail.service.ts::MailService.confirmNewEmail"
+    ]
+  ],
+  "data_flow": [
+    "userDto.email is looked up with UsersService.findByEmail; if a different user owns it the update must throw emailExists before the confirm-new-email mail is signed and sent",
+    "The email is then deleted from userDto, so no later duplicate check runs in UsersService.update"
+  ],
+  "control_flow_conditions": [
+    {
+      "symbol": "src/auth/auth.service.ts::AuthService.update",
+      "condition": "userByEmail && userByEmail.id === currentUser.id",
+      "line": 479
+    }
+  ],
+  "distractor_symbols": [
+    "src/users/users.service.ts::UsersService.update",
+    "src/users/users.service.ts::UsersService.create",
+    "src/auth/auth.service.ts::AuthService.register"
+  ],
+  "difficulty": "easy",
+  "lexical_overlap": "high",
+  "bug_category": "wrong-comparison",
+  "call_distance": 0,
+  "fix": "Throw emailExists when userByEmail.id !== currentUser.id.",
+  "notes": "Equality instead of inequality. Because the email differs from the current one (outer guard), the condition can never be true so the duplicate check never fires. UsersService.update has a similar emailAlreadyExists check but it is not reached for this flow."
+}

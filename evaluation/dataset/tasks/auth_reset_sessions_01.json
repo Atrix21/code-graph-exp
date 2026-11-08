@@ -1,0 +1,65 @@
+{
+  "task_id": "auth_reset_sessions_01",
+  "split": "test",
+  "description": "I reset my password from the link in the email, but my phone, which was already signed in, kept working and could still renew its login. After a reset I would expect every device to be signed out.",
+  "root_cause_symbols": [
+    "src/auth/auth.service.ts::AuthService.resetPassword"
+  ],
+  "relevant_symbols": [
+    "src/auth/auth.service.ts::AuthService.resetPassword",
+    "src/auth/auth.controller.ts::AuthController.resetPassword",
+    "src/session/session.service.ts::SessionService.deleteByUserId",
+    "src/session/infrastructure/persistence/relational/repositories/session.repository.ts::SessionRelationalRepository.deleteByUserId"
+  ],
+  "relevant_files": [
+    "src/auth/auth.service.ts",
+    "src/auth/auth.controller.ts",
+    "src/session/session.service.ts",
+    "src/session/infrastructure/persistence/relational/repositories/session.repository.ts"
+  ],
+  "expected_relationships": [
+    [
+      "src/auth/auth.controller.ts::AuthController.resetPassword",
+      "ROUTES_TO",
+      "src/auth/auth.service.ts::AuthService.resetPassword"
+    ],
+    [
+      "src/auth/auth.service.ts::AuthService.resetPassword",
+      "CALLS",
+      "src/session/session.service.ts::SessionService.deleteByUserId"
+    ],
+    [
+      "src/session/session.service.ts::SessionService.deleteByUserId",
+      "CALLS",
+      "src/session/infrastructure/persistence/relational/repositories/session.repository.ts::SessionRelationalRepository.deleteByUserId"
+    ],
+    [
+      "src/auth/auth.service.ts::AuthService.resetPassword",
+      "CALLS",
+      "src/users/users.service.ts::UsersService.update"
+    ]
+  ],
+  "data_flow": [
+    "resetPassword receives hash+password, sets user.password and must call SessionService.deleteByUserId({userId}) so all sessions of that user are soft-deleted before the user is updated",
+    "Without deletion the refresh-token hash stored in session rows stays valid, so SessionRelationalRepository.updateByHash still finds the row and AuthService.refreshToken keeps issuing tokens"
+  ],
+  "control_flow_conditions": [
+    {
+      "symbol": "src/auth/auth.service.ts::AuthService.resetPassword",
+      "condition": "user.password = password; /* missing: await this.sessionService.deleteByUserId({ userId: user.id }); */ await this.usersService.update(user.id, user);",
+      "line": 413
+    }
+  ],
+  "distractor_symbols": [
+    "src/auth/auth.service.ts::AuthService.update",
+    "src/session/infrastructure/persistence/relational/repositories/session.repository.ts::SessionRelationalRepository.deleteByUserIdWithExclude",
+    "src/auth/auth.service.ts::AuthService.logout",
+    "src/session/infrastructure/persistence/document/repositories/session.repository.ts::SessionDocumentRepository.deleteByUserId"
+  ],
+  "difficulty": "medium",
+  "lexical_overlap": "low",
+  "bug_category": "missing-call",
+  "call_distance": 0,
+  "fix": "Call sessionService.deleteByUserId({ userId: user.id }) before updating the user in resetPassword.",
+  "notes": "The invalidating call was removed from resetPassword. AuthService.update has a similar exclude-current-session invalidation for authenticated password change; that one is intact in this task."
+}

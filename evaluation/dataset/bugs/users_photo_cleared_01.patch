@@ -1,0 +1,13 @@
+diff --git a/src/users/users.service.ts b/src/users/users.service.ts
+index b832856..d60db33 100644
+--- a/src/users/users.service.ts
++++ b/src/users/users.service.ts
+@@ -223,7 +223,7 @@ export class UsersService {
+         });
+       }
+       photo = fileObject;
+-    } else if (updateUserDto.photo === null) {
++    } else if (updateUserDto.photo === undefined) {
+       photo = null;
+     }
+ 

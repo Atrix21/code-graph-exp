@@ -1,0 +1,24 @@
+{
+  "graphify": {
+    "upstream": "https://github.com/Graphify-Labs/graphify",
+    "pypi": "graphifyy",
+    "tag": "v0.9.104",
+    "commit": "433a57a002908e74c9f0abd2ad93af8b302b71c4",
+    "venv": "vendor/.venvs/graphify",
+    "install": "uv venv --python 3.12 vendor/.venvs/graphify && uv pip install --python vendor/.venvs/graphify/bin/python -e './vendor/graphify[mcp]'"
+  },
+  "code-review-graph": {
+    "upstream": "https://github.com/tirth8205/code-review-graph",
+    "pypi": "code-review-graph",
+    "tag": "v2.3.9",
+    "commit": "343ab7cea29d47a3e805381e09f8243a43d43d88",
+    "venv": "vendor/.venvs/code-review-graph",
+    "install": "uv venv --python 3.12 vendor/.venvs/code-review-graph && uv pip install --python vendor/.venvs/code-review-graph/bin/python './vendor/code-review-graph[embeddings,communities]'"
+  },
+  "embeddings": {
+    "model": "Qwen/Qwen3-Embedding-0.6B",
+    "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "venv": "vendor/.venvs/embeddings",
+    "install": "uv venv --python 3.12 vendor/.venvs/embeddings && uv pip install --python vendor/.venvs/embeddings/bin/python sentence-transformers==5.1.2 transformers==4.57.1 torch==2.9.1 numpy"
+  }
+}

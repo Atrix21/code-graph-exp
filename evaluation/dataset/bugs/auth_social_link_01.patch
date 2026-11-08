@@ -1,0 +1,13 @@
+diff --git a/src/auth/auth.service.ts b/src/auth/auth.service.ts
+index 988f3ab..5527f5b 100644
+--- a/src/auth/auth.service.ts
++++ b/src/auth/auth.service.ts
+@@ -132,7 +132,7 @@ export class AuthService {
+     } else if (userByEmail) {
+       user = userByEmail;
+ 
+-      if (user.status?.id?.toString() === StatusEnum.inactive.toString()) {
++      if (user.status?.id?.toString() !== StatusEnum.inactive.toString()) {
+         user.provider = authProvider;
+         user.socialId = socialData.id;
+ 
