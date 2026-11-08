@@ -70,7 +70,7 @@ export function renderChunksWithinBudget(chunks: Chunk[], budget: RetrievalBudge
 }
 
 export function chunkToItem(c: Chunk, score: number): RetrievedItem {
-  return { file: c.file, symbol: c.symbol === '<module>' ? null : c.symbol, start_line: c.start_line, end_line: c.end_line, score, node_type: c.kind, raw_id: c.id };
+  return { file: c.file, symbol: c.symbol, start_line: c.start_line, end_line: c.end_line, score, node_type: c.kind, raw_id: c.id };
 }
 
 export class BM25Retriever implements RetrievalMethod {

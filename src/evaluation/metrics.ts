@@ -3,7 +3,7 @@
  * so every method is scored by identical rules.
  */
 import type { GroundTruthTask } from '../types.js';
-import type { NormalisedOutput } from './normalise.js';
+import { MAX_EVAL_RESULTS, type NormalisedOutput } from './normalise.js';
 import { SymbolIndex } from './symbol-index.js';
 import { countTokens } from './token-accounting.js';
 
@@ -94,8 +94,8 @@ export function computeTaskMetrics(
   const rc = new Set(gt.root_cause_symbols);
   const relFiles = new Set(gt.relevant_files);
   const rcFiles = new Set(gt.root_cause_symbols.map((k) => k.split('::')[0]));
-  const S = norm.rankedSymbols;
-  const F = norm.rankedFiles;
+  const S = norm.rankedSymbols.slice(0, MAX_EVAL_RESULTS);
+  const F = norm.rankedFiles.slice(0, MAX_EVAL_RESULTS);
 
   const rcRank = firstRank(S, rc);
   const fRcRank = firstRank(F, rcFiles);

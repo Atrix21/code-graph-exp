@@ -152,8 +152,6 @@ export class HybridRetriever implements RetrievalMethod {
         };
       });
     const { context, items } = renderRanked(eng, this.repoRoot, ranked, budget, c.snippets);
-    // Module-level chunks have no symbol: report them by line range only.
-    for (const it of items) if (it.symbol === '<module>') it.symbol = null;
     return {
       task_id: q.task_id, method: this.name, results: items, context, latency_ms: performance.now() - t0, llm_tokens: { input: 0, output: 0 },
       metadata: { seeds: seedsOut.map(([k, s]) => [k, Number(s.toFixed(3))]), query_embedding_tokens: this.emb.queryTokens?.(q.query) ?? null },

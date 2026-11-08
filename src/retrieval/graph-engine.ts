@@ -16,6 +16,7 @@ import { BM25Index } from './bm25.js';
 import { tokenize } from './text.js';
 
 export const DECL_TYPES: NodeType[] = ['class', 'function', 'method', 'interface', 'type', 'variable', 'property'];
+const NO_TRANSIT = new Set<NodeType>(['external_dependency', 'repository']);
 const INTRA_TYPES: NodeType[] = ['condition', 'branch', 'return', 'loop', 'exception_handler', 'parameter'];
 
 export type FactKind = 'name' | 'path' | 'route' | 'control_flow' | 'data_flow' | 'execution' | 'application' | 'structural';
@@ -222,7 +223,7 @@ export class GraphEngine {
   }
 
   outputDecls(): GraphNode[] {
-    return this.decls.filter((d) => this.cfg.outputTypes.includes(d.type));
+    return this.decls.filter((d) => this.cfg.outputTypes.includes(d.type) && d.file && d.start_line != null && !d.meta?.synthetic);
   }
 
   /** Lexical seed scores over fact documents (0..1 normalised). */
@@ -248,6 +249,9 @@ export class GraphEngine {
         const next = new Set<string>();
         for (const u of frontier) {
           const bu = best.get(u)!;
+          // External packages / stdlib / config-less synthetic hubs are reachable but never expanded:
+          // they would otherwise connect unrelated project code through e.g. '@nestjs/common'.
+          if (u !== seed && NO_TRANSIT.has(this.nodes.get(u)?.type as NodeType)) continue;
           const damp = u === seed ? 1 : hub(u);
           for (const e of this.adj.get(u) ?? []) {
             const sc = (bu.score * e.w * e.conf * this.cfg.decay) / damp;

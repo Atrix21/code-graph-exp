@@ -27,7 +27,10 @@ export function buildChunks(index: SymbolIndex): Chunk[] {
     const covered = new Set<number>();
     const memberCovered = new Map<string, Set<number>>(); // class key -> lines covered by own chunks of members
     for (const s of syms) {
-      if (s.kind === 'class' || s.kind === 'property') continue;
+      if (s.kind === 'class') continue;
+      // Single-line properties stay in the class-header chunk; multi-line ones (decorators with logic,
+      // initialisers) are meaningful units and get their own chunk.
+      if (s.kind === 'property' && s.end_line - s.start_line < 1) continue;
       if (s.parent) {
         let set = memberCovered.get(s.parent);
         if (!set) memberCovered.set(s.parent, (set = new Set()));

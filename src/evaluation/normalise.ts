@@ -11,7 +11,13 @@
  *     span). A single line therefore maps to its innermost enclosing declaration and
  *     a class-sized range maps to the class, not to an arbitrary method.
  *  4. Else (file only) the item counts at file level but not at symbol level.
+ *  File nodes (node_type 'file'/'File') and whole-file ranges without a symbol name are file-only.
+ *  Every returned item occupies a rank slot in the symbol ranking (file-only and unresolved items get
+ *  placeholder keys that are never relevant), so no method gets free noise removal (harness review M3).
+ *  Only the first MAX_EVAL_RESULTS items are evaluated (harness review C1).
  */
+export const MAX_EVAL_RESULTS = 50;
+export const PLACEHOLDER_PREFIX = '#';
 import path from 'node:path';
 import type { RetrievedItem, RetrievalOutput } from '../types.js';
 import { SymbolIndex, type CanonicalSymbol } from './symbol-index.js';
@@ -65,6 +71,12 @@ export function normaliseItem(index: SymbolIndex, it: RetrievedItem, rank: numbe
   const file = normaliseFile(index.repoRoot, it.file, index);
   if (!file) return { rank, file: null, symbolKey: null, anchorLine: null, how: 'unresolved' };
   const line = it.start_line ?? null;
+  if (it.node_type && /^file$/i.test(it.node_type)) return { rank, file, symbolKey: null, anchorLine: null, how: 'file-only' };
+  if (it.symbol === '<module>') return { rank, file, symbolKey: `${file}::<module>`, anchorLine: line, how: 'name' };
+  if (!it.symbol && line != null && it.end_line != null) {
+    const n = index.fileLines.get(file)?.length ?? 0;
+    if (line <= 1 && n > 0 && it.end_line - line + 1 >= 0.9 * n) return { rank, file, symbolKey: null, anchorLine: null, how: 'file-only' };
+  }
   if (it.symbol) {
     const s = index.resolveName(file, it.symbol, line);
     if (s) return { rank, file, symbolKey: s.key, anchorLine: line ?? s.start_line, how: 'name' };
@@ -77,8 +89,8 @@ export function normaliseItem(index: SymbolIndex, it: RetrievedItem, rank: numbe
   return { rank, file, symbolKey: null, anchorLine: null, how: 'file-only' };
 }
 
-export function normaliseOutput(index: SymbolIndex, out: RetrievalOutput): NormalisedOutput {
-  const items = out.results.map((r, i) => normaliseItem(index, r, i + 1));
+export function normaliseOutput(index: SymbolIndex, out: RetrievalOutput, maxItems = MAX_EVAL_RESULTS): NormalisedOutput {
+  const items = out.results.slice(0, maxItems).map((r, i) => normaliseItem(index, r, i + 1));
   const rankedSymbols: string[] = [];
   const rankedFiles: string[] = [];
   const seenS = new Set<string>();
@@ -86,12 +98,17 @@ export function normaliseOutput(index: SymbolIndex, out: RetrievalOutput): Norma
   const anchorLines = new Map<string, number>();
   let unresolved = 0;
   for (const it of items) {
-    if (it.how === 'unresolved') { unresolved++; continue; }
+    if (it.how === 'unresolved') {
+      unresolved++;
+      rankedSymbols.push(`${PLACEHOLDER_PREFIX}unresolved:${it.rank}`); // occupies a slot, never relevant
+      continue;
+    }
     if (it.file && !seenF.has(it.file)) { seenF.add(it.file); rankedFiles.push(it.file); }
-    if (it.symbolKey && !seenS.has(it.symbolKey)) {
-      seenS.add(it.symbolKey);
-      rankedSymbols.push(it.symbolKey);
-      if (it.anchorLine != null) anchorLines.set(it.symbolKey, it.anchorLine);
+    const key = it.symbolKey ?? `${PLACEHOLDER_PREFIX}file:${it.file}`;
+    if (!seenS.has(key)) {
+      seenS.add(key);
+      rankedSymbols.push(key);
+      if (it.symbolKey && it.anchorLine != null) anchorLines.set(it.symbolKey, it.anchorLine);
     }
   }
   return { task_id: out.task_id, method: out.method, items, rankedSymbols, rankedFiles, anchorLines, unresolved };

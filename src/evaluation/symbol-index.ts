@@ -141,6 +141,7 @@ export class SymbolIndex {
   resolveName(file: string, rawName: string, line: number | null): CanonicalSymbol | null {
     const syms = this.byFile.get(file);
     if (!syms) return null;
+    if (rawName.trim() === '<module>') return this.byKey.get(`${file}::<module>`) ?? null;
     const name = normaliseName(rawName);
     if (!name) return null;
     const exact = syms.filter((s) => s.name === name);
