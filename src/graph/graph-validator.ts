@@ -19,10 +19,20 @@ export function canonicalJson(v: unknown): string {
   return `{${keys.map((k) => `${JSON.stringify(k)}:${canonicalJson(o[k])}`).join(',')}}`;
 }
 
+/**
+ * SHA-256 of canonicalJson({ nodes, edges }) with both arrays sorted by id.
+ * Streamed element by element so that graphs whose canonical JSON exceeds V8's maximum string length
+ * (~512 MB; e.g. a 10k-file repository) can be hashed. The bytes hashed are identical to
+ * canonicalJson({ edges, nodes }) (keys sorted: "edges" < "nodes"), so existing hashes are unchanged.
+ */
 export function graphHash(nodes: GraphNode[], edges: GraphEdge[]): string {
-  const n = [...nodes].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
-  const e = [...edges].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
-  return crypto.createHash('sha256').update(canonicalJson({ nodes: n, edges: e })).digest('hex');
+  const byId = (a: { id: string }, b: { id: string }) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
+  const n = [...nodes].sort(byId);
+  const e = [...edges].sort(byId);
+  const h = crypto.createHash('sha256');
+  const arr = (xs: unknown[]) => { for (let i = 0; i < xs.length; i++) { if (i) h.update(','); h.update(canonicalJson(xs[i] === undefined ? null : xs[i])); } };
+  h.update('{"edges":['); arr(e); h.update('],"nodes":['); arr(n); h.update(']}');
+  return h.digest('hex');
 }
 
 // ------------------------------------------------------------ independent syntactic facts

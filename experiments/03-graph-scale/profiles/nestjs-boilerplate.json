@@ -1,0 +1,323 @@
+{
+  "name": "nestjs-boilerplate",
+  "repo": "targets/bench",
+  "graph": ".cache/graph-base",
+  "generated_by": "scripts/exp3/graph_profile.py",
+  "seed": 20261109,
+  "definitions": {
+    "scope": "non-test source files only (paths matching *.spec.*, *.test.*, __tests__/, test/, e2e excluded) unless stated",
+    "module_dir1": "first directory segment below src/ (e.g. src/auth -> auth)",
+    "module_dir2": "first two directory segments below src/",
+    "community": "Louvain community (seeded) on the undirected file-level dependency graph (internal imports + navigation edges); architecture-agnostic module boundary",
+    "navigation_graph": "nodes = declared function/method/class/interface/type; edges = CALLS,CONSUMES_EVENT,CONTROLLER_CALLS,EXTENDS,HAS_TYPE,IMPLEMENTS,INJECTS_DEPENDENCY,INSTANTIATES,PUBLISHES_EVENT,REFERENCES,REPOSITORY_ACCESSES,ROUTES_TO,SERVICE_USES with both endpoints declared in non-test code",
+    "tokens_estimate_chars_div_4": "ESTIMATE: characters / 4 (no tokenizer run)"
+  },
+  "source": {
+    "non_test": {
+      "files": 157,
+      "lines": 6268,
+      "code_lines": 5418,
+      "chars": 177312,
+      "tokens_estimate_chars_div_4": 44328
+    },
+    "test": {
+      "files": 13,
+      "lines": 1341,
+      "code_lines": 1205,
+      "chars": 39245,
+      "tokens_estimate_chars_div_4": 9811
+    },
+    "source_directories_non_test": 89,
+    "package_json": {
+      "dependencies": 38,
+      "devDependencies": 41
+    }
+  },
+  "graph_full": {
+    "nodes": 2450,
+    "edges": 7441,
+    "nodes_by_type": {
+      "import": 714,
+      "property": 257,
+      "branch": 229,
+      "parameter": 217,
+      "method": 188,
+      "condition": 174,
+      "file": 157,
+      "class": 126,
+      "return": 125,
+      "variable": 122,
+      "external_dependency": 48,
+      "type": 25,
+      "route": 24,
+      "export": 11,
+      "function": 11,
+      "db_entity": 8,
+      "exception_handler": 8,
+      "interface": 4,
+      "loop": 1,
+      "repository": 1
+    },
+    "edges_by_type": {
+      "CONTAINS": 2264,
+      "CALLS": 1245,
+      "IMPORTS": 714,
+      "REFERENCES": 530,
+      "READS": 491,
+      "CHECKS": 307,
+      "HAS_TYPE": 275,
+      "BRANCHES_TO": 229,
+      "PASSES_TO": 177,
+      "EXPORTS": 156,
+      "INSTANTIATES": 150,
+      "RETURNS": 139,
+      "WRITES": 136,
+      "THROWS": 106,
+      "SERVICE_USES": 105,
+      "QUERIES_DATABASE": 88,
+      "REPOSITORY_ACCESSES": 69,
+      "INJECTS_DEPENDENCY": 48,
+      "RECEIVES_FROM": 37,
+      "RETURNS_VALUE_TO": 37,
+      "DEFINES": 32,
+      "CONTROLLER_CALLS": 26,
+      "ROUTES_TO": 24,
+      "EXTENDS": 13,
+      "CALLS_EXTERNAL_API": 11,
+      "IMPLEMENTS": 11,
+      "CATCHES": 9,
+      "MUTATES": 6,
+      "RECURSES_TO": 4,
+      "LOOPS": 2
+    },
+    "edges_by_verification": {
+      "static_verified": 6898,
+      "framework_inferred": 538,
+      "unknown": 5
+    },
+    "edge_confidence": {
+      "mean": 0.9907,
+      "share_ge_0_9": 0.98
+    }
+  },
+  "extraction_coverage": {
+    "scope": "all corpus files incl. tests (as built)",
+    "files_parsed": "170/170",
+    "detected_calls": 1977,
+    "resolved_internal_rate": 0.1067,
+    "resolved_external_rate": 0.8872,
+    "unresolved_call_rate": 0.0061,
+    "imports_resolved": "744/744",
+    "unresolved_import_specifiers": 0,
+    "unresolved_references": 0
+  },
+  "size": {
+    "functions": 11,
+    "methods": 188,
+    "classes": 126,
+    "interfaces": 4,
+    "type_aliases_and_enums": 25,
+    "files_in_graph": 157,
+    "modules_dir1": 17,
+    "modules_dir2": 51,
+    "nestjs_module_classes": 26,
+    "external_packages_referenced": 48,
+    "class_roles": {
+      "module": 26,
+      "dto": 25,
+      "service": 19,
+      "class": 19,
+      "controller": 9,
+      "repository": 9,
+      "entity": 8,
+      "mapper": 6,
+      "strategy": 3,
+      "guard": 1,
+      "interceptor": 1
+    }
+  },
+  "behaviour": {
+    "routes": 24,
+    "async_method_share": 0.4415,
+    "repository_access_edges": 69,
+    "database_query_edges": 88,
+    "external_api_edges": 11,
+    "event_edges_extracted": {
+      "PUBLISHES_EVENT": 0,
+      "CONSUMES_EVENT": 0
+    },
+    "decorator_counts": {
+      "Get": 10,
+      "Post": 30,
+      "Patch": 4,
+      "Delete": 4,
+      "Query": 1,
+      "InjectRepository": 12,
+      "Entity": 5,
+      "Injectable": 30,
+      "Controller": 9,
+      "Module": 26
+    },
+    "top_decorators": {
+      "ApiProperty": 56,
+      "IsOptional": 45,
+      "HttpCode": 38,
+      "IsString": 37,
+      "Injectable": 30,
+      "Post": 30,
+      "Module": 26,
+      "ApiPropertyOptional": 23,
+      "SerializeOptions": 22,
+      "IsNotEmpty": 21,
+      "ApiOkResponse": 20,
+      "Prop": 18,
+      "ApiBearerAuth": 17,
+      "UseGuards": 17,
+      "Body": 13,
+      "InjectRepository": 12,
+      "Transform": 12,
+      "ValidateIf": 11,
+      "Get": 10,
+      "Column": 10,
+      "ApiTags": 9,
+      "Controller": 9,
+      "ApiCreatedResponse": 8,
+      "InjectModel": 8,
+      "Allow": 8
+    }
+  },
+  "navigation_graph": {
+    "nodes": 354,
+    "edges": 663,
+    "edge_type_instances": {
+      "REFERENCES": 424,
+      "CALLS": 192,
+      "SERVICE_USES": 105,
+      "REPOSITORY_ACCESSES": 69,
+      "INJECTS_DEPENDENCY": 33,
+      "CONTROLLER_CALLS": 26,
+      "INSTANTIATES": 23,
+      "EXTENDS": 8,
+      "IMPLEMENTS": 6
+    },
+    "density": 0.00530561,
+    "degree_undirected": {
+      "n": 354,
+      "mean": 3.746,
+      "p50": 3,
+      "p90": 7,
+      "max": 60
+    },
+    "in_degree": {
+      "n": 354,
+      "mean": 1.873,
+      "p50": 1,
+      "p90": 4,
+      "max": 60
+    },
+    "out_degree": {
+      "n": 354,
+      "mean": 1.873,
+      "p50": 1,
+      "p90": 4,
+      "max": 17
+    },
+    "connected_components": 44,
+    "largest_component_nodes": 308,
+    "largest_component_share": 0.8701,
+    "isolated_nodes": 40,
+    "cross_file_edge_ratio": 0.9879,
+    "cross_module_dir1_edge_ratio": 0.3394,
+    "cross_module_dir2_edge_ratio": 0.6546,
+    "cross_community_edge_ratio": 0.2519,
+    "file_graph": {
+      "files": 157,
+      "edges": 426,
+      "communities": 11,
+      "modularity_Q": 0.5571,
+      "community_sizes_top10": [
+        44,
+        28,
+        27,
+        21,
+        16,
+        12,
+        5,
+        1,
+        1,
+        1
+      ]
+    },
+    "internal_call_edges": 192,
+    "internal_call_verification": {
+      "static_verified": 146,
+      "framework_inferred": 46
+    },
+    "callee_name_ambiguity": {
+      "n": 192,
+      "mean": 6.911,
+      "p50": 6,
+      "p90": 15,
+      "max": 15,
+      "share_unique_name": 0.125,
+      "meaning": "number of callable declarations sharing the callee simple name, per internal call edge"
+    },
+    "two_hop_neighbourhood_sample": {
+      "sampled_callables": 199,
+      "nodes": {
+        "n": 199,
+        "mean": 36.412,
+        "p50": 26,
+        "p90": 81,
+        "max": 108
+      },
+      "files": {
+        "n": 199,
+        "mean": 14.749,
+        "p50": 14,
+        "p90": 28,
+        "max": 45
+      },
+      "communities": {
+        "n": 199,
+        "mean": 3.417,
+        "p50": 4,
+        "p90": 5,
+        "max": 7
+      }
+    },
+    "lcc_shortest_path_sample": {
+      "n": 300,
+      "mean": 4.9,
+      "p50": 5,
+      "p90": 8,
+      "max": 9
+    },
+    "route_handler_reach": {
+      "handlers": 23,
+      "sampled": 23,
+      "max_depth": {
+        "n": 23,
+        "mean": 4.087,
+        "p50": 5,
+        "p90": 5,
+        "max": 5
+      },
+      "files_reached": {
+        "n": 23,
+        "mean": 12.391,
+        "p50": 13,
+        "p90": 21,
+        "max": 21
+      },
+      "communities_reached": {
+        "n": 23,
+        "mean": 3.522,
+        "p50": 4,
+        "p90": 6,
+        "max": 6
+      }
+    }
+  },
+  "elapsed_s": 0.1
+}

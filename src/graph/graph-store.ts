@@ -74,7 +74,20 @@ export function loadGraph(dbPath: string): StoredGraph {
   } finally { db.close(); }
 }
 
-export function exportGraphJson(jsonPath: string, graph: StoredGraph): void {
+/**
+ * Writes JSON.stringify({ meta, nodes, edges }) + '\n', streamed element by element so graphs larger than
+ * V8's maximum string length can be exported. Output bytes are identical to the single-string version.
+ */
+export function exportGraphJson(jsonPath: string, graph: Pick<StoredGraph, 'nodes' | 'edges'> & { meta?: unknown }): void {
   fs.mkdirSync(path.dirname(path.resolve(jsonPath)), { recursive: true });
-  fs.writeFileSync(jsonPath, JSON.stringify({ meta: graph.meta, nodes: graph.nodes, edges: graph.edges }) + '\n');
+  const fd = fs.openSync(jsonPath, 'w');
+  try {
+    let buf = '';
+    const put = (s: string) => { buf += s; if (buf.length > 1 << 22) { fs.writeSync(fd, buf); buf = ''; } };
+    const arr = (xs: unknown[]) => { for (let i = 0; i < xs.length; i++) { if (i) put(','); put(JSON.stringify(xs[i]) ?? 'null'); } };
+    const meta = graph.meta === undefined ? undefined : JSON.stringify(graph.meta);
+    put(meta === undefined ? '{' : `{"meta":${meta},`);
+    put('"nodes":['); arr(graph.nodes); put('],"edges":['); arr(graph.edges); put(']}\n');
+    fs.writeSync(fd, buf);
+  } finally { fs.closeSync(fd); }
 }

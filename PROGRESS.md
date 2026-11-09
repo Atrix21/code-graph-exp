@@ -1,5 +1,12 @@
 # PROGRESS
 
+## Experiment 3 (branch `agent-eval`): does graph retrieval become more valuable at scale? Status: milestone 1 (investigation and proposal) done; awaiting the owner's review. No billable run.
+- Start at `experiments/03-graph-scale/README.md` (executive summary, recommendation, approvals needed). Design: `protocol.md` (DRAFT, not frozen); `repository-assessment.md`; `task-catalogue.md`; `retrieval-architecture.md`; `implementation-plan.md`; `cost-estimate.md`; `decision-log.md` (E3-D01..).
+- Scale ladder (TypeScript/NestJS held constant): S nestjs-boilerplate 6.3k non-test lines → M Immich server 62.6k → L Twenty server 763k. Snapshots in `targets/exp3/` (git-ignored; commits in E3-D04). SignalStream (2.6k Go lines, 2 commits) and DocuParse are too small (E3-D02); IntelliDoc not found; Hyrra not opened.
+- Rebuild profiles (no model calls): `npx tsx src/graph/build-cli.ts --repo <server dir> --out .cache/exp3/graph-<name> --include src`, then `vendor/.venvs/graphify/bin/python -I scripts/exp3/graph_profile.py --name <name> --repo <dir> --graph .cache/exp3/graph-<name> --out experiments/03-graph-scale/profiles/<name>.json`.
+- Compact-output prototype: `npx tsx scripts/exp3/compact-measure.ts` (experiment-1 frozen rankings; no model calls).
+- Next (after approval of the plan): `implementation-plan.md` M2.1 (dependencies for Twenty, Immich workspace) → M2.2 (keyed-dispatch / GraphQL / Kysely extractor rules) → tasks + audit → stage 1 retrieval-only.
+
 ## Experiment 2 (branch `agent-eval`): downstream agent diagnosis. Status: complete (findings: `experiments/02-agent-diagnosis/findings.md`)
 - Question: does graph-enhanced retrieval make a coding agent diagnose bugs more accurately or cheaply?
 - Answer on this benchmark: **not for an agent with grep** (accuracy 1.00 in every agentic condition; retrieval tools unused unless directed, then no net gain; Graphify/CRG MCP servers never called and cost 1.4×/3.1× the tokens). **Yes for single-shot context:** file list 0.31–0.33 → our custom graph 0.76/0.98 and hybrid 0.71/0.93 (2k/8k), best of all retrieval methods; hybrid vs embeddings (+0.07/+0.10) not significant with 14 tasks.

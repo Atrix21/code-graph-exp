@@ -1,0 +1,1559 @@
+{
+ "query": "gh pr list -R twentyhq/twenty --state merged --search \"fix merged:>2026-06-01 in:title\" --limit 120",
+ "fetched_at": "2026-11-09",
+ "prs": [
+  {
+   "pr": 29835,
+   "url": "https://github.com/twentyhq/twenty/pull/29835",
+   "merged_at": "2026-11-06T16:35:57Z",
+   "title": "Fix settings table footer spacing",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29847,
+   "url": "https://github.com/twentyhq/twenty/pull/29847",
+   "merged_at": "2026-11-06T12:53:49Z",
+   "title": "Fix undefined assistantParticipationInput in member message sender",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/metadata-modules/ai/ai-chat/services/agent-chat-member-message-sender.service.ts"
+   ],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29846,
+   "url": "https://github.com/twentyhq/twenty/pull/29846",
+   "merged_at": "2026-11-06T12:45:31Z",
+   "title": "Fix undefined assistantParticipationInput in chat message sender",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/metadata-modules/ai/ai-chat/services/agent-chat-member-message-sender.service.ts"
+   ],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29754,
+   "url": "https://github.com/twentyhq/twenty/pull/29754",
+   "merged_at": "2026-11-05T13:28:25Z",
+   "title": "Fix duplicated CalDAV events created from Twenty",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/modules/calendar/calendar-event-creation-manager/drivers/caldav/services/caldav-create-event.service.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/test/integration/caldav/suites/caldav-events-import-without-etags.integration-spec.ts",
+    "packages/twenty-server/test/integration/utils/start-non-compliant-caldav-proxy.util.ts"
+   ],
+   "linked_issues": [
+    29720
+   ]
+  },
+  {
+   "pr": 28663,
+   "url": "https://github.com/twentyhq/twenty/pull/28663",
+   "merged_at": "2026-10-23T07:26:11Z",
+   "title": "Fix navigation skeleton overflow",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29382,
+   "url": "https://github.com/twentyhq/twenty/pull/29382",
+   "merged_at": "2026-10-31T16:47:28Z",
+   "title": "Fix default record sharing Storybook expectations",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29894,
+   "url": "https://github.com/twentyhq/twenty/pull/29894",
+   "merged_at": "2026-11-07T13:47:34Z",
+   "title": "Fix email thread widget spacing and composer border",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29395,
+   "url": "https://github.com/twentyhq/twenty/pull/29395",
+   "merged_at": "2026-11-07T14:41:35Z",
+   "title": "Fix sent Outlook drafts staying as drafts",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/database/commands/upgrade-version-command/2-57/2-57-upgrade-version-command.module.ts",
+    "packages/twenty-server/src/database/commands/upgrade-version-command/2-57/2-57-workspace-command-1794061333000-refresh-outlook-drafts.command.ts",
+    "packages/twenty-server/src/engine/metadata-modules/message-channel/services/application-message-ingestion.service.ts",
+    "packages/twenty-server/src/modules/messaging/message-import-manager/drivers/inbound-email/services/inbound-email-import.service.ts",
+    "packages/twenty-server/src/modules/messaging/message-import-manager/services/messaging-message-folder-association.service.ts",
+    "packages/twenty-server/src/modules/messaging/message-import-manager/services/messaging-message-list-fetch.service.ts",
+    "packages/twenty-server/src/modules/messaging/message-import-manager/services/messaging-message.service.ts",
+    "packages/twenty-server/src/modules/messaging/message-import-manager/services/messaging-messages-import.service.ts",
+    "packages/twenty-server/src/modules/messaging/message-import-manager/services/messaging-save-messages-and-enqueue-contact-creation.service.ts",
+    "packages/twenty-server/src/modules/messaging/message-import-manager/types/message-folder-link-update.type.ts",
+    "packages/twenty-server/src/modules/messaging/message-outbound-manager/services/sent-message-persistence.service.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/test/integration/microsoft/messaging/sent-draft.integration-spec.ts"
+   ],
+   "linked_issues": [
+    28373
+   ]
+  },
+  {
+   "pr": 28770,
+   "url": "https://github.com/twentyhq/twenty/pull/28770",
+   "merged_at": "2026-10-28T00:11:12Z",
+   "title": "Fix phone number validation (#28764)",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/core-modules/record-transformer/utils/transform-phones-value.util.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/src/engine/core-modules/record-transformer/utils/__tests__/transform-phones-value.util.spec.ts",
+    "packages/twenty-server/test/integration/graphql/suites/inputs-validation/create-validation/constants/successful-create-input-by-field-metadata-type.constant.ts",
+    "packages/twenty-server/test/integration/graphql/suites/inputs-validation/filter-validation/constants/successful-filter-input-by-field-metadata-type.constant.ts",
+    "packages/twenty-server/test/integration/graphql/suites/inputs-validation/utils/setup-test-objects-with-all-field-types.util.ts",
+    "packages/twenty-server/test/integration/graphql/suites/unique-field/unique-phones-field-null-equivalence.integration-spec.ts",
+    "packages/twenty-server/test/integration/metadata/suites/field-metadata/composite/successful-create-phone-field-metadata.integration-spec.ts",
+    "packages/twenty-server/test/integration/rest/suites/field-permissions.integration-spec.ts"
+   ],
+   "linked_issues": [
+    28764
+   ]
+  },
+  {
+   "pr": 29203,
+   "url": "https://github.com/twentyhq/twenty/pull/29203",
+   "merged_at": "2026-10-29T13:15:27Z",
+   "title": "Fix avatars overlapping selected chat cards",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28423,
+   "url": "https://github.com/twentyhq/twenty/pull/28423",
+   "merged_at": "2026-10-20T10:41:19Z",
+   "title": "Fix flaky SavedSecretCanBeCleared story",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29969,
+   "url": "https://github.com/twentyhq/twenty/pull/29969",
+   "merged_at": "2026-11-09T10:10:15Z",
+   "title": "fix(cli): explain stdin input for misplaced API keys",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 27936,
+   "url": "https://github.com/twentyhq/twenty/pull/27936",
+   "merged_at": "2026-10-13T22:24:42Z",
+   "title": "Fix Kanban icon",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29831,
+   "url": "https://github.com/twentyhq/twenty/pull/29831",
+   "merged_at": "2026-11-06T15:59:08Z",
+   "title": "fix(billing): keep the partner code through email verification",
+   "server_only": false,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/core-modules/auth/auth.resolver.ts",
+    "packages/twenty-server/src/engine/core-modules/auth/dto/sign-up-in-new-workspace.input.ts",
+    "packages/twenty-server/src/engine/core-modules/auth/dto/sign-up-without-workspace.input.ts",
+    "packages/twenty-server/src/engine/core-modules/auth/services/sign-in-up.service.ts",
+    "packages/twenty-server/src/engine/core-modules/billing/services/billing.service.ts",
+    "packages/twenty-server/src/engine/core-modules/billing/stripe/services/stripe-customer.service.ts",
+    "packages/twenty-server/src/engine/core-modules/email-verification/dtos/resend-email-verification-token.input.ts",
+    "packages/twenty-server/src/engine/core-modules/email-verification/email-verification.resolver.ts",
+    "packages/twenty-server/src/engine/core-modules/email-verification/services/email-verification.service.ts",
+    "packages/twenty-server/src/engine/core-modules/email-verification/utils/build-email-verification-link-search-params.util.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/src/engine/core-modules/billing/services/__tests__/billing.service.spec.ts",
+    "packages/twenty-server/src/engine/core-modules/email-verification/utils/__tests__/build-email-verification-link-search-params.util.spec.ts"
+   ],
+   "linked_issues": []
+  },
+  {
+   "pr": 28150,
+   "url": "https://github.com/twentyhq/twenty/pull/28150",
+   "merged_at": "2026-10-16T07:47:08Z",
+   "title": "Fix logo URL parsing",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": [
+    28035
+   ]
+  },
+  {
+   "pr": 28060,
+   "url": "https://github.com/twentyhq/twenty/pull/28060",
+   "merged_at": "2026-10-15T17:25:05Z",
+   "title": "Fix front scale drift",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": [
+    28044
+   ]
+  },
+  {
+   "pr": 29954,
+   "url": "https://github.com/twentyhq/twenty/pull/29954",
+   "merged_at": "2026-11-08T20:20:32Z",
+   "title": "Fix server typecheck on main for application grant field permissions",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/core-modules/application/application-grant-role/utils/build-application-grant-role-from-to-flat-entity-maps.util.ts"
+   ],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28982,
+   "url": "https://github.com/twentyhq/twenty/pull/28982",
+   "merged_at": "2026-10-30T11:53:05Z",
+   "title": "Fix front component dropdown dismissal and reopening",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29951,
+   "url": "https://github.com/twentyhq/twenty/pull/29951",
+   "merged_at": "2026-11-08T19:31:30Z",
+   "title": "Fix assistant settings swallowing clicks and showing the default name",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29658,
+   "url": "https://github.com/twentyhq/twenty/pull/29658",
+   "merged_at": "2026-11-04T12:38:18Z",
+   "title": "fix(billing): set Organization monthly fallback price to $52",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29013,
+   "url": "https://github.com/twentyhq/twenty/pull/29013",
+   "merged_at": "2026-10-27T15:47:34Z",
+   "title": "fix(sdk): regenerate metadata client for billingPlans",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29471,
+   "url": "https://github.com/twentyhq/twenty/pull/29471",
+   "merged_at": "2026-11-02T17:08:10Z",
+   "title": "Fix duplicate AI component previews and empty sample data",
+   "server_only": false,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/metadata-modules/ai/ai-front-component/schemas/front-component-draft.schema.ts",
+    "packages/twenty-server/src/engine/metadata-modules/ai/ai-front-component/utils/validate-front-component-sample-records-or-throw.util.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/src/engine/metadata-modules/ai/ai-front-component/schemas/front-component-draft.schema.spec.ts",
+    "packages/twenty-server/src/engine/metadata-modules/ai/ai-front-component/utils/__tests__/validate-front-component-sample-records-or-throw.util.spec.ts"
+   ],
+   "linked_issues": []
+  },
+  {
+   "pr": 29125,
+   "url": "https://github.com/twentyhq/twenty/pull/29125",
+   "merged_at": "2026-10-28T14:28:52Z",
+   "title": "Fix the Dropdown gallery story Shift+Tab race",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29417,
+   "url": "https://github.com/twentyhq/twenty/pull/29417",
+   "merged_at": "2026-11-07T15:50:04Z",
+   "title": "fix(docs): localize section root links without trailing slashes (#28858)",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": [
+    28858
+   ]
+  },
+  {
+   "pr": 28281,
+   "url": "https://github.com/twentyhq/twenty/pull/28281",
+   "merged_at": "2026-10-19T12:34:29Z",
+   "title": "Fix core client JSON scalar types",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28725,
+   "url": "https://github.com/twentyhq/twenty/pull/28725",
+   "merged_at": "2026-10-23T16:27:34Z",
+   "title": "Fix docs translations for Crowdin CLI 5",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29506,
+   "url": "https://github.com/twentyhq/twenty/pull/29506",
+   "merged_at": "2026-11-03T14:13:14Z",
+   "title": "Fix AI step QA findings after the inline-config rework",
+   "server_only": false,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/core-modules/workflow/services/core-workflow-version-mutation.workspace-service.ts",
+    "packages/twenty-server/src/engine/workspace-manager/dev-seeder/data/services/dev-seeder-workflow-pending-input.workspace-service.ts",
+    "packages/twenty-server/src/modules/workflow/workflow-builder/workflow-version-step/workflow-version-step-operations.workspace-service.ts",
+    "packages/twenty-server/src/modules/workflow/workflow-executor/workflow-actions/ai-agent/ai-agent.workflow-action.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/src/engine/core-modules/workflow/services/__tests__/core-workflow-version-mutation.workspace-service.spec.ts",
+    "packages/twenty-server/src/modules/workflow/workflow-executor/workflow-actions/ai-agent/__tests__/ai-agent.workflow-action.spec.ts",
+    "packages/twenty-server/test/integration/graphql/suites/workflow/core-workflow-draft-step-resources.integration-spec.ts"
+   ],
+   "linked_issues": []
+  },
+  {
+   "pr": 28657,
+   "url": "https://github.com/twentyhq/twenty/pull/28657",
+   "merged_at": "2026-10-23T08:20:23Z",
+   "title": "Fix currency and date display in cards",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29318,
+   "url": "https://github.com/twentyhq/twenty/pull/29318",
+   "merged_at": "2026-10-30T17:46:23Z",
+   "title": "fix(cli): accept default role references without local definitions",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29287,
+   "url": "https://github.com/twentyhq/twenty/pull/29287",
+   "merged_at": "2026-10-30T14:10:35Z",
+   "title": "Fix extra right padding on record table cell buttons",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 27807,
+   "url": "https://github.com/twentyhq/twenty/pull/27807",
+   "merged_at": "2026-10-16T15:26:58Z",
+   "title": "Fix front component layout measurements",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28913,
+   "url": "https://github.com/twentyhq/twenty/pull/28913",
+   "merged_at": "2026-10-26T14:18:08Z",
+   "title": "Fix orphaned case study card on partner profiles",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28625,
+   "url": "https://github.com/twentyhq/twenty/pull/28625",
+   "merged_at": "2026-10-22T13:20:49Z",
+   "title": "Fix oversized icons in timeline field diffs",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28852,
+   "url": "https://github.com/twentyhq/twenty/pull/28852",
+   "merged_at": "2026-10-26T12:12:40Z",
+   "title": "Fix follow-redirects in the Workspace upgrade snapshot",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/database/commands/upgrade-version-command/2-52/workspace-frontend-dependencies/yarn.snapshot.lock"
+   ],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28620,
+   "url": "https://github.com/twentyhq/twenty/pull/28620",
+   "merged_at": "2026-10-22T10:41:32Z",
+   "title": "Fix annotated publishing tags after shallow checkout",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28548,
+   "url": "https://github.com/twentyhq/twenty/pull/28548",
+   "merged_at": "2026-10-22T20:36:39Z",
+   "title": "Fix app OAuth recovery and return navigation",
+   "server_only": false,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/core-modules/application/connection-provider/connection-provider-oauth-flow.service.ts",
+    "packages/twenty-server/src/engine/core-modules/application/connection-provider/connection-provider-oauth.controller.ts",
+    "packages/twenty-server/src/engine/core-modules/auth/guards/google-apis-oauth-exchange-code-for-token.guard.ts",
+    "packages/twenty-server/src/engine/core-modules/domain/workspace-domains/services/workspace-domains.service.ts",
+    "packages/twenty-server/src/engine/core-modules/guard-redirect/services/guard-redirect.service.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/test/integration/metadata/suites/connection-provider/app-connection-oauth-callback.integration-spec.ts"
+   ],
+   "linked_issues": []
+  },
+  {
+   "pr": 29193,
+   "url": "https://github.com/twentyhq/twenty/pull/29193",
+   "merged_at": "2026-11-07T22:17:35Z",
+   "title": "fix(server): report unknown names in learn_tools under notFound",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/core-modules/tool-provider/services/tool-registry.service.ts",
+    "packages/twenty-server/src/engine/core-modules/tool-provider/tools/learn-tools.tool.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/src/engine/core-modules/tool-provider/tools/__tests__/learn-tools.tool.spec.ts",
+    "packages/twenty-server/test/integration/ai/suites/mcp-tool-execution.integration-spec.ts"
+   ],
+   "linked_issues": [
+    29258
+   ]
+  },
+  {
+   "pr": 28709,
+   "url": "https://github.com/twentyhq/twenty/pull/28709",
+   "merged_at": "2026-10-27T21:27:01Z",
+   "title": "fix(front): preserve spreadsheet imports after submission errors",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": [
+    28714
+   ]
+  },
+  {
+   "pr": 29108,
+   "url": "https://github.com/twentyhq/twenty/pull/29108",
+   "merged_at": "2026-10-28T12:51:32Z",
+   "title": "fix(oauth): raise authorizeApp state max length to 4096",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/core-modules/auth/dto/authorize-app.input.ts"
+   ],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29078,
+   "url": "https://github.com/twentyhq/twenty/pull/29078",
+   "merged_at": "2026-10-28T14:15:25Z",
+   "title": "fix(cli): surface metadata validation errors in command output",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28396,
+   "url": "https://github.com/twentyhq/twenty/pull/28396",
+   "merged_at": "2026-10-20T16:09:47Z",
+   "title": "Fix add rule group in search node",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29402,
+   "url": "https://github.com/twentyhq/twenty/pull/29402",
+   "merged_at": "2026-11-08T11:20:43Z",
+   "title": "fix(fields-widget): hide No Access fields on the record page",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": [
+    29397
+   ]
+  },
+  {
+   "pr": 26589,
+   "url": "https://github.com/twentyhq/twenty/pull/26589",
+   "merged_at": "2026-10-09T18:40:39Z",
+   "title": "Fix JSON filter",
+   "server_only": false,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/api/common/common-args-processors/filter-arg-processor/constants/filter-operators.constant.ts",
+    "packages/twenty-server/src/engine/api/graphql/workspace-schema-builder/graphql-types/input/raw-json-filter.input-type.ts",
+    "packages/twenty-server/src/engine/core-modules/record-crud/json-schemas/field-filters.json-schema.ts",
+    "packages/twenty-server/src/engine/core-modules/record-crud/json-schemas/shared-filter-definitions.json-schema.ts",
+    "packages/twenty-server/src/modules/workflow/workflow-executor/workflow-actions/filter/utils/evaluate-filter-conditions.util.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/src/modules/workflow/workflow-executor/workflow-actions/filter/utils/__tests__/evaluate-filter-conditions.util.spec.ts",
+    "packages/twenty-server/test/integration/ai/suites/__snapshots__/mcp-database-tool-input-schemas.integration-spec.ts.snap",
+    "packages/twenty-server/test/integration/graphql/suites/inputs-validation/filter-validation/__snapshots__/files-field-filter-input-validation.integration-spec.ts.snap",
+    "packages/twenty-server/test/integration/graphql/suites/inputs-validation/filter-validation/constants/successful-filter-input-by-field-metadata-type.constant.ts"
+   ],
+   "linked_issues": []
+  },
+  {
+   "pr": 28975,
+   "url": "https://github.com/twentyhq/twenty/pull/28975",
+   "merged_at": "2026-10-28T14:05:59Z",
+   "title": "fix: add workspace member record page and backfill relations",
+   "server_only": false,
+   "server_src_files": [
+    "packages/twenty-server/src/database/commands/upgrade-version-command/2-53/2-53-upgrade-version-command.module.ts",
+    "packages/twenty-server/src/database/commands/upgrade-version-command/2-53/2-53-workspace-command-1793192231470-sync-workspace-member-record-page.command.ts",
+    "packages/twenty-server/src/engine/workspace-manager/twenty-standard-application/constants/standard-page-layout.constant.ts",
+    "packages/twenty-server/src/engine/workspace-manager/twenty-standard-application/utils/page-layout-config/index.ts",
+    "packages/twenty-server/src/engine/workspace-manager/twenty-standard-application/utils/page-layout-config/standard-workspace-member-page-layout.config.ts",
+    "packages/twenty-server/src/engine/workspace-manager/twenty-standard-application/utils/page-layout-widget/build-standard-flat-page-layout-widget-metadata-maps.util.ts",
+    "packages/twenty-server/src/engine/workspace-manager/twenty-standard-application/utils/view-field-group/build-standard-flat-view-field-group-metadata-maps.util.ts",
+    "packages/twenty-server/src/engine/workspace-manager/twenty-standard-application/utils/view-field-group/compute-standard-workspace-member-view-field-groups.util.ts",
+    "packages/twenty-server/src/engine/workspace-manager/twenty-standard-application/utils/view-field/compute-standard-workspace-member-view-fields.util.ts",
+    "packages/twenty-server/src/engine/workspace-manager/twenty-standard-application/utils/view/compute-standard-workspace-member-views.util.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/src/database/commands/upgrade-version-command/2-31/constants/__tests__/pre-2-31-standard-record-page-layout-universal-identifier-by-object-universal-identifier.constant.spec.ts",
+    "packages/twenty-server/src/database/commands/upgrade-version-command/2-53/__tests__/2-53-workspace-command-1793192231470-sync-workspace-member-record-page.command.spec.ts",
+    "packages/twenty-server/src/engine/workspace-manager/twenty-standard-application/utils/__tests__/__snapshots__/get-standard-object-metadata-related-entity-ids.util.spec.ts.snap",
+    "packages/twenty-server/src/engine/workspace-manager/twenty-standard-application/utils/__tests__/__snapshots__/get-standard-page-layout-metadata-related-entity-ids.util.spec.ts.snap",
+    "packages/twenty-server/src/engine/workspace-manager/twenty-standard-application/utils/__tests__/compute-workspace-member-standard-metadata.spec.ts"
+   ],
+   "linked_issues": []
+  },
+  {
+   "pr": 28072,
+   "url": "https://github.com/twentyhq/twenty/pull/28072",
+   "merged_at": "2026-10-15T12:58:16Z",
+   "title": "docs: fix workflow trigger variable paths",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29311,
+   "url": "https://github.com/twentyhq/twenty/pull/29311",
+   "merged_at": "2026-10-30T16:33:53Z",
+   "title": "fix(website): drop the secret from the affiliate application webhook",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28038,
+   "url": "https://github.com/twentyhq/twenty/pull/28038",
+   "merged_at": "2026-10-14T20:50:44Z",
+   "title": "Fix missing Microsoft Teams app logo",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29244,
+   "url": "https://github.com/twentyhq/twenty/pull/29244",
+   "merged_at": "2026-10-30T09:36:10Z",
+   "title": "fix(server): rebuild ORM table shapes after a field rename",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/twenty-orm/datasource/workspace-data-source.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/src/engine/twenty-orm/datasource/__tests__/workspace-data-source.spec.ts"
+   ],
+   "linked_issues": []
+  },
+  {
+   "pr": 27962,
+   "url": "https://github.com/twentyhq/twenty/pull/27962",
+   "merged_at": "2026-10-14T07:24:54Z",
+   "title": "MCP: fix soft-delete generated tools",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/core-modules/tool-provider/providers/database-tool.provider.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/src/engine/core-modules/tool-provider/providers/__tests__/database-tool.provider.spec.ts"
+   ],
+   "linked_issues": [
+    26867
+   ]
+  },
+  {
+   "pr": 28743,
+   "url": "https://github.com/twentyhq/twenty/pull/28743",
+   "merged_at": "2026-10-27T23:24:01Z",
+   "title": "fix(server): refresh stale workflow version maps before sync",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/core-modules/workflow/services/workflow-version-core-sync.service.ts"
+   ],
+   "test_files": [],
+   "linked_issues": [
+    28742
+   ]
+  },
+  {
+   "pr": 27624,
+   "url": "https://github.com/twentyhq/twenty/pull/27624",
+   "merged_at": "2026-10-08T12:53:57Z",
+   "title": "Fix oversized icon in InlineBanner",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29126,
+   "url": "https://github.com/twentyhq/twenty/pull/29126",
+   "merged_at": "2026-10-28T15:01:00Z",
+   "title": "fix(currency-field): reject unknown currency codes on currency fields",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/api/common/common-args-processors/data-arg-processor/validator-utils/validate-currency-field-or-throw.util.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/src/engine/api/common/common-args-processors/data-arg-processor/validator-utils/__tests__/validate-currency-field-or-throw.util.spec.ts"
+   ],
+   "linked_issues": [
+    28761
+   ]
+  },
+  {
+   "pr": 29546,
+   "url": "https://github.com/twentyhq/twenty/pull/29546",
+   "merged_at": "2026-11-04T08:11:34Z",
+   "title": "fix(CommonAPI): cap GraphQL find-many page size at QUERY_MAX_RECORDS",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/api/common/common-query-runners/common-find-many-query-runner.service.ts",
+    "packages/twenty-server/src/engine/api/common/common-query-runners/utils/get-find-many-page-size.util.ts",
+    "packages/twenty-server/src/engine/api/common/core-common-api.module.ts",
+    "packages/twenty-server/src/engine/api/common/types/common-query-args.type.ts",
+    "packages/twenty-server/src/engine/api/graphql/direct-execution/utils/compute-graphql-direct-execution-query-cost.util.ts",
+    "packages/twenty-server/src/engine/api/graphql/workspace-resolver-builder/factories/find-many-resolver.factory.ts",
+    "packages/twenty-server/src/engine/core-modules/record-export/services/record-export-query.service.ts",
+    "packages/twenty-server/src/modules/emailing/emailing.module.ts",
+    "packages/twenty-server/src/modules/emailing/services/add-people-to-message-list.service.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/src/engine/api/common/common-query-runners/utils/__tests__/get-find-many-page-size.util.spec.ts",
+    "packages/twenty-server/src/engine/api/graphql/direct-execution/utils/__tests__/compute-graphql-direct-execution-query-cost.util.spec.ts",
+    "packages/twenty-server/test/integration/graphql/suites/object-generated/people-merge-many.integration-spec.ts"
+   ],
+   "linked_issues": []
+  },
+  {
+   "pr": 28435,
+   "url": "https://github.com/twentyhq/twenty/pull/28435",
+   "merged_at": "2026-10-20T12:12:27Z",
+   "title": "fix(billing): drop billingPrice.stripeMeterId before dropping billingMeter",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/database/commands/upgrade-version-command/2-50/2-50-instance-command-fast-1792480059403-drop-billing-meter-table.ts",
+    "packages/twenty-server/src/engine/core-modules/billing-webhook/utils/transform-stripe-price-event-to-database-price.util.ts",
+    "packages/twenty-server/src/engine/core-modules/billing/entities/billing-price.entity.ts",
+    "packages/twenty-server/src/engine/core-modules/billing/utils/transform-stripe-price-to-database-price.util.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/src/engine/core-modules/billing-webhook/utils/__tests__/transform-stripe-price-event-to-database-price.util.spec.ts",
+    "packages/twenty-server/src/engine/core-modules/billing/utils/__tests__/transform-stripe-price-to-database-price.util.spec.ts",
+    "packages/twenty-server/test/integration/billing/suites/billing-controller.integration-spec.ts"
+   ],
+   "linked_issues": []
+  },
+  {
+   "pr": 28592,
+   "url": "https://github.com/twentyhq/twenty/pull/28592",
+   "merged_at": "2026-10-27T15:43:26Z",
+   "title": "fix: activity link toggling before existing links finish loading",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": [
+    28594
+   ]
+  },
+  {
+   "pr": 29010,
+   "url": "https://github.com/twentyhq/twenty/pull/29010",
+   "merged_at": "2026-10-27T15:21:15Z",
+   "title": "Fix twenty-ui version expectation in default application package spec",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [
+    "packages/twenty-server/src/engine/core-modules/application/application-package/utils/__tests__/get-default-application-package-fields.util.spec.ts"
+   ],
+   "linked_issues": []
+  },
+  {
+   "pr": 29005,
+   "url": "https://github.com/twentyhq/twenty/pull/29005",
+   "merged_at": "2026-10-27T15:15:18Z",
+   "title": "fix(front): show application logo in log console app filter",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28989,
+   "url": "https://github.com/twentyhq/twenty/pull/28989",
+   "merged_at": "2026-10-27T14:19:15Z",
+   "title": "fix(server): drop twenty-server import from version bump script",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 27433,
+   "url": "https://github.com/twentyhq/twenty/pull/27433",
+   "merged_at": "2026-10-07T18:44:09Z",
+   "title": "Fix inverted front module dependencies",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29333,
+   "url": "https://github.com/twentyhq/twenty/pull/29333",
+   "merged_at": "2026-10-30T19:36:09Z",
+   "title": "[v2.54] fix(cli): accept default role references without local definitions",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28494,
+   "url": "https://github.com/twentyhq/twenty/pull/28494",
+   "merged_at": "2026-10-27T08:33:06Z",
+   "title": "Fix app sync recreating search rows that already exist",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/metadata-modules/flat-field-metadata/services/workspace-flat-field-metadata-map-cache.service.ts",
+    "packages/twenty-server/src/engine/metadata-modules/flat-field-metadata/utils/expand-flat-field-metadata-maps-or-throw.util.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/src/engine/metadata-modules/flat-field-metadata/utils/__tests__/expand-flat-field-metadata-maps-or-throw.util.spec.ts",
+    "packages/twenty-server/test/integration/workspace-cache/flat-field-metadata-maps-cache.integration-spec.ts"
+   ],
+   "linked_issues": [
+    28484
+   ]
+  },
+  {
+   "pr": 28084,
+   "url": "https://github.com/twentyhq/twenty/pull/28084",
+   "merged_at": "2026-10-15T13:36:52Z",
+   "title": "fix(billing): make direct subscription creation idempotent",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/core-modules/billing/services/billing-portal.workspace-service.ts",
+    "packages/twenty-server/src/engine/core-modules/billing/stripe/services/stripe-checkout.service.ts"
+   ],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28071,
+   "url": "https://github.com/twentyhq/twenty/pull/28071",
+   "merged_at": "2026-10-15T11:58:12Z",
+   "title": "Fix icon alignment in core object tables",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28279,
+   "url": "https://github.com/twentyhq/twenty/pull/28279",
+   "merged_at": "2026-10-19T12:20:57Z",
+   "title": "Fix the call recorder custom hex input border",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29769,
+   "url": "https://github.com/twentyhq/twenty/pull/29769",
+   "merged_at": "2026-11-05T16:26:47Z",
+   "title": "fix(getting-started): remove the goal pill and align the sidebar card header",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 27275,
+   "url": "https://github.com/twentyhq/twenty/pull/27275",
+   "merged_at": "2026-10-07T15:59:45Z",
+   "title": "Fix input selection and Autocomplete",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 27764,
+   "url": "https://github.com/twentyhq/twenty/pull/27764",
+   "merged_at": "2026-10-11T08:04:23Z",
+   "title": "Fix ordering for view sort replacements",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/workspace-manager/workspace-migration/utils/compute-ordered-migration-actions.util.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/src/engine/workspace-manager/workspace-migration/utils/__tests__/compute-ordered-migration-actions.util.spec.ts"
+   ],
+   "linked_issues": []
+  },
+  {
+   "pr": 27992,
+   "url": "https://github.com/twentyhq/twenty/pull/27992",
+   "merged_at": "2026-10-14T16:13:30Z",
+   "title": "Fix record exports with CLI OAuth sessions",
+   "server_only": false,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/core-modules/record-export/services/record-export.workspace-service.ts",
+    "packages/twenty-server/src/engine/core-modules/record-export/types/record-export-download-request.type.ts",
+    "packages/twenty-server/src/engine/core-modules/record-export/types/record-export-download-token-jwt-payload.type.ts",
+    "packages/twenty-server/src/engine/core-modules/record-export/types/record-export-requester.type.ts",
+    "packages/twenty-server/src/engine/core-modules/record-export/types/record-export-session.type.ts",
+    "packages/twenty-server/src/engine/core-modules/record-export/types/record-export.type.ts",
+    "packages/twenty-server/src/engine/core-modules/record-export/utils/compute-record-export-permissions-hash.util.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/src/engine/core-modules/record-export/utils/__tests__/compute-record-export-permissions-hash.util.spec.ts",
+    "packages/twenty-server/test/integration/record-export/record-export.integration-spec.ts"
+   ],
+   "linked_issues": []
+  },
+  {
+   "pr": 29185,
+   "url": "https://github.com/twentyhq/twenty/pull/29185",
+   "merged_at": "2026-10-29T12:44:10Z",
+   "title": "fix(permissions): validate row-level predicate operands against the field type",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/twenty-orm/utils/build-row-level-permission-record-filter.util.ts",
+    "packages/twenty-server/src/engine/workspace-manager/workspace-migration/workspace-migration-builder/validators/services/flat-row-level-permission-predicate-validator.service.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/src/engine/twenty-orm/utils/__tests__/build-row-level-permission-record-filter.util.spec.ts",
+    "packages/twenty-server/test/integration/metadata/suites/application/successful-manifest-sync-row-level-permission-predicate.integration-spec.ts",
+    "packages/twenty-server/test/integration/metadata/suites/row-level-permission-predicate/__snapshots__/failing-row-level-permission-predicate-upsert.integration-spec.ts.snap",
+    "packages/twenty-server/test/integration/metadata/suites/row-level-permission-predicate/failing-row-level-permission-predicate-upsert.integration-spec.ts",
+    "packages/twenty-server/test/integration/metadata/suites/row-level-permission-predicate/successful-row-level-permission-predicate-upsert.integration-spec.ts"
+   ],
+   "linked_issues": []
+  },
+  {
+   "pr": 27130,
+   "url": "https://github.com/twentyhq/twenty/pull/27130",
+   "merged_at": "2026-10-09T16:12:44Z",
+   "title": "fix force redirect with Navigate",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": [
+    26212
+   ]
+  },
+  {
+   "pr": 28741,
+   "url": "https://github.com/twentyhq/twenty/pull/28741",
+   "merged_at": "2026-10-27T23:02:37Z",
+   "title": "fix(front): honor all sort fields in optimistic record updates",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": [
+    28739
+   ]
+  },
+  {
+   "pr": 28738,
+   "url": "https://github.com/twentyhq/twenty/pull/28738",
+   "merged_at": "2026-10-27T22:31:52Z",
+   "title": "fix(server): honor Content-Type and preserve falsy HTTP bodies",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/core-modules/tool/tools/http-tool/http-tool.ts"
+   ],
+   "test_files": [],
+   "linked_issues": [
+    28737
+   ]
+  },
+  {
+   "pr": 27069,
+   "url": "https://github.com/twentyhq/twenty/pull/27069",
+   "merged_at": "2026-10-09T19:07:42Z",
+   "title": "Fix record gql fields typing",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": [
+    413
+   ]
+  },
+  {
+   "pr": 29176,
+   "url": "https://github.com/twentyhq/twenty/pull/29176",
+   "merged_at": "2026-11-04T17:59:36Z",
+   "title": "fix(twenty-shared): reject two-digit years when parsing date-time strings",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29029,
+   "url": "https://github.com/twentyhq/twenty/pull/29029",
+   "merged_at": "2026-10-28T13:03:36Z",
+   "title": "Fix merge bugs: stale priority, hidden-field data loss, permission gating",
+   "server_only": false,
+   "server_src_files": [
+    "packages/twenty-server/src/database/commands/upgrade-version-command/2-53/2-53-upgrade-version-command.module.ts",
+    "packages/twenty-server/src/database/commands/upgrade-version-command/2-53/2-53-workspace-command-1793183175063-gate-merge-command-on-record-permissions.command.ts",
+    "packages/twenty-server/src/database/commands/upgrade-version-command/2-53/utils/build-merge-command-record-permission-availability-updates.util.ts",
+    "packages/twenty-server/src/engine/api/common/common-query-runners/common-merge-many-query-runner.service.ts",
+    "packages/twenty-server/src/engine/api/common/common-query-runners/utils/find-record-keys-changed-by-merge.util.ts",
+    "packages/twenty-server/src/engine/api/graphql/graphql-query-runner/utils/has-record-field-value.util.ts",
+    "packages/twenty-server/src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item.constant.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/src/database/commands/upgrade-version-command/2-53/utils/__tests__/build-merge-command-record-permission-availability-updates.util.spec.ts",
+    "packages/twenty-server/src/database/commands/upgrade-version-command/2-53/utils/__tests__/build-ungate-merge-command-menu-item-update.util.spec.ts",
+    "packages/twenty-server/src/engine/api/common/common-query-runners/utils/__tests__/find-record-keys-changed-by-merge.util.spec.ts",
+    "packages/twenty-server/src/engine/api/graphql/graphql-query-runner/utils/__tests__/default-merge-field-value.util.spec.ts",
+    "packages/twenty-server/test/integration/graphql/suites/object-generated/people-merge-many-field-permissions.integration-spec.ts",
+    "packages/twenty-server/test/integration/metadata/suites/application-default-role/successful-workspace-custom-application-token-role.integration-spec.ts"
+   ],
+   "linked_issues": []
+  },
+  {
+   "pr": 29041,
+   "url": "https://github.com/twentyhq/twenty/pull/29041",
+   "merged_at": "2026-10-27T22:30:14Z",
+   "title": "Fix admin user page spacing and simplify the data export table",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 27604,
+   "url": "https://github.com/twentyhq/twenty/pull/27604",
+   "merged_at": "2026-10-08T13:02:53Z",
+   "title": "Fix stale metadata in SSE events",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28375,
+   "url": "https://github.com/twentyhq/twenty/pull/28375",
+   "merged_at": "2026-10-21T08:25:38Z",
+   "title": "Fix front components and uploads behind cookie-authenticating proxies",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28748,
+   "url": "https://github.com/twentyhq/twenty/pull/28748",
+   "merged_at": "2026-10-24T10:17:28Z",
+   "title": "fix(onboarding): add aria-labels to invite team email inputs",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": [
+    28746
+   ]
+  },
+  {
+   "pr": 28993,
+   "url": "https://github.com/twentyhq/twenty/pull/28993",
+   "merged_at": "2026-10-27T16:07:31Z",
+   "title": "Fix two integration test flakes: msw passthrough EINVAL and orphaned messages",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [
+    "packages/twenty-server/test/integration/graphql/suites/object-generated/calendar-events.integration-spec.ts",
+    "packages/twenty-server/test/integration/graphql/suites/object-generated/messages.integration-spec.ts",
+    "packages/twenty-server/test/integration/resend/suites/inbound-email-body-text.integration-spec.ts",
+    "packages/twenty-server/test/integration/resend/suites/inbound-email-exclude-group-emails.integration-spec.ts",
+    "packages/twenty-server/test/integration/resend/suites/inbound-email-reply-threading.integration-spec.ts",
+    "packages/twenty-server/test/integration/utils/delete-message-channel.util.ts",
+    "packages/twenty-server/test/integration/utils/setup-test.ts"
+   ],
+   "linked_issues": []
+  },
+  {
+   "pr": 27816,
+   "url": "https://github.com/twentyhq/twenty/pull/27816",
+   "merged_at": "2026-10-12T14:08:49Z",
+   "title": "Fix double highlight on view picker rows",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29349,
+   "url": "https://github.com/twentyhq/twenty/pull/29349",
+   "merged_at": "2026-11-08T10:29:09Z",
+   "title": "fix(twenty-sdk): prevent infinite re-renders in useFrontComponentExecutionContext for object selectors (#29032)",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": [
+    29032
+   ]
+  },
+  {
+   "pr": 28367,
+   "url": "https://github.com/twentyhq/twenty/pull/28367",
+   "merged_at": "2026-10-19T22:58:27Z",
+   "title": "Fix grouped table rows disappearing after a relation edit",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28795,
+   "url": "https://github.com/twentyhq/twenty/pull/28795",
+   "merged_at": "2026-10-28T00:34:55Z",
+   "title": "fix(onboarding): enable Enter key on focused Continue button (closes #28794)",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": [
+    28794
+   ]
+  },
+  {
+   "pr": 27977,
+   "url": "https://github.com/twentyhq/twenty/pull/27977",
+   "merged_at": "2026-10-16T15:02:22Z",
+   "title": "Fix date-sorted pagination skipping or duplicating records",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/api/graphql/graphql-query-runner/utils/compute-where-condition-parts.ts",
+    "packages/twenty-server/src/engine/api/utils/build-cursor-keyset-condition.utils.ts",
+    "packages/twenty-server/src/engine/twenty-orm/executor/client-query-executor.ts",
+    "packages/twenty-server/src/engine/twenty-orm/executor/pool-query-executor.ts",
+    "packages/twenty-server/src/engine/twenty-orm/query-builder/workspace-select-query-builder.ts",
+    "packages/twenty-server/src/engine/twenty-orm/sql/utils/compile-named-parameters.util.ts",
+    "packages/twenty-server/src/engine/twenty-orm/utils/format-result.util.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/src/engine/api/graphql/graphql-query-runner/utils/__tests__/compute-where-condition-parts.spec.ts",
+    "packages/twenty-server/src/engine/api/utils/__tests__/compute-cursor-arg-filter.utils.spec.ts",
+    "packages/twenty-server/src/engine/twenty-orm/query-builder/__tests__/workspace-select-query-builder-selection.spec.ts",
+    "packages/twenty-server/src/engine/twenty-orm/utils/__tests__/format-result.util.spec.ts",
+    "packages/twenty-server/test/integration/graphql/suites/cursor-pagination-order-by.integration-spec.ts"
+   ],
+   "linked_issues": [
+    27804
+   ]
+  },
+  {
+   "pr": 27423,
+   "url": "https://github.com/twentyhq/twenty/pull/27423",
+   "merged_at": "2026-10-06T22:05:51Z",
+   "title": "fix(cli): improve command output readability",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29173,
+   "url": "https://github.com/twentyhq/twenty/pull/29173",
+   "merged_at": "2026-10-30T11:28:16Z",
+   "title": "fix(server): refresh app connection access tokens using provider expires_in (#28446)",
+   "server_only": false,
+   "server_src_files": [
+    "packages/twenty-server/src/database/commands/upgrade-version-command/2-54/2-54-instance-command-fast-1793357800472-add-access-token-expires-at-to-connected-account.ts",
+    "packages/twenty-server/src/database/commands/upgrade-version-command/2-54/add-access-token-expires-at-to-connected-account-upgrade-command-name.constant.ts",
+    "packages/twenty-server/src/database/commands/upgrade-version-command/instance-commands.constant.ts",
+    "packages/twenty-server/src/engine/core-modules/application/connection-provider/connection-provider-connected-account.service.ts",
+    "packages/twenty-server/src/engine/core-modules/application/connection-provider/connection-provider-oauth-flow.service.ts",
+    "packages/twenty-server/src/engine/core-modules/application/connection-provider/refresh/services/app-oauth-refresh-tokens.service.ts",
+    "packages/twenty-server/src/engine/core-modules/application/connection-provider/types/token-exchange-response.type.ts",
+    "packages/twenty-server/src/engine/core-modules/application/connection-provider/utils/parse-access-token-expires-at.util.ts",
+    "packages/twenty-server/src/engine/core-modules/application/connection-provider/utils/parse-expires-in-seconds.util.ts",
+    "packages/twenty-server/src/engine/core-modules/application/connection-provider/utils/parse-token-response.util.ts",
+    "packages/twenty-server/src/engine/metadata-modules/connected-account/entities/connected-account.entity.ts",
+    "packages/twenty-server/src/modules/connected-account/refresh-tokens-manager/services/connected-account-refresh-tokens.service.ts",
+    "packages/twenty-server/src/modules/connected-account/refresh-tokens-manager/utils/compute-access-token-refresh-at.util.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/src/engine/core-modules/application/connection-provider/utils/__tests__/exchange-code-for-token.util.spec.ts",
+    "packages/twenty-server/src/engine/core-modules/application/connection-provider/utils/__tests__/parse-token-response.util.spec.ts",
+    "packages/twenty-server/src/modules/connected-account/refresh-tokens-manager/utils/__tests__/compute-access-token-refresh-at.util.spec.ts"
+   ],
+   "linked_issues": [
+    28446
+   ]
+  },
+  {
+   "pr": 27422,
+   "url": "https://github.com/twentyhq/twenty/pull/27422",
+   "merged_at": "2026-10-06T20:53:13Z",
+   "title": "fix(cli): make built binary executable",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 27411,
+   "url": "https://github.com/twentyhq/twenty/pull/27411",
+   "merged_at": "2026-10-06T20:14:39Z",
+   "title": "fix(cli): color doctor status labels",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29183,
+   "url": "https://github.com/twentyhq/twenty/pull/29183",
+   "merged_at": "2026-10-29T09:14:50Z",
+   "title": "fix(merge): reject non-UUID ids and a missing conflict priority index",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/api/common/common-query-runners/common-merge-many-query-runner.service.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/test/integration/rest/suites/rest-api-core-merge.integration-spec.ts"
+   ],
+   "linked_issues": []
+  },
+  {
+   "pr": 29024,
+   "url": "https://github.com/twentyhq/twenty/pull/29024",
+   "merged_at": "2026-10-27T17:18:15Z",
+   "title": "fix(billing): set Organization fallback prices to $49 monthly and $39 yearly",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 27663,
+   "url": "https://github.com/twentyhq/twenty/pull/27663",
+   "merged_at": "2026-10-09T11:47:17Z",
+   "title": "Fix Fathom imports that silently lose data",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28414,
+   "url": "https://github.com/twentyhq/twenty/pull/28414",
+   "merged_at": "2026-10-20T16:39:51Z",
+   "title": "fix(server): route view-derived filters through the filter processor",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/api/common/common-query-runners/common-group-by-query-runner.service.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/test/integration/graphql/suites/group-by-resolver.integration-spec.ts"
+   ],
+   "linked_issues": []
+  },
+  {
+   "pr": 28401,
+   "url": "https://github.com/twentyhq/twenty/pull/28401",
+   "merged_at": "2026-10-20T11:29:05Z",
+   "title": "Fix transcript status placement in the call recording transcript widget",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 27869,
+   "url": "https://github.com/twentyhq/twenty/pull/27869",
+   "merged_at": "2026-10-12T20:52:45Z",
+   "title": "Fix oversized icon in side panel switch rows",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29261,
+   "url": "https://github.com/twentyhq/twenty/pull/29261",
+   "merged_at": "2026-11-08T16:23:02Z",
+   "title": "fix(workflow): describe both day of month and day of week in cron descriptions",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": [
+    29260
+   ]
+  },
+  {
+   "pr": 28178,
+   "url": "https://github.com/twentyhq/twenty/pull/28178",
+   "merged_at": "2026-10-16T12:32:09Z",
+   "title": "Fix lost keystrokes in Preact front component text inputs",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28310,
+   "url": "https://github.com/twentyhq/twenty/pull/28310",
+   "merged_at": "2026-10-19T14:10:48Z",
+   "title": "Fix inert edit button on field widgets in editor mode",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28069,
+   "url": "https://github.com/twentyhq/twenty/pull/28069",
+   "merged_at": "2026-10-16T09:46:34Z",
+   "title": "fix(i18n): backfill and enforce Lingui across frontend packages",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28265,
+   "url": "https://github.com/twentyhq/twenty/pull/28265",
+   "merged_at": "2026-10-19T09:25:15Z",
+   "title": "fix(clickhouse): wait for each migration ALTER on all replicas",
+   "server_only": false,
+   "server_src_files": [
+    "packages/twenty-server/src/database/clickhouse/migrations/run-migrations.ts"
+   ],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28646,
+   "url": "https://github.com/twentyhq/twenty/pull/28646",
+   "merged_at": "2026-10-22T16:08:52Z",
+   "title": "fix(ci): track standalone CLI in docs and skills drift checks",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29163,
+   "url": "https://github.com/twentyhq/twenty/pull/29163",
+   "merged_at": "2026-10-29T09:49:33Z",
+   "title": "fix(accounts): trim whitespace in IMAP/SMTP/CalDAV server and username fields (#29091)",
+   "server_only": false,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/core-modules/imap-smtp-caldav-connection/schemas/connection-parameters.schema.ts",
+    "packages/twenty-server/src/engine/core-modules/secure-http-client/utils/resolve-and-validate-hostname.util.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/src/engine/core-modules/imap-smtp-caldav-connection/schemas/__tests__/connection-parameters.schema.spec.ts",
+    "packages/twenty-server/src/engine/core-modules/secure-http-client/utils/__tests__/resolve-and-validate-hostname.util.spec.ts"
+   ],
+   "linked_issues": [
+    29091
+   ]
+  },
+  {
+   "pr": 28458,
+   "url": "https://github.com/twentyhq/twenty/pull/28458",
+   "merged_at": "2026-10-24T17:10:13Z",
+   "title": "fix(front): keep cached relation picker results clickable while Search refreshes",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": [
+    28262
+   ]
+  },
+  {
+   "pr": 28425,
+   "url": "https://github.com/twentyhq/twenty/pull/28425",
+   "merged_at": "2026-10-24T10:15:59Z",
+   "title": "fix(record-form): block submission when field input has validation error",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": [
+    28246
+   ]
+  },
+  {
+   "pr": 27767,
+   "url": "https://github.com/twentyhq/twenty/pull/27767",
+   "merged_at": "2026-10-11T08:04:54Z",
+   "title": "Fix cascade-before-update ordering in workspace migrations",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/workspace-manager/workspace-migration/utils/compute-ordered-migration-actions.util.ts",
+    "packages/twenty-server/src/engine/workspace-manager/workspace-migration/workspace-migration-builder/validators/services/flat-view-sort-validator.service.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/src/engine/workspace-manager/workspace-migration/utils/__tests__/compute-ordered-migration-actions.util.spec.ts",
+    "packages/twenty-server/test/integration/metadata/suites/view-sort/__snapshots__/failing-view-sort-creation.integration-spec.ts.snap",
+    "packages/twenty-server/test/integration/metadata/suites/view-sort/failing-view-sort-creation.integration-spec.ts",
+    "packages/twenty-server/test/integration/metadata/suites/view-sort/successful-view-sort-replacement.integration-spec.ts"
+   ],
+   "linked_issues": []
+  },
+  {
+   "pr": 27968,
+   "url": "https://github.com/twentyhq/twenty/pull/27968",
+   "merged_at": "2026-10-14T13:23:41Z",
+   "title": "Fix trigger variable paths advertised to workflow AI tools",
+   "server_only": false,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/workspace-manager/twenty-standard-application/utils/skill-metadata/create-standard-flat-skill-metadata.util.ts",
+    "packages/twenty-server/src/modules/workflow/workflow-tools/tools/create-complete-workflow.tool.ts"
+   ],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28504,
+   "url": "https://github.com/twentyhq/twenty/pull/28504",
+   "merged_at": "2026-10-21T08:17:04Z",
+   "title": "fix(dpa): stop recording a click-through DPA on every signup",
+   "server_only": false,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/core-modules/auth/services/sign-in-up.service.ts",
+    "packages/twenty-server/src/engine/core-modules/dpa/enums/dpa-agreement-type.enum.ts"
+   ],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29000,
+   "url": "https://github.com/twentyhq/twenty/pull/29000",
+   "merged_at": "2026-10-27T14:46:55Z",
+   "title": "fix(server): pin workspace app twenty-ui to the release already on npm",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28825,
+   "url": "https://github.com/twentyhq/twenty/pull/28825",
+   "merged_at": "2026-10-30T13:43:15Z",
+   "title": "fix(dashboard): keep the Not Set group when gap-filling select and da\u2026",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/modules/dashboard/chart-data/utils/fill-date-gaps.util.ts",
+    "packages/twenty-server/src/modules/dashboard/chart-data/utils/fill-select-gaps.util.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/src/modules/dashboard/chart-data/utils/__tests__/fill-date-gaps.util.spec.ts",
+    "packages/twenty-server/src/modules/dashboard/chart-data/utils/__tests__/fill-select-gaps.util.spec.ts"
+   ],
+   "linked_issues": [
+    28812
+   ]
+  },
+  {
+   "pr": 27331,
+   "url": "https://github.com/twentyhq/twenty/pull/27331",
+   "merged_at": "2026-10-15T10:26:28Z",
+   "title": "fix(i18n): translate hard-coded front-end labels",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": [
+    27330
+   ]
+  },
+  {
+   "pr": 28821,
+   "url": "https://github.com/twentyhq/twenty/pull/28821",
+   "merged_at": "2026-10-29T09:24:36Z",
+   "title": "fix(rich-text): keep nested task item content out of markdown code blocks",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [
+    "packages/twenty-server/src/engine/core-modules/record-transformer/utils/__tests__/transform-rich-text.util.spec.ts"
+   ],
+   "linked_issues": [
+    28820
+   ]
+  },
+  {
+   "pr": 29198,
+   "url": "https://github.com/twentyhq/twenty/pull/29198",
+   "merged_at": "2026-11-07T22:59:53Z",
+   "title": "fix(timeline): prevent diff value hard-truncation and enable tooltip on long field values (#28834)",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": [
+    28834
+   ]
+  },
+  {
+   "pr": 27085,
+   "url": "https://github.com/twentyhq/twenty/pull/27085",
+   "merged_at": "2026-10-09T16:17:12Z",
+   "title": "fix(cli): remove legacy CLI config migration",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": [
+    26703
+   ]
+  },
+  {
+   "pr": 28683,
+   "url": "https://github.com/twentyhq/twenty/pull/28683",
+   "merged_at": "2026-10-23T11:35:16Z",
+   "title": "Fix logic functions staying on the old SDK after it is regenerated",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/core-modules/logic-function/logic-function-drivers/drivers/lambda/constants/lambda-driver.constant.ts",
+    "packages/twenty-server/src/engine/core-modules/logic-function/logic-function-drivers/drivers/lambda/services/lambda-executor-manager.service.ts",
+    "packages/twenty-server/src/engine/core-modules/logic-function/logic-function-drivers/drivers/lambda/services/lambda-layer-manager.service.ts"
+   ],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 28493,
+   "url": "https://github.com/twentyhq/twenty/pull/28493",
+   "merged_at": "2026-10-27T06:29:29Z",
+   "title": "fix(slack): show one content-shaped skeleton while the settings tab loads",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 27639,
+   "url": "https://github.com/twentyhq/twenty/pull/27639",
+   "merged_at": "2026-10-08T15:45:53Z",
+   "title": "Fix changing a workflow node into an Iterator",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/core-modules/workflow/services/core-workflow-version-mutation.workspace-service.ts",
+    "packages/twenty-server/src/modules/workflow/workflow-builder/workflow-version-step/workflow-version-step-operations.workspace-service.ts",
+    "packages/twenty-server/src/modules/workflow/workflow-builder/workflow-version-step/workflow-version-step-update.workspace-service.ts"
+   ],
+   "test_files": [
+    "packages/twenty-server/test/integration/graphql/suites/workflow/workflow-version-step-type-change.integration-spec.ts"
+   ],
+   "linked_issues": []
+  },
+  {
+   "pr": 25882,
+   "url": "https://github.com/twentyhq/twenty/pull/25882",
+   "merged_at": "2026-09-16T11:17:26Z",
+   "title": "Phone number fix",
+   "server_only": true,
+   "server_src_files": [
+    "packages/twenty-server/src/engine/core-modules/record-crud/zod-schemas/shared-value-defs.zod-schema.ts"
+   ],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 29134,
+   "url": "https://github.com/twentyhq/twenty/pull/29134",
+   "merged_at": "2026-10-28T17:32:14Z",
+   "title": "fix(front): let the task and note rich text body scroll to the bottom",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 27425,
+   "url": "https://github.com/twentyhq/twenty/pull/27425",
+   "merged_at": "2026-10-07T09:14:54Z",
+   "title": "fix(cli): simplify connection hints and planning messages",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  },
+  {
+   "pr": 27412,
+   "url": "https://github.com/twentyhq/twenty/pull/27412",
+   "merged_at": "2026-10-06T20:40:43Z",
+   "title": "fix(cli): default unnamed login connections to default",
+   "server_only": false,
+   "server_src_files": [],
+   "test_files": [],
+   "linked_issues": []
+  }
+ ]
+}

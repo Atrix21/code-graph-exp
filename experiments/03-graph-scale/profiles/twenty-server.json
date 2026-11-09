@@ -1,0 +1,340 @@
+{
+  "name": "twenty-server",
+  "repo": "targets/exp3/twenty/packages/twenty-server",
+  "graph": ".cache/exp3/graph-twenty",
+  "generated_by": "scripts/exp3/graph_profile.py",
+  "seed": 20261109,
+  "definitions": {
+    "scope": "non-test source files only (paths matching *.spec.*, *.test.*, __tests__/, test/, e2e excluded) unless stated",
+    "module_dir1": "first directory segment below src/ (e.g. src/auth -> auth)",
+    "module_dir2": "first two directory segments below src/",
+    "community": "Louvain community (seeded) on the undirected file-level dependency graph (internal imports + navigation edges); architecture-agnostic module boundary",
+    "navigation_graph": "nodes = declared function/method/class/interface/type; edges = CALLS,CONSUMES_EVENT,CONTROLLER_CALLS,EXTENDS,HAS_TYPE,IMPLEMENTS,INJECTS_DEPENDENCY,INSTANTIATES,PUBLISHES_EVENT,REFERENCES,REPOSITORY_ACCESSES,ROUTES_TO,SERVICE_USES with both endpoints declared in non-test code",
+    "tokens_estimate_chars_div_4": "ESTIMATE: characters / 4 (no tokenizer run)"
+  },
+  "source": {
+    "non_test": {
+      "files": 10046,
+      "lines": 763415,
+      "code_lines": 674101,
+      "chars": 34028318,
+      "tokens_estimate_chars_div_4": 8507079
+    },
+    "test": {
+      "files": 1851,
+      "lines": 247442,
+      "code_lines": 218172,
+      "chars": 8236695,
+      "tokens_estimate_chars_div_4": 2059173
+    },
+    "source_directories_non_test": 2581,
+    "package_json": {
+      "dependencies": 156,
+      "devDependencies": 61
+    }
+  },
+  "graph_full": {
+    "nodes": 213698,
+    "edges": 698833,
+    "nodes_by_type": {
+      "import": 59193,
+      "branch": 29812,
+      "condition": 25141,
+      "parameter": 24555,
+      "return": 18898,
+      "property": 13395,
+      "method": 11972,
+      "file": 10043,
+      "function": 4986,
+      "class": 4461,
+      "type": 3810,
+      "variable": 3710,
+      "loop": 2053,
+      "exception_handler": 1011,
+      "external_dependency": 203,
+      "route": 154,
+      "interface": 125,
+      "db_entity": 85,
+      "export": 83,
+      "event": 7,
+      "repository": 1
+    },
+    "edges_by_type": {
+      "CONTAINS": 213215,
+      "CALLS": 102184,
+      "IMPORTS": 59189,
+      "PASSES_TO": 49919,
+      "REFERENCES": 48482,
+      "CHECKS": 36022,
+      "READS": 30701,
+      "BRANCHES_TO": 29812,
+      "RETURNS": 27331,
+      "HAS_TYPE": 26309,
+      "EXPORTS": 12568,
+      "RECEIVES_FROM": 11113,
+      "RETURNS_VALUE_TO": 11113,
+      "SERVICE_USES": 10698,
+      "THROWS": 7661,
+      "INSTANTIATES": 6541,
+      "INJECTS_DEPENDENCY": 5897,
+      "LOOPS": 2399,
+      "QUERIES_DATABASE": 1287,
+      "CATCHES": 1138,
+      "EXTENDS": 1095,
+      "REPOSITORY_ACCESSES": 986,
+      "IMPLEMENTS": 975,
+      "MUTATES": 788,
+      "WRITES": 545,
+      "DEFINES": 239,
+      "CONTROLLER_CALLS": 222,
+      "RECURSES_TO": 189,
+      "ROUTES_TO": 154,
+      "CALLS_EXTERNAL_API": 54,
+      "CONSUMES_EVENT": 7
+    },
+    "edges_by_verification": {
+      "static_verified": 641314,
+      "unknown": 36139,
+      "framework_inferred": 19292,
+      "ambiguous": 2081,
+      "semantic_inferred": 7
+    },
+    "edge_confidence": {
+      "mean": 0.9502,
+      "share_ge_0_9": 0.9453
+    }
+  },
+  "extraction_coverage": {
+    "scope": "all corpus files incl. tests (as built)",
+    "files_parsed": "11894/11894",
+    "detected_calls": 188084,
+    "resolved_internal_rate": 0.3386,
+    "resolved_external_rate": 0.539,
+    "unresolved_call_rate": 0.1224,
+    "imports_resolved": "54960/65960",
+    "unresolved_import_specifiers": 11000,
+    "unresolved_references": 145
+  },
+  "size": {
+    "functions": 4986,
+    "methods": 11972,
+    "classes": 4461,
+    "interfaces": 125,
+    "type_aliases_and_enums": 3810,
+    "files_in_graph": 10043,
+    "modules_dir1": 9,
+    "modules_dir2": 59,
+    "nestjs_module_classes": 463,
+    "external_packages_referenced": 203,
+    "class_roles": {
+      "class": 2400,
+      "service": 1128,
+      "module": 463,
+      "provider": 263,
+      "entity": 85,
+      "controller": 50,
+      "guard": 31,
+      "interceptor": 15,
+      "strategy": 10,
+      "repository": 10,
+      "dto": 5,
+      "pipe": 1
+    }
+  },
+  "behaviour": {
+    "routes": 154,
+    "async_method_share": 0.6147,
+    "repository_access_edges": 986,
+    "database_query_edges": 1287,
+    "external_api_edges": 54,
+    "event_edges_extracted": {
+      "PUBLISHES_EVENT": 0,
+      "CONSUMES_EVENT": 7
+    },
+    "decorator_counts": {
+      "Get": 144,
+      "Post": 90,
+      "Put": 10,
+      "Patch": 34,
+      "Delete": 30,
+      "Query": 245,
+      "Mutation": 358,
+      "Resolver": 3,
+      "Subscription": 5,
+      "OnEvent": 16,
+      "Processor": 129,
+      "Process": 129,
+      "Cron": 1,
+      "OnDatabaseBatchEvent": 55,
+      "OnCustomBatchEvent": 10,
+      "InjectRepository": 766,
+      "Inject": 110,
+      "Entity": 85,
+      "Injectable": 1437,
+      "Controller": 50,
+      "Module": 463,
+      "Command": 380
+    },
+    "top_decorators": {
+      "Field": 3742,
+      "Injectable": 1437,
+      "IsOptional": 1019,
+      "Column": 846,
+      "InjectRepository": 766,
+      "UseGuards": 721,
+      "AuthWorkspace": 601,
+      "Args": 554,
+      "IsString": 480,
+      "Module": 463,
+      "ObjectType": 461,
+      "Command": 380,
+      "IsUUID": 376,
+      "IsNotEmpty": 373,
+      "InjectWorkspaceScopedRepository": 366,
+      "Mutation": 358,
+      "RegisteredWorkspaceCommand": 308,
+      "InjectMessageQueue": 306,
+      "RegisteredInstanceCommand": 292,
+      "ConfigVariablesMetadata": 271,
+      "InputType": 265,
+      "Query": 245,
+      "Index": 197,
+      "UseFilters": 184,
+      "IsBoolean": 182
+    }
+  },
+  "navigation_graph": {
+    "nodes": 25354,
+    "edges": 76434,
+    "edge_type_instances": {
+      "CALLS": 39668,
+      "REFERENCES": 36254,
+      "SERVICE_USES": 10653,
+      "INJECTS_DEPENDENCY": 5793,
+      "INSTANTIATES": 3093,
+      "REPOSITORY_ACCESSES": 985,
+      "EXTENDS": 814,
+      "IMPLEMENTS": 499,
+      "CONTROLLER_CALLS": 222
+    },
+    "density": 0.00011891,
+    "degree_undirected": {
+      "n": 25354,
+      "mean": 6.028,
+      "p50": 4,
+      "p90": 11,
+      "max": 986
+    },
+    "in_degree": {
+      "n": 25354,
+      "mean": 3.015,
+      "p50": 1,
+      "p90": 4,
+      "max": 986
+    },
+    "out_degree": {
+      "n": 25354,
+      "mean": 3.015,
+      "p50": 2,
+      "p90": 7,
+      "max": 325
+    },
+    "connected_components": 1900,
+    "largest_component_nodes": 23325,
+    "largest_component_share": 0.92,
+    "isolated_nodes": 1818,
+    "cross_file_edge_ratio": 0.8817,
+    "cross_module_dir1_edge_ratio": 0.1566,
+    "cross_module_dir2_edge_ratio": 0.3323,
+    "cross_community_edge_ratio": 0.2148,
+    "file_graph": {
+      "files": 10043,
+      "edges": 44915,
+      "communities": 234,
+      "modularity_Q": 0.6708,
+      "community_sizes_top10": [
+        1288,
+        1116,
+        1057,
+        690,
+        675,
+        656,
+        640,
+        408,
+        393,
+        355
+      ]
+    },
+    "internal_call_edges": 39668,
+    "internal_call_verification": {
+      "static_verified": 38052,
+      "ambiguous": 1616
+    },
+    "callee_name_ambiguity": {
+      "n": 39668,
+      "mean": 214.11,
+      "p50": 1,
+      "p90": 318,
+      "max": 2221,
+      "share_unique_name": 0.6935,
+      "meaning": "number of callable declarations sharing the callee simple name, per internal call edge"
+    },
+    "two_hop_neighbourhood_sample": {
+      "sampled_callables": 400,
+      "nodes": {
+        "n": 400,
+        "mean": 260.82,
+        "p50": 80,
+        "p90": 816,
+        "max": 2224
+      },
+      "files": {
+        "n": 400,
+        "mean": 142.773,
+        "p50": 55,
+        "p90": 361,
+        "max": 969
+      },
+      "communities": {
+        "n": 400,
+        "mean": 7.42,
+        "p50": 5,
+        "p90": 17,
+        "max": 21
+      }
+    },
+    "lcc_shortest_path_sample": {
+      "n": 300,
+      "mean": 5.48,
+      "p50": 5,
+      "p90": 7,
+      "max": 10
+    },
+    "route_handler_reach": {
+      "handlers": 146,
+      "sampled": 146,
+      "max_depth": {
+        "n": 146,
+        "mean": 18.219,
+        "p50": 21,
+        "p90": 26,
+        "max": 33
+      },
+      "files_reached": {
+        "n": 146,
+        "mean": 466.288,
+        "p50": 473,
+        "p90": 999,
+        "max": 1816
+      },
+      "communities_reached": {
+        "n": 146,
+        "mean": 14.349,
+        "p50": 17,
+        "p90": 19,
+        "max": 20
+      }
+    }
+  },
+  "elapsed_s": 11.3
+}

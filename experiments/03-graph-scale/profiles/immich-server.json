@@ -1,0 +1,326 @@
+{
+  "name": "immich-server",
+  "repo": "targets/exp3/immich/server",
+  "graph": ".cache/exp3/graph-immich",
+  "generated_by": "scripts/exp3/graph_profile.py",
+  "seed": 20261109,
+  "definitions": {
+    "scope": "non-test source files only (paths matching *.spec.*, *.test.*, __tests__/, test/, e2e excluded) unless stated",
+    "module_dir1": "first directory segment below src/ (e.g. src/auth -> auth)",
+    "module_dir2": "first two directory segments below src/",
+    "community": "Louvain community (seeded) on the undirected file-level dependency graph (internal imports + navigation edges); architecture-agnostic module boundary",
+    "navigation_graph": "nodes = declared function/method/class/interface/type; edges = CALLS,CONSUMES_EVENT,CONTROLLER_CALLS,EXTENDS,HAS_TYPE,IMPLEMENTS,INJECTS_DEPENDENCY,INSTANTIATES,PUBLISHES_EVENT,REFERENCES,REPOSITORY_ACCESSES,ROUTES_TO,SERVICE_USES with both endpoints declared in non-test code",
+    "tokens_estimate_chars_div_4": "ESTIMATE: characters / 4 (no tokenizer run)"
+  },
+  "source": {
+    "non_test": {
+      "files": 472,
+      "lines": 62612,
+      "code_lines": 54284,
+      "chars": 2361533,
+      "tokens_estimate_chars_div_4": 590383
+    },
+    "test": {
+      "files": 109,
+      "lines": 34552,
+      "code_lines": 29484,
+      "chars": 1342634,
+      "tokens_estimate_chars_div_4": 335658
+    },
+    "source_directories_non_test": 18,
+    "package_json": {
+      "dependencies": 81,
+      "devDependencies": 47
+    }
+  },
+  "graph_full": {
+    "nodes": 22003,
+    "edges": 90783,
+    "nodes_by_type": {
+      "parameter": 3782,
+      "import": 3061,
+      "branch": 2910,
+      "condition": 2441,
+      "return": 2367,
+      "method": 2150,
+      "property": 1519,
+      "variable": 734,
+      "class": 640,
+      "function": 557,
+      "file": 463,
+      "type": 378,
+      "route": 315,
+      "loop": 304,
+      "interface": 143,
+      "exception_handler": 118,
+      "external_dependency": 118,
+      "event": 1,
+      "export": 1,
+      "repository": 1
+    },
+    "edges_by_type": {
+      "CALLS": 23891,
+      "CONTAINS": 21543,
+      "PASSES_TO": 8133,
+      "REFERENCES": 7080,
+      "CHECKS": 3510,
+      "READS": 3120,
+      "IMPORTS": 3057,
+      "RETURNS": 2939,
+      "BRANCHES_TO": 2910,
+      "HAS_TYPE": 2835,
+      "SERVICE_USES": 2342,
+      "REPOSITORY_ACCESSES": 1706,
+      "EXPORTS": 1584,
+      "RECEIVES_FROM": 1134,
+      "RETURNS_VALUE_TO": 1134,
+      "INSTANTIATES": 824,
+      "THROWS": 562,
+      "EXTENDS": 441,
+      "LOOPS": 373,
+      "DEFINES": 315,
+      "ROUTES_TO": 315,
+      "CONTROLLER_CALLS": 312,
+      "INJECTS_DEPENDENCY": 303,
+      "CATCHES": 140,
+      "WRITES": 120,
+      "MUTATES": 118,
+      "IMPLEMENTS": 19,
+      "CALLS_EXTERNAL_API": 12,
+      "RECURSES_TO": 11
+    },
+    "edges_by_verification": {
+      "static_verified": 85397,
+      "framework_inferred": 5301,
+      "unknown": 67,
+      "ambiguous": 18
+    },
+    "edge_confidence": {
+      "mean": 0.9939,
+      "share_ge_0_9": 0.9992
+    }
+  },
+  "extraction_coverage": {
+    "scope": "all corpus files incl. tests (as built)",
+    "files_parsed": "572/572",
+    "detected_calls": 47675,
+    "resolved_internal_rate": 0.1961,
+    "resolved_external_rate": 0.8031,
+    "unresolved_call_rate": 0.0008,
+    "imports_resolved": "3769/3781",
+    "unresolved_import_specifiers": 12,
+    "unresolved_references": 0
+  },
+  "size": {
+    "functions": 557,
+    "methods": 2150,
+    "classes": 640,
+    "interfaces": 143,
+    "type_aliases_and_enums": 378,
+    "files_in_graph": 463,
+    "modules_dir1": 13,
+    "modules_dir2": 16,
+    "nestjs_module_classes": 4,
+    "external_packages_referenced": 118,
+    "class_roles": {
+      "dto": 257,
+      "class": 205,
+      "repository": 62,
+      "service": 57,
+      "controller": 48,
+      "module": 4,
+      "interceptor": 4,
+      "guard": 2,
+      "provider": 1
+    }
+  },
+  "behaviour": {
+    "routes": 315,
+    "async_method_share": 0.4056,
+    "repository_access_edges": 1706,
+    "database_query_edges": 0,
+    "external_api_edges": 12,
+    "event_edges_extracted": {
+      "PUBLISHES_EVENT": 0,
+      "CONSUMES_EVENT": 0
+    },
+    "decorator_counts": {
+      "Get": 272,
+      "Post": 146,
+      "Put": 86,
+      "Patch": 34,
+      "Delete": 92,
+      "Query": 36,
+      "OnEvent": 95,
+      "OnJob": 67,
+      "WebSocketGateway": 2,
+      "InjectKysely": 81,
+      "Inject": 8,
+      "Injectable": 119,
+      "Controller": 48,
+      "Module": 4,
+      "Command": 13
+    },
+    "top_decorators": {
+      "Authenticated": 608,
+      "Endpoint": 574,
+      "GenerateSql": 375,
+      "Column": 280,
+      "Get": 272,
+      "Auth": 230,
+      "HttpCode": 170,
+      "Post": 146,
+      "Body": 130,
+      "Param": 127,
+      "Injectable": 119,
+      "OnEvent": 95,
+      "Delete": 92,
+      "Put": 86,
+      "InjectKysely": 81,
+      "ForeignKeyColumn": 73,
+      "Table": 71,
+      "OnJob": 67,
+      "Controller": 48,
+      "CreateDateColumn": 48,
+      "ApiTags": 46,
+      "ExtraModel": 42,
+      "Query": 36,
+      "Patch": 34,
+      "ApiExcludeEndpoint": 34
+    }
+  },
+  "navigation_graph": {
+    "nodes": 3868,
+    "edges": 10954,
+    "edge_type_instances": {
+      "CALLS": 6444,
+      "REFERENCES": 4455,
+      "SERVICE_USES": 2342,
+      "REPOSITORY_ACCESSES": 1702,
+      "INSTANTIATES": 367,
+      "CONTROLLER_CALLS": 312,
+      "INJECTS_DEPENDENCY": 225,
+      "EXTENDS": 115,
+      "IMPLEMENTS": 3
+    },
+    "density": 0.00073234,
+    "degree_undirected": {
+      "n": 3868,
+      "mean": 5.663,
+      "p50": 3,
+      "p90": 11,
+      "max": 485
+    },
+    "in_degree": {
+      "n": 3868,
+      "mean": 2.832,
+      "p50": 1,
+      "p90": 4,
+      "max": 485
+    },
+    "out_degree": {
+      "n": 3868,
+      "mean": 2.832,
+      "p50": 1,
+      "p90": 9,
+      "max": 62
+    },
+    "connected_components": 407,
+    "largest_component_nodes": 3410,
+    "largest_component_share": 0.8816,
+    "isolated_nodes": 386,
+    "cross_file_edge_ratio": 0.8508,
+    "cross_module_dir1_edge_ratio": 0.8018,
+    "cross_module_dir2_edge_ratio": 0.802,
+    "cross_community_edge_ratio": 0.3241,
+    "file_graph": {
+      "files": 463,
+      "edges": 2346,
+      "communities": 107,
+      "modularity_Q": 0.348,
+      "community_sizes_top10": [
+        117,
+        87,
+        63,
+        50,
+        29,
+        12,
+        5,
+        1,
+        1,
+        1
+      ]
+    },
+    "internal_call_edges": 6444,
+    "internal_call_verification": {
+      "static_verified": 6434,
+      "ambiguous": 10
+    },
+    "callee_name_ambiguity": {
+      "n": 6444,
+      "mean": 4.552,
+      "p50": 1,
+      "p90": 7,
+      "max": 162,
+      "share_unique_name": 0.7422,
+      "meaning": "number of callable declarations sharing the callee simple name, per internal call edge"
+    },
+    "two_hop_neighbourhood_sample": {
+      "sampled_callables": 400,
+      "nodes": {
+        "n": 400,
+        "mean": 214.12,
+        "p50": 106,
+        "p90": 585,
+        "max": 702
+      },
+      "files": {
+        "n": 400,
+        "mean": 39.958,
+        "p50": 39,
+        "p90": 96,
+        "max": 123
+      },
+      "communities": {
+        "n": 400,
+        "mean": 4.625,
+        "p50": 5,
+        "p90": 7,
+        "max": 7
+      }
+    },
+    "lcc_shortest_path_sample": {
+      "n": 300,
+      "mean": 4.687,
+      "p50": 5,
+      "p90": 6,
+      "max": 9
+    },
+    "route_handler_reach": {
+      "handlers": 315,
+      "sampled": 150,
+      "max_depth": {
+        "n": 150,
+        "mean": 5.787,
+        "p50": 5,
+        "p90": 9,
+        "max": 11
+      },
+      "files_reached": {
+        "n": 150,
+        "mean": 9.993,
+        "p50": 9,
+        "p90": 17,
+        "max": 23
+      },
+      "communities_reached": {
+        "n": 150,
+        "mean": 3.4,
+        "p50": 3,
+        "p90": 5,
+        "max": 6
+      }
+    }
+  },
+  "elapsed_s": 1.0
+}
