@@ -1,0 +1,217 @@
+{
+  "run_id": "stage3-agentic-test-p1",
+  "status": "completed",
+  "protocol": "agentic",
+  "split": "test",
+  "conditions": [
+    "baseline",
+    "embeddings",
+    "hybrid",
+    "graphify",
+    "crg"
+  ],
+  "repeats": 3,
+  "tasks": [
+    "auth_jwt_secret_01",
+    "auth_reset_sessions_01",
+    "auth_uniform_login_01",
+    "files_local_path_01",
+    "files_photo_url_01",
+    "files_presigned_size_01",
+    "mail_new_email_link_01",
+    "roles_admin_guard_01",
+    "session_password_change_01",
+    "users_create_provider_01",
+    "users_list_page_01",
+    "users_mapper_lastname_01",
+    "users_photo_cleared_01",
+    "utils_has_next_page_01"
+  ],
+  "model": "claude-sonnet-5-5",
+  "profile": "restricted-oauth",
+  "effort": "high",
+  "max_turns": 40,
+  "budget_per_call": 4000,
+  "seed": 20261108,
+  "claude_version": "2.1.319",
+  "mock_api": null,
+  "account": {
+    "name": "personal",
+    "primary": true,
+    "subscription_type": "pro",
+    "email_sha": "0cfa2dbaab"
+  },
+  "prompt_version": "p1",
+  "backend": "claude-code",
+  "billable": true,
+  "max_parallel": 1,
+  "max_embedding_servers": 2,
+  "isolation_env": {
+    "CLAUDE_CODE_DISABLE_CLAUDE_MDS": "1",
+    "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
+    "CLAUDE_CODE_SKIP_PROMPT_HISTORY": "1",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "DISABLE_AUTOUPDATER": "1",
+    "NO_COLOR": "1",
+    "ENABLE_CLAUDEAI_MCP_SERVERS": "false",
+    "MCP_TIMEOUT": "180000",
+    "MCP_TOOL_TIMEOUT": "120000"
+  },
+  "condition_labels": {
+    "baseline": "baseline",
+    "embeddings": "embeddings",
+    "hybrid": "hybrid",
+    "graphify": "graphify",
+    "crg": "crg-default-fts"
+  },
+  "tool_policy": {
+    "baseline": {
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "allowed": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "denied": [
+        "Bash",
+        "Edit",
+        "Write",
+        "NotebookEdit",
+        "WebFetch",
+        "WebSearch",
+        "Task",
+        "Agent",
+        "Skill",
+        "TodoWrite"
+      ]
+    },
+    "embeddings": {
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "allowed": [
+        "Read",
+        "Grep",
+        "Glob",
+        "mcp__retrieval__*"
+      ],
+      "denied": [
+        "Bash",
+        "Edit",
+        "Write",
+        "NotebookEdit",
+        "WebFetch",
+        "WebSearch",
+        "Task",
+        "Agent",
+        "Skill",
+        "TodoWrite"
+      ]
+    },
+    "hybrid": {
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "allowed": [
+        "Read",
+        "Grep",
+        "Glob",
+        "mcp__retrieval__*"
+      ],
+      "denied": [
+        "Bash",
+        "Edit",
+        "Write",
+        "NotebookEdit",
+        "WebFetch",
+        "WebSearch",
+        "Task",
+        "Agent",
+        "Skill",
+        "TodoWrite"
+      ]
+    },
+    "graphify": {
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "allowed": [
+        "Read",
+        "Grep",
+        "Glob",
+        "mcp__graphify__*"
+      ],
+      "denied": [
+        "Bash",
+        "Edit",
+        "Write",
+        "NotebookEdit",
+        "WebFetch",
+        "WebSearch",
+        "Task",
+        "Agent",
+        "Skill",
+        "TodoWrite",
+        "mcp__graphify__list_prs",
+        "mcp__graphify__get_pr_impact",
+        "mcp__graphify__triage_prs"
+      ]
+    },
+    "crg": {
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "allowed": [
+        "Read",
+        "Grep",
+        "Glob",
+        "mcp__code-review-graph__*"
+      ],
+      "denied": [
+        "Bash",
+        "Edit",
+        "Write",
+        "NotebookEdit",
+        "WebFetch",
+        "WebSearch",
+        "Task",
+        "Agent",
+        "Skill",
+        "TodoWrite",
+        "mcp__code-review-graph__apply_refactor_tool",
+        "mcp__code-review-graph__generate_wiki_tool",
+        "mcp__code-review-graph__build_or_update_graph_tool",
+        "mcp__code-review-graph__embed_graph_tool",
+        "mcp__code-review-graph__run_postprocess_tool",
+        "mcp__code-review-graph__cross_repo_search_tool",
+        "mcp__code-review-graph__list_repos_tool"
+      ]
+    }
+  },
+  "run_usd": 1,
+  "max_total_usd": 75,
+  "shuffle_seed": 20261108,
+  "plan_file": "plan.json",
+  "updated": "2026-11-09T05:13:34.816Z",
+  "halted": null,
+  "n_pending": 0,
+  "n_items": 210,
+  "n_scored": 210,
+  "n_excluded_records": 1,
+  "total_cost_ledger_usd": 5.609904799999999,
+  "total_cost_reported_usd": 5.084001399999998,
+  "wall_ms_this_invocation": 598278,
+  "finished": "2026-11-09T05:13:34.816Z"
+}

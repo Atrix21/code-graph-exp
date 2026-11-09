@@ -12,6 +12,7 @@ import path from 'node:path';
 import { abs } from '../config.js';
 import { mean } from '../evaluation/metrics.js';
 import { compare, confirmatoryReport, perTask, PRIMARY, repeatAgreement, report, type Comparison } from './analysis.js';
+import { isUsageLimitExclusion } from './backends/claude-code.js';
 import { EXP_DIR } from './contexts.js';
 import type { ScoredRun } from './runner.js';
 
@@ -42,7 +43,7 @@ function load(dirs: string[]): { runs: ScoredRun[]; status: string[] } {
     try { meta = JSON.parse(fs.readFileSync(path.join(dir, 'meta.json'), 'utf8')); } catch { /* none */ }
     const excl = readJsonl(path.join(dir, 'excluded.jsonl'));
     const kinds = new Map<string, number>();
-    for (const e of excl) kinds.set(String(e.excluded), (kinds.get(String(e.excluded)) ?? 0) + 1);
+    for (const e of excl) { const k = isUsageLimitExclusion(e) ? 'usage-limit interruption (re-run)' : String(e.excluded); kinds.set(k, (kinds.get(k) ?? 0) + 1); }
     const pending = meta.n_pending ?? (meta.n_items != null ? meta.n_items - rs.length : '—');
     status.push(`| ${d} | ${meta.status ?? '—'}${meta.halted ? ` (${String(meta.halted).slice(0, 60)})` : ''} | ${rs.length} | ${[...kinds].map(([k, n]) => `${k} ×${n}`).join(', ') || '0'} | ${pending} |`);
   }
@@ -136,6 +137,14 @@ export function finalReport(split: 'test' | 'dev'): string {
     '',
     '### 2,000-token budget', '', s2.runs.length ? report(s2.runs, 'single:none@2000') : '_not run_',
     '', '### 8,000-token budget', '', s8.runs.length ? report(s8.runs, 'single:none@8000') : '_not run_',
+    '', '### Exploratory method comparisons (not confirmatory, uncorrected)', '',
+    single.length ? comparisons(single, [2000, 8000].flatMap((b) => [
+      { id: `X-graph-vs-emb@${b}`, hypothesis: `custom_graph > embeddings @${b}`, a: `single:custom_graph@${b}`, b: `single:embeddings@${b}`, metric: PRIMARY },
+      { id: `X-graph-vs-hybrid@${b}`, hypothesis: `custom_graph > hybrid @${b}`, a: `single:custom_graph@${b}`, b: `single:hybrid@${b}`, metric: PRIMARY },
+      { id: `X-hybrid-vs-bm25@${b}`, hypothesis: `hybrid > bm25 @${b}`, a: `single:hybrid@${b}`, b: `single:bm25@${b}`, metric: PRIMARY },
+      { id: `X-hybrid-vs-graphify@${b}`, hypothesis: `hybrid > graphify @${b}`, a: `single:hybrid@${b}`, b: `single:graphify@${b}`, metric: PRIMARY },
+      { id: `X-hybrid-vs-crg@${b}`, hypothesis: `hybrid > code_review_graph @${b}`, a: `single:hybrid@${b}`, b: `single:code_review_graph@${b}`, metric: PRIMARY },
+    ] as Comparison[])) : '',
     '',
     'Repeat agreement, all conditions: ' + Object.entries(repeatAgreement([...p2.runs, ...p1r, ...single])).sort().map(([c, v]) => `${c} ${f2(v)}`).join(' · '),
   ];

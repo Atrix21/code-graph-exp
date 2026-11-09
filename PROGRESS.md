@@ -1,13 +1,13 @@
 # PROGRESS
 
-## Experiment 2 (branch `agent-eval`): downstream agent diagnosis. Status: main run (stage 3) in progress
+## Experiment 2 (branch `agent-eval`): downstream agent diagnosis. Status: complete (findings: `experiments/02-agent-diagnosis/findings.md`)
 - Question: does graph-enhanced retrieval make a coding agent diagnose bugs more accurately or cheaply?
-- Everything is in `experiments/02-agent-diagnosis/`: `protocol.md` (frozen 2026-11-08, Amendment A), `FROZEN.json`, `decision-log.md` (E2-D01..D19), `AUDIT.md`, `APPROVAL.json` (owner-approved stages), `results/`.
-- Approval (2026-11-08): run on the owner's "personal" Claude Code login (Pro subscription), strictly one run at a time. Model claude-sonnet-5-5, effort high.
-- Stages 1–2 (dev pilot, done): 60 agentic + 108 single-shot runs, all valid, 0 exclusions, $6.02 list-price. Agentic accuracy at ceiling (1.00 everywhere). Under p1 the agent never calls retrieval tools; under p2 (directed) it uses our `search_code` (≈ 40% fewer turns, 20–30% fewer tokens) but still never Graphify/CRG. Report: `results/dev-pilot-report.md`.
-- Stage 3 (test split, 1,176 runs: agentic p2 → single-shot 2k → 8k → agentic p1): `experiments/02-agent-diagnosis/run-stage3.sh` (resumable; stops on a usage-limit halt; re-run the script to resume). Log: `results/stage3.log`.
-- Final report: `npx tsx src/agent-eval/final-report.ts --split test` → `results/final-report.md`.
-- Not done: the independent auditor's re-verification of the audit fixes (deferred to save plan usage; the fixes are covered by tests and the dev pilot ran clean).
+- Answer on this benchmark: **not for an agent with grep** (accuracy 1.00 in every agentic condition; retrieval tools unused unless directed, then no net gain; Graphify/CRG MCP servers never called and cost 1.4×/3.1× the tokens). **Yes for single-shot context:** file list 0.31–0.33 → our custom graph 0.76/0.98 and hybrid 0.71/0.93 (2k/8k), best of all retrieval methods; hybrid vs embeddings (+0.07/+0.10) not significant with 14 tasks.
+- Files in `experiments/02-agent-diagnosis/`: `findings.md`, `protocol.md` (frozen, Amendment A), `FROZEN.json`, `decision-log.md` (E2-D01..D21), `AUDIT.md`, `APPROVAL.json`, `results/final-report.md`, `results/dev-pilot-report.md`.
+- Ran on the owner's "personal" Claude Code login (Pro), strictly sequential; 1,349 billable calls, $33.99 list-price equivalent, three 5-hour usage windows.
+- Rebuild reports (no model calls): `npx tsx src/agent-eval/final-report.ts --split test|dev`.
+- Not done: the independent auditor's re-verification of the pre-run fixes (deferred to save plan usage).
+- Next: harder tasks (historical / multi-file / identifier-free reports), a no-Grep arm, a weaker model, an agent-shaped compact graph tool.
 
 ---
 

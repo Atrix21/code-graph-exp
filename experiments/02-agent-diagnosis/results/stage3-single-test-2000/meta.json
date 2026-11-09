@@ -1,0 +1,39 @@
+{
+  "run_id": "stage3-single-test-2000",
+  "protocol": "single_shot",
+  "split": "test",
+  "budget": 2000,
+  "methods": [
+    "none",
+    "ripgrep",
+    "bm25",
+    "embeddings",
+    "graphify",
+    "code_review_graph",
+    "custom_graph",
+    "hybrid",
+    "oracle"
+  ],
+  "repeats": 3,
+  "backend": "claude-code",
+  "model": "claude-sonnet-5-5",
+  "billable": true,
+  "prompt_version": "p1",
+  "n_items": 378,
+  "n_scored": 378,
+  "n_excluded": 0,
+  "n_pending": 0,
+  "status": "completed",
+  "halted": null,
+  "backend_meta": {
+    "effort": "high",
+    "billing": "subscription",
+    "account": "personal",
+    "run_usd": 0.25,
+    "seed": 20261108,
+    "profile": "restricted-oauth",
+    "expected_version": "2.1.319"
+  },
+  "wall_ms_this_invocation": 1406,
+  "updated": "2026-11-09T05:03:20.872Z"
+}

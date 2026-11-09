@@ -1,0 +1,1518 @@
+{
+ "seed": 20261108,
+ "created": "2026-11-09T00:42:04.983Z",
+ "config": {
+  "split": "test",
+  "conditions": [
+   "baseline",
+   "embeddings",
+   "hybrid",
+   "graphify",
+   "crg"
+  ],
+  "repeats": 3,
+  "tasks": [
+   "auth_jwt_secret_01",
+   "auth_reset_sessions_01",
+   "auth_uniform_login_01",
+   "files_local_path_01",
+   "files_photo_url_01",
+   "files_presigned_size_01",
+   "mail_new_email_link_01",
+   "roles_admin_guard_01",
+   "session_password_change_01",
+   "users_create_provider_01",
+   "users_list_page_01",
+   "users_mapper_lastname_01",
+   "users_photo_cleared_01",
+   "utils_has_next_page_01"
+  ],
+  "model": "claude-sonnet-5-5",
+  "profile": "restricted-oauth",
+  "effort": "high",
+  "max_turns": 40,
+  "budget_per_call": 4000,
+  "seed": 20261108,
+  "claude_version": "2.1.319",
+  "mock_api": null,
+  "account": {
+   "name": "personal",
+   "primary": true,
+   "subscription_type": "pro",
+   "email_sha": "0cfa2dbaab"
+  },
+  "prompt_version": "p1"
+ },
+ "items": [
+  {
+   "run_id": "utils_has_next_page_01|agentic:crg|0",
+   "task_id": "utils_has_next_page_01",
+   "condition": "crg",
+   "repeat": 0,
+   "position": 0
+  },
+  {
+   "run_id": "files_presigned_size_01|agentic:graphify|1",
+   "task_id": "files_presigned_size_01",
+   "condition": "graphify",
+   "repeat": 1,
+   "position": 1
+  },
+  {
+   "run_id": "users_list_page_01|agentic:embeddings|2",
+   "task_id": "users_list_page_01",
+   "condition": "embeddings",
+   "repeat": 2,
+   "position": 2
+  },
+  {
+   "run_id": "auth_reset_sessions_01|agentic:crg|0",
+   "task_id": "auth_reset_sessions_01",
+   "condition": "crg",
+   "repeat": 0,
+   "position": 3
+  },
+  {
+   "run_id": "files_local_path_01|agentic:crg|0",
+   "task_id": "files_local_path_01",
+   "condition": "crg",
+   "repeat": 0,
+   "position": 4
+  },
+  {
+   "run_id": "auth_jwt_secret_01|agentic:embeddings|1",
+   "task_id": "auth_jwt_secret_01",
+   "condition": "embeddings",
+   "repeat": 1,
+   "position": 5
+  },
+  {
+   "run_id": "users_mapper_lastname_01|agentic:graphify|2",
+   "task_id": "users_mapper_lastname_01",
+   "condition": "graphify",
+   "repeat": 2,
+   "position": 6
+  },
+  {
+   "run_id": "auth_reset_sessions_01|agentic:embeddings|2",
+   "task_id": "auth_reset_sessions_01",
+   "condition": "embeddings",
+   "repeat": 2,
+   "position": 7
+  },
+  {
+   "run_id": "utils_has_next_page_01|agentic:graphify|2",
+   "task_id": "utils_has_next_page_01",
+   "condition": "graphify",
+   "repeat": 2,
+   "position": 8
+  },
+  {
+   "run_id": "users_photo_cleared_01|agentic:embeddings|0",
+   "task_id": "users_photo_cleared_01",
+   "condition": "embeddings",
+   "repeat": 0,
+   "position": 9
+  },
+  {
+   "run_id": "files_photo_url_01|agentic:baseline|1",
+   "task_id": "files_photo_url_01",
+   "condition": "baseline",
+   "repeat": 1,
+   "position": 10
+  },
+  {
+   "run_id": "auth_jwt_secret_01|agentic:baseline|0",
+   "task_id": "auth_jwt_secret_01",
+   "condition": "baseline",
+   "repeat": 0,
+   "position": 11
+  },
+  {
+   "run_id": "roles_admin_guard_01|agentic:baseline|1",
+   "task_id": "roles_admin_guard_01",
+   "condition": "baseline",
+   "repeat": 1,
+   "position": 12
+  },
+  {
+   "run_id": "mail_new_email_link_01|agentic:baseline|1",
+   "task_id": "mail_new_email_link_01",
+   "condition": "baseline",
+   "repeat": 1,
+   "position": 13
+  },
+  {
+   "run_id": "files_local_path_01|agentic:embeddings|1",
+   "task_id": "files_local_path_01",
+   "condition": "embeddings",
+   "repeat": 1,
+   "position": 14
+  },
+  {
+   "run_id": "mail_new_email_link_01|agentic:baseline|2",
+   "task_id": "mail_new_email_link_01",
+   "condition": "baseline",
+   "repeat": 2,
+   "position": 15
+  },
+  {
+   "run_id": "utils_has_next_page_01|agentic:embeddings|1",
+   "task_id": "utils_has_next_page_01",
+   "condition": "embeddings",
+   "repeat": 1,
+   "position": 16
+  },
+  {
+   "run_id": "session_password_change_01|agentic:hybrid|2",
+   "task_id": "session_password_change_01",
+   "condition": "hybrid",
+   "repeat": 2,
+   "position": 17
+  },
+  {
+   "run_id": "mail_new_email_link_01|agentic:crg|2",
+   "task_id": "mail_new_email_link_01",
+   "condition": "crg",
+   "repeat": 2,
+   "position": 18
+  },
+  {
+   "run_id": "users_photo_cleared_01|agentic:crg|2",
+   "task_id": "users_photo_cleared_01",
+   "condition": "crg",
+   "repeat": 2,
+   "position": 19
+  },
+  {
+   "run_id": "mail_new_email_link_01|agentic:hybrid|1",
+   "task_id": "mail_new_email_link_01",
+   "condition": "hybrid",
+   "repeat": 1,
+   "position": 20
+  },
+  {
+   "run_id": "files_presigned_size_01|agentic:hybrid|0",
+   "task_id": "files_presigned_size_01",
+   "condition": "hybrid",
+   "repeat": 0,
+   "position": 21
+  },
+  {
+   "run_id": "users_list_page_01|agentic:baseline|0",
+   "task_id": "users_list_page_01",
+   "condition": "baseline",
+   "repeat": 0,
+   "position": 22
+  },
+  {
+   "run_id": "users_photo_cleared_01|agentic:crg|1",
+   "task_id": "users_photo_cleared_01",
+   "condition": "crg",
+   "repeat": 1,
+   "position": 23
+  },
+  {
+   "run_id": "files_presigned_size_01|agentic:embeddings|1",
+   "task_id": "files_presigned_size_01",
+   "condition": "embeddings",
+   "repeat": 1,
+   "position": 24
+  },
+  {
+   "run_id": "files_photo_url_01|agentic:hybrid|2",
+   "task_id": "files_photo_url_01",
+   "condition": "hybrid",
+   "repeat": 2,
+   "position": 25
+  },
+  {
+   "run_id": "users_create_provider_01|agentic:graphify|1",
+   "task_id": "users_create_provider_01",
+   "condition": "graphify",
+   "repeat": 1,
+   "position": 26
+  },
+  {
+   "run_id": "auth_reset_sessions_01|agentic:graphify|0",
+   "task_id": "auth_reset_sessions_01",
+   "condition": "graphify",
+   "repeat": 0,
+   "position": 27
+  },
+  {
+   "run_id": "files_photo_url_01|agentic:embeddings|2",
+   "task_id": "files_photo_url_01",
+   "condition": "embeddings",
+   "repeat": 2,
+   "position": 28
+  },
+  {
+   "run_id": "utils_has_next_page_01|agentic:baseline|0",
+   "task_id": "utils_has_next_page_01",
+   "condition": "baseline",
+   "repeat": 0,
+   "position": 29
+  },
+  {
+   "run_id": "files_local_path_01|agentic:hybrid|2",
+   "task_id": "files_local_path_01",
+   "condition": "hybrid",
+   "repeat": 2,
+   "position": 30
+  },
+  {
+   "run_id": "utils_has_next_page_01|agentic:graphify|0",
+   "task_id": "utils_has_next_page_01",
+   "condition": "graphify",
+   "repeat": 0,
+   "position": 31
+  },
+  {
+   "run_id": "users_mapper_lastname_01|agentic:baseline|1",
+   "task_id": "users_mapper_lastname_01",
+   "condition": "baseline",
+   "repeat": 1,
+   "position": 32
+  },
+  {
+   "run_id": "users_photo_cleared_01|agentic:crg|0",
+   "task_id": "users_photo_cleared_01",
+   "condition": "crg",
+   "repeat": 0,
+   "position": 33
+  },
+  {
+   "run_id": "users_list_page_01|agentic:crg|0",
+   "task_id": "users_list_page_01",
+   "condition": "crg",
+   "repeat": 0,
+   "position": 34
+  },
+  {
+   "run_id": "files_local_path_01|agentic:embeddings|2",
+   "task_id": "files_local_path_01",
+   "condition": "embeddings",
+   "repeat": 2,
+   "position": 35
+  },
+  {
+   "run_id": "auth_uniform_login_01|agentic:crg|2",
+   "task_id": "auth_uniform_login_01",
+   "condition": "crg",
+   "repeat": 2,
+   "position": 36
+  },
+  {
+   "run_id": "users_create_provider_01|agentic:hybrid|1",
+   "task_id": "users_create_provider_01",
+   "condition": "hybrid",
+   "repeat": 1,
+   "position": 37
+  },
+  {
+   "run_id": "files_local_path_01|agentic:baseline|2",
+   "task_id": "files_local_path_01",
+   "condition": "baseline",
+   "repeat": 2,
+   "position": 38
+  },
+  {
+   "run_id": "auth_jwt_secret_01|agentic:graphify|1",
+   "task_id": "auth_jwt_secret_01",
+   "condition": "graphify",
+   "repeat": 1,
+   "position": 39
+  },
+  {
+   "run_id": "mail_new_email_link_01|agentic:hybrid|0",
+   "task_id": "mail_new_email_link_01",
+   "condition": "hybrid",
+   "repeat": 0,
+   "position": 40
+  },
+  {
+   "run_id": "auth_jwt_secret_01|agentic:crg|1",
+   "task_id": "auth_jwt_secret_01",
+   "condition": "crg",
+   "repeat": 1,
+   "position": 41
+  },
+  {
+   "run_id": "session_password_change_01|agentic:crg|2",
+   "task_id": "session_password_change_01",
+   "condition": "crg",
+   "repeat": 2,
+   "position": 42
+  },
+  {
+   "run_id": "auth_uniform_login_01|agentic:embeddings|2",
+   "task_id": "auth_uniform_login_01",
+   "condition": "embeddings",
+   "repeat": 2,
+   "position": 43
+  },
+  {
+   "run_id": "users_create_provider_01|agentic:baseline|2",
+   "task_id": "users_create_provider_01",
+   "condition": "baseline",
+   "repeat": 2,
+   "position": 44
+  },
+  {
+   "run_id": "auth_uniform_login_01|agentic:crg|1",
+   "task_id": "auth_uniform_login_01",
+   "condition": "crg",
+   "repeat": 1,
+   "position": 45
+  },
+  {
+   "run_id": "auth_jwt_secret_01|agentic:graphify|0",
+   "task_id": "auth_jwt_secret_01",
+   "condition": "graphify",
+   "repeat": 0,
+   "position": 46
+  },
+  {
+   "run_id": "users_mapper_lastname_01|agentic:embeddings|1",
+   "task_id": "users_mapper_lastname_01",
+   "condition": "embeddings",
+   "repeat": 1,
+   "position": 47
+  },
+  {
+   "run_id": "users_create_provider_01|agentic:crg|0",
+   "task_id": "users_create_provider_01",
+   "condition": "crg",
+   "repeat": 0,
+   "position": 48
+  },
+  {
+   "run_id": "utils_has_next_page_01|agentic:crg|2",
+   "task_id": "utils_has_next_page_01",
+   "condition": "crg",
+   "repeat": 2,
+   "position": 49
+  },
+  {
+   "run_id": "files_local_path_01|agentic:embeddings|0",
+   "task_id": "files_local_path_01",
+   "condition": "embeddings",
+   "repeat": 0,
+   "position": 50
+  },
+  {
+   "run_id": "files_presigned_size_01|agentic:baseline|2",
+   "task_id": "files_presigned_size_01",
+   "condition": "baseline",
+   "repeat": 2,
+   "position": 51
+  },
+  {
+   "run_id": "mail_new_email_link_01|agentic:embeddings|0",
+   "task_id": "mail_new_email_link_01",
+   "condition": "embeddings",
+   "repeat": 0,
+   "position": 52
+  },
+  {
+   "run_id": "users_mapper_lastname_01|agentic:hybrid|2",
+   "task_id": "users_mapper_lastname_01",
+   "condition": "hybrid",
+   "repeat": 2,
+   "position": 53
+  },
+  {
+   "run_id": "users_create_provider_01|agentic:baseline|0",
+   "task_id": "users_create_provider_01",
+   "condition": "baseline",
+   "repeat": 0,
+   "position": 54
+  },
+  {
+   "run_id": "files_photo_url_01|agentic:graphify|2",
+   "task_id": "files_photo_url_01",
+   "condition": "graphify",
+   "repeat": 2,
+   "position": 55
+  },
+  {
+   "run_id": "files_local_path_01|agentic:graphify|1",
+   "task_id": "files_local_path_01",
+   "condition": "graphify",
+   "repeat": 1,
+   "position": 56
+  },
+  {
+   "run_id": "auth_jwt_secret_01|agentic:embeddings|0",
+   "task_id": "auth_jwt_secret_01",
+   "condition": "embeddings",
+   "repeat": 0,
+   "position": 57
+  },
+  {
+   "run_id": "session_password_change_01|agentic:embeddings|0",
+   "task_id": "session_password_change_01",
+   "condition": "embeddings",
+   "repeat": 0,
+   "position": 58
+  },
+  {
+   "run_id": "session_password_change_01|agentic:crg|1",
+   "task_id": "session_password_change_01",
+   "condition": "crg",
+   "repeat": 1,
+   "position": 59
+  },
+  {
+   "run_id": "files_photo_url_01|agentic:crg|2",
+   "task_id": "files_photo_url_01",
+   "condition": "crg",
+   "repeat": 2,
+   "position": 60
+  },
+  {
+   "run_id": "users_mapper_lastname_01|agentic:embeddings|2",
+   "task_id": "users_mapper_lastname_01",
+   "condition": "embeddings",
+   "repeat": 2,
+   "position": 61
+  },
+  {
+   "run_id": "auth_uniform_login_01|agentic:baseline|0",
+   "task_id": "auth_uniform_login_01",
+   "condition": "baseline",
+   "repeat": 0,
+   "position": 62
+  },
+  {
+   "run_id": "users_photo_cleared_01|agentic:baseline|1",
+   "task_id": "users_photo_cleared_01",
+   "condition": "baseline",
+   "repeat": 1,
+   "position": 63
+  },
+  {
+   "run_id": "mail_new_email_link_01|agentic:crg|0",
+   "task_id": "mail_new_email_link_01",
+   "condition": "crg",
+   "repeat": 0,
+   "position": 64
+  },
+  {
+   "run_id": "roles_admin_guard_01|agentic:graphify|0",
+   "task_id": "roles_admin_guard_01",
+   "condition": "graphify",
+   "repeat": 0,
+   "position": 65
+  },
+  {
+   "run_id": "roles_admin_guard_01|agentic:crg|1",
+   "task_id": "roles_admin_guard_01",
+   "condition": "crg",
+   "repeat": 1,
+   "position": 66
+  },
+  {
+   "run_id": "utils_has_next_page_01|agentic:baseline|1",
+   "task_id": "utils_has_next_page_01",
+   "condition": "baseline",
+   "repeat": 1,
+   "position": 67
+  },
+  {
+   "run_id": "session_password_change_01|agentic:baseline|2",
+   "task_id": "session_password_change_01",
+   "condition": "baseline",
+   "repeat": 2,
+   "position": 68
+  },
+  {
+   "run_id": "files_photo_url_01|agentic:baseline|2",
+   "task_id": "files_photo_url_01",
+   "condition": "baseline",
+   "repeat": 2,
+   "position": 69
+  },
+  {
+   "run_id": "users_mapper_lastname_01|agentic:graphify|1",
+   "task_id": "users_mapper_lastname_01",
+   "condition": "graphify",
+   "repeat": 1,
+   "position": 70
+  },
+  {
+   "run_id": "auth_reset_sessions_01|agentic:baseline|2",
+   "task_id": "auth_reset_sessions_01",
+   "condition": "baseline",
+   "repeat": 2,
+   "position": 71
+  },
+  {
+   "run_id": "auth_jwt_secret_01|agentic:baseline|2",
+   "task_id": "auth_jwt_secret_01",
+   "condition": "baseline",
+   "repeat": 2,
+   "position": 72
+  },
+  {
+   "run_id": "auth_reset_sessions_01|agentic:graphify|1",
+   "task_id": "auth_reset_sessions_01",
+   "condition": "graphify",
+   "repeat": 1,
+   "position": 73
+  },
+  {
+   "run_id": "files_photo_url_01|agentic:baseline|0",
+   "task_id": "files_photo_url_01",
+   "condition": "baseline",
+   "repeat": 0,
+   "position": 74
+  },
+  {
+   "run_id": "files_local_path_01|agentic:graphify|0",
+   "task_id": "files_local_path_01",
+   "condition": "graphify",
+   "repeat": 0,
+   "position": 75
+  },
+  {
+   "run_id": "session_password_change_01|agentic:embeddings|2",
+   "task_id": "session_password_change_01",
+   "condition": "embeddings",
+   "repeat": 2,
+   "position": 76
+  },
+  {
+   "run_id": "roles_admin_guard_01|agentic:baseline|0",
+   "task_id": "roles_admin_guard_01",
+   "condition": "baseline",
+   "repeat": 0,
+   "position": 77
+  },
+  {
+   "run_id": "files_presigned_size_01|agentic:hybrid|2",
+   "task_id": "files_presigned_size_01",
+   "condition": "hybrid",
+   "repeat": 2,
+   "position": 78
+  },
+  {
+   "run_id": "auth_uniform_login_01|agentic:embeddings|0",
+   "task_id": "auth_uniform_login_01",
+   "condition": "embeddings",
+   "repeat": 0,
+   "position": 79
+  },
+  {
+   "run_id": "files_local_path_01|agentic:baseline|1",
+   "task_id": "files_local_path_01",
+   "condition": "baseline",
+   "repeat": 1,
+   "position": 80
+  },
+  {
+   "run_id": "roles_admin_guard_01|agentic:crg|0",
+   "task_id": "roles_admin_guard_01",
+   "condition": "crg",
+   "repeat": 0,
+   "position": 81
+  },
+  {
+   "run_id": "mail_new_email_link_01|agentic:graphify|0",
+   "task_id": "mail_new_email_link_01",
+   "condition": "graphify",
+   "repeat": 0,
+   "position": 82
+  },
+  {
+   "run_id": "auth_uniform_login_01|agentic:hybrid|2",
+   "task_id": "auth_uniform_login_01",
+   "condition": "hybrid",
+   "repeat": 2,
+   "position": 83
+  },
+  {
+   "run_id": "users_photo_cleared_01|agentic:embeddings|1",
+   "task_id": "users_photo_cleared_01",
+   "condition": "embeddings",
+   "repeat": 1,
+   "position": 84
+  },
+  {
+   "run_id": "session_password_change_01|agentic:baseline|0",
+   "task_id": "session_password_change_01",
+   "condition": "baseline",
+   "repeat": 0,
+   "position": 85
+  },
+  {
+   "run_id": "files_photo_url_01|agentic:hybrid|1",
+   "task_id": "files_photo_url_01",
+   "condition": "hybrid",
+   "repeat": 1,
+   "position": 86
+  },
+  {
+   "run_id": "files_photo_url_01|agentic:graphify|0",
+   "task_id": "files_photo_url_01",
+   "condition": "graphify",
+   "repeat": 0,
+   "position": 87
+  },
+  {
+   "run_id": "users_list_page_01|agentic:embeddings|0",
+   "task_id": "users_list_page_01",
+   "condition": "embeddings",
+   "repeat": 0,
+   "position": 88
+  },
+  {
+   "run_id": "session_password_change_01|agentic:graphify|2",
+   "task_id": "session_password_change_01",
+   "condition": "graphify",
+   "repeat": 2,
+   "position": 89
+  },
+  {
+   "run_id": "roles_admin_guard_01|agentic:embeddings|2",
+   "task_id": "roles_admin_guard_01",
+   "condition": "embeddings",
+   "repeat": 2,
+   "position": 90
+  },
+  {
+   "run_id": "auth_jwt_secret_01|agentic:crg|2",
+   "task_id": "auth_jwt_secret_01",
+   "condition": "crg",
+   "repeat": 2,
+   "position": 91
+  },
+  {
+   "run_id": "files_presigned_size_01|agentic:baseline|0",
+   "task_id": "files_presigned_size_01",
+   "condition": "baseline",
+   "repeat": 0,
+   "position": 92
+  },
+  {
+   "run_id": "files_photo_url_01|agentic:crg|1",
+   "task_id": "files_photo_url_01",
+   "condition": "crg",
+   "repeat": 1,
+   "position": 93
+  },
+  {
+   "run_id": "roles_admin_guard_01|agentic:hybrid|2",
+   "task_id": "roles_admin_guard_01",
+   "condition": "hybrid",
+   "repeat": 2,
+   "position": 94
+  },
+  {
+   "run_id": "files_presigned_size_01|agentic:baseline|1",
+   "task_id": "files_presigned_size_01",
+   "condition": "baseline",
+   "repeat": 1,
+   "position": 95
+  },
+  {
+   "run_id": "mail_new_email_link_01|agentic:embeddings|2",
+   "task_id": "mail_new_email_link_01",
+   "condition": "embeddings",
+   "repeat": 2,
+   "position": 96
+  },
+  {
+   "run_id": "auth_reset_sessions_01|agentic:hybrid|2",
+   "task_id": "auth_reset_sessions_01",
+   "condition": "hybrid",
+   "repeat": 2,
+   "position": 97
+  },
+  {
+   "run_id": "mail_new_email_link_01|agentic:graphify|2",
+   "task_id": "mail_new_email_link_01",
+   "condition": "graphify",
+   "repeat": 2,
+   "position": 98
+  },
+  {
+   "run_id": "users_photo_cleared_01|agentic:hybrid|0",
+   "task_id": "users_photo_cleared_01",
+   "condition": "hybrid",
+   "repeat": 0,
+   "position": 99
+  },
+  {
+   "run_id": "users_mapper_lastname_01|agentic:baseline|2",
+   "task_id": "users_mapper_lastname_01",
+   "condition": "baseline",
+   "repeat": 2,
+   "position": 100
+  },
+  {
+   "run_id": "auth_uniform_login_01|agentic:baseline|1",
+   "task_id": "auth_uniform_login_01",
+   "condition": "baseline",
+   "repeat": 1,
+   "position": 101
+  },
+  {
+   "run_id": "files_local_path_01|agentic:graphify|2",
+   "task_id": "files_local_path_01",
+   "condition": "graphify",
+   "repeat": 2,
+   "position": 102
+  },
+  {
+   "run_id": "users_mapper_lastname_01|agentic:embeddings|0",
+   "task_id": "users_mapper_lastname_01",
+   "condition": "embeddings",
+   "repeat": 0,
+   "position": 103
+  },
+  {
+   "run_id": "users_list_page_01|agentic:graphify|0",
+   "task_id": "users_list_page_01",
+   "condition": "graphify",
+   "repeat": 0,
+   "position": 104
+  },
+  {
+   "run_id": "mail_new_email_link_01|agentic:embeddings|1",
+   "task_id": "mail_new_email_link_01",
+   "condition": "embeddings",
+   "repeat": 1,
+   "position": 105
+  },
+  {
+   "run_id": "auth_reset_sessions_01|agentic:hybrid|0",
+   "task_id": "auth_reset_sessions_01",
+   "condition": "hybrid",
+   "repeat": 0,
+   "position": 106
+  },
+  {
+   "run_id": "users_list_page_01|agentic:crg|1",
+   "task_id": "users_list_page_01",
+   "condition": "crg",
+   "repeat": 1,
+   "position": 107
+  },
+  {
+   "run_id": "files_local_path_01|agentic:crg|1",
+   "task_id": "files_local_path_01",
+   "condition": "crg",
+   "repeat": 1,
+   "position": 108
+  },
+  {
+   "run_id": "users_create_provider_01|agentic:hybrid|0",
+   "task_id": "users_create_provider_01",
+   "condition": "hybrid",
+   "repeat": 0,
+   "position": 109
+  },
+  {
+   "run_id": "auth_uniform_login_01|agentic:embeddings|1",
+   "task_id": "auth_uniform_login_01",
+   "condition": "embeddings",
+   "repeat": 1,
+   "position": 110
+  },
+  {
+   "run_id": "users_mapper_lastname_01|agentic:baseline|0",
+   "task_id": "users_mapper_lastname_01",
+   "condition": "baseline",
+   "repeat": 0,
+   "position": 111
+  },
+  {
+   "run_id": "files_presigned_size_01|agentic:crg|0",
+   "task_id": "files_presigned_size_01",
+   "condition": "crg",
+   "repeat": 0,
+   "position": 112
+  },
+  {
+   "run_id": "users_mapper_lastname_01|agentic:graphify|0",
+   "task_id": "users_mapper_lastname_01",
+   "condition": "graphify",
+   "repeat": 0,
+   "position": 113
+  },
+  {
+   "run_id": "users_mapper_lastname_01|agentic:hybrid|1",
+   "task_id": "users_mapper_lastname_01",
+   "condition": "hybrid",
+   "repeat": 1,
+   "position": 114
+  },
+  {
+   "run_id": "users_create_provider_01|agentic:embeddings|0",
+   "task_id": "users_create_provider_01",
+   "condition": "embeddings",
+   "repeat": 0,
+   "position": 115
+  },
+  {
+   "run_id": "roles_admin_guard_01|agentic:graphify|1",
+   "task_id": "roles_admin_guard_01",
+   "condition": "graphify",
+   "repeat": 1,
+   "position": 116
+  },
+  {
+   "run_id": "auth_uniform_login_01|agentic:hybrid|1",
+   "task_id": "auth_uniform_login_01",
+   "condition": "hybrid",
+   "repeat": 1,
+   "position": 117
+  },
+  {
+   "run_id": "auth_reset_sessions_01|agentic:crg|1",
+   "task_id": "auth_reset_sessions_01",
+   "condition": "crg",
+   "repeat": 1,
+   "position": 118
+  },
+  {
+   "run_id": "files_local_path_01|agentic:crg|2",
+   "task_id": "files_local_path_01",
+   "condition": "crg",
+   "repeat": 2,
+   "position": 119
+  },
+  {
+   "run_id": "session_password_change_01|agentic:embeddings|1",
+   "task_id": "session_password_change_01",
+   "condition": "embeddings",
+   "repeat": 1,
+   "position": 120
+  },
+  {
+   "run_id": "auth_jwt_secret_01|agentic:hybrid|1",
+   "task_id": "auth_jwt_secret_01",
+   "condition": "hybrid",
+   "repeat": 1,
+   "position": 121
+  },
+  {
+   "run_id": "roles_admin_guard_01|agentic:baseline|2",
+   "task_id": "roles_admin_guard_01",
+   "condition": "baseline",
+   "repeat": 2,
+   "position": 122
+  },
+  {
+   "run_id": "mail_new_email_link_01|agentic:hybrid|2",
+   "task_id": "mail_new_email_link_01",
+   "condition": "hybrid",
+   "repeat": 2,
+   "position": 123
+  },
+  {
+   "run_id": "auth_jwt_secret_01|agentic:baseline|1",
+   "task_id": "auth_jwt_secret_01",
+   "condition": "baseline",
+   "repeat": 1,
+   "position": 124
+  },
+  {
+   "run_id": "users_create_provider_01|agentic:crg|2",
+   "task_id": "users_create_provider_01",
+   "condition": "crg",
+   "repeat": 2,
+   "position": 125
+  },
+  {
+   "run_id": "users_create_provider_01|agentic:embeddings|1",
+   "task_id": "users_create_provider_01",
+   "condition": "embeddings",
+   "repeat": 1,
+   "position": 126
+  },
+  {
+   "run_id": "files_presigned_size_01|agentic:graphify|2",
+   "task_id": "files_presigned_size_01",
+   "condition": "graphify",
+   "repeat": 2,
+   "position": 127
+  },
+  {
+   "run_id": "session_password_change_01|agentic:graphify|0",
+   "task_id": "session_password_change_01",
+   "condition": "graphify",
+   "repeat": 0,
+   "position": 128
+  },
+  {
+   "run_id": "users_create_provider_01|agentic:graphify|2",
+   "task_id": "users_create_provider_01",
+   "condition": "graphify",
+   "repeat": 2,
+   "position": 129
+  },
+  {
+   "run_id": "users_list_page_01|agentic:baseline|1",
+   "task_id": "users_list_page_01",
+   "condition": "baseline",
+   "repeat": 1,
+   "position": 130
+  },
+  {
+   "run_id": "users_list_page_01|agentic:hybrid|0",
+   "task_id": "users_list_page_01",
+   "condition": "hybrid",
+   "repeat": 0,
+   "position": 131
+  },
+  {
+   "run_id": "users_list_page_01|agentic:graphify|2",
+   "task_id": "users_list_page_01",
+   "condition": "graphify",
+   "repeat": 2,
+   "position": 132
+  },
+  {
+   "run_id": "auth_uniform_login_01|agentic:hybrid|0",
+   "task_id": "auth_uniform_login_01",
+   "condition": "hybrid",
+   "repeat": 0,
+   "position": 133
+  },
+  {
+   "run_id": "auth_reset_sessions_01|agentic:graphify|2",
+   "task_id": "auth_reset_sessions_01",
+   "condition": "graphify",
+   "repeat": 2,
+   "position": 134
+  },
+  {
+   "run_id": "users_photo_cleared_01|agentic:hybrid|2",
+   "task_id": "users_photo_cleared_01",
+   "condition": "hybrid",
+   "repeat": 2,
+   "position": 135
+  },
+  {
+   "run_id": "utils_has_next_page_01|agentic:hybrid|1",
+   "task_id": "utils_has_next_page_01",
+   "condition": "hybrid",
+   "repeat": 1,
+   "position": 136
+  },
+  {
+   "run_id": "auth_uniform_login_01|agentic:baseline|2",
+   "task_id": "auth_uniform_login_01",
+   "condition": "baseline",
+   "repeat": 2,
+   "position": 137
+  },
+  {
+   "run_id": "users_list_page_01|agentic:graphify|1",
+   "task_id": "users_list_page_01",
+   "condition": "graphify",
+   "repeat": 1,
+   "position": 138
+  },
+  {
+   "run_id": "users_create_provider_01|agentic:hybrid|2",
+   "task_id": "users_create_provider_01",
+   "condition": "hybrid",
+   "repeat": 2,
+   "position": 139
+  },
+  {
+   "run_id": "auth_uniform_login_01|agentic:crg|0",
+   "task_id": "auth_uniform_login_01",
+   "condition": "crg",
+   "repeat": 0,
+   "position": 140
+  },
+  {
+   "run_id": "users_create_provider_01|agentic:crg|1",
+   "task_id": "users_create_provider_01",
+   "condition": "crg",
+   "repeat": 1,
+   "position": 141
+  },
+  {
+   "run_id": "mail_new_email_link_01|agentic:graphify|1",
+   "task_id": "mail_new_email_link_01",
+   "condition": "graphify",
+   "repeat": 1,
+   "position": 142
+  },
+  {
+   "run_id": "files_photo_url_01|agentic:graphify|1",
+   "task_id": "files_photo_url_01",
+   "condition": "graphify",
+   "repeat": 1,
+   "position": 143
+  },
+  {
+   "run_id": "users_create_provider_01|agentic:graphify|0",
+   "task_id": "users_create_provider_01",
+   "condition": "graphify",
+   "repeat": 0,
+   "position": 144
+  },
+  {
+   "run_id": "auth_jwt_secret_01|agentic:hybrid|2",
+   "task_id": "auth_jwt_secret_01",
+   "condition": "hybrid",
+   "repeat": 2,
+   "position": 145
+  },
+  {
+   "run_id": "users_list_page_01|agentic:hybrid|1",
+   "task_id": "users_list_page_01",
+   "condition": "hybrid",
+   "repeat": 1,
+   "position": 146
+  },
+  {
+   "run_id": "files_presigned_size_01|agentic:hybrid|1",
+   "task_id": "files_presigned_size_01",
+   "condition": "hybrid",
+   "repeat": 1,
+   "position": 147
+  },
+  {
+   "run_id": "users_list_page_01|agentic:embeddings|1",
+   "task_id": "users_list_page_01",
+   "condition": "embeddings",
+   "repeat": 1,
+   "position": 148
+  },
+  {
+   "run_id": "utils_has_next_page_01|agentic:crg|1",
+   "task_id": "utils_has_next_page_01",
+   "condition": "crg",
+   "repeat": 1,
+   "position": 149
+  },
+  {
+   "run_id": "auth_reset_sessions_01|agentic:embeddings|1",
+   "task_id": "auth_reset_sessions_01",
+   "condition": "embeddings",
+   "repeat": 1,
+   "position": 150
+  },
+  {
+   "run_id": "users_create_provider_01|agentic:baseline|1",
+   "task_id": "users_create_provider_01",
+   "condition": "baseline",
+   "repeat": 1,
+   "position": 151
+  },
+  {
+   "run_id": "auth_jwt_secret_01|agentic:embeddings|2",
+   "task_id": "auth_jwt_secret_01",
+   "condition": "embeddings",
+   "repeat": 2,
+   "position": 152
+  },
+  {
+   "run_id": "auth_reset_sessions_01|agentic:crg|2",
+   "task_id": "auth_reset_sessions_01",
+   "condition": "crg",
+   "repeat": 2,
+   "position": 153
+  },
+  {
+   "run_id": "roles_admin_guard_01|agentic:embeddings|1",
+   "task_id": "roles_admin_guard_01",
+   "condition": "embeddings",
+   "repeat": 1,
+   "position": 154
+  },
+  {
+   "run_id": "users_list_page_01|agentic:baseline|2",
+   "task_id": "users_list_page_01",
+   "condition": "baseline",
+   "repeat": 2,
+   "position": 155
+  },
+  {
+   "run_id": "users_photo_cleared_01|agentic:graphify|0",
+   "task_id": "users_photo_cleared_01",
+   "condition": "graphify",
+   "repeat": 0,
+   "position": 156
+  },
+  {
+   "run_id": "mail_new_email_link_01|agentic:crg|1",
+   "task_id": "mail_new_email_link_01",
+   "condition": "crg",
+   "repeat": 1,
+   "position": 157
+  },
+  {
+   "run_id": "files_presigned_size_01|agentic:embeddings|0",
+   "task_id": "files_presigned_size_01",
+   "condition": "embeddings",
+   "repeat": 0,
+   "position": 158
+  },
+  {
+   "run_id": "auth_uniform_login_01|agentic:graphify|0",
+   "task_id": "auth_uniform_login_01",
+   "condition": "graphify",
+   "repeat": 0,
+   "position": 159
+  },
+  {
+   "run_id": "files_photo_url_01|agentic:embeddings|0",
+   "task_id": "files_photo_url_01",
+   "condition": "embeddings",
+   "repeat": 0,
+   "position": 160
+  },
+  {
+   "run_id": "files_presigned_size_01|agentic:crg|2",
+   "task_id": "files_presigned_size_01",
+   "condition": "crg",
+   "repeat": 2,
+   "position": 161
+  },
+  {
+   "run_id": "roles_admin_guard_01|agentic:crg|2",
+   "task_id": "roles_admin_guard_01",
+   "condition": "crg",
+   "repeat": 2,
+   "position": 162
+  },
+  {
+   "run_id": "auth_jwt_secret_01|agentic:crg|0",
+   "task_id": "auth_jwt_secret_01",
+   "condition": "crg",
+   "repeat": 0,
+   "position": 163
+  },
+  {
+   "run_id": "files_local_path_01|agentic:hybrid|1",
+   "task_id": "files_local_path_01",
+   "condition": "hybrid",
+   "repeat": 1,
+   "position": 164
+  },
+  {
+   "run_id": "session_password_change_01|agentic:hybrid|0",
+   "task_id": "session_password_change_01",
+   "condition": "hybrid",
+   "repeat": 0,
+   "position": 165
+  },
+  {
+   "run_id": "auth_jwt_secret_01|agentic:graphify|2",
+   "task_id": "auth_jwt_secret_01",
+   "condition": "graphify",
+   "repeat": 2,
+   "position": 166
+  },
+  {
+   "run_id": "files_local_path_01|agentic:baseline|0",
+   "task_id": "files_local_path_01",
+   "condition": "baseline",
+   "repeat": 0,
+   "position": 167
+  },
+  {
+   "run_id": "auth_reset_sessions_01|agentic:embeddings|0",
+   "task_id": "auth_reset_sessions_01",
+   "condition": "embeddings",
+   "repeat": 0,
+   "position": 168
+  },
+  {
+   "run_id": "auth_reset_sessions_01|agentic:baseline|0",
+   "task_id": "auth_reset_sessions_01",
+   "condition": "baseline",
+   "repeat": 0,
+   "position": 169
+  },
+  {
+   "run_id": "users_photo_cleared_01|agentic:graphify|1",
+   "task_id": "users_photo_cleared_01",
+   "condition": "graphify",
+   "repeat": 1,
+   "position": 170
+  },
+  {
+   "run_id": "auth_reset_sessions_01|agentic:baseline|1",
+   "task_id": "auth_reset_sessions_01",
+   "condition": "baseline",
+   "repeat": 1,
+   "position": 171
+  },
+  {
+   "run_id": "users_mapper_lastname_01|agentic:crg|1",
+   "task_id": "users_mapper_lastname_01",
+   "condition": "crg",
+   "repeat": 1,
+   "position": 172
+  },
+  {
+   "run_id": "auth_uniform_login_01|agentic:graphify|2",
+   "task_id": "auth_uniform_login_01",
+   "condition": "graphify",
+   "repeat": 2,
+   "position": 173
+  },
+  {
+   "run_id": "users_create_provider_01|agentic:embeddings|2",
+   "task_id": "users_create_provider_01",
+   "condition": "embeddings",
+   "repeat": 2,
+   "position": 174
+  },
+  {
+   "run_id": "roles_admin_guard_01|agentic:hybrid|1",
+   "task_id": "roles_admin_guard_01",
+   "condition": "hybrid",
+   "repeat": 1,
+   "position": 175
+  },
+  {
+   "run_id": "utils_has_next_page_01|agentic:embeddings|2",
+   "task_id": "utils_has_next_page_01",
+   "condition": "embeddings",
+   "repeat": 2,
+   "position": 176
+  },
+  {
+   "run_id": "users_photo_cleared_01|agentic:graphify|2",
+   "task_id": "users_photo_cleared_01",
+   "condition": "graphify",
+   "repeat": 2,
+   "position": 177
+  },
+  {
+   "run_id": "utils_has_next_page_01|agentic:hybrid|2",
+   "task_id": "utils_has_next_page_01",
+   "condition": "hybrid",
+   "repeat": 2,
+   "position": 178
+  },
+  {
+   "run_id": "users_mapper_lastname_01|agentic:crg|2",
+   "task_id": "users_mapper_lastname_01",
+   "condition": "crg",
+   "repeat": 2,
+   "position": 179
+  },
+  {
+   "run_id": "users_photo_cleared_01|agentic:baseline|2",
+   "task_id": "users_photo_cleared_01",
+   "condition": "baseline",
+   "repeat": 2,
+   "position": 180
+  },
+  {
+   "run_id": "files_local_path_01|agentic:hybrid|0",
+   "task_id": "files_local_path_01",
+   "condition": "hybrid",
+   "repeat": 0,
+   "position": 181
+  },
+  {
+   "run_id": "users_list_page_01|agentic:hybrid|2",
+   "task_id": "users_list_page_01",
+   "condition": "hybrid",
+   "repeat": 2,
+   "position": 182
+  },
+  {
+   "run_id": "auth_reset_sessions_01|agentic:hybrid|1",
+   "task_id": "auth_reset_sessions_01",
+   "condition": "hybrid",
+   "repeat": 1,
+   "position": 183
+  },
+  {
+   "run_id": "users_mapper_lastname_01|agentic:hybrid|0",
+   "task_id": "users_mapper_lastname_01",
+   "condition": "hybrid",
+   "repeat": 0,
+   "position": 184
+  },
+  {
+   "run_id": "mail_new_email_link_01|agentic:baseline|0",
+   "task_id": "mail_new_email_link_01",
+   "condition": "baseline",
+   "repeat": 0,
+   "position": 185
+  },
+  {
+   "run_id": "roles_admin_guard_01|agentic:graphify|2",
+   "task_id": "roles_admin_guard_01",
+   "condition": "graphify",
+   "repeat": 2,
+   "position": 186
+  },
+  {
+   "run_id": "session_password_change_01|agentic:graphify|1",
+   "task_id": "session_password_change_01",
+   "condition": "graphify",
+   "repeat": 1,
+   "position": 187
+  },
+  {
+   "run_id": "files_presigned_size_01|agentic:embeddings|2",
+   "task_id": "files_presigned_size_01",
+   "condition": "embeddings",
+   "repeat": 2,
+   "position": 188
+  },
+  {
+   "run_id": "session_password_change_01|agentic:hybrid|1",
+   "task_id": "session_password_change_01",
+   "condition": "hybrid",
+   "repeat": 1,
+   "position": 189
+  },
+  {
+   "run_id": "session_password_change_01|agentic:baseline|1",
+   "task_id": "session_password_change_01",
+   "condition": "baseline",
+   "repeat": 1,
+   "position": 190
+  },
+  {
+   "run_id": "utils_has_next_page_01|agentic:embeddings|0",
+   "task_id": "utils_has_next_page_01",
+   "condition": "embeddings",
+   "repeat": 0,
+   "position": 191
+  },
+  {
+   "run_id": "auth_uniform_login_01|agentic:graphify|1",
+   "task_id": "auth_uniform_login_01",
+   "condition": "graphify",
+   "repeat": 1,
+   "position": 192
+  },
+  {
+   "run_id": "utils_has_next_page_01|agentic:hybrid|0",
+   "task_id": "utils_has_next_page_01",
+   "condition": "hybrid",
+   "repeat": 0,
+   "position": 193
+  },
+  {
+   "run_id": "users_photo_cleared_01|agentic:embeddings|2",
+   "task_id": "users_photo_cleared_01",
+   "condition": "embeddings",
+   "repeat": 2,
+   "position": 194
+  },
+  {
+   "run_id": "roles_admin_guard_01|agentic:hybrid|0",
+   "task_id": "roles_admin_guard_01",
+   "condition": "hybrid",
+   "repeat": 0,
+   "position": 195
+  },
+  {
+   "run_id": "files_photo_url_01|agentic:embeddings|1",
+   "task_id": "files_photo_url_01",
+   "condition": "embeddings",
+   "repeat": 1,
+   "position": 196
+  },
+  {
+   "run_id": "users_mapper_lastname_01|agentic:crg|0",
+   "task_id": "users_mapper_lastname_01",
+   "condition": "crg",
+   "repeat": 0,
+   "position": 197
+  },
+  {
+   "run_id": "utils_has_next_page_01|agentic:graphify|1",
+   "task_id": "utils_has_next_page_01",
+   "condition": "graphify",
+   "repeat": 1,
+   "position": 198
+  },
+  {
+   "run_id": "files_photo_url_01|agentic:crg|0",
+   "task_id": "files_photo_url_01",
+   "condition": "crg",
+   "repeat": 0,
+   "position": 199
+  },
+  {
+   "run_id": "users_photo_cleared_01|agentic:baseline|0",
+   "task_id": "users_photo_cleared_01",
+   "condition": "baseline",
+   "repeat": 0,
+   "position": 200
+  },
+  {
+   "run_id": "auth_jwt_secret_01|agentic:hybrid|0",
+   "task_id": "auth_jwt_secret_01",
+   "condition": "hybrid",
+   "repeat": 0,
+   "position": 201
+  },
+  {
+   "run_id": "users_photo_cleared_01|agentic:hybrid|1",
+   "task_id": "users_photo_cleared_01",
+   "condition": "hybrid",
+   "repeat": 1,
+   "position": 202
+  },
+  {
+   "run_id": "roles_admin_guard_01|agentic:embeddings|0",
+   "task_id": "roles_admin_guard_01",
+   "condition": "embeddings",
+   "repeat": 0,
+   "position": 203
+  },
+  {
+   "run_id": "session_password_change_01|agentic:crg|0",
+   "task_id": "session_password_change_01",
+   "condition": "crg",
+   "repeat": 0,
+   "position": 204
+  },
+  {
+   "run_id": "files_presigned_size_01|agentic:graphify|0",
+   "task_id": "files_presigned_size_01",
+   "condition": "graphify",
+   "repeat": 0,
+   "position": 205
+  },
+  {
+   "run_id": "files_presigned_size_01|agentic:crg|1",
+   "task_id": "files_presigned_size_01",
+   "condition": "crg",
+   "repeat": 1,
+   "position": 206
+  },
+  {
+   "run_id": "users_list_page_01|agentic:crg|2",
+   "task_id": "users_list_page_01",
+   "condition": "crg",
+   "repeat": 2,
+   "position": 207
+  },
+  {
+   "run_id": "utils_has_next_page_01|agentic:baseline|2",
+   "task_id": "utils_has_next_page_01",
+   "condition": "baseline",
+   "repeat": 2,
+   "position": 208
+  },
+  {
+   "run_id": "files_photo_url_01|agentic:hybrid|0",
+   "task_id": "files_photo_url_01",
+   "condition": "hybrid",
+   "repeat": 0,
+   "position": 209
+  }
+ ]
+}

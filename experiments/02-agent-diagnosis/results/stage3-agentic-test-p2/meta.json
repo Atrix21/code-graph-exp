@@ -1,6 +1,6 @@
 {
   "run_id": "stage3-agentic-test-p2",
-  "status": "halted",
+  "status": "completed",
   "protocol": "agentic",
   "split": "test",
   "conditions": [
@@ -204,14 +204,14 @@
   "max_total_usd": 75,
   "shuffle_seed": 20261108,
   "plan_file": "plan.json",
-  "updated": "2026-11-08T16:31:04.392Z",
-  "halted": "3 consecutive infrastructure errors",
-  "n_pending": 141,
+  "updated": "2026-11-09T05:03:18.350Z",
+  "halted": null,
+  "n_pending": 0,
   "n_items": 210,
-  "n_scored": 68,
+  "n_scored": 210,
   "n_excluded_records": 3,
-  "total_cost_ledger_usd": 1.8875983999999997,
-  "total_cost_reported_usd": 1.6766801999999998,
-  "wall_ms_this_invocation": 807860,
-  "finished": "2026-11-08T16:31:04.391Z"
+  "total_cost_ledger_usd": 5.620533599999997,
+  "total_cost_reported_usd": 5.073597799999998,
+  "wall_ms_this_invocation": 4,
+  "finished": "2026-11-09T05:03:18.350Z"
 }

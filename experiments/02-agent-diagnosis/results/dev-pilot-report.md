@@ -1,6 +1,6 @@
 # Experiment 2: dev pilot report
 
-Generated 2026-11-08T16:18:00.415Z by `src/agent-eval/final-report.ts` from the run directories (no model calls). Model claude-sonnet-5-5, effort high, Claude Code restricted-oauth profile; RC+line@1 = right function and its mutated lines, top candidate.
+Generated 2026-11-09T05:14:12.953Z by `src/agent-eval/final-report.ts` from the run directories (no model calls). Model claude-sonnet-5-5, effort high, Claude Code restricted-oauth profile; RC+line@1 = right function and its mutated lines, top candidate.
 
 ## Run status
 
@@ -14,7 +14,7 @@ Generated 2026-11-08T16:18:00.415Z by `src/agent-eval/final-report.ts` from the 
 | stage1-single-dev-8000 | completed | 18 | 0 | 0 |
 | stage2-single-dev-8000 | completed | 36 | 0 | 0 |
 
-Cumulative list-price spend (all stages, spend-ledger.jsonl): $6.04 over 169 billable runs (subscription billing; Claude Code's estimate or our list recomputation, whichever is higher).
+Cumulative list-price spend (all stages, spend-ledger.jsonl): $33.99 over 1349 billable runs (subscription billing; Claude Code's estimate or our list recomputation, whichever is higher).
 
 ## Confirmatory family (Holm over 6; agentic tests on the p2 arm)
 
@@ -173,5 +173,20 @@ Paired differences vs `single:none@8000` (per-task means over repeats; Δ = cond
 | single:hybrid@8000 | 0.33 [-0.33, 0.83] | 12,795 | 0.0492 | 3/1/2 |
 | single:oracle@8000 | 0.50 [0.17, 0.83] | -2,533 | -0.0067 | 3/0/3 |
 | single:ripgrep@8000 | 0.17 [-0.33, 0.67] | 4,678 | 0.0279 | 2/1/3 |
+
+### Exploratory method comparisons (not confirmatory, uncorrected)
+
+| ID | Comparison | n tasks | A | B | Improvement [95% CI] | W/L/T | p (one-sided, uncorrected) |
+|---|---|---:|---:|---:|---:|---:|---:|
+| X-graph-vs-emb@2000 | custom_graph > embeddings @2000 | 6 | 0.50 | 0.67 | -0.17 [-0.67, 0.33] | 1/2/3 | 0.817 |
+| X-graph-vs-hybrid@2000 | custom_graph > hybrid @2000 | 6 | 0.50 | 0.33 | 0.17 [0.00, 0.50] | 1/0/5 | 0.337 |
+| X-hybrid-vs-bm25@2000 | hybrid > bm25 @2000 | 6 | 0.33 | 0.50 | -0.17 [-0.67, 0.33] | 1/2/3 | 0.817 |
+| X-hybrid-vs-graphify@2000 | hybrid > graphify @2000 | 6 | 0.33 | 0.50 | -0.17 [-0.67, 0.33] | 1/2/3 | 0.816 |
+| X-hybrid-vs-crg@2000 | hybrid > code_review_graph @2000 | 6 | 0.33 | 0.33 | 0.00 [-0.50, 0.50] | 1/1/4 | 0.644 |
+| X-graph-vs-emb@8000 | custom_graph > embeddings @8000 | 6 | 0.83 | 0.67 | 0.17 [-0.33, 0.67] | 2/1/3 | 0.376 |
+| X-graph-vs-hybrid@8000 | custom_graph > hybrid @8000 | 6 | 0.83 | 0.67 | 0.17 [0.00, 0.50] | 1/0/5 | 0.337 |
+| X-hybrid-vs-bm25@8000 | hybrid > bm25 @8000 | 6 | 0.67 | 0.50 | 0.17 [-0.33, 0.67] | 2/1/3 | 0.376 |
+| X-hybrid-vs-graphify@8000 | hybrid > graphify @8000 | 6 | 0.67 | 0.50 | 0.17 [-0.33, 0.67] | 2/1/3 | 0.379 |
+| X-hybrid-vs-crg@8000 | hybrid > code_review_graph @8000 | 6 | 0.67 | 0.17 | 0.50 [-0.17, 1.00] | 4/1/1 | 0.104 |
 
 Repeat agreement, all conditions: agentic-p1:baseline — · agentic-p1:crg — · agentic-p1:embeddings — · agentic-p1:graphify — · agentic-p1:hybrid — · agentic:baseline — · agentic:crg — · agentic:embeddings — · agentic:graphify — · agentic:hybrid — · single:bm25@2000 — · single:bm25@8000 — · single:code_review_graph@2000 — · single:code_review_graph@8000 — · single:custom_graph@2000 — · single:custom_graph@8000 — · single:embeddings@2000 — · single:embeddings@8000 — · single:graphify@2000 — · single:graphify@8000 — · single:hybrid@2000 — · single:hybrid@8000 — · single:none@2000 — · single:none@8000 — · single:oracle@2000 — · single:oracle@8000 — · single:ripgrep@2000 — · single:ripgrep@8000 —
